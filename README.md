@@ -1,4 +1,4 @@
-# Project name
+# Resource Volunteer Management Django API
 
 [![GitHub contributors][ico-contributors]][link-contributors]
 [![GitHub last commit][ico-last-commit]][link-last-commit]
@@ -24,27 +24,49 @@ If you would like to suggest new functionality, open an Issue and mark it as a _
 
 ### Programming languages
 
+Python 3.9
+
 ### Platforms
 
-### Frontend framework
+### Backend framework
+
+Django 3.2
 
 ### Package managers
 
+pip
+
 ### Database technology & provider
 
-## Repos and projects
-
-Mention all related repos and projects.
+PostgreSQL
 
 ## Deployment
 
 Guide users through getting your code up and running on their own system. In this section you can talk about:
-1. Installation process
-2. Software dependencies
-3. Latest releases
-4. API references
+1. Make a copy of the `.env` file, change the variables and run the build command
 
-Describe and show how to build your code and run the tests.
+    ```shell
+    cp .env.dev .env
+    # modify the variables in the .env and then build the development container
+    make build-dev
+    ```
+
+2. Software dependencies
+
+    You can run the app through docker, if it is installed on your machine. If you wish to run it manually you will need to have `gettext` installed.
+
+### Environment variables
+
+The `.env` files contain variables required to start the services and initialize them.
+
+- `ENVIRONMENT` - [`test`|`development`|`production`] sets the type of deployment (default `production`)
+- `RUN_MIGRATION` - [`yes`|`no`] run django migrations when you start the app (default `yes`)
+- `RUN_COMPILEMESSAGES` - [`yes`|`no`] compile i18n messages when you first start the app (default `yes`)
+- `RUN_LOAD_DUMMY_DATA` - [`yes`|`no`] load the data from the `fixtures/` folders (default `no`)
+- `RUN_COLLECT_STATIC` - [`yes`|`no`] collects static data like images/fonts (default `yes` - has no effect if `ENVIRONMENT != production`)
+- `RUN_DEV_SERVER` - [`yes`|`no`] starts the app in development mode with a more comprehensive debugging toolbox (default `no`)
+- `DATABASE_URL` - the URL Django will use to connect to the database (should be changed if you're not running through Docker)
+- `SECRET_KEY` - the secret key Django will use to encrypt data (should be changed if you're not running through Docker)
 
 ## Feedback
 
@@ -64,12 +86,12 @@ Started in 2016, Code for Romania is a civic tech NGO, official member of the Co
 Last, but not least, we rely on donations to ensure the infrastructure, logistics and management of our community that is widely spread across 11 timezones, coding for social change to make Romania and the world a better place. If you want to support us, [you can do it here][link-donate].
 
 
-[ico-contributors]: https://img.shields.io/github/contributors/code4romania/standard-repo-template.svg?style=for-the-badge
-[ico-last-commit]: https://img.shields.io/github/last-commit/code4romania/standard-repo-template.svg?style=for-the-badge
+[ico-contributors]: https://img.shields.io/github/contributors/code4romania/rvm-api-django.svg?style=for-the-badge
+[ico-last-commit]: https://img.shields.io/github/last-commit/code4romania/rvm-api-django.svg?style=for-the-badge
 [ico-license]: https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge
 
-[link-contributors]: https://github.com/code4romania/standard-repo-template/graphs/contributors
-[link-last-commit]: https://github.com/code4romania/standard-repo-template/commits/main
+[link-contributors]: https://github.com/code4romania/rvm-api-django/graphs/contributors
+[link-last-commit]: https://github.com/code4romania/rvm-api-django/commits/main
 [link-license]: https://opensource.org/licenses/MPL-2.0
 [link-contributing]: https://github.com/code4romania/.github/blob/main/CONTRIBUTING.md
 
