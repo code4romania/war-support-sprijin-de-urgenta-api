@@ -1,6 +1,6 @@
 set -e
 
-cd /root/rvm-api-django
+cd ~/rvm-api-django
 git reset --hard HEAD
 git pull
 
