@@ -39,3 +39,9 @@ compilemessages:                  ## compile the translations
 
 collectstatic:
 	docker-compose exec revm ./manage.py collectstatic --no-input
+
+format:
+	black --line-length=120 --target-version=py39  --exclude migrations ./revm
+
+format-check:
+	black --line-length=120 --target-version=py39 --check --diff  --exclude migrations ./revm

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-26 18:03+0200\n"
+"POT-Creation-Date: 2022-02-26 21:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,21 +19,98 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
 
-#: revm_site/settings/base.py:126
-msgid "Romanian"
-msgstr ""
+#: available_resources/models.py:6
+msgid "category name"
+msgstr "numele categoriei"
+
+#: available_resources/models.py:7
+msgid "category description"
+msgstr "descrierea categoriei"
+
+#: available_resources/models.py:13 available_resources/models.py:27
+msgid "resource category"
+msgstr "categoria resurselor"
+
+#: available_resources/models.py:14 available_resources/models.py:28
+msgid "resource categories"
+msgstr "categoriile resurselor"
+
+#: available_resources/models.py:18
+msgid "subcategory name"
+msgstr "numele subcategoriei"
+
+#: available_resources/models.py:19
+msgid "subcategory description"
+msgstr "descrierea subcategoriei"
+
+#: available_resources/models.py:32
+msgid "resource name"
+msgstr "numele resursei"
+
+#: available_resources/models.py:33
+msgid "resource description"
+msgstr "descrierea resursei"
+
+#: available_resources/models.py:36
+msgid "name"
+msgstr "nume"
+
+#: available_resources/models.py:37
+msgid "contact name"
+msgstr "nume contact"
+
+#: available_resources/models.py:38
+msgid "email address"
+msgstr "adresa e-mail"
+
+#: available_resources/models.py:39
+msgid "phone number"
+msgstr "număr telefon"
+
+#: available_resources/models.py:40
+msgid "county"
+msgstr "județ"
+
+#: available_resources/models.py:41
+msgid "details"
+msgstr "detalii"
+
+#: available_resources/models.py:48
+msgid "Individual"
+msgstr "Persoană Fizică"
+
+#: available_resources/models.py:49
+msgid "Company"
+msgstr "Persoană Juridică"
+
+#: available_resources/models.py:50
+msgid "Public Body"
+msgstr "Autoritate Publică"
+
+#: available_resources/models.py:51
+msgid "Non-Profit"
+msgstr "ONG"
+
+#: available_resources/models.py:54
+msgid "type"
+msgstr "tip"
+
+#: available_resources/models.py:60
+msgid "resource"
+msgstr "resursă"
+
+#: available_resources/models.py:61
+msgid "resources"
+msgstr "resurse"
 
 #: revm_site/settings/base.py:127
+msgid "Romanian"
+msgstr "Română"
+
+#: revm_site/settings/base.py:128
 msgid "English"
-msgstr ""
+msgstr "Engleză"
 
-#: revm_site/urls.py:11
+#: revm_site/urls.py:13
 msgid "Resource Volunteer Management Admin"
-msgstr ""
-
-#: revm_site/utils.py:27
-#, python-brace-format
-msgid "{updated} {item_sg} was successfully marked as {status}."
-msgid_plural "{updated} {item_pl} were successfully marked as {status}."
-msgstr[0] ""
-msgstr[1] ""
+msgstr "Resource Volunteer Management Admin"

@@ -8,13 +8,15 @@ from django.utils.translation import gettext_lazy as _
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
+from available_resources.views import ResourceCreateViewSet
+
 admin_site_string = _("Resource Volunteer Management Admin")
 admin.site.site_title = admin_site_string
 admin.site.site_header = admin_site_string
 admin.site.index_title = admin_site_string
 
 router = routers.DefaultRouter()
-
+router.register(r"resource", ResourceCreateViewSet, basename="resource")
 
 urlpatterns = (
     i18n_patterns(
