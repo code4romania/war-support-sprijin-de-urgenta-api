@@ -1,0 +1,16 @@
+# django
+django-debug-toolbar
+django-extensions
+werkzeug
+
+# utils
+pdbpp
+ipython
+
+# style checker
+black==22.1.0
+
+# dependency management
+pip-tools
+
+-r requirements.txt

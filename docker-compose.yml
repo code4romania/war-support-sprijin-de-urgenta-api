@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: revm-db
+    build:
+      context: ./db
+    env_file:
+      - .env
+    ports:
+      - "5454:5432"
+    networks:
+      - internal
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+
+  revm:
+    container_name: revm-admin
+    build:
+      context: ./revm
+    command: dockerize -wait tcp://db:5432 -timeout 90s
+    env_file:
+      - .env
+    networks:
+      - internal
+    volumes:
+      - ./revm:/code
+    ports:
+      - "8070:8070"
+    depends_on:
+      - db
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  pgdata:
+    name: revm-pgdata
