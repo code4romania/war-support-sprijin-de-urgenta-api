@@ -1,6 +1,6 @@
 set -e
 
-cd ~/war-support-sprijin-de-urgenta-api
+cd ~/root/war-support-sprijin-de-urgenta-api
 git reset --hard HEAD
 git pull
 
