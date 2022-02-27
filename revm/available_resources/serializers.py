@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from available_resources.models import GoodsTransportService, PeopleTransportService, FoodProductsResource
+from available_resources.models import GoodsTransportService, PeopleTransportService, ProductsResource
+from available_resources.models import OtherResource
+from available_resources.models import VolunteeringResource
 
 
 class CreateGoodsTransportServiceSerializer(serializers.ModelSerializer):
@@ -15,7 +17,19 @@ class CreatePeopleTransportServiceSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class CreateFoodProductsResourceSerializer(serializers.ModelSerializer):
+class CreateProductsResourceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FoodProductsResource
+        model = ProductsResource
+        fields = "__all__"
+
+
+class CreateVolunteeringResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VolunteeringResource
+        fields = "__all__"
+
+
+class CreateOtherResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OtherResource
         fields = "__all__"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-27 18:31+0200\n"
+"POT-Creation-Date: 2022-02-27 23:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,34 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: account/admin.py:40
+msgid "Personal info"
+msgstr ""
+
+#: account/admin.py:41
+msgid "Profile data"
+msgstr ""
+
+#: account/admin.py:42
+msgid "Permissions"
+msgstr ""
+
+#: account/models.py:11 donors/models.py:10
+msgid "email address"
+msgstr ""
+
+#: account/models.py:12 donors/models.py:11
+msgid "phone number"
+msgstr ""
+
+#: account/models.py:16
+msgid "user"
+msgstr ""
+
+#: account/models.py:17
+msgid "users"
+msgstr ""
 
 #: available_resources/models.py:9
 msgid "Box"
@@ -62,88 +90,116 @@ msgstr ""
 msgid "resource name"
 msgstr ""
 
-#: available_resources/models.py:43
+#: available_resources/models.py:49 available_resources/models.py:125
 msgid "resource description"
 msgstr ""
 
-#: available_resources/models.py:44
+#: available_resources/models.py:50
 msgid "resource added on"
 msgstr ""
 
-#: available_resources/models.py:45
+#: available_resources/models.py:51
 msgid "resource available from"
 msgstr ""
 
-#: available_resources/models.py:46
+#: available_resources/models.py:52
 msgid "resource available until"
 msgstr ""
 
-#: available_resources/models.py:48
+#: available_resources/models.py:54
 msgid "resource finished"
 msgstr ""
 
-#: available_resources/models.py:50
+#: available_resources/models.py:56
 msgid "Is this resource completely used up"
 msgstr ""
 
-#: available_resources/models.py:63
+#: available_resources/models.py:69
 msgid "county"
 msgstr ""
 
-#: available_resources/models.py:71
+#: available_resources/models.py:77
 msgid "reuses left"
 msgstr ""
 
-#: available_resources/models.py:71
+#: available_resources/models.py:77
 msgid "How many times can this resource be used"
 msgstr ""
 
-#: available_resources/models.py:73
+#: available_resources/models.py:79
 msgid "is infinitely reusable"
 msgstr ""
 
-#: available_resources/models.py:74
+#: available_resources/models.py:80
 msgid "reusable resource currently under use"
 msgstr ""
 
-#: available_resources/models.py:75
+#: available_resources/models.py:81
 msgid "used by"
 msgstr ""
 
-#: available_resources/models.py:82
+#: available_resources/models.py:88
 msgid "usable weight"
 msgstr ""
 
-#: available_resources/models.py:83
+#: available_resources/models.py:89
 msgid "has refrigeration"
 msgstr ""
 
-#: available_resources/models.py:87
+#: available_resources/models.py:93
 msgid "total passengers"
 msgstr ""
 
-#: available_resources/models.py:88
+#: available_resources/models.py:94
 msgid "has disability access"
 msgstr ""
 
-#: available_resources/models.py:89
+#: available_resources/models.py:95
 msgid "has pet accommodation"
 msgstr ""
 
-#: available_resources/models.py:94
+#: available_resources/models.py:99
 msgid "unit type"
 msgstr ""
 
-#: available_resources/models.py:96
+#: available_resources/models.py:100
 msgid "total units"
 msgstr ""
 
-#: available_resources/models.py:97
+#: available_resources/models.py:101
 msgid "expiration date"
 msgstr ""
 
-#: available_resources/models.py:98
+#: available_resources/models.py:102
 msgid "pickup town"
+msgstr ""
+
+#: available_resources/models.py:114
+msgid "psychologist"
+msgstr ""
+
+#: available_resources/models.py:115
+msgid "medic"
+msgstr ""
+
+#: available_resources/models.py:116
+msgid "nurse"
+msgstr ""
+
+#: available_resources/models.py:117
+msgid "lawyer"
+msgstr ""
+
+#: available_resources/models.py:118
+msgid "cook"
+msgstr ""
+
+#: available_resources/models.py:119
+msgid "manager"
+msgstr ""
+
+#: available_resources/models.py:121
+msgid "volunteer type"
 msgstr ""
 
 #: donors/models.py:6
@@ -170,14 +226,6 @@ msgstr ""
 msgid "contact name"
 msgstr ""
 
-#: donors/models.py:10
-msgid "email address"
-msgstr ""
-
-#: donors/models.py:11
-msgid "phone number"
-msgstr ""
-
 #: donors/models.py:12
 msgid "type"
 msgstr ""
@@ -186,14 +234,14 @@ msgstr ""
 msgid "details"
 msgstr ""
 
-#: revm_site/settings/base.py:129
+#: revm_site/settings/base.py:130
 msgid "Romanian"
 msgstr ""
 
-#: revm_site/settings/base.py:130
+#: revm_site/settings/base.py:131
 msgid "English"
 msgstr ""
 
-#: revm_site/urls.py:18
+#: revm_site/urls.py:21
 msgid "Resource Volunteer Management Admin"
 msgstr ""

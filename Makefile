@@ -11,8 +11,8 @@ build-dev:                        ## builds the container with the development f
 	docker-compose build --build-arg ENVIRONMENT=development --pull
 	docker-compose up -d
 
-superuser:                        ## creates a superuser for the API
-	docker-compose exec revm ./manage.py createsuperuser
+superuser:                        ## creates a superuser for the API based on the data in the .env file
+	docker-compose exec revm ./manage.py seed_superuser
 
 drop-db:                          ## drops the database
 	docker-compose down -t 60

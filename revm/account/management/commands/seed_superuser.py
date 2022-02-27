@@ -20,7 +20,7 @@ class Command(BaseCommand):
             superuser.set_password(settings.SUPER_ADMIN_PASS)
             superuser.save()
         else:
-            print('Super admin user already exists')
+            print("Super admin user already exists")
 
     def handle(self, *args, **kwargs):
         self.create_superuser()
