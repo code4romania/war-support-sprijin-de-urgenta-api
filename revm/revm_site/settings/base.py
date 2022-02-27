@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # project apps
     "donors",
     "available_resources",
+    "account",
     # api documentation
     "drf_spectacular",
 ]
@@ -200,3 +201,12 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
     "RO": "Național",
 }
+
+AUTH_USER_MODEL = 'account.CustomUser'
+LOGIN_REDIRECT_URL = 'admin'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
+SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
+SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
+SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")

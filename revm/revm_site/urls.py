@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
@@ -61,7 +62,8 @@ urlpatterns = (
             auth_views.PasswordResetCompleteView.as_view(),
             name="password_reset_complete",
         ),
-        path("admin/", admin.site.urls),
+        path("admin/", admin.site.urls, name='admin'),
+        path('logout', LogoutView.as_view(), name='logout'),
     )
     + [
         # URL patterns which do not use a language prefix
