@@ -1,6 +1,6 @@
 set -e
 
-cd ~/rvm-api-django
+cd ~/war-support-sprijin-de-urgenta-api
 git reset --hard HEAD
 git pull
 
