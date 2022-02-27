@@ -1,4 +1,5 @@
 ### VisualStudioCode template
+.idea
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
