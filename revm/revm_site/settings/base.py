@@ -19,6 +19,7 @@ env = environ.Env(
     ENABLE_DEBUG_TOOLBAR=(bool, True),
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
+    ALLOWED_HOSTS=(list, ["*"]),
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,7 +29,7 @@ DEBUG = env("ENVIRONMENT") != "production"
 
 ENABLE_DEBUG_TOOLBAR = bool(DEBUG and env("ENABLE_DEBUG_TOOLBAR"))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CORS_ORIGIN_ALLOW_ALL = False
 
 INSTALLED_APPS = [
