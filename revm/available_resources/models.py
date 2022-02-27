@@ -40,6 +40,12 @@ class CommonResource(models.Model):
     subcategory = models.ForeignKey(ResourceSubcategory, on_delete=models.CASCADE)
     donor = models.ForeignKey(Donor, on_delete=models.CASCADE)
     name = models.CharField(_("resource name"), max_length=50, null=False, blank=False, db_index=True)
+
+    class Meta:
+        abstract = True
+
+
+class CommonDetailedResource(CommonResource):
     description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
     added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
     available_from = models.DateTimeField(_("resource available from"), auto_now_add=timezone.now, null=False)
@@ -66,7 +72,7 @@ class CommonLocalizedResource(models.Model):
         abstract = True
 
 
-class CommonReusableResource(CommonResource):
+class CommonReusableResource(CommonDetailedResource):
     reuses_left = models.PositiveSmallIntegerField(
         _("reuses left"), help_text=_("How many times can this resource be used"), null=True, blank=True
     )
@@ -89,10 +95,31 @@ class PeopleTransportService(CommonReusableResource, CommonLocalizedResource):
     has_pet_accommodation = models.BooleanField(_("has pet accommodation"), default=False)
 
 
-class FoodProductsResource(CommonResource, CommonLocalizedResource):
-    unit_type = models.CharField(
-        _("unit type"), max_length=10, choices=GOODS_CONTAINER_CHOICES, blank=False, null=False
-    )
+class ProductsResource(CommonDetailedResource, CommonLocalizedResource):
+    unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
     total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
     pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
+
+
+class VolunteeringResource(CommonResource, CommonLocalizedResource):
+    PSYCHOLOGIST = 0
+    MEDIC = 1
+    NURSE = 2
+    LAWYER = 3
+    COOK = 4
+    MANAGER = 5
+
+    VOLUNTEER_TYPES = (
+        (PSYCHOLOGIST, _("psychologist")),
+        (MEDIC, _("medic")),
+        (NURSE, _("nurse")),
+        (LAWYER, _("lawyer")),
+        (COOK, _("cook")),
+        (MANAGER, _("manager")),
+    )
+    type = models.PositiveSmallIntegerField(_("volunteer type"), choices=VOLUNTEER_TYPES, db_index=True)
+
+
+class OtherResource(CommonResource):
+    description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)

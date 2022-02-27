@@ -12,8 +12,10 @@ from rest_framework import routers
 from available_resources.views import (
     CreateGoodsTransportServiceViewSet,
     CreatePeopleTransportServiceViewSet,
-    CreateFoodProductsResourceViewSet,
+    CreateProductsResourceViewSet,
 )
+from available_resources.views import CreateOtherResourceViewSet
+from available_resources.views import CreateVolunteeringResourceViewSet
 from donors.views import CreateDonorViewSet
 
 admin_site_string = _("Resource Volunteer Management Admin")
@@ -34,8 +36,18 @@ router.register(
 )
 router.register(
     r"create_food_products_resource",
-    CreateFoodProductsResourceViewSet,
+    CreateProductsResourceViewSet,
     basename="food_products_resource",
+)
+router.register(
+    r"create_volunteering_products_resource",
+    CreateVolunteeringResourceViewSet,
+    basename="volunteering_products_resource",
+)
+router.register(
+    r"create_other_products_resource",
+    CreateOtherResourceViewSet,
+    basename="other_products_resource",
 )
 router.register(r"create_donor", CreateDonorViewSet, basename="create_donor")
 
@@ -62,8 +74,8 @@ urlpatterns = (
             auth_views.PasswordResetCompleteView.as_view(),
             name="password_reset_complete",
         ),
-        path("admin/", admin.site.urls, name='admin'),
-        path('logout', LogoutView.as_view(), name='logout'),
+        path("admin/", admin.site.urls, name="admin"),
+        path("logout", LogoutView.as_view(), name="logout"),
     )
     + [
         # URL patterns which do not use a language prefix

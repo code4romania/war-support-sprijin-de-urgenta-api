@@ -8,59 +8,44 @@ from rest_framework.throttling import AnonRateThrottle
 from available_resources.serializers import (
     CreateGoodsTransportServiceSerializer,
     CreatePeopleTransportServiceSerializer,
-    CreateFoodProductsResourceSerializer,
+    CreateProductsResourceSerializer,
 )
+from available_resources.serializers import CreateOtherResourceSerializer
+from available_resources.serializers import CreateVolunteeringResourceSerializer
 
 
-class CreateGoodsTransportServiceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class CreateResourceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     permission_classes = (permissions.AllowAny,)
     throttle_classes = (AnonRateThrottle,)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class CreateGoodsTransportServiceViewSet(CreateResourceViewSet):
     serializer_class = CreateGoodsTransportServiceSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = CreateGoodsTransportServiceSerializer(data=request.data)
 
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-
-class CreatePeopleTransportServiceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    permission_classes = (permissions.AllowAny,)
-    throttle_classes = (AnonRateThrottle,)
+class CreatePeopleTransportServiceViewSet(CreateResourceViewSet):
     serializer_class = CreatePeopleTransportServiceSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = CreatePeopleTransportServiceSerializer(data=request.data)
 
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+class CreateProductsResourceViewSet(CreateResourceViewSet):
+    serializer_class = CreateProductsResourceSerializer
 
 
-class CreateFoodProductsResourceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    permission_classes = (permissions.AllowAny,)
-    throttle_classes = (AnonRateThrottle,)
-    serializer_class = CreateFoodProductsResourceSerializer
+class CreateVolunteeringResourceViewSet(CreateResourceViewSet):
+    serializer_class = CreateVolunteeringResourceSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = CreateFoodProductsResourceSerializer(data=request.data)
 
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+class CreateOtherResourceViewSet(CreateResourceViewSet):
+    serializer_class = CreateOtherResourceSerializer
