@@ -1,9 +1,21 @@
 from rest_framework import serializers
 
-from available_resources.models import Resource
+from available_resources.models import GoodsTransportService, PeopleTransportService, FoodProductsResource
 
 
-class CreateResourceSerializer(serializers.ModelSerializer):
+class CreateGoodsTransportServiceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Resource
+        model = GoodsTransportService
+        fields = "__all__"
+
+
+class CreatePeopleTransportServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PeopleTransportService
+        fields = "__all__"
+
+
+class CreateFoodProductsResourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FoodProductsResource
         fields = "__all__"
