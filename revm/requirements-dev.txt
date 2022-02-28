@@ -37,6 +37,7 @@ django==3.2.12
     #   django-extensions
     #   django-storages
     #   djangorestframework
+    #   djangorestframework-simplejwt
     #   drf-spectacular
 django-cors-headers==3.11.0
     # via -r requirements.txt
@@ -52,7 +53,10 @@ djangorestframework==3.13.1
     # via
     #   -r requirements.txt
     #   dj-rest-auth
+    #   djangorestframework-simplejwt
     #   drf-spectacular
+djangorestframework-simplejwt==5.0.0
+    # via -r requirements.txt
 drf-spectacular==0.21.2
     # via -r requirements.txt
 executing==0.8.2
@@ -111,6 +115,10 @@ pygments==2.11.2
     # via
     #   ipython
     #   pdbpp
+pyjwt==2.3.0
+    # via
+    #   -r requirements.txt
+    #   djangorestframework-simplejwt
 pymemcache==3.5.1
     # via -r requirements.txt
 pyrepl==0.9.0
