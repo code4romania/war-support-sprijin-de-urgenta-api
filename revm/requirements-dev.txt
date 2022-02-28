@@ -24,6 +24,14 @@ click==8.0.4
     #   pip-tools
 decorator==5.1.1
     # via ipython
+defusedxml==0.7.1
+    # via
+    #   -r requirements.txt
+    #   odfpy
+diff-match-patch==20200713
+    # via
+    #   -r requirements.txt
+    #   django-import-export
 dj-database-url==0.5.0
     # via -r requirements.txt
 dj-rest-auth==2.2.3
@@ -35,6 +43,7 @@ django==3.2.12
     #   django-cors-headers
     #   django-debug-toolbar
     #   django-extensions
+    #   django-import-export
     #   django-storages
     #   djangorestframework
     #   djangorestframework-simplejwt
@@ -47,6 +56,8 @@ django-environ==0.8.1
     # via -r requirements.txt
 django-extensions==3.1.5
     # via -r requirements-dev.in
+django-import-export==2.7.1
+    # via -r requirements.txt
 django-storages==1.12.3
     # via -r requirements.txt
 djangorestframework==3.13.1
@@ -59,6 +70,10 @@ djangorestframework-simplejwt==5.0.0
     # via -r requirements.txt
 drf-spectacular==0.21.2
     # via -r requirements.txt
+et-xmlfile==1.1.0
+    # via
+    #   -r requirements.txt
+    #   openpyxl
 executing==0.8.2
     # via stack-data
 fancycompleter==0.9.1
@@ -83,10 +98,22 @@ jsonschema==4.4.0
     # via
     #   -r requirements.txt
     #   drf-spectacular
+markuppy==1.14
+    # via
+    #   -r requirements.txt
+    #   tablib
 matplotlib-inline==0.1.3
     # via ipython
 mypy-extensions==0.4.3
     # via black
+odfpy==1.4.1
+    # via
+    #   -r requirements.txt
+    #   tablib
+openpyxl==3.0.9
+    # via
+    #   -r requirements.txt
+    #   tablib
 parso==0.8.3
     # via jedi
 pathspec==0.9.0
@@ -136,6 +163,7 @@ pyyaml==6.0
     # via
     #   -r requirements.txt
     #   drf-spectacular
+    #   tablib
 six==1.16.0
     # via
     #   -r requirements.txt
@@ -147,6 +175,10 @@ sqlparse==0.4.2
     #   django-debug-toolbar
 stack-data==0.2.0
     # via ipython
+tablib[html,ods,xls,xlsx,yaml]==3.2.0
+    # via
+    #   -r requirements.txt
+    #   django-import-export
 tomli==2.0.1
     # via
     #   black
@@ -171,6 +203,14 @@ whitenoise==6.0.0
     # via -r requirements.txt
 wmctrl==0.4
     # via pdbpp
+xlrd==2.0.1
+    # via
+    #   -r requirements.txt
+    #   tablib
+xlwt==1.3.0
+    # via
+    #   -r requirements.txt
+    #   tablib
 zope-event==4.5.0
     # via
     #   -r requirements.txt

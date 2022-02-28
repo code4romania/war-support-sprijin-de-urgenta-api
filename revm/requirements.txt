@@ -8,6 +8,10 @@ asgiref==3.5.0
     # via django
 attrs==21.4.0
     # via jsonschema
+defusedxml==0.7.1
+    # via odfpy
+diff-match-patch==20200713
+    # via django-import-export
 dj-database-url==0.5.0
     # via -r requirements.in
 dj-rest-auth==2.2.3
@@ -17,6 +21,7 @@ django==3.2.12
     #   -r requirements.in
     #   dj-rest-auth
     #   django-cors-headers
+    #   django-import-export
     #   django-storages
     #   djangorestframework
     #   djangorestframework-simplejwt
@@ -24,6 +29,8 @@ django==3.2.12
 django-cors-headers==3.11.0
     # via -r requirements.in
 django-environ==0.8.1
+    # via -r requirements.in
+django-import-export==2.7.1
     # via -r requirements.in
 django-storages==1.12.3
     # via -r requirements.in
@@ -37,6 +44,8 @@ djangorestframework-simplejwt==5.0.0
     # via -r requirements.in
 drf-spectacular==0.21.2
     # via -r requirements.in
+et-xmlfile==1.1.0
+    # via openpyxl
 gevent==21.12.0
     # via -r requirements.in
 greenlet==1.1.2
@@ -47,6 +56,12 @@ inflection==0.5.1
     # via drf-spectacular
 jsonschema==4.4.0
     # via drf-spectacular
+markuppy==1.14
+    # via tablib
+odfpy==1.4.1
+    # via tablib
+openpyxl==3.0.9
+    # via tablib
 psycopg2==2.9.3
     # via -r requirements.in
 pyjwt==2.3.0
@@ -60,15 +75,23 @@ pytz==2021.3
     #   django
     #   djangorestframework
 pyyaml==6.0
-    # via drf-spectacular
+    # via
+    #   drf-spectacular
+    #   tablib
 six==1.16.0
     # via pymemcache
 sqlparse==0.4.2
     # via django
+tablib[html,ods,xls,xlsx,yaml]==3.2.0
+    # via django-import-export
 uritemplate==4.1.1
     # via drf-spectacular
 whitenoise==6.0.0
     # via -r requirements.in
+xlrd==2.0.1
+    # via tablib
+xlwt==1.3.0
+    # via tablib
 zope-event==4.5.0
     # via gevent
 zope-interface==5.4.0
