@@ -1,21 +1,40 @@
-from rest_framework import mixins
-from rest_framework import permissions
-from rest_framework import status
-from rest_framework import viewsets
+from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
 
+from available_resources.models import ResourceCategory
 from available_resources.serializers import (
     CreateGoodsTransportServiceSerializer,
+    CreateOtherResourceSerializer,
     CreatePeopleTransportServiceSerializer,
     CreateProductsResourceSerializer,
+    CreateVolunteeringResourceSerializer,
+    ViewCategoriesListSerializer,
+    ViewCategorySerializer,
 )
-from available_resources.serializers import CreateOtherResourceSerializer
-from available_resources.serializers import CreateVolunteeringResourceSerializer
+
+
+class CategoriesViewSet(viewsets.ReadOnlyModelViewSet):
+    lookup_field = "pk"
+    permission_classes = (permissions.AllowAny,)
+
+    def get_queryset(self):
+        return ResourceCategory.objects.all().order_by("name")
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return ViewCategoriesListSerializer
+        return ViewCategorySerializer
+
+
+class CategoriesByNameViewSet(CategoriesViewSet):
+    lookup_field = "name"
 
 
 class CreateResourceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    # TODO: change permissions to allow only authenticated users
     permission_classes = (permissions.AllowAny,)
+    # TODO: Add throttling
     throttle_classes = (AnonRateThrottle,)
 
     def create(self, request, *args, **kwargs):
