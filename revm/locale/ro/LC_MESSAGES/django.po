@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-28 10:14+0200\n"
+"POT-Creation-Date: 2022-02-28 20:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: account/admin.py:40
 msgid "Personal info"
-msgstr ""
+msgstr "Informații personale"
 
 #: account/admin.py:41
 msgid "Profile data"
-msgstr ""
+msgstr "Informații profil"
 
 #: account/admin.py:42
 msgid "Permissions"
-msgstr ""
+msgstr "Permisiuni"
 
 #: account/models.py:11 donors/models.py:10
 msgid "email address"
@@ -41,19 +41,19 @@ msgstr "număr telefon"
 
 #: account/models.py:16
 msgid "user"
-msgstr ""
+msgstr "utilizator"
 
 #: account/models.py:17
 msgid "users"
-msgstr ""
+msgstr "utilizator"
 
 #: available_resources/models.py:9
 msgid "Box"
-msgstr ""
+msgstr "Cutie"
 
 #: available_resources/models.py:10
 msgid "Bottle"
-msgstr ""
+msgstr "Sticlă"
 
 #: available_resources/models.py:15
 msgid "category name"
@@ -80,16 +80,12 @@ msgid "subcategory description"
 msgstr "descrierea subcategoriei"
 
 #: available_resources/models.py:35
-#, fuzzy
-#| msgid "resource category"
 msgid "resource subcategory"
-msgstr "categoria resurselor"
+msgstr "subcategoria resurselor"
 
 #: available_resources/models.py:36
-#, fuzzy
-#| msgid "resource categories"
 msgid "resource subcategories"
-msgstr "categoriile resurselor"
+msgstr "subcategoriile resurselor"
 
 #: available_resources/models.py:42
 msgid "resource name"
@@ -100,30 +96,24 @@ msgid "resource description"
 msgstr "descrierea resursei"
 
 #: available_resources/models.py:50
-#, fuzzy
-#| msgid "resource name"
 msgid "resource added on"
-msgstr "numele resursei"
+msgstr "data adăugării"
 
 #: available_resources/models.py:51
-#, fuzzy
-#| msgid "resource name"
 msgid "resource available from"
-msgstr "numele resursei"
+msgstr "disponibilitate de la"
 
 #: available_resources/models.py:52
 msgid "resource available until"
-msgstr ""
+msgstr "disponibilitate până la"
 
 #: available_resources/models.py:54
-#, fuzzy
-#| msgid "resource name"
 msgid "resource finished"
-msgstr "numele resursei"
+msgstr "resursă consumată"
 
 #: available_resources/models.py:56
 msgid "Is this resource completely used up"
-msgstr ""
+msgstr "E această resursă complet utilizată"
 
 #: available_resources/models.py:69
 msgid "county"
@@ -131,61 +121,59 @@ msgstr "județ"
 
 #: available_resources/models.py:77
 msgid "reuses left"
-msgstr ""
+msgstr "reutilizări rămase"
 
 #: available_resources/models.py:77
 msgid "How many times can this resource be used"
-msgstr ""
+msgstr "De câte ori poate fi această resursă utilizată"
 
 #: available_resources/models.py:79
 msgid "is infinitely reusable"
-msgstr ""
+msgstr "nu are limită de reutilizări"
 
 #: available_resources/models.py:80
 msgid "reusable resource currently under use"
-msgstr ""
+msgstr "resursă reutilizabilă în utilizare"
 
 #: available_resources/models.py:81
 msgid "used by"
-msgstr ""
+msgstr "utilizat de"
 
 #: available_resources/models.py:88
 msgid "usable weight"
-msgstr ""
+msgstr "greutate utilă"
 
 #: available_resources/models.py:89
 msgid "has refrigeration"
-msgstr ""
+msgstr "are refigerare"
 
 #: available_resources/models.py:93
 msgid "total passengers"
-msgstr ""
+msgstr "număr de pasageri"
 
 #: available_resources/models.py:94
 msgid "has disability access"
-msgstr ""
+msgstr "are acces pentru persoane cu dizabilități"
 
 #: available_resources/models.py:95
 msgid "has pet accommodation"
-msgstr ""
+msgstr "are acomodare pentru animale de companie"
 
 #: available_resources/models.py:99
-#, fuzzy
-#| msgid "type"
 msgid "unit type"
 msgstr "unitate de măsură"
 
 #: available_resources/models.py:100
 msgid "total units"
-msgstr ""
+msgstr "număr de unități"
 
 #: available_resources/models.py:101
 msgid "expiration date"
-msgstr ""
+msgstr "data expirării"
 
 #: available_resources/models.py:102
 msgid "pickup town"
-msgstr ""
+msgstr "oraș de ridicare"
 
 #: available_resources/models.py:114
 msgid "psychologist"
@@ -212,10 +200,8 @@ msgid "manager"
 msgstr "organizare"
 
 #: available_resources/models.py:121
-#, fuzzy
-#| msgid "type"
 msgid "volunteer type"
-msgstr "unitate de măsură"
+msgstr "tip de voluntariat"
 
 #: donors/models.py:6
 msgid "Individual"
@@ -223,7 +209,7 @@ msgstr "Persoană Fizică"
 
 #: donors/models.py:6
 msgid "Corporate"
-msgstr ""
+msgstr "Companie"
 
 #: donors/models.py:6
 msgid "Non-Profit"
@@ -231,7 +217,7 @@ msgstr "ONG"
 
 #: donors/models.py:6
 msgid "Government"
-msgstr ""
+msgstr "Autoritate Publică"
 
 #: donors/models.py:8
 msgid "name"
@@ -249,11 +235,11 @@ msgstr "tip"
 msgid "details"
 msgstr "detalii"
 
-#: revm_site/settings/base.py:130
+#: revm_site/settings/base.py:134
 msgid "Romanian"
 msgstr "Română"
 
-#: revm_site/settings/base.py:131
+#: revm_site/settings/base.py:135
 msgid "English"
 msgstr "Engleză"
 

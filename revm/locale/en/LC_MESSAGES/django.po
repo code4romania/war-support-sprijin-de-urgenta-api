@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-28 10:14+0200\n"
+"POT-Creation-Date: 2022-02-28 20:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,11 +234,11 @@ msgstr ""
 msgid "details"
 msgstr ""
 
-#: revm_site/settings/base.py:130
+#: revm_site/settings/base.py:134
 msgid "Romanian"
 msgstr ""
 
-#: revm_site/settings/base.py:131
+#: revm_site/settings/base.py:135
 msgid "English"
 msgstr ""
 
