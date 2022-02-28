@@ -8,6 +8,9 @@ django-storages
 # authentication
 dj-rest-auth==2.2.3
 
+# py caching
+pymemcache
+
 # database
 psycopg2<2.10
 dj-database-url

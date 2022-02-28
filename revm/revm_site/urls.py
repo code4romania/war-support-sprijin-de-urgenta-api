@@ -64,7 +64,7 @@ urlpatterns = (
     + [
         # URL patterns which do not use a language prefix
         path("api/v1/", include(router.urls)),
-        path('auth/', include('dj_rest_auth.urls')),
+        path("auth/", include("dj_rest_auth.urls")),
         path("i18n/", include("django.conf.urls.i18n")),
         path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
         path(

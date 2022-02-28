@@ -45,6 +45,8 @@ jsonschema==4.4.0
     # via drf-spectacular
 psycopg2==2.9.3
     # via -r requirements.in
+pymemcache==3.5.1
+    # via -r requirements.in
 pyrsistent==0.18.1
     # via jsonschema
 pytz==2021.3
@@ -53,6 +55,8 @@ pytz==2021.3
     #   djangorestframework
 pyyaml==6.0
     # via drf-spectacular
+six==1.16.0
+    # via pymemcache
 sqlparse==0.4.2
     # via django
 uritemplate==4.1.1
