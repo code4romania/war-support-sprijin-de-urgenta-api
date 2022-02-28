@@ -16,7 +16,7 @@ from available_resources.serializers import (
 
 class CategoriesViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = "pk"
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         return ResourceCategory.objects.all().order_by("name")
