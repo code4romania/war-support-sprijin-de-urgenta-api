@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "storages",
     "corsheaders",
     "dj_rest_auth",
+    "import_export",
     # project apps
     "donors",
     "available_resources",
@@ -221,6 +222,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'revm-auth-cookie'
 JWT_AUTH_REFRESH_COOKIE = 'revm-refresh-token'
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
 SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")

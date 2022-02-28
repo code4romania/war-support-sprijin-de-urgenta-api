@@ -1,20 +1,12 @@
 from django.contrib import admin
 
+from import_export.admin import ImportExportModelAdmin
+
 from available_resources import models
 
 
-@admin.register(models.ResourceSubcategory)
-class ResourceSubcategoryAdmin(admin.ModelAdmin):
-    list_filter = ("name", "category")
-    list_display = ("name", "category", "description")
-
-    search_fields = ("name",)
-
-    ordering = ("name",)
-
-
 @admin.register(models.ResourceCategory)
-class ResourceCategoryAdmin(admin.ModelAdmin):
+class ResourceCategoryAdmin(ImportExportModelAdmin):
     list_filter = ("name",)
     list_display = ("name", "description")
 
@@ -23,12 +15,23 @@ class ResourceCategoryAdmin(admin.ModelAdmin):
     ordering = ("name",)
 
 
+@admin.register(models.ResourceSubcategory)
+class ResourceSubcategoryAdmin(ImportExportModelAdmin):
+    list_filter = ("name", "category")
+    list_display = ("name", "category", "description")
+
+    search_fields = ("name",)
+
+    ordering = ("name",)
+
+
 @admin.register(models.GoodsTransportService)
-class GoodsTransportServiceAdmin(admin.ModelAdmin):
+class GoodsTransportServiceAdmin(ImportExportModelAdmin):
     list_filter = ("county_coverage", "currently_in_use")
     list_display = (
         "name",
         "category",
+        "subcategory",
         "usable_weight",
         "has_refrigeration",
         "county_coverage",
@@ -44,9 +47,10 @@ class GoodsTransportServiceAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.PeopleTransportService)
-class PeopleTransportServiceAdmin(admin.ModelAdmin):
+class PeopleTransportServiceAdmin(ImportExportModelAdmin):
     list_filter = ("county_coverage", "currently_in_use", "total_passengers")
-    list_display = ("name", "category", "total_passengers", "has_disability_access", "has_pet_accommodation")
+    list_display = ("name", "category", "subcategory", "total_passengers", "has_disability_access",
+                    "has_pet_accommodation")
 
     # custom `category` field added to the list view in Admin Panel
     def category(self, instance):
@@ -56,9 +60,9 @@ class PeopleTransportServiceAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.ProductsResource)
-class ProductsResourceAdmin(admin.ModelAdmin):
+class ProductsResourceAdmin(ImportExportModelAdmin):
     list_filter = ("pickup_town",)
-    list_display = ("name", "category", "total_units", "unit_type")
+    list_display = ("name", "category", "subcategory", "total_units", "unit_type")
 
     # custom `category` field added to the list view in Admin Panel
     def category(self, instance):
@@ -68,12 +72,12 @@ class ProductsResourceAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.VolunteeringResource)
-class VolunteeringResourceAdmin(admin.ModelAdmin):
+class VolunteeringResourceAdmin(ImportExportModelAdmin):
     list_filter = ("type", "county_coverage")
     list_display = ("name", "county_coverage", "type")
 
 
 @admin.register(models.OtherResource)
-class OtherResourceAdmin(admin.ModelAdmin):
+class OtherResourceAdmin(ImportExportModelAdmin):
     list_filter = ("donor",)
     list_display = ("donor", "description")
