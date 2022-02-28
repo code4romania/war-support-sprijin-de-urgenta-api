@@ -15,7 +15,7 @@ class CreateDonorQueryBurstAnonRateThrottle(AnonRateThrottle):
 
 
 class CreateDonorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     throttle_classes = (CreateDonorQueryBurstAnonRateThrottle,)
     serializer_class = CreateDonorSerializer
 

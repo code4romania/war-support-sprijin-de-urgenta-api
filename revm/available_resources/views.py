@@ -33,7 +33,6 @@ class CategoriesByNameViewSet(CategoriesViewSet):
 
 class CreateResourceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     permission_classes = (permissions.IsAuthenticated,)
-    # TODO: Add throttling
     throttle_classes = (AnonRateThrottle,)
 
     def create(self, request, *args, **kwargs):
