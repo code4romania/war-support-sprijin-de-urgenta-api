@@ -5,6 +5,9 @@ djangorestframework
 django-cors-headers
 django-storages
 
+# authentication
+dj-rest-auth==2.2.3
+
 # database
 psycopg2<2.10
 dj-database-url
