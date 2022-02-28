@@ -1,8 +1,34 @@
 from rest_framework import serializers
 
-from available_resources.models import GoodsTransportService, PeopleTransportService, ProductsResource
-from available_resources.models import OtherResource
-from available_resources.models import VolunteeringResource
+from available_resources.models import (
+    GoodsTransportService,
+    OtherResource,
+    PeopleTransportService,
+    ProductsResource,
+    ResourceCategory,
+    ResourceSubcategory,
+    VolunteeringResource,
+)
+
+
+class ViewCategoriesListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ResourceCategory
+        fields = ("pk", "name")
+
+
+class ResourceSubcategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ResourceSubcategory
+        fields = "__all__"
+
+
+class ViewCategorySerializer(serializers.ModelSerializer):
+    subcategories = ResourceSubcategorySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ResourceCategory
+        fields = ("pk", "name", "subcategories")
 
 
 class CreateGoodsTransportServiceSerializer(serializers.ModelSerializer):

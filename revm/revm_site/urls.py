@@ -2,20 +2,22 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
 from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
 from available_resources.views import (
+    CategoriesByNameViewSet,
+    CategoriesViewSet,
     CreateGoodsTransportServiceViewSet,
+    CreateOtherResourceViewSet,
     CreatePeopleTransportServiceViewSet,
     CreateProductsResourceViewSet,
+    CreateVolunteeringResourceViewSet,
 )
-from available_resources.views import CreateOtherResourceViewSet
-from available_resources.views import CreateVolunteeringResourceViewSet
 from donors.views import CreateDonorViewSet
 
 admin_site_string = _("Resource Volunteer Management Admin")
@@ -24,31 +26,13 @@ admin.site.site_header = admin_site_string
 admin.site.index_title = admin_site_string
 
 router = routers.DefaultRouter()
-router.register(
-    r"create_goods_transport_service",
-    CreateGoodsTransportServiceViewSet,
-    basename="goods_transport_service",
-)
-router.register(
-    r"create_people_transport_service",
-    CreatePeopleTransportServiceViewSet,
-    basename="people_transport_service",
-)
-router.register(
-    r"create_food_products_resource",
-    CreateProductsResourceViewSet,
-    basename="food_products_resource",
-)
-router.register(
-    r"create_volunteering_products_resource",
-    CreateVolunteeringResourceViewSet,
-    basename="volunteering_products_resource",
-)
-router.register(
-    r"create_other_products_resource",
-    CreateOtherResourceViewSet,
-    basename="other_products_resource",
-)
+router.register(r"create_goods_transport_service", CreateGoodsTransportServiceViewSet, basename="goods_transport")
+router.register(r"create_people_transport_service", CreatePeopleTransportServiceViewSet, basename="people_transport")
+router.register(r"create_food_products_resource", CreateProductsResourceViewSet, basename="food_products")
+router.register(r"create_volunteering_resource", CreateVolunteeringResourceViewSet, basename="volunteering")
+router.register(r"create_other_products_resource", CreateOtherResourceViewSet, basename="other_products")
+router.register(r"categories", CategoriesViewSet, basename="categories")
+router.register(r"categories_by_name", CategoriesByNameViewSet, basename="categories")
 router.register(r"create_donor", CreateDonorViewSet, basename="create_donor")
 
 urlpatterns = (

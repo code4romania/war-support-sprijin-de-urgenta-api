@@ -5,10 +5,7 @@ from available_resources import models
 
 @admin.register(models.ResourceSubcategory)
 class ResourceSubcategoryAdmin(admin.ModelAdmin):
-    list_filter = (
-        "name",
-        "category"
-    )
+    list_filter = ("name", "category")
     list_display = ("name", "category", "description")
 
     search_fields = ("name",)
@@ -72,7 +69,7 @@ class ProductsResourceAdmin(admin.ModelAdmin):
 
 @admin.register(models.VolunteeringResource)
 class VolunteeringResourceAdmin(admin.ModelAdmin):
-    list_filter = ("county_coverage", "type")
+    list_filter = ("type", "county_coverage")
     list_display = ("name", "county_coverage", "type")
 
 
