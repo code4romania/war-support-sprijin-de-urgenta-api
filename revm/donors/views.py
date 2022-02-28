@@ -1,3 +1,4 @@
+from django.core.cache import caches
 from rest_framework import mixins
 from rest_framework import permissions
 from rest_framework import status
@@ -8,9 +9,14 @@ from rest_framework.throttling import AnonRateThrottle
 from donors.serializers import CreateDonorSerializer
 
 
+class CreateDonorQueryBurstAnonRateThrottle(AnonRateThrottle):
+    cache = caches["default"]
+    rate = "20/min"
+
+
 class CreateDonorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     permission_classes = (permissions.IsAuthenticated,)
-    throttle_classes = (AnonRateThrottle,)
+    throttle_classes = (CreateDonorQueryBurstAnonRateThrottle,)
     serializer_class = CreateDonorSerializer
 
     def create(self, request, *args, **kwargs):

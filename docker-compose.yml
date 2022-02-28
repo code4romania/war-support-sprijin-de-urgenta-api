@@ -18,6 +18,12 @@ services:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_DB=${DATABASE_NAME}
 
+  cache:
+    container_name: revm-cache
+    image: memcached:1.6.14-alpine
+    networks:
+      - internal
+
   revm:
     container_name: revm-admin
     build:
@@ -33,6 +39,7 @@ services:
       - "8070:8070"
     depends_on:
       - db
+      - cache
 
 networks:
   internal:
