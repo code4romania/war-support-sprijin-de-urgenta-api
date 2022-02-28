@@ -32,8 +32,7 @@ class CategoriesByNameViewSet(CategoriesViewSet):
 
 
 class CreateResourceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    # TODO: change permissions to allow only authenticated users
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     # TODO: Add throttling
     throttle_classes = (AnonRateThrottle,)
 

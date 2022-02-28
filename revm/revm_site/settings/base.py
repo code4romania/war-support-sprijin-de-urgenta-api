@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     # third-party apps
     "rest_framework",
+    "rest_framework.authtoken",
     "storages",
     "corsheaders",
+    "dj_rest_auth",
     # project apps
     "donors",
     "available_resources",
@@ -145,9 +147,10 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 

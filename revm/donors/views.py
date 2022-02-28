@@ -9,7 +9,7 @@ from donors.serializers import CreateDonorSerializer
 
 
 class CreateDonorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     throttle_classes = (AnonRateThrottle,)
     serializer_class = CreateDonorSerializer
 
