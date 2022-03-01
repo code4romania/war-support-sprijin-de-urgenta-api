@@ -18,28 +18,46 @@ backcall==0.2.0
     # via ipython
 black==22.1.0
     # via -r requirements-dev.in
+certifi==2021.10.8
+    # via
+    #   -r requirements.txt
+    #   requests
+cffi==1.15.0
+    # via
+    #   -r requirements.txt
+    #   cryptography
+charset-normalizer==2.0.12
+    # via
+    #   -r requirements.txt
+    #   requests
 click==8.0.4
     # via
     #   black
     #   pip-tools
+cryptography==36.0.1
+    # via
+    #   -r requirements.txt
+    #   pyjwt
 decorator==5.1.1
     # via ipython
 defusedxml==0.7.1
     # via
     #   -r requirements.txt
     #   odfpy
+    #   python3-openid
 diff-match-patch==20200713
     # via
     #   -r requirements.txt
     #   django-import-export
 dj-database-url==0.5.0
     # via -r requirements.txt
-dj-rest-auth==2.2.3
+dj-rest-auth[with_social]==2.2.3
     # via -r requirements.txt
 django==3.2.12
     # via
     #   -r requirements.txt
     #   dj-rest-auth
+    #   django-allauth
     #   django-cors-headers
     #   django-debug-toolbar
     #   django-extensions
@@ -48,6 +66,10 @@ django==3.2.12
     #   djangorestframework
     #   djangorestframework-simplejwt
     #   drf-spectacular
+django-allauth==0.47.0
+    # via
+    #   -r requirements.txt
+    #   dj-rest-auth
 django-cors-headers==3.11.0
     # via -r requirements.txt
 django-debug-toolbar==3.2.4
@@ -86,6 +108,10 @@ greenlet==1.1.2
     #   gevent
 gunicorn==20.1.0
     # via -r requirements.txt
+idna==3.3
+    # via
+    #   -r requirements.txt
+    #   requests
 inflection==0.5.1
     # via
     #   -r requirements.txt
@@ -106,6 +132,10 @@ matplotlib-inline==0.1.3
     # via ipython
 mypy-extensions==0.4.3
     # via black
+oauthlib==3.2.0
+    # via
+    #   -r requirements.txt
+    #   requests-oauthlib
 odfpy==1.4.1
     # via
     #   -r requirements.txt
@@ -138,13 +168,18 @@ ptyprocess==0.7.0
     # via pexpect
 pure-eval==0.2.2
     # via stack-data
+pycparser==2.21
+    # via
+    #   -r requirements.txt
+    #   cffi
 pygments==2.11.2
     # via
     #   ipython
     #   pdbpp
-pyjwt==2.3.0
+pyjwt[crypto]==2.3.0
     # via
     #   -r requirements.txt
+    #   django-allauth
     #   djangorestframework-simplejwt
 pymemcache==3.5.1
     # via -r requirements.txt
@@ -154,6 +189,10 @@ pyrsistent==0.18.1
     # via
     #   -r requirements.txt
     #   jsonschema
+python3-openid==3.2.0
+    # via
+    #   -r requirements.txt
+    #   django-allauth
 pytz==2021.3
     # via
     #   -r requirements.txt
@@ -164,6 +203,15 @@ pyyaml==6.0
     #   -r requirements.txt
     #   drf-spectacular
     #   tablib
+requests==2.27.1
+    # via
+    #   -r requirements.txt
+    #   django-allauth
+    #   requests-oauthlib
+requests-oauthlib==1.3.1
+    # via
+    #   -r requirements.txt
+    #   django-allauth
 six==1.16.0
     # via
     #   -r requirements.txt
@@ -193,6 +241,10 @@ uritemplate==4.1.1
     # via
     #   -r requirements.txt
     #   drf-spectacular
+urllib3==1.26.8
+    # via
+    #   -r requirements.txt
+    #   requests
 wcwidth==0.2.5
     # via prompt-toolkit
 werkzeug==2.0.3
