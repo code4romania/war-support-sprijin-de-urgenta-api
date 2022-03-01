@@ -16,7 +16,7 @@ from available_resources.serializers import (
 
 class CategoriesViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = "pk"
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     def get_queryset(self):
         return ResourceCategory.objects.all().order_by("name")
@@ -32,7 +32,7 @@ class CategoriesByNameViewSet(CategoriesViewSet):
 
 
 class CreateResourceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     throttle_classes = (AnonRateThrottle,)
 
     def create(self, request, *args, **kwargs):
