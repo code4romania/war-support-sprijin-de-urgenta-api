@@ -9,14 +9,60 @@ from django.utils.translation import gettext_lazy as _
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
+from app_item.views import (
+    CreateItemRequestViewSet,
+    CreateItemOfferViewSet,
+    GetItemCategoryViewSet,
+    GetItemSubcategoryViewSet,
+)
+from app_other.views import (
+    CreateOtherRequestViewSet,
+    CreateOtherOfferViewSet,
+    GetOtherCategoryViewSet,
+    GetOtherSubcategoryViewSet,
+)
+from app_transport_service.views import (
+    CreateTransportServiceRequestViewSet,
+    CreateTransportServiceOfferViewSet,
+    GetTransportServiceCategoryViewSet,
+    GetTransportServiceSubcategoryViewSet,
+)
+from app_volunteering.views import (
+    CreateVolunteeringOfferViewSet,
+    CreateVolunteeringRequestViewSet,
+    GetVolunteeringCategoryViewSet,
+)
+
 
 admin_site_string = _("RVM")
+
 admin.site.site_title = admin_site_string
 admin.site.site_header = admin_site_string
 admin.site.index_title = admin_site_string
 
 router = routers.DefaultRouter()
+router.register(r"categories/item", GetItemCategoryViewSet, basename="volunteering_categories")
+router.register(r"categories/other", GetOtherCategoryViewSet, basename="volunteering_categories")
+router.register(r"categories/transport_service", GetTransportServiceCategoryViewSet, basename="volunteering_categories")
+router.register(r"categories/volunteering", GetVolunteeringCategoryViewSet, basename="volunteering_categories")
 
+router.register(r"subcategories/item", GetItemSubcategoryViewSet, basename="volunteering_subcategories")
+router.register(r"subcategories/other", GetOtherSubcategoryViewSet, basename="volunteering_subcategories")
+router.register(
+    r"subcategories/transport_service", GetTransportServiceSubcategoryViewSet, basename="volunteering_subcategories"
+)
+
+router.register(r"request/item", CreateItemRequestViewSet, basename="item_request")
+router.register(r"request/other", CreateOtherRequestViewSet, basename="other_request")
+router.register(r"request/transport_service", CreateTransportServiceRequestViewSet, basename="transport_request")
+router.register(r"request/volunteering", CreateVolunteeringRequestViewSet, basename="volunteering_request")
+
+
+router.register(r"donate/item", CreateItemOfferViewSet, basename="item_resource")
+
+router.register(r"donate/other", CreateOtherOfferViewSet, basename="other_resource")
+router.register(r"donate/transport_service", CreateTransportServiceOfferViewSet, basename="transport_resource")
+router.register(r"donate/volunteering", CreateVolunteeringOfferViewSet, basename="volunteering_resource")
 
 urlpatterns = (
     i18n_patterns(

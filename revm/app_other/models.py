@@ -31,7 +31,7 @@ class Subcategory(models.Model):
         verbose_name_plural = _("subcategories")
 
 
-class OtherResource(models.Model):
+class OtherOffer(models.Model):
     donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
@@ -50,19 +50,17 @@ class OtherResource(models.Model):
 
     class Meta:
         verbose_name = _("other offer")
-        verbose_name_plural = _("other offers")
+        verbose_name_plural = _("other offer")
 
 
 class OtherRequest(models.Model):
     made_by = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
-    service_resources = models.ManyToManyField(OtherResource, related_name="other_request")
-    # ToDo add here app_item, app_service, app_transport_service, app_volunteering | so we can match them up later
 
-    name = models.CharField(_("service name"), max_length=100, db_index=True)
-    description = models.CharField(_("service description"), default="", blank=True, null=False, max_length=500)
+    name = models.CharField(_("name"), max_length=100, db_index=True)
+    description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
-    added_on = models.DateTimeField(_("service added on"), auto_now_add=timezone.now, editable=False)
+    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
 
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
     town = models.CharField(_("town"), max_length=100, blank=False, null=False)
@@ -73,3 +71,13 @@ class OtherRequest(models.Model):
     class Meta:
         verbose_name = _("other request")
         verbose_name_plural = _("other requests")
+
+
+class ResourceRequest(models.Model):
+    resource = models.ForeignKey(OtherOffer, on_delete=models.DO_NOTHING)
+    request = models.ForeignKey(OtherRequest, on_delete=models.DO_NOTHING)
+    # ToDo add here app_item, app_service, app_transport_service, app_volunteering | so we can match them up later
+
+    class Meta:
+        verbose_name = _("Offer - Request")
+        verbose_name_plural = _("Offer - Request")

@@ -34,6 +34,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CORS_ORIGIN_ALLOW_ALL = False
 
 INSTALLED_APPS = [
+    "jazzmin",
     # django apps
     "jazzmin",
     "django.contrib.admin",
@@ -229,8 +230,8 @@ AUTH_USER_MODEL = "app_account.CustomUser"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'revm-auth-cookie'
-JWT_AUTH_REFRESH_COOKIE = 'revm-refresh-token'
+JWT_AUTH_COOKIE = "revm-auth-cookie"
+JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
