@@ -2,7 +2,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from .serializers import (
     TransportServiceRequestSerializer,
-    TransportServiceResourceSerializer,
+    TransportServiceOfferSerializer,
     TransportServiceCategorySerializer,
     TransportServiceSubcategorySerializer,
 )
@@ -21,5 +21,5 @@ class CreateTransportServiceRequestViewSet(CreateResourceViewSet):
     serializer_class = TransportServiceRequestSerializer
 
 
-class CreateTransportServiceResourceViewSet(CreateResourceViewSet):
-    serializer_class = TransportServiceResourceSerializer
+class CreateTransportServiceOfferViewSet(CreateResourceViewSet):
+    serializer_class = TransportServiceOfferSerializer

@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from revm_site.views import CreateResourceViewSet
-from .serializers import VolunteeringRequestSerializer, VolunteeringResourceSerializer, VolunteeringCategorySerializer
+from .serializers import VolunteeringRequestSerializer, VolunteeringOfferSerializer, VolunteeringCategorySerializer
 
 
 class GetVolunteeringCategoryViewSet(ReadOnlyModelViewSet):
@@ -12,5 +12,5 @@ class CreateVolunteeringRequestViewSet(CreateResourceViewSet):
     serializer_class = VolunteeringRequestSerializer
 
 
-class CreateVolunteeringResourceViewSet(CreateResourceViewSet):
-    serializer_class = VolunteeringResourceSerializer
+class CreateVolunteeringOfferViewSet(CreateResourceViewSet):
+    serializer_class = VolunteeringOfferSerializer
