@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
-from account import models
+from custom_account import models
 
 
 DjangoUserAdmin.add_fieldsets = (
