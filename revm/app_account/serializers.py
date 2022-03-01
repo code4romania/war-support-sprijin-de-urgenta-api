@@ -51,7 +51,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             "phone_number": self.validated_data.get("phone_number", ""),
             "email": self.validated_data.get("email", ""),
             "password": self.validated_data.get("password", ""),
-
         }
 
     def save(self, request):
