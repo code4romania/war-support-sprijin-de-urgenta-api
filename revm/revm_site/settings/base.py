@@ -36,7 +36,6 @@ CORS_ORIGIN_ALLOW_ALL = False
 INSTALLED_APPS = [
     "jazzmin",
     # django apps
-    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -260,7 +259,7 @@ JAZZMIN_SETTINGS = {
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     "site_logo": "images/logo.png",
     # Welcome text on the login screen
-    "welcome_sign": "Welcome",
+    "welcome_sign": "",
     # Copyright on the footer
     "copyright": "Code4Romania - War Task Force",
 
