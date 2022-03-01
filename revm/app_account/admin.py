@@ -16,4 +16,3 @@ DjangoUserAdmin.add_fieldsets = (
 
 
 admin.site.register(models.CustomUser)
-

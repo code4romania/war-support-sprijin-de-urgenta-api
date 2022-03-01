@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from revm_site.views import CreateResourceViewSet
+from .serializers import ItemRequestSerializer, ItemResourceSerializer
 
-# Create your views here.
+
+class CreateItemRequestViewSet(CreateResourceViewSet):
+    serializer_class = ItemRequestSerializer
+
+
+class CreateItemResourceViewSet(CreateResourceViewSet):
+    serializer_class = ItemResourceSerializer

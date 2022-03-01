@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class AppOtherConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'app_other'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "app_other"
