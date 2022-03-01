@@ -109,7 +109,6 @@ class VolunteeringResource(CommonResource, CommonLocalizedResource):
     LAWYER = 3
     COOK = 4
     MANAGER = 5
-    TRANSLATOR = 6
 
     VOLUNTEER_TYPES = (
         (PSYCHOLOGIST, _("psychologist")),
@@ -118,7 +117,6 @@ class VolunteeringResource(CommonResource, CommonLocalizedResource):
         (LAWYER, _("lawyer")),
         (COOK, _("cook")),
         (MANAGER, _("manager")),
-        (TRANSLATOR, _("translator"))
     )
     type = models.PositiveSmallIntegerField(_("volunteer type"), choices=VOLUNTEER_TYPES, db_index=True)
 
