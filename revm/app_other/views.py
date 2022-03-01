@@ -1,6 +1,8 @@
+from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from revm_site.views import CreateResourceViewSet
+from .models import Subcategory, Category
 from .serializers import (
     OtherRequestSerializer,
     OtherOfferSerializer,
@@ -10,10 +12,16 @@ from .serializers import (
 
 
 class GetOtherCategoryViewSet(ReadOnlyModelViewSet):
+    lookup_field = "name"
+    permissions_classes = (AllowAny,)
+    queryset = Category.objects.all()
     serializer_class = OtherCategorySerializer
 
 
 class GetOtherSubcategoryViewSet(ReadOnlyModelViewSet):
+    lookup_field = "name"
+    permissions_classes = (AllowAny,)
+    queryset = Subcategory.objects.all()
     serializer_class = OtherSubcategorySerializer
 
 
