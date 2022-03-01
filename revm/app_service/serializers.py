@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import ServiceRequest, ServiceResource, Category, Subcategory
+from .models import ServiceRequest, ServiceOffer, Category, Subcategory
 
 
 class ServiceCategorySerializer(serializers.ModelSerializer):
@@ -15,9 +15,9 @@ class ServiceSubcategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ServiceResourceSerializer(serializers.ModelSerializer):
+class ServiceOfferSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ServiceResource
+        model = ServiceOffer
         fields = "__all__"
 
 
