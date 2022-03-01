@@ -3,7 +3,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from revm_site.views import CreateResourceViewSet
 from .serializers import (
     OtherRequestSerializer,
-    OtherResourceSerializer,
+    OtherOfferSerializer,
     OtherCategorySerializer,
     OtherSubcategorySerializer,
 )
@@ -21,5 +21,5 @@ class CreateOtherRequestViewSet(CreateResourceViewSet):
     serializer_class = OtherRequestSerializer
 
 
-class CreateOtherResourceViewSet(CreateResourceViewSet):
-    serializer_class = OtherResourceSerializer
+class CreateOtherOfferViewSet(CreateResourceViewSet):
+    serializer_class = OtherOfferSerializer

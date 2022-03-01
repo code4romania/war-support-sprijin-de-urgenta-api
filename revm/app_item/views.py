@@ -3,7 +3,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from revm_site.views import CreateResourceViewSet
 from .serializers import (
     ItemRequestSerializer,
-    ItemResourceSerializer,
+    ItemOfferSerializer,
     ItemCategorySerializer,
     ItemSubcategorySerializer,
 )
@@ -21,5 +21,5 @@ class CreateItemRequestViewSet(CreateResourceViewSet):
     serializer_class = ItemRequestSerializer
 
 
-class CreateItemResourceViewSet(CreateResourceViewSet):
-    serializer_class = ItemResourceSerializer
+class CreateItemOfferViewSet(CreateResourceViewSet):
+    serializer_class = ItemOfferSerializer

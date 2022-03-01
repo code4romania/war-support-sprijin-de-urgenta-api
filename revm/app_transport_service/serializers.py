@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import TransportServiceRequest, TransportServiceResource, Category, Subcategory
+from .models import TransportServiceRequest, TransportServiceOffer, Category, Subcategory
 
 
 class TransportServiceCategorySerializer(serializers.ModelSerializer):
@@ -15,9 +15,9 @@ class TransportServiceSubcategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class TransportServiceResourceSerializer(serializers.ModelSerializer):
+class TransportServiceOfferSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TransportServiceResource
+        model = TransportServiceOffer
         fields = "__all__"
 
 
