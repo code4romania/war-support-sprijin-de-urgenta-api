@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import VolunteeringRequest, VolunteeringResource, Type
+from .models import VolunteeringRequest, VolunteeringOffer, Type
 
 
 class VolunteeringCategorySerializer(serializers.ModelSerializer):
@@ -9,9 +9,9 @@ class VolunteeringCategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class VolunteeringResourceSerializer(serializers.ModelSerializer):
+class VolunteeringOfferSerializer(serializers.ModelSerializer):
     class Meta:
-        model = VolunteeringResource
+        model = VolunteeringOffer
         fields = "__all__"
 
 
