@@ -34,6 +34,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CORS_ORIGIN_ALLOW_ALL = False
 
 INSTALLED_APPS = [
+    "jazzmin",
     # django apps
     "django.contrib.admin",
     "django.contrib.auth",
