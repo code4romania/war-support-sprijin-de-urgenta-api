@@ -11,24 +11,24 @@ from rest_framework import routers
 
 from app_item.views import (
     CreateItemRequestViewSet,
-    CreateItemResourceViewSet,
+    CreateItemOfferViewSet,
     GetItemCategoryViewSet,
     GetItemSubcategoryViewSet,
 )
 from app_other.views import (
     CreateOtherRequestViewSet,
-    CreateOtherResourceViewSet,
+    CreateOtherOfferViewSet,
     GetOtherCategoryViewSet,
     GetOtherSubcategoryViewSet,
 )
 from app_transport_service.views import (
     CreateTransportServiceRequestViewSet,
-    CreateTransportServiceResourceViewSet,
+    CreateTransportServiceOfferViewSet,
     GetTransportServiceCategoryViewSet,
     GetTransportServiceSubcategoryViewSet,
 )
 from app_volunteering.views import (
-    CreateVolunteeringResourceViewSet,
+    CreateVolunteeringOfferViewSet,
     CreateVolunteeringRequestViewSet,
     GetVolunteeringCategoryViewSet,
 )
@@ -55,10 +55,10 @@ router.register(r"request/other", CreateOtherRequestViewSet, basename="other_req
 router.register(r"request/transport_service", CreateTransportServiceRequestViewSet, basename="transport_request")
 router.register(r"request/volunteering", CreateVolunteeringRequestViewSet, basename="volunteering_request")
 
-router.register(r"donate/item", CreateItemResourceViewSet, basename="item_resource")
-router.register(r"donate/other", CreateOtherResourceViewSet, basename="other_resource")
-router.register(r"donate/transport_service", CreateTransportServiceResourceViewSet, basename="transport_resource")
-router.register(r"donate/volunteering", CreateVolunteeringResourceViewSet, basename="volunteering_resource")
+router.register(r"donate/item", CreateItemOfferViewSet, basename="item_Offer")
+router.register(r"donate/other", CreateOtherOfferViewSet, basename="other_resource")
+router.register(r"donate/transport_service", CreateTransportServiceOfferViewSet, basename="transport_resource")
+router.register(r"donate/volunteering", CreateVolunteeringOfferViewSet, basename="volunteering_resource")
 
 urlpatterns = (
     i18n_patterns(
