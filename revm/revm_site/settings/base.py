@@ -35,6 +35,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 INSTALLED_APPS = [
     # django apps
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,13 +47,16 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "django.contrib.postgres",
     # third-party apps
-    "allauth",
     "rest_framework",
     "rest_framework.authtoken",
     "storages",
     "corsheaders",
     "dj_rest_auth",
     "import_export",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
     # project apps
     "app_account",
     "app_item",
@@ -221,7 +225,7 @@ COUNTIES_SHORTNAME = {
 COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
 AUTH_USER_MODEL = "app_account.CustomUser"
-LOGIN_REDIRECT_URL = "admin"
+# LOGIN_REDIRECT_URL = "admin"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 REST_USE_JWT = True
@@ -234,3 +238,7 @@ SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
 SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
 SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
 SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"
+}

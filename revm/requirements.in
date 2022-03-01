@@ -29,3 +29,6 @@ gevent
 
 # doc-generation
 drf-spectacular
+
+# admin
+django-jazzmin
