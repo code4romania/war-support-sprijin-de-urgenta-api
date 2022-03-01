@@ -33,6 +33,7 @@ django==3.2.12
     #   django-allauth
     #   django-cors-headers
     #   django-import-export
+    #   django-jazzmin
     #   django-storages
     #   djangorestframework
     #   djangorestframework-simplejwt
@@ -44,6 +45,8 @@ django-cors-headers==3.11.0
 django-environ==0.8.1
     # via -r requirements.in
 django-import-export==2.7.1
+    # via -r requirements.in
+django-jazzmin==2.4.9
     # via -r requirements.in
 django-storages==1.12.3
     # via -r requirements.in
