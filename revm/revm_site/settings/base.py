@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     # project apps
     "donors",
     "available_resources",
-    "account",
+    "custom_account",
     # api documentation
     "drf_spectacular",
 ]
@@ -215,7 +215,7 @@ COUNTIES_SHORTNAME = {
     "RO": "Național",
 }
 
-AUTH_USER_MODEL = "account.CustomUser"
+AUTH_USER_MODEL = "custom_account.CustomUser"
 LOGIN_REDIRECT_URL = "admin"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
