@@ -18,7 +18,7 @@ class Type(models.Model):
         verbose_name_plural = _("volunteering types")
 
 
-class VolunteeringResource(models.Model):
+class VolunteeringOffer(models.Model):
     donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
@@ -41,7 +41,6 @@ class VolunteeringResource(models.Model):
 class VolunteeringRequest(models.Model):
     made_by = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
-    volunteering_resources = models.ManyToManyField(VolunteeringResource, related_name="volunteering_request")
 
     description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
@@ -54,3 +53,12 @@ class VolunteeringRequest(models.Model):
     class Meta:
         verbose_name = _("volunteering request")
         verbose_name_plural = _("volunteering requests")
+
+
+class ResourceRequest(models.Model):
+    resource = models.ForeignKey(VolunteeringOffer, on_delete=models.DO_NOTHING)
+    request = models.ForeignKey(VolunteeringRequest, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = _("Offer - Request")
+        verbose_name_plural = _("Offer - Request")
