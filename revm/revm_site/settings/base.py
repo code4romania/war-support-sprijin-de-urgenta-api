@@ -20,6 +20,7 @@ env = environ.Env(
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
+    MEMCACHED_HOST=(str, "cache:11211"),
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -45,13 +46,20 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "django.contrib.postgres",
     # third-party apps
+    "allauth",
     "rest_framework",
+    "rest_framework.authtoken",
     "storages",
     "corsheaders",
+    "dj_rest_auth",
+    "import_export",
     # project apps
-    "donors",
-    "available_resources",
-    "account",
+    "app_account",
+    "app_item",
+    "app_service",
+    "app_transport_service",
+    "app_volunteering",
+    "app_other",
     # api documentation
     "drf_spectacular",
 ]
@@ -144,10 +152,19 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
+MEMCACHED_HOST = env("MEMCACHED_HOST")
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": MEMCACHED_HOST,
+    },
+}
+
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -201,10 +218,17 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
     "RO": "Național",
 }
+COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
-AUTH_USER_MODEL = "account.CustomUser"
+AUTH_USER_MODEL = "app_account.CustomUser"
 LOGIN_REDIRECT_URL = "admin"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = "revm-auth-cookie"
+JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
 SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")

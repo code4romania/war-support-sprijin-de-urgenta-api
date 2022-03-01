@@ -9,31 +9,25 @@ from django.utils.translation import gettext_lazy as _
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
-from available_resources.views import (
-    CategoriesByNameViewSet,
-    CategoriesViewSet,
-    CreateGoodsTransportServiceViewSet,
-    CreateOtherResourceViewSet,
-    CreatePeopleTransportServiceViewSet,
-    CreateProductsResourceViewSet,
-    CreateVolunteeringResourceViewSet,
-)
-from donors.views import CreateDonorViewSet
+from app_volunteering.views import CreateVolunteeringResourceViewSet, CreateVolunteeringRequestViewSet
 
-admin_site_string = _("Resource Volunteer Management Admin")
+admin_site_string = _("Emergency Support Admin")
 admin.site.site_title = admin_site_string
 admin.site.site_header = admin_site_string
 admin.site.index_title = admin_site_string
 
 router = routers.DefaultRouter()
-router.register(r"create_goods_transport_service", CreateGoodsTransportServiceViewSet, basename="goods_transport")
-router.register(r"create_people_transport_service", CreatePeopleTransportServiceViewSet, basename="people_transport")
-router.register(r"create_food_products_resource", CreateProductsResourceViewSet, basename="food_products")
-router.register(r"create_volunteering_resource", CreateVolunteeringResourceViewSet, basename="volunteering")
-router.register(r"create_other_products_resource", CreateOtherResourceViewSet, basename="other_products")
-router.register(r"categories", CategoriesViewSet, basename="categories")
-router.register(r"categories_by_name", CategoriesByNameViewSet, basename="categories")
-router.register(r"create_donor", CreateDonorViewSet, basename="create_donor")
+router.register(r"item_request", CreateVolunteeringRequestViewSet, basename="item_request")
+router.register(r"item_resources", CreateVolunteeringResourceViewSet, basename="item_resource")
+
+router.register(r"other_request", CreateVolunteeringRequestViewSet, basename="other_request")
+router.register(r"other_resources", CreateVolunteeringResourceViewSet, basename="other_resource")
+
+router.register(r"transport_service_request", CreateVolunteeringRequestViewSet, basename="transport_request")
+router.register(r"transport_service_resources", CreateVolunteeringResourceViewSet, basename="transport_resource")
+
+router.register(r"volunteering_request", CreateVolunteeringRequestViewSet, basename="volunteering_request")
+router.register(r"volunteering_resources", CreateVolunteeringResourceViewSet, basename="volunteering_resource")
 
 urlpatterns = (
     i18n_patterns(
@@ -64,6 +58,7 @@ urlpatterns = (
     + [
         # URL patterns which do not use a language prefix
         path("api/v1/", include(router.urls)),
+        path("auth/", include("dj_rest_auth.urls")),
         path("i18n/", include("django.conf.urls.i18n")),
         path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
         path(
