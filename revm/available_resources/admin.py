@@ -39,7 +39,6 @@ class GoodsTransportServiceAdmin(ImportExportModelAdmin):
         "currently_in_use",
     )
 
-    # custom `category` field added to the list view in Admin Panel
     def category(self, instance):
         return instance.subcategory.category.name
 
@@ -52,7 +51,6 @@ class PeopleTransportServiceAdmin(ImportExportModelAdmin):
     list_display = ("name", "category", "subcategory", "total_passengers", "has_disability_access",
                     "has_pet_accommodation")
 
-    # custom `category` field added to the list view in Admin Panel
     def category(self, instance):
         return instance.subcategory.category.name
 
@@ -64,7 +62,6 @@ class ProductsResourceAdmin(ImportExportModelAdmin):
     list_filter = ("pickup_town",)
     list_display = ("name", "category", "subcategory", "total_units", "unit_type")
 
-    # custom `category` field added to the list view in Admin Panel
     def category(self, instance):
         return instance.subcategory.category.name
 
