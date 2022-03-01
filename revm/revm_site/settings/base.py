@@ -36,7 +36,6 @@ CORS_ORIGIN_ALLOW_ALL = False
 INSTALLED_APPS = [
     "jazzmin",
     # django apps
-    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
