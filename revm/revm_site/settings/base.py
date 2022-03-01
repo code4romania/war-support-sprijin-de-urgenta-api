@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "app_service",
     "app_transport_service",
     "app_volunteering",
+    "app_other",
     # api documentation
     "drf_spectacular",
 ]
