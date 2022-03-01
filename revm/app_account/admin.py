@@ -17,9 +17,9 @@ DjangoUserAdmin.add_fieldsets = (
 
 
 class AdminCustomUser(admin.ModelAdmin):
-    list_display = ('id', 'full_name', 'email', 'phone_number')
-    list_display_links = ('id', 'full_name')
-    search_fields = ['first_name', 'last_name']
+    list_display = ("id", "full_name", "email", "phone_number")
+    list_display_links = ("id", "full_name")
+    search_fields = ["first_name", "last_name"]
 
     def full_name(self, obj):
         return obj.__str__()

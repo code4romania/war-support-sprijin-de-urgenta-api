@@ -7,6 +7,7 @@ from allauth.account.utils import setup_user_email
 
 from .models import CustomUser
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     re_password = serializers.CharField(write_only=True)
@@ -22,14 +23,15 @@ class RegisterSerializer(serializers.ModelSerializer):
             "phone_number",
             "email",
             "password",
-            "re_password"]
+            "re_password",
+        ]
 
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
 
         if email and email_address_exists(email):
             raise serializers.ValidationError(
-                _('A user is already registered with this e-mail address.'),
+                _("A user is already registered with this e-mail address."),
             )
         return email
 
@@ -37,7 +39,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         return get_adapter().clean_password(password)
 
     def validate(self, data):
-        if data['password'] != data['re_password']:
+        if data["password"] != data["re_password"]:
             raise serializers.ValidationError(_("The two password fields didn't match."))
         return data
 
@@ -60,11 +62,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = adapter.save_user(request, user, self, commit=False)
         if "password" in self.cleaned_data:
             try:
-                adapter.clean_password(self.cleaned_data['password'], user=user)
+                adapter.clean_password(self.cleaned_data["password"], user=user)
             except DjangoValidationError as exc:
-                raise serializers.ValidationError(
-                    detail=serializers.as_serializer_error(exc)
-            )
+                raise serializers.ValidationError(detail=serializers.as_serializer_error(exc))
         user.save()
         # self.custom_signup(request, user)
         setup_user_email(request, user, [])
