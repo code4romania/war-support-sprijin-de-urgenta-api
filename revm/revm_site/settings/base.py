@@ -54,9 +54,12 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "import_export",
     # project apps
-    "donors",
-    "available_resources",
-    "custom_account",
+    "app_account",
+    "app_item",
+    "app_service",
+    "app_transport_service",
+    "app_volunteering",
+    "app_other",
     # api documentation
     "drf_spectacular",
 ]
@@ -215,8 +218,9 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
     "RO": "Național",
 }
+COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
-AUTH_USER_MODEL = "custom_account.CustomUser"
+AUTH_USER_MODEL = "app_account.CustomUser"
 LOGIN_REDIRECT_URL = "admin"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
