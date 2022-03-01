@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "django.contrib.postgres",
     # third-party apps
+    "allauth",
     "rest_framework",
     "rest_framework.authtoken",
     "storages",
