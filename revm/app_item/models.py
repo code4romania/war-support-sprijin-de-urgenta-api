@@ -31,7 +31,7 @@ class Subcategory(models.Model):
         verbose_name_plural = _("subcategories")
 
 
-class ItemResource(models.Model):
+class ItemOffer(models.Model):
     donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
@@ -69,7 +69,6 @@ class ItemResource(models.Model):
 class ItemRequest(models.Model):
     made_by = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
-    item_resources = models.ManyToManyField(ItemResource, related_name="item_request")
 
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
     description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
@@ -88,3 +87,12 @@ class ItemRequest(models.Model):
     class Meta:
         verbose_name = _("item request")
         verbose_name_plural = _("item requests")
+
+
+class ResourceRequest(models.Model):
+    resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING)
+    request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = _("Offer - Request")
+        verbose_name_plural = _("Offer - Request")

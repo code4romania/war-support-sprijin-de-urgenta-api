@@ -8,7 +8,9 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = "email"
     TYPES_CHOICES = ((1, _("Individual")), (2, _("Corporate")), (3, _("Non-Profit")), (4, _("Government")))
 
-    business_name = models.CharField(_("contact name"), max_length=255, blank=True)
+    business_name = models.CharField(_("bussiness name"), max_length=255, null=True, blank=True)
+    identification_no = models.CharField(_("identification number"), max_length=25, null=True, blank=True)
+
     email = models.EmailField(_("email address"), unique=True)
 
     type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=1)

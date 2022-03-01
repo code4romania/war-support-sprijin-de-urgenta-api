@@ -12,6 +12,7 @@ djangorestframework-simplejwt==5.0.0
 
 # django dashboard
 django-import-export==2.7.1
+django-jazzmin==2.4.9
 
 # py caching
 pymemcache
@@ -29,3 +30,6 @@ gevent
 
 # doc-generation
 drf-spectacular
+
+# admin
+django-jazzmin

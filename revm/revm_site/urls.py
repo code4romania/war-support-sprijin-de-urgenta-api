@@ -11,29 +11,31 @@ from rest_framework import routers
 
 from app_item.views import (
     CreateItemRequestViewSet,
-    CreateItemResourceViewSet,
+    CreateItemOfferViewSet,
     GetItemCategoryViewSet,
     GetItemSubcategoryViewSet,
 )
 from app_other.views import (
     CreateOtherRequestViewSet,
-    CreateOtherResourceViewSet,
+    CreateOtherOfferViewSet,
     GetOtherCategoryViewSet,
     GetOtherSubcategoryViewSet,
 )
 from app_transport_service.views import (
     CreateTransportServiceRequestViewSet,
-    CreateTransportServiceResourceViewSet,
+    CreateTransportServiceOfferViewSet,
     GetTransportServiceCategoryViewSet,
     GetTransportServiceSubcategoryViewSet,
 )
 from app_volunteering.views import (
-    CreateVolunteeringResourceViewSet,
+    CreateVolunteeringOfferViewSet,
     CreateVolunteeringRequestViewSet,
     GetVolunteeringCategoryViewSet,
 )
 
-admin_site_string = _("Emergency Support Admin")
+
+admin_site_string = _("RVM")
+
 admin.site.site_title = admin_site_string
 admin.site.site_header = admin_site_string
 admin.site.index_title = admin_site_string
@@ -55,10 +57,12 @@ router.register(r"request/other", CreateOtherRequestViewSet, basename="other_req
 router.register(r"request/transport_service", CreateTransportServiceRequestViewSet, basename="transport_request")
 router.register(r"request/volunteering", CreateVolunteeringRequestViewSet, basename="volunteering_request")
 
-router.register(r"donate/item", CreateItemResourceViewSet, basename="item_resource")
-router.register(r"donate/other", CreateOtherResourceViewSet, basename="other_resource")
-router.register(r"donate/transport_service", CreateTransportServiceResourceViewSet, basename="transport_resource")
-router.register(r"donate/volunteering", CreateVolunteeringResourceViewSet, basename="volunteering_resource")
+
+router.register(r"donate/item", CreateItemOfferViewSet, basename="item_resource")
+
+router.register(r"donate/other", CreateOtherOfferViewSet, basename="other_resource")
+router.register(r"donate/transport_service", CreateTransportServiceOfferViewSet, basename="transport_resource")
+router.register(r"donate/volunteering", CreateVolunteeringOfferViewSet, basename="volunteering_resource")
 
 urlpatterns = (
     i18n_patterns(
@@ -90,6 +94,7 @@ urlpatterns = (
         # URL patterns which do not use a language prefix
         path("api/v1/", include(router.urls)),
         path("auth/", include("dj_rest_auth.urls")),
+        path('registration/', include('dj_rest_auth.registration.urls')),
         path("i18n/", include("django.conf.urls.i18n")),
         path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
         path(
@@ -100,6 +105,7 @@ urlpatterns = (
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
+
 
 if settings.ENABLE_DEBUG_TOOLBAR:
     import debug_toolbar
