@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-02 00:36+0200\n"
+"POT-Creation-Date: 2022-03-02 01:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,8 +57,6 @@ msgid "details"
 msgstr "detalii"
 
 #: app_account/models.py:18
-#, fuzzy
-#| msgid "category description"
 msgid "general user description"
 msgstr "descrierea categoriei"
 
@@ -73,7 +71,7 @@ msgstr "utilizator"
 #: app_item/models.py:10 app_other/models.py:10 app_service/models.py:10
 #: app_transport_service/models.py:13
 msgid "category name"
-msgstr "numele categoriei"
+msgstr "Numele Categoriei"
 
 #: app_item/models.py:11 app_other/models.py:11 app_service/models.py:11
 #: app_transport_service/models.py:14
@@ -82,22 +80,18 @@ msgstr "descrierea categoriei"
 
 #: app_item/models.py:17 app_other/models.py:17 app_service/models.py:17
 #: app_transport_service/models.py:20
-#, fuzzy
-#| msgid "category name"
 msgid "category"
-msgstr "numele categoriei"
+msgstr "Categorii"
 
 #: app_item/models.py:18 app_other/models.py:18 app_service/models.py:18
 #: app_transport_service/models.py:21
-#, fuzzy
-#| msgid "category name"
 msgid "categories"
-msgstr "numele categoriei"
+msgstr "Categorii"
 
 #: app_item/models.py:23 app_other/models.py:23 app_service/models.py:23
 #: app_transport_service/models.py:26
 msgid "subcategory name"
-msgstr "numele subcategoriei"
+msgstr "Numele Subcategoriei"
 
 #: app_item/models.py:24 app_other/models.py:24 app_service/models.py:24
 #: app_transport_service/models.py:27
@@ -106,17 +100,13 @@ msgstr "descrierea subcategoriei"
 
 #: app_item/models.py:30 app_other/models.py:30 app_service/models.py:30
 #: app_transport_service/models.py:33
-#, fuzzy
-#| msgid "subcategory name"
 msgid "subcategory"
-msgstr "numele subcategoriei"
+msgstr "Subcategorie"
 
 #: app_item/models.py:31 app_other/models.py:31 app_service/models.py:31
 #: app_transport_service/models.py:34
-#, fuzzy
-#| msgid "subcategory name"
 msgid "subcategories"
-msgstr "numele subcategoriei"
+msgstr "Subcategorii"
 
 #: app_item/models.py:37 app_item/models.py:74 app_other/models.py:37
 #: app_service/models.py:37 app_transport_service/models.py:40
@@ -178,8 +168,6 @@ msgid "reuses left"
 msgstr "reutilizări rămase"
 
 #: app_item/models.py:54
-#, fuzzy
-#| msgid "How many times can this resource be used"
 msgid "How many units of this type are left"
 msgstr "De câte ori poate fi această resursă utilizată"
 
@@ -228,22 +216,16 @@ msgstr "alte oferte"
 
 #: app_other/models.py:62 app_service/models.py:63
 #: app_transport_service/models.py:80
-#, fuzzy
-#| msgid "resource name"
 msgid "service name"
 msgstr "numele resursei"
 
 #: app_other/models.py:63 app_service/models.py:64
 #: app_transport_service/models.py:81
-#, fuzzy
-#| msgid "resource description"
 msgid "service description"
 msgstr "descrierea resursei"
 
 #: app_other/models.py:65 app_service/models.py:66
 #: app_transport_service/models.py:83
-#, fuzzy
-#| msgid "resource added on"
 msgid "service added on"
 msgstr "data adăugării"
 
@@ -284,8 +266,6 @@ msgid "International"
 msgstr "International"
 
 #: app_transport_service/models.py:43
-#, fuzzy
-#| msgid "resource name"
 msgid "driver name"
 msgstr "numele soferului"
 
@@ -306,56 +286,38 @@ msgid "weight unit"
 msgstr "Greutate"
 
 #: app_transport_service/models.py:60 app_transport_service/models.py:91
-#, fuzzy
-#| msgid "total units"
 msgid "volume unit"
 msgstr "număr de unități"
 
 #: app_volunteering/models.py:10
-#, fuzzy
-#| msgid "category name"
 msgid "type name"
 msgstr "numele categoriei"
 
 #: app_volunteering/models.py:11
-#, fuzzy
-#| msgid "category description"
 msgid "type description"
 msgstr "descrierea categoriei"
 
 #: app_volunteering/models.py:17
-#, fuzzy
-#| msgid "volunteer type"
 msgid "volunteering type"
 msgstr "tip de voluntariat"
 
 #: app_volunteering/models.py:18
-#, fuzzy
-#| msgid "volunteer type"
 msgid "volunteering types"
 msgstr "tipuri de voluntariat"
 
 #: app_volunteering/models.py:37
-#, fuzzy
-#| msgid "volunteer type"
 msgid "volunteering offer"
 msgstr "oferta voluntar"
 
 #: app_volunteering/models.py:38
-#, fuzzy
-#| msgid "volunteer type"
 msgid "volunteering offers"
 msgstr "oferte voluntari"
 
 #: app_volunteering/models.py:55
-#, fuzzy
-#| msgid "volunteer type"
 msgid "volunteering request"
 msgstr "cerere de voluntariat"
 
 #: app_volunteering/models.py:56
-#, fuzzy
-#| msgid "volunteer type"
 msgid "volunteering requests"
 msgstr "cereri de voluntariat"
 
