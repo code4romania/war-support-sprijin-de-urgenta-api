@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "django.contrib.postgres",
     # third-party apps
-    "allauth",
     "rest_framework",
     "rest_framework.authtoken",
     "storages",
@@ -54,9 +53,11 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "import_export",
     # project apps
-    "donors",
-    "available_resources",
-    "custom_account",
+    "app_account",
+    "app_item",
+    "app_service",
+    "app_transport_service",
+    "app_volunteering",
     # api documentation
     "drf_spectacular",
 ]
@@ -161,7 +162,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -215,8 +216,9 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
     "RO": "Național",
 }
+COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
-AUTH_USER_MODEL = "custom_account.CustomUser"
+AUTH_USER_MODEL = "app_account.CustomUser"
 LOGIN_REDIRECT_URL = "admin"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 

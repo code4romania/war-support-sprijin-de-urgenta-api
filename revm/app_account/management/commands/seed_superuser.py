@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from custom_account.models import CustomUser
+from app_account.models import CustomUser
 
 
 class Command(BaseCommand):
