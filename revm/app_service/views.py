@@ -4,7 +4,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from .models import Category, Subcategory
 from .serializers import (
     ServiceRequestSerializer,
-    ServiceResourceSerializer,
+    ServiceOfferSerializer,
     ServiceCategorySerializer,
     ServiceSubcategorySerializer,
 )
@@ -29,5 +29,5 @@ class CreateServiceRequestViewSet(CreateResourceViewSet):
     serializer_class = ServiceRequestSerializer
 
 
-class CreateServiceResourceViewSet(CreateResourceViewSet):
-    serializer_class = ServiceResourceSerializer
+class CreateServiceOfferViewSet(CreateResourceViewSet):
+    serializer_class = ServiceOfferSerializer

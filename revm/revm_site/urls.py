@@ -55,7 +55,9 @@ router.register(r"request/other", CreateOtherRequestViewSet, basename="other_req
 router.register(r"request/transport_service", CreateTransportServiceRequestViewSet, basename="transport_request")
 router.register(r"request/volunteering", CreateVolunteeringRequestViewSet, basename="volunteering_request")
 
-router.register(r"donate/item", CreateItemOfferViewSet, basename="item_Offer")
+
+router.register(r"donate/item", CreateItemOfferViewSet, basename="item_resource")
+
 router.register(r"donate/other", CreateOtherOfferViewSet, basename="other_resource")
 router.register(r"donate/transport_service", CreateTransportServiceOfferViewSet, basename="transport_resource")
 router.register(r"donate/volunteering", CreateVolunteeringOfferViewSet, basename="volunteering_resource")
