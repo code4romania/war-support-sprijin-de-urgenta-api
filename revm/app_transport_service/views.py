@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from .serializers import TransportServiceRequestSerializer, TransportServiceResourceSerializer
+from revm_site.views import CreateResourceViewSet
 
-# Create your views here.
+
+class CreateTransportServiceRequestViewSet(CreateResourceViewSet):
+    serializer_class = TransportServiceRequestSerializer
+
+
+class CreateTransportServiceResourceViewSet(CreateResourceViewSet):
+    serializer_class = TransportServiceResourceSerializer

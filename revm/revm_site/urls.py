@@ -9,14 +9,25 @@ from django.utils.translation import gettext_lazy as _
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
+from app_volunteering.views import CreateVolunteeringResourceViewSet, CreateVolunteeringRequestViewSet
 
-admin_site_string = _("Resource Volunteer Management Admin")
+admin_site_string = _("Emergency Support Admin")
 admin.site.site_title = admin_site_string
 admin.site.site_header = admin_site_string
 admin.site.index_title = admin_site_string
 
 router = routers.DefaultRouter()
+router.register(r"item_request", CreateVolunteeringRequestViewSet, basename="item_request")
+router.register(r"item_resources", CreateVolunteeringResourceViewSet, basename="item_resource")
 
+router.register(r"other_request", CreateVolunteeringRequestViewSet, basename="other_request")
+router.register(r"other_resources", CreateVolunteeringResourceViewSet, basename="other_resource")
+
+router.register(r"transport_service_request", CreateVolunteeringRequestViewSet, basename="transport_request")
+router.register(r"transport_service_resources", CreateVolunteeringResourceViewSet, basename="transport_resource")
+
+router.register(r"volunteering_request", CreateVolunteeringRequestViewSet, basename="volunteering_request")
+router.register(r"volunteering_resources", CreateVolunteeringResourceViewSet, basename="volunteering_resource")
 
 urlpatterns = (
     i18n_patterns(

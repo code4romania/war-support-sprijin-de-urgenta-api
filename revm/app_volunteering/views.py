@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from app_volunteering.serializers import VolunteeringRequestSerializer, VolunteeringResourceSerializer
+from revm_site.views import CreateResourceViewSet
 
-# Create your views here.
+
+class CreateVolunteeringRequestViewSet(CreateResourceViewSet):
+    serializer_class = VolunteeringRequestSerializer
+
+
+class CreateVolunteeringResourceViewSet(CreateResourceViewSet):
+    serializer_class = VolunteeringResourceSerializer

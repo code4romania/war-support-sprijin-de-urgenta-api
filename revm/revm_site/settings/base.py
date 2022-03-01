@@ -225,8 +225,8 @@ LOGIN_REDIRECT_URL = "admin"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'revm-auth-cookie'
-JWT_AUTH_REFRESH_COOKIE = 'revm-refresh-token'
+JWT_AUTH_COOKIE = "revm-auth-cookie"
+JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
