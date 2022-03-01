@@ -11,47 +11,47 @@ class OtherResourceRequestInline(admin.TabularInline):
 
 @admin.register(models.Category)
 class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ('id', 'name', 'description')
-    list_display_links = ('id', 'name')
-    search_fields = ['name']
+    list_display = ("id", "name", "description")
+    list_display_links = ("id", "name")
+    search_fields = ["name"]
 
-    ordering = ('pk',)
+    ordering = ("pk",)
 
     view_on_site = False
 
 
 @admin.register(models.Subcategory)
 class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category')
-    list_display_links = ('id', 'name')
-    search_fields = ['name']
+    list_display = ("id", "name", "category")
+    list_display_links = ("id", "name")
+    search_fields = ["name"]
 
-    ordering = ('pk',)
+    ordering = ("pk",)
 
     view_on_site = False
 
 
 @admin.register(models.ServiceOffer)
 class AdminServiceOffer(admin.ModelAdmin):
-    list_display = ('id', 'donor', 'name', 'subcategory')
-    list_display_links = ('id', 'name')
-    search_fields = ['name']
+    list_display = ("id", "donor", "name", "subcategory")
+    list_display_links = ("id", "name")
+    search_fields = ["name"]
 
-    inlines = (OtherResourceRequestInline, )
+    inlines = (OtherResourceRequestInline,)
 
-    ordering = ('pk',)
+    ordering = ("pk",)
 
     view_on_site = False
 
 
 @admin.register(models.ServiceRequest)
 class AdminServiceRequest(admin.ModelAdmin):
-    list_display = ('id', 'made_by', 'name', 'subcategory')
-    list_display_links = ('id', 'name')
-    search_fields = ['name']
+    list_display = ("id", "made_by", "name", "subcategory")
+    list_display_links = ("id", "name")
+    search_fields = ["name"]
 
-    inlines = (OtherResourceRequestInline, )
+    inlines = (OtherResourceRequestInline,)
 
-    ordering = ('pk',)
+    ordering = ("pk",)
 
     view_on_site = False

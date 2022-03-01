@@ -11,36 +11,36 @@ class OtherResourceRequestInline(admin.TabularInline):
 
 @admin.register(models.Type)
 class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ('id', 'name', 'description')
-    list_display_links = ('id', 'name')
-    search_fields = ['name']
+    list_display = ("id", "name", "description")
+    list_display_links = ("id", "name")
+    search_fields = ["name"]
 
-    ordering = ('pk',)
+    ordering = ("pk",)
 
     view_on_site = False
 
 
 @admin.register(models.VolunteeringOffer)
 class AdminVolunteeringOffer(admin.ModelAdmin):
-    list_display = ('id', 'donor', 'type')
-    list_display_links = ('id', 'donor')
-    search_fields = ['name']
+    list_display = ("id", "donor", "type")
+    list_display_links = ("id", "donor")
+    search_fields = ["name"]
 
-    inlines = (OtherResourceRequestInline, )
+    inlines = (OtherResourceRequestInline,)
 
-    ordering = ('pk',)
+    ordering = ("pk",)
 
     view_on_site = False
 
 
 @admin.register(models.VolunteeringRequest)
 class AdminVolunteeringRequest(admin.ModelAdmin):
-    list_display = ('id', 'made_by', 'type')
-    list_display_links = ('id', 'made_by')
-    search_fields = ['name']
+    list_display = ("id", "made_by", "type")
+    list_display_links = ("id", "made_by")
+    search_fields = ["name"]
 
-    inlines = (OtherResourceRequestInline, )
+    inlines = (OtherResourceRequestInline,)
 
-    ordering = ('pk',)
+    ordering = ("pk",)
 
     view_on_site = False

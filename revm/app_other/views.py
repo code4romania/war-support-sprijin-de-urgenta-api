@@ -8,14 +8,21 @@ from .serializers import (
     OtherOfferSerializer,
     OtherCategorySerializer,
     OtherSubcategorySerializer,
+    OtherCategoryListSerializer,
 )
 
 
 class GetOtherCategoryViewSet(ReadOnlyModelViewSet):
     lookup_field = "name"
     permissions_classes = (AllowAny,)
-    queryset = Category.objects.all()
-    serializer_class = OtherCategorySerializer
+
+    def get_queryset(self):
+        return Category.objects.all().order_by("name")
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return OtherCategoryListSerializer
+        return OtherCategorySerializer
 
 
 class GetOtherSubcategoryViewSet(ReadOnlyModelViewSet):

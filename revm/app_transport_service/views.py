@@ -7,6 +7,7 @@ from .serializers import (
     TransportServiceOfferSerializer,
     TransportServiceCategorySerializer,
     TransportServiceSubcategorySerializer,
+    TransportServiceCategoryListSerializer,
 )
 from revm_site.views import CreateResourceViewSet
 
@@ -14,8 +15,14 @@ from revm_site.views import CreateResourceViewSet
 class GetTransportServiceCategoryViewSet(ReadOnlyModelViewSet):
     lookup_field = "name"
     permissions_classes = (AllowAny,)
-    queryset = Category.objects.all()
-    serializer_class = TransportServiceCategorySerializer
+
+    def get_queryset(self):
+        return Category.objects.all().order_by("name")
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return TransportServiceCategoryListSerializer
+        return TransportServiceCategorySerializer
 
 
 class GetTransportServiceSubcategoryViewSet(ReadOnlyModelViewSet):

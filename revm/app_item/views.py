@@ -7,6 +7,7 @@ from .serializers import (
     ItemRequestSerializer,
     ItemOfferSerializer,
     ItemCategorySerializer,
+    ItemCategoryListSerializer,
     ItemSubcategorySerializer,
 )
 
@@ -14,8 +15,14 @@ from .serializers import (
 class GetItemCategoryViewSet(ReadOnlyModelViewSet):
     lookup_field = "name"
     permissions_classes = (AllowAny,)
-    queryset = Category.objects.all()
-    serializer_class = ItemCategorySerializer
+
+    def get_queryset(self):
+        return Category.objects.all().order_by("name")
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return ItemCategoryListSerializer
+        return ItemCategorySerializer
 
 
 class GetItemSubcategoryViewSet(ReadOnlyModelViewSet):

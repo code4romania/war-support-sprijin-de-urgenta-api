@@ -239,9 +239,7 @@ SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
 SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
 SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")
 
-REST_AUTH_REGISTER_SERIALIZERS = {
-    "REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"
-}
+REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"}
 
 # django-jazzmin
 # -------------------------------------------------------------------------------
@@ -249,20 +247,15 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 JAZZMIN_SETTINGS = {
     # title of the window
-
     "site_title": "Ajutor",
-
     # Title on the brand, and the login screen (19 chars max)
     "site_header": "#TM4UA",
-
-
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     "site_logo": "images/logo.png",
     # Welcome text on the login screen
     "welcome_sign": "",
     # Copyright on the footer
     "copyright": "Code4Romania - War Task Force",
-
     # The model admin to search from the search bar, search bar omitted if excluded
     # "search_model": "donors.Donor",
     # Field name on user model that contains avatar image
