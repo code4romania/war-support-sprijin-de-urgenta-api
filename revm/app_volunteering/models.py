@@ -18,12 +18,11 @@ class Type(models.Model):
         verbose_name_plural = _("volunteering types")
 
 
-class VolunteeringOffer(CommonRequestModel, CommonCountyModel):
+class VolunteeringOffer(CommonOfferModel, CommonCountyModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     town = models.CharField(_("town"), max_length=100, blank=False, null=False)
 
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
     available_from = models.DateTimeField(_("resource available from"), auto_now_add=timezone.now, null=False)
     available_until = models.DateTimeField(_("resource available until"), null=True)
 
@@ -35,11 +34,10 @@ class VolunteeringOffer(CommonRequestModel, CommonCountyModel):
         verbose_name_plural = _("volunteering offers")
 
 
-class VolunteeringRequest(CommonOfferModel, CommonCountyModel):
+class VolunteeringRequest(CommonRequestModel, CommonCountyModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     town = models.CharField(_("town"), max_length=100, blank=False, null=False)
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
 
     def __str__(self):
         return self.type
