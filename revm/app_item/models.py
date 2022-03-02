@@ -4,18 +4,11 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
+from revm_site.models import CommonCategoryModel
 
 
-class Category(models.Model):
-    name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
-    description = models.TextField(_("category description"), default="", blank=True, null=False, max_length=500)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _("category")
-        verbose_name_plural = _("categories")
+class Category(CommonCategoryModel):
+    ...
 
 
 class Subcategory(models.Model):
