@@ -13,7 +13,6 @@ from app_item.views import (
     CreateItemRequestViewSet,
     CreateItemOfferViewSet,
     GetItemCategoryViewSet,
-    GetItemSubcategoryViewSet,
 )
 from app_other.views import (
     CreateOtherRequestViewSet,
@@ -45,7 +44,6 @@ router.register(r"categories/other", GetOtherCategoryViewSet, basename="voluntee
 router.register(r"categories/transport_service", GetTransportServiceCategoryViewSet, basename="volunteering_categories")
 router.register(r"categories/volunteering", GetVolunteeringCategoryViewSet, basename="volunteering_categories")
 
-router.register(r"subcategories/item", GetItemSubcategoryViewSet, basename="volunteering_subcategories")
 router.register(r"subcategories/other", GetOtherSubcategoryViewSet, basename="volunteering_subcategories")
 
 router.register(r"request/item", CreateItemRequestViewSet, basename="item_request")

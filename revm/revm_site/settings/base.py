@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     # project apps
     "app_account",
     "app_item",
-    "app_service",
     "app_transport_service",
     "app_volunteering",
     "app_other",
@@ -315,7 +314,7 @@ JAZZMIN_SETTINGS = {
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["app_item", "app_service", "app_transport_service", "app_volunteering"],
+    "order_with_respect_to": ["app_item", "app_transport_service", "app_volunteering"],
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
         "books": [
@@ -334,13 +333,9 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
         "app_item.Category": "fas fa-cube",
-        "app_item.Subcategory": "fas fa-cubes",
+        "app_item.TextileCategory": "fas fa-cubes",
         "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
         "app_item.ItemRequest": "far fa-arrow-alt-circle-left",
-        "app_service.Category": "fas fa-cube",
-        "app_service.Subcategory": "fas fa-cubes",
-        "app_service.ServiceOffer": "fas fa-arrow-alt-circle-right",
-        "app_service.ServiceRequest": "far fa-arrow-alt-circle-left",
         "app_other.Category": "fas fa-cube",
         "app_other.Subcategory": "fas fa-cubes",
         "app_other.OtherOffer": "fas fa-arrow-alt-circle-right",
@@ -352,7 +347,6 @@ JAZZMIN_SETTINGS = {
         "app_transport_service.Category": "fas fa-cube",
         "app_transport_service.TransportServiceOffer": "fas fa-arrow-alt-circle-right",
         "app_transport_service.TransportServiceRequest": "far fa-arrow-alt-circle-left",
-
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",

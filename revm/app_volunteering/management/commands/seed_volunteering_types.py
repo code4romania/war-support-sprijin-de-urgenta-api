@@ -15,7 +15,7 @@ class Command(BaseCommand):
             categories = json.load(f)
 
             for category in categories:
-                Type(name=category["name"]).save()
+                Type.objects.get_or_create(name=category["name"])
 
     def handle(self, *args, **kwargs):
         self.populate_volunteering_types()

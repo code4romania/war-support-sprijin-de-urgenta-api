@@ -2,27 +2,22 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from multiselectfield import MultiSelectField
 
 from app_account.models import CustomUser
+from revm_site.models import (
+    CommonCountyModel,
+    CommonRequestModel,
+    CommonOfferModel,
+    CommonCategoryModel,
+)
 
 
-class Category(models.Model):
-    name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
-    description = models.CharField(_("category description"), default="", blank=True, null=False, max_length=500)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _("category")
-        verbose_name_plural = _("categories")
+class Category(CommonCategoryModel):
+    ...
 
 
-class TransportServiceOffer(models.Model):
-    donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("donor"))
+class TransportServiceOffer(CommonRequestModel, CommonCountyModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
-    description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
@@ -33,8 +28,6 @@ class TransportServiceOffer(models.Model):
     type = models.SmallIntegerField(
         _("type"), choices=settings.TRANSPORT_TYPES_CHOICES, default=1, blank=True, null=True
     )
-
-    county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES)
 
     availability = models.CharField(
         _("availability"),
@@ -56,9 +49,6 @@ class TransportServiceOffer(models.Model):
     has_disabled_access = models.BooleanField(_("has disabled access"), default=False)
     pets_allowed = models.BooleanField(_("pets allowed"), default=False)
 
-    status = models.CharField(
-        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
-    )
     added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
 
     def __str__(self):
@@ -69,12 +59,8 @@ class TransportServiceOffer(models.Model):
         verbose_name_plural = _("transport service offers")
 
 
-class TransportServiceRequest(models.Model):
-    made_by = models.ForeignKey(
-        CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("requested by")
-    )
+class TransportServiceRequest(CommonOfferModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
-    description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
@@ -92,9 +78,6 @@ class TransportServiceRequest(models.Model):
     to_county = models.CharField(_("To county"), choices=settings.COUNTY_CHOICES, max_length=50)
     to_city = models.CharField(_("From city"), max_length=150)
 
-    status = models.CharField(
-        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
-    )
     added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
 
     def __str__(self):

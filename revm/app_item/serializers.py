@@ -1,16 +1,9 @@
 from rest_framework import serializers
 
-from .models import ItemRequest, ItemOffer, Category, Subcategory
-
-
-class ItemSubcategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Subcategory
-        fields = "__all__"
+from .models import ItemRequest, ItemOffer, Category
 
 
 class ItemCategorySerializer(serializers.ModelSerializer):
-    subcategories = ItemSubcategorySerializer(many=True, read_only=True)
 
     class Meta:
         model = Category
