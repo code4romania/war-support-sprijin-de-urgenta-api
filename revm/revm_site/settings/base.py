@@ -222,6 +222,12 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
     "RO": "Național",
 }
+
+RESOURCE_STATUS = (
+    ("NV", _("Not Verified")),
+    ("V", _("Verified")),
+)
+
 COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
 AUTH_USER_MODEL = "app_account.CustomUser"
@@ -247,7 +253,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializer
 
 JAZZMIN_SETTINGS = {
     # title of the window
-    "site_title": "Ajutor",
+    "site_title": "Resource Volunteer Management Admin",
     # Title on the brand, and the login screen (19 chars max)
     "site_header": "Resource Volunteer Management Admin",
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
