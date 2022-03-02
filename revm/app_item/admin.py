@@ -43,7 +43,7 @@ class AdminItemOffer(admin.ModelAdmin):
     list_display_links = ("id", "name")
     search_fields = ["name"]
     list_filter = ["county_coverage", "category", "unit_type", "textile_category", "kids_age", "status"]
-    readonly_fields = ["donor", "added_on", "stock"]
+    readonly_fields = ["added_on", "stock"]
 
     inlines = (OtherResourceRequestInline,)
 
