@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-02 15:03+0200\n"
+"POT-Creation-Date: 2022-03-02 22:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,13 +62,18 @@ msgstr ""
 msgid "email address"
 msgstr ""
 
-#: app_account/models.py:16 app_transport_service/models.py:52
-#: app_transport_service/models.py:82
+#: app_account/models.py:16 app_transport_service/models.py:29
+#: app_volunteering/models.py:22 app_volunteering/models.py:38
+#: app_volunteering/models.py:52
 msgid "type"
 msgstr ""
 
 #: app_account/models.py:17
 msgid "phone number"
+msgstr ""
+
+#: app_account/models.py:18
+msgid "address"
 msgstr ""
 
 #: app_account/models.py:19
@@ -95,288 +100,247 @@ msgstr ""
 msgid "The two password fields didn't match."
 msgstr ""
 
-#: app_item/models.py:10 app_other/models.py:10 app_service/models.py:10
-#: app_transport_service/models.py:13
-msgid "category name"
-msgstr ""
-
-#: app_item/models.py:11 app_other/models.py:11 app_service/models.py:11
-#: app_transport_service/models.py:14
-msgid "category description"
-msgstr ""
-
-#: app_item/models.py:17 app_other/models.py:17 app_service/models.py:17
-#: app_transport_service/models.py:20
-msgid "category"
-msgstr ""
-
-#: app_item/models.py:18 app_other/models.py:18 app_service/models.py:18
-#: app_transport_service/models.py:21
-msgid "categories"
-msgstr ""
-
-#: app_item/models.py:23 app_other/models.py:23 app_service/models.py:23
+#: app_item/models.py:16 app_other/models.py:16
 msgid "subcategory name"
 msgstr ""
 
-#: app_item/models.py:24 app_other/models.py:24 app_service/models.py:24
+#: app_item/models.py:17 app_other/models.py:17
 msgid "subcategory description"
 msgstr ""
 
-#: app_item/models.py:30 app_other/models.py:30 app_service/models.py:30
+#: app_item/models.py:23 app_other/models.py:23
 msgid "subcategory"
 msgstr ""
 
-#: app_item/models.py:31 app_other/models.py:31 app_service/models.py:31
+#: app_item/models.py:24 app_other/models.py:24
 msgid "subcategories"
 msgstr ""
 
-#: app_item/models.py:37 app_item/models.py:75 app_other/models.py:37
-#: app_service/models.py:37
+#: app_item/models.py:30 app_item/models.py:68 app_other/models.py:30
 msgid "resource name"
 msgstr ""
 
-#: app_item/models.py:38 app_item/models.py:76 app_other/models.py:38
-#: app_service/models.py:38 app_volunteering/models.py:24
-#: app_volunteering/models.py:45
+#: app_item/models.py:31 app_item/models.py:69 app_other/models.py:31
 msgid "resource description"
 msgstr ""
 
-#: app_item/models.py:40 app_item/models.py:78 app_other/models.py:40
-#: app_service/models.py:40 app_volunteering/models.py:29
-#: app_volunteering/models.py:48
+#: app_item/models.py:33 app_item/models.py:71 app_other/models.py:33
 msgid "resource added on"
 msgstr ""
 
-#: app_item/models.py:41 app_other/models.py:41 app_service/models.py:41
-#: app_volunteering/models.py:30
-msgid "resource available from"
-msgstr ""
-
-#: app_item/models.py:42 app_other/models.py:42 app_service/models.py:42
-#: app_volunteering/models.py:31
-msgid "resource available until"
-msgstr ""
-
-#: app_item/models.py:43 app_other/models.py:43 app_service/models.py:43
+#: app_item/models.py:35 app_other/models.py:36
 msgid "expiration date"
 msgstr ""
 
-#: app_item/models.py:45
-msgid "packaging type"
-msgstr ""
-
-#: app_item/models.py:47 app_item/models.py:80 app_other/models.py:45
-#: app_other/models.py:65 app_service/models.py:45 app_service/models.py:67
-#: app_transport_service/models.py:74 app_volunteering/models.py:26
-#: app_volunteering/models.py:46
+#: app_item/models.py:37 app_item/models.py:73 app_other/models.py:38
+#: app_other/models.py:58
 msgid "county"
 msgstr ""
 
-#: app_item/models.py:48 app_item/models.py:81
+#: app_item/models.py:38 app_item/models.py:74
 msgid "pickup town"
 msgstr ""
 
-#: app_item/models.py:50
+#: app_item/models.py:40
 msgid "in use by"
 msgstr ""
 
-#: app_item/models.py:52 app_item/models.py:83 app_item/models.py:104
-#: app_transport_service/models.py:83
+#: app_item/models.py:42 app_item/models.py:76 app_item/models.py:99
 msgid "total units"
 msgstr ""
 
-#: app_item/models.py:54
+#: app_item/models.py:43
+msgid "packaging type"
+msgstr ""
+
+#: app_item/models.py:45
 msgid "reuses left"
 msgstr ""
 
-#: app_item/models.py:54
+#: app_item/models.py:45
 msgid "How many units of this type are left"
 msgstr ""
 
-#: app_item/models.py:56 app_item/models.py:84
+#: app_item/models.py:47 app_item/models.py:77
 msgid "unit type"
 msgstr ""
 
-#: app_item/models.py:58
+#: app_item/models.py:49
 msgid "usable weight"
 msgstr ""
 
-#: app_item/models.py:59
+#: app_item/models.py:50
 msgid "is infinitely reusable"
 msgstr ""
 
-#: app_item/models.py:61 app_item/models.py:90
+#: app_item/models.py:53 app_item/models.py:84 revm_site/models.py:35
 msgid "status"
 msgstr ""
 
-#: app_item/models.py:67
+#: app_item/models.py:60
 msgid "item offer"
 msgstr ""
 
-#: app_item/models.py:68
+#: app_item/models.py:61
 msgid "item offers"
 msgstr ""
 
-#: app_item/models.py:87
+#: app_item/models.py:80
 msgid "units left"
 msgstr ""
 
-#: app_item/models.py:87
+#: app_item/models.py:80
 msgid "How many units of this type are still needed"
 msgstr ""
 
-#: app_item/models.py:96
+#: app_item/models.py:91
 msgid "item request"
 msgstr ""
 
-#: app_item/models.py:97
+#: app_item/models.py:92
 msgid "item requests"
 msgstr ""
 
-#: app_item/models.py:105 app_other/models.py:61
-#: app_transport_service/models.py:28 app_transport_service/models.py:70
+#: app_item/models.py:100 app_other/models.py:54
+#: app_transport_service/models.py:95 revm_site/models.py:31
 msgid "description"
 msgstr ""
 
-#: app_item/models.py:107 app_other/models.py:63
-#: app_transport_service/models.py:34 app_transport_service/models.py:72
+#: app_item/models.py:102 app_other/models.py:56 revm_site/models.py:33
 msgid "added on"
 msgstr ""
 
-#: app_item/models.py:110 app_item/models.py:111 app_other/models.py:82
-#: app_other/models.py:83 app_service/models.py:83 app_service/models.py:84
-#: app_transport_service/models.py:100 app_transport_service/models.py:101
-#: app_volunteering/models.py:63 app_volunteering/models.py:64
+#: app_item/models.py:105 app_item/models.py:106 app_other/models.py:75
+#: app_other/models.py:76 app_transport_service/models.py:98
+#: app_transport_service/models.py:99 app_volunteering/models.py:55
+#: app_volunteering/models.py:56
 msgid "Offer - Request"
 msgstr ""
 
-#: app_other/models.py:46 app_other/models.py:66 app_service/models.py:46
-#: app_service/models.py:68 app_transport_service/models.py:44
-#: app_transport_service/models.py:75 app_volunteering/models.py:27
-#: app_volunteering/models.py:47
+#: app_other/models.py:34 app_volunteering/models.py:26
+msgid "resource available from"
+msgstr ""
+
+#: app_other/models.py:35 app_volunteering/models.py:27
+msgid "resource available until"
+msgstr ""
+
+#: app_other/models.py:39 app_other/models.py:59 app_volunteering/models.py:24
+#: app_volunteering/models.py:40
 msgid "town"
 msgstr ""
 
-#: app_other/models.py:52 app_other/models.py:53
+#: app_other/models.py:45 app_other/models.py:46
 msgid "other offer"
 msgstr ""
 
-#: app_other/models.py:60 app_transport_service/models.py:27
-#: app_transport_service/models.py:69
+#: app_other/models.py:53
 msgid "name"
 msgstr ""
 
-#: app_other/models.py:72
+#: app_other/models.py:65
 msgid "other request"
 msgstr ""
 
-#: app_other/models.py:73
+#: app_other/models.py:66
 msgid "other requests"
 msgstr ""
 
-#: app_service/models.py:48
-msgid "used by"
+#: app_transport_service/models.py:20 app_transport_service/models.py:60
+#: revm_site/models.py:19
+msgid "category"
 msgstr ""
 
-#: app_service/models.py:54
-msgid "service offer"
+#: app_transport_service/models.py:23 app_transport_service/models.py:63
+msgid "Capacity"
 msgstr ""
 
-#: app_service/models.py:55
-msgid "service offers"
-msgstr ""
-
-#: app_service/models.py:62
-msgid "service name"
-msgstr ""
-
-#: app_service/models.py:63
-msgid "service description"
-msgstr ""
-
-#: app_service/models.py:65
-msgid "service added on"
-msgstr ""
-
-#: app_service/models.py:74
-msgid "service request"
-msgstr ""
-
-#: app_service/models.py:75
-msgid "service requests"
-msgstr ""
-
-#: app_transport_service/models.py:9
-msgid "National"
-msgstr ""
-
-#: app_transport_service/models.py:9
-msgid "International"
-msgstr ""
-
-#: app_transport_service/models.py:30
-msgid "driver name"
-msgstr ""
-
-#: app_transport_service/models.py:31
-msgid "driver id"
-msgstr ""
-
-#: app_transport_service/models.py:32
-msgid "car registration number"
-msgstr ""
-
-#: app_transport_service/models.py:35
-msgid "available from"
-msgstr ""
-
-#: app_transport_service/models.py:36
-msgid "available until"
-msgstr ""
-
-#: app_transport_service/models.py:38
-msgid "availability"
-msgstr ""
-
-#: app_transport_service/models.py:40
-msgid "availability from hour"
-msgstr ""
-
-#: app_transport_service/models.py:41
-msgid "availability until hour"
-msgstr ""
-
-#: app_transport_service/models.py:43
-msgid "county coverage"
-msgstr ""
-
-#: app_transport_service/models.py:47 app_transport_service/models.py:78
+#: app_transport_service/models.py:24 app_transport_service/models.py:64
 msgid "weight unit"
 msgstr ""
 
-#: app_transport_service/models.py:49 app_transport_service/models.py:80
-msgid "volume unit"
+#: app_transport_service/models.py:25 app_transport_service/models.py:65
+msgid "has refrigeration"
 msgstr ""
 
-#: app_transport_service/models.py:53
+#: app_transport_service/models.py:33
+msgid "availability"
+msgstr ""
+
+#: app_transport_service/models.py:38
+msgid "from hour"
+msgstr ""
+
+#: app_transport_service/models.py:39
+msgid "until hour"
+msgstr ""
+
+#: app_transport_service/models.py:42
+msgid "driver name"
+msgstr ""
+
+#: app_transport_service/models.py:43
+msgid "driver id"
+msgstr ""
+
+#: app_transport_service/models.py:44
+msgid "car registration number"
+msgstr ""
+
+#: app_transport_service/models.py:47 app_transport_service/models.py:68
 msgid "available seats"
 msgstr ""
 
-#: app_transport_service/models.py:61
+#: app_transport_service/models.py:48 app_transport_service/models.py:69
+msgid "has disabled access"
+msgstr ""
+
+#: app_transport_service/models.py:49 app_transport_service/models.py:70
+msgid "pets allowed"
+msgstr ""
+
+#: app_transport_service/models.py:55
 msgid "transport service offer"
 msgstr ""
 
-#: app_transport_service/models.py:62
+#: app_transport_service/models.py:56
 msgid "transport service offers"
 msgstr ""
 
-#: app_transport_service/models.py:91
+#: app_transport_service/models.py:73
+msgid "From county"
+msgstr ""
+
+#: app_transport_service/models.py:74 app_transport_service/models.py:76
+msgid "From city"
+msgstr ""
+
+#: app_transport_service/models.py:75
+msgid "To county"
+msgstr ""
+
+#: app_transport_service/models.py:82
 msgid "transport service request"
 msgstr ""
 
-#: app_transport_service/models.py:92
+#: app_transport_service/models.py:83
 msgid "transport service requests"
+msgstr ""
+
+#: app_transport_service/models.py:88
+msgid "donation"
+msgstr ""
+
+#: app_transport_service/models.py:91
+msgid "request"
+msgstr ""
+
+#: app_transport_service/models.py:93
+msgid "transport date"
+msgstr ""
+
+#: app_transport_service/models.py:94
+msgid "units"
 msgstr ""
 
 #: app_volunteering/models.py:10
@@ -395,20 +359,48 @@ msgstr ""
 msgid "volunteering types"
 msgstr ""
 
-#: app_volunteering/models.py:37
+#: app_volunteering/models.py:33
 msgid "volunteering offer"
 msgstr ""
 
-#: app_volunteering/models.py:38
+#: app_volunteering/models.py:34
 msgid "volunteering offers"
 msgstr ""
 
-#: app_volunteering/models.py:54
+#: app_volunteering/models.py:46
 msgid "volunteering request"
 msgstr ""
 
-#: app_volunteering/models.py:55
+#: app_volunteering/models.py:47
 msgid "volunteering requests"
+msgstr ""
+
+#: app_volunteering/models.py:51
+msgid "made_by"
+msgstr ""
+
+#: revm_site/models.py:11
+msgid "category name"
+msgstr ""
+
+#: revm_site/models.py:12
+msgid "category description"
+msgstr ""
+
+#: revm_site/models.py:20
+msgid "categories"
+msgstr ""
+
+#: revm_site/models.py:24
+msgid "county coverage"
+msgstr ""
+
+#: revm_site/models.py:43
+msgid "donor"
+msgstr ""
+
+#: revm_site/models.py:51
+msgid "requested by"
 msgstr ""
 
 #: revm_site/settings/base.py:142
@@ -419,27 +411,35 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: revm_site/settings/base.py:227
+#: revm_site/settings/base.py:226
 msgid "Not Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:228
+#: revm_site/settings/base.py:227
 msgid "Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:232
-msgid "Available in weekend"
+#: revm_site/settings/base.py:230
+msgid "National"
+msgstr ""
+
+#: revm_site/settings/base.py:230
+msgid "County"
 msgstr ""
 
 #: revm_site/settings/base.py:233
-msgid "Available in week day"
+msgid "Available in weekend"
 msgstr ""
 
 #: revm_site/settings/base.py:234
-msgid "Available anytime"
+msgid "Available in week day"
 msgstr ""
 
 #: revm_site/settings/base.py:235
+msgid "Available anytime"
+msgstr ""
+
+#: revm_site/settings/base.py:236
 msgid "Fixed intervals"
 msgstr ""
 
