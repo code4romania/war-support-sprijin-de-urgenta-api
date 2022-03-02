@@ -221,7 +221,6 @@ COUNTIES_SHORTNAME = {
     "VS": "Vaslui",
     "VL": "Vâlcea",
     "VN": "Vrancea",
-    "RO": "Național",
 }
 
 RESOURCE_STATUS = (

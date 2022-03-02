@@ -20,20 +20,21 @@ class Category(models.Model):
 
 
 class TransportServiceOffer(models.Model):
-    donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("donor"))
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
     weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
-    has_refrigeration = models.BooleanField(default=False, blank=True, null=True)
+    has_refrigeration = models.BooleanField(_("has refrigeration"), default=False, blank=True, null=True)
 
     # Disponibilitate
     type = models.SmallIntegerField(
         _("type"), choices=settings.TRANSPORT_TYPES_CHOICES, default=1, blank=True, null=True
     )
-    county_coverage = MultiSelectField(("county coverage"), choices=settings.COUNTY_CHOICES)
+
+    county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES)
 
     availability = models.CharField(
         _("availability"),
@@ -51,8 +52,8 @@ class TransportServiceOffer(models.Model):
 
     # Detalii transport persoane
     available_seats = models.PositiveSmallIntegerField(_("available seats"), default=0, blank=True, null=True)
-    has_disabled_access = models.BooleanField(default=False)
-    pets_allowed = models.BooleanField(default=False)
+    has_disabled_access = models.BooleanField(_("has disabled access"), default=False)
+    pets_allowed = models.BooleanField(_("pets allowed"), default=False)
 
     status = models.CharField(
         _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
@@ -68,19 +69,21 @@ class TransportServiceOffer(models.Model):
 
 
 class TransportServiceRequest(models.Model):
-    made_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    made_by = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("requested by")
+    )
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
     weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
-    has_refrigeration = models.BooleanField(default=False, blank=True, null=True)
+    has_refrigeration = models.BooleanField(_("has refrigeration"), default=False, blank=True, null=True)
 
     # Detalii transport persoane
     available_seats = models.PositiveSmallIntegerField(_("available seats"), default=0, blank=True, null=True)
-    has_disabled_access = models.BooleanField(default=False)
-    pets_allowed = models.BooleanField(default=False)
+    has_disabled_access = models.BooleanField(_("has disabled access"), default=False)
+    pets_allowed = models.BooleanField(_("pets allowed"), default=False)
 
     # Detalii transport
     from_county = models.CharField(_("From county"), choices=settings.COUNTY_CHOICES, max_length=50)
@@ -102,8 +105,12 @@ class TransportServiceRequest(models.Model):
 
 
 class ResourceRequest(models.Model):
-    resource = models.ForeignKey(TransportServiceOffer, on_delete=models.SET_NULL, null=True, blank=True)
-    request = models.ForeignKey(TransportServiceRequest, on_delete=models.SET_NULL, null=True, blank=True)
+    resource = models.ForeignKey(
+        TransportServiceOffer, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("donation")
+    )
+    request = models.ForeignKey(
+        TransportServiceRequest, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("request")
+    )
     date = models.DateTimeField(_("transport date"))
     units = models.SmallIntegerField(_("units"), null=True, blank=True)
     description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
