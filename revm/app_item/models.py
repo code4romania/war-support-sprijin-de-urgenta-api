@@ -34,10 +34,10 @@ class Subcategory(models.Model):
 class ItemOffer(models.Model):
     donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
-    name = models.CharField(_("resource name"), max_length=100, db_index=True)
-    description = models.TextField(_("resource description"), default="", blank=True, null=False, max_length=500)
 
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
+    name = models.CharField(_("Product"), max_length=100, db_index=True)
+    description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
+
 
     expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
 
@@ -56,6 +56,7 @@ class ItemOffer(models.Model):
     weight = models.PositiveSmallIntegerField(_("usable weight"), default=0, blank=False)
     is_infinitely_reusable = models.BooleanField(_("is infinitely reusable"), default=False)
 
+    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
     status = models.CharField(
         _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
     )

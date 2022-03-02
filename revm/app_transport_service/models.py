@@ -46,8 +46,9 @@ class TransportServiceOffer(models.Model):
     availability_interval_to = models.TimeField(_("until hour"), null=True, blank=True)
 
     # Detalii șofer
-    driver_name = models.CharField(_("driver name"), max_length=255)
-    driver_id = models.CharField(_("driver id"), max_length=255)
+    driver_name = models.CharField(_("name"), max_length=255)
+    driver_contact = models.CharField(_("contact"), max_length=255)
+    driver_id = models.CharField(_("id"), max_length=255)
     car_registration_number = models.CharField(_("car registration number"), max_length=50)
 
     # Detalii transport persoane
