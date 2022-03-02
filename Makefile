@@ -14,6 +14,12 @@ build-dev:                        ## builds the container with the development f
 superuser:                        ## creates a superuser for the API based on the data in the .env file
 	docker-compose exec revm ./manage.py seed_superuser
 
+seed_data:                        ## seed categories and subcategories
+	docker-compose exec revm ./manage.py seed_item_data
+	docker-compose exec revm ./manage.py seed_service_data
+	docker-compose exec revm ./manage.py seed_transport_service_categories
+	docker-compose exec revm ./manage.py seed_volunteering_types
+
 drop-db:                          ## drops the database
 	docker-compose down -t 60
 	docker volume rm revm-pgdata
