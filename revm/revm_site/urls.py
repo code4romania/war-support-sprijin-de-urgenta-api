@@ -5,7 +5,6 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 from django.urls import include, path
-from django.utils.translation import gettext_lazy as _
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
@@ -32,11 +31,9 @@ from app_volunteering.views import (
 )
 
 
-admin_site_string = _("RVM")
-
-admin.site.site_title = admin_site_string
-admin.site.site_header = admin_site_string
-admin.site.index_title = admin_site_string
+admin.site.site_title = settings.ADMIN_TITLE
+admin.site.site_header = settings.ADMIN_TITLE
+admin.site.index_title = settings.ADMIN_TITLE_SHORT
 
 router = routers.DefaultRouter()
 router.register(r"categories/item", GetItemCategoryViewSet, basename="volunteering_categories")
