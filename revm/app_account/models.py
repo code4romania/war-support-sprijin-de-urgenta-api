@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
 
     type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=1)
     phone_number = models.CharField(_("phone number"), max_length=13, null=True, blank=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(_("address"), max_length=255, blank=True, null=True)
     details = models.JSONField(_("details"), null=True, blank=True)
     description = models.CharField(_("general user description"), default="", blank=True, null=False, max_length=500)
 
