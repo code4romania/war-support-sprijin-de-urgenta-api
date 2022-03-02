@@ -2,13 +2,12 @@ from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from revm_site.views import CreateResourceViewSet
-from .models import Category, Subcategory
+from .models import Category
 from .serializers import (
     ItemRequestSerializer,
     ItemOfferSerializer,
     ItemCategorySerializer,
     ItemCategoryListSerializer,
-    ItemSubcategorySerializer,
 )
 
 
@@ -23,13 +22,6 @@ class GetItemCategoryViewSet(ReadOnlyModelViewSet):
         if self.action == "list":
             return ItemCategoryListSerializer
         return ItemCategorySerializer
-
-
-class GetItemSubcategoryViewSet(ReadOnlyModelViewSet):
-    lookup_field = "name"
-    permissions_classes = (AllowAny,)
-    queryset = Subcategory.objects.all()
-    serializer_class = ItemSubcategorySerializer
 
 
 class CreateItemRequestViewSet(CreateResourceViewSet):

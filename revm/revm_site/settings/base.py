@@ -333,7 +333,7 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
         "app_item.Category": "fas fa-cube",
-        "app_item.Subcategory": "fas fa-cubes",
+        "app_item.TextileCategory": "fas fa-cubes",
         "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
         "app_item.ItemRequest": "far fa-arrow-alt-circle-left",
         "app_other.Category": "fas fa-cube",
