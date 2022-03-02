@@ -24,7 +24,7 @@ class Subcategory(models.Model):
     description = models.TextField(_("subcategory description"), default="", blank=True, null=False, max_length=500)
 
     def __str__(self):
-        return self.name
+        return f"{self.category}/{self.name}"
 
     class Meta:
         verbose_name = _("subcategory")
