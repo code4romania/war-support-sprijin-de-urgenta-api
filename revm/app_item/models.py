@@ -41,7 +41,6 @@ class ItemOffer(models.Model):
 
     expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
 
-
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
     pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
 
@@ -57,7 +56,9 @@ class ItemOffer(models.Model):
     weight = models.PositiveSmallIntegerField(_("usable weight"), default=0, blank=False)
     is_infinitely_reusable = models.BooleanField(_("is infinitely reusable"), default=False)
 
-    status = models.CharField(_("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0])
+    status = models.CharField(
+        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
+    )
 
     def __str__(self):
         return f"#{self.id} {self.name} ({self.units_left} {self.unit_type})"
@@ -86,7 +87,9 @@ class ItemRequest(models.Model):
         _("units left"), help_text=_("How many units of this type are still needed"), null=True, blank=True
     )
 
-    status = models.CharField(_("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0])
+    status = models.CharField(
+        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
+    )
 
     def __str__(self):
         return f"#{self.id} {self.name} ({self.units_left} {self.unit_type})"
