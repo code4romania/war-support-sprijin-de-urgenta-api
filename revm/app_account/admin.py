@@ -40,8 +40,10 @@ class AdminCustomUser(DjangoUserAdmin):
                 (_("Personal info"), {"fields": ("first_name", "last_name", "password")}),
                 (_("Profile data"), {"fields": ("phone_number", "address")}),
                 (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions")}),
-
-                (_("RVM User"), {"fields": ("type", "business_name", "phone_number", "address", "details", "description")}),
+                (
+                    _("RVM User"),
+                    {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
+                ),
             )
         else:
             return self.add_fieldsets
