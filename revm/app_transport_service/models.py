@@ -2,11 +2,12 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from multiselectfield import MultiSelectField
 
 from app_account.models import CustomUser
 
 
-TYPES_CHOICES = ((1, _("National")), (2, _("International")))
+
 
 
 class Category(models.Model):
@@ -24,35 +25,36 @@ class Category(models.Model):
 class TransportServiceOffer(models.Model):
     donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    name = models.CharField(_("name"), max_length=100, db_index=True)
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
+    # Detalii transport marfă
+    weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
+    weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
+    has_refrigeration = models.BooleanField(default=False, blank=True, null=True)
+
+    # Disponibilitate
+    type = models.SmallIntegerField(_("type"), choices=settings.TRANSPORT_TYPES_CHOICES, default=1, blank=True, null=True)
+    county_coverage = MultiSelectField(("county coverage"), choices=settings.COUNTY_CHOICES)
+
+    availability = models.CharField(_("availability"), max_length=2,
+        choices=settings.TRANSPORT_AVAILABILTY, default=settings.TRANSPORT_AVAILABILTY[0][0])
+    availability_interval_from = models.TimeField(_("from hour"), null=True, blank=True)
+    availability_interval_to = models.TimeField(_("until hour"), null=True, blank=True)
+
+
+    # Detalii șofer
     driver_name = models.CharField(_("driver name"), max_length=255)
     driver_id = models.CharField(_("driver id"), max_length=255)
     car_registration_number = models.CharField(_("car registration number"), max_length=50)
 
-    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
-    available_from = models.DateField(_("available from"), null=False)
-    available_until = models.DateField(_("available until"), null=True)
 
-    availability = models.CharField(_("availability"), max_length=2,
-        choices=settings.TRANSPORT_AVAILABILTY, default=settings.TRANSPORT_AVAILABILTY[0][0])
-    availability_interval_from = models.TimeField(_("availability from hour"), null=True, blank=True)
-    availability_interval_to = models.TimeField(_("availability until hour"), null=True, blank=True)
-
-    county_coverage = models.CharField(_("county coverage"), max_length=2, choices=settings.COUNTY_CHOICES)
-    town = models.CharField(_("town"), max_length=100, blank=False, null=False)
-
-    weight_capacity = models.FloatField(blank=True, null=True)
-    weight_unit = models.CharField(_("weight unit"), max_length=3, default="kg", blank=True, null=True)
-    volume = models.FloatField(blank=True, null=True)
-    volume_unit = models.CharField(_("volume unit"), max_length=3, default="mc", blank=True, null=True)
-    has_refrigeration = models.BooleanField(default=False, blank=True, null=True)
-
-    type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=1, blank=True, null=True)
+    # Detalii transport persoane
     available_seats = models.PositiveSmallIntegerField(_("available seats"), default=0, blank=True, null=True)
     has_disabled_access = models.BooleanField(default=False)
     pets_allowed = models.BooleanField(default=False)
+
+    status = models.CharField(_("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0])
+    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
 
     def __str__(self):
         return f"#{self.id} {self.category}"
@@ -65,26 +67,26 @@ class TransportServiceOffer(models.Model):
 class TransportServiceRequest(models.Model):
     made_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-
-    name = models.CharField(_("name"), max_length=100, db_index=True)
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
-    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
+    # Detalii transport marfă
+    weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
+    weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
+    has_refrigeration = models.BooleanField(default=False, blank=True, null=True)
 
-    county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
-    town = models.CharField(_("town"), max_length=100, blank=False, null=False)
-
-    weight_capacity = models.FloatField(blank=True, null=True)
-    weight_unit = models.CharField(_("weight unit"), max_length=3, default="kg", blank=True, null=True)
-    volume = models.FloatField(blank=True, null=True)
-    volume_unit = models.CharField(_("volume unit"), max_length=3, default="mc", blank=True, null=True)
-    has_refrigeration = models.BooleanField(default=False)
-
-    type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=1, blank=True, null=True)
-
-    seats_number = models.PositiveSmallIntegerField(_("number of seats"), default=0, blank=True, null=True)
+    # Detalii transport persoane
+    available_seats = models.PositiveSmallIntegerField(_("available seats"), default=0, blank=True, null=True)
     has_disabled_access = models.BooleanField(default=False)
     pets_allowed = models.BooleanField(default=False)
+
+    # Detalii transport
+    from_county = models.CharField(_("From county"), choices=settings.COUNTY_CHOICES, max_length=50)
+    from_city = models.CharField(_("From city"), max_length=150)
+    to_county = models.CharField(_("To county"), choices=settings.COUNTY_CHOICES, max_length=50)
+    to_city = models.CharField(_("From city"), max_length=150)
+
+    status = models.CharField(_("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0])
+    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
 
     def __str__(self):
         return f"#{self.id} {self.category}"

@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "app_other",
     # api documentation
     "drf_spectacular",
+    "multiselectfield",
 ]
 
 MIDDLEWARE = [
@@ -227,6 +228,11 @@ RESOURCE_STATUS = (
     ("NV", _("Not Verified")),
     ("V", _("Verified")),
 )
+
+TRANSPORT_TYPES_CHOICES = (
+    (1, _("National")),
+    (2, _("County"))
+    )
 
 TRANSPORT_AVAILABILTY = (
     ('WK', _("Available in weekend")),

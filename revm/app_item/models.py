@@ -38,11 +38,9 @@ class ItemOffer(models.Model):
     description = models.TextField(_("resource description"), default="", blank=True, null=False, max_length=500)
 
     added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
-    available_from = models.DateTimeField(_("resource available from"), auto_now_add=timezone.now, null=False)
-    available_until = models.DateTimeField(_("resource available until"), null=True)
+
     expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
 
-    packaging_type = models.CharField(_("packaging type"), max_length=100, blank=True, null=True)
 
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
     pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
@@ -50,6 +48,7 @@ class ItemOffer(models.Model):
     in_use_by = models.TextField(_("in use by"), null=True, blank=True)
 
     total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
+    packaging_type = models.CharField(_("packaging type"), max_length=100, blank=True, null=True)
     units_left = models.PositiveSmallIntegerField(
         _("reuses left"), help_text=_("How many units of this type are left"), null=True, blank=True
     )
