@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from app_other import models
 
 
@@ -20,20 +21,9 @@ class AdminOtherRequest(admin.ModelAdmin):
     view_on_site = False
 
 
-@admin.register(models.Subcategory)
-class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ("id", "name", "category")
-    list_display_links = ("id", "name")
-    search_fields = ["name"]
-
-    ordering = ("pk",)
-
-    view_on_site = False
-
-
 @admin.register(models.OtherOffer)
 class AdminOtherOffer(admin.ModelAdmin):
-    list_display = ("id", "name", "subcategory")
+    list_display = ("id", "name", "category")
     list_display_links = ("id", "name")
     search_fields = ["name"]
 
@@ -46,7 +36,7 @@ class AdminOtherOffer(admin.ModelAdmin):
 
 @admin.register(models.OtherRequest)
 class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ("id", "name", "subcategory")
+    list_display = ("id", "name", "category")
     list_display_links = ("id", "name")
     search_fields = ["name"]
 

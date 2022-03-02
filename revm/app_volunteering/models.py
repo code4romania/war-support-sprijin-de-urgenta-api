@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import CommonRequestModel, CommonCountyModel, CommonOfferModel
+from revm_site.models import CommonRequestModel, CommonCountyModel, CommonOfferModel, CommonLocationModel
 
 
 class Type(models.Model):
@@ -18,13 +18,11 @@ class Type(models.Model):
         verbose_name_plural = _("volunteering types")
 
 
-class VolunteeringOffer(CommonOfferModel, CommonCountyModel):
+class VolunteeringOffer(CommonOfferModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
-    town = models.CharField(_("town"), max_length=100, blank=False, null=False)
-
-    available_from = models.DateTimeField(_("resource available from"), auto_now_add=timezone.now, null=False)
-    available_until = models.DateTimeField(_("resource available until"), null=True)
+    available_from = models.DateTimeField(_("volunteer available from"), auto_now_add=timezone.now, null=False)
+    available_until = models.DateTimeField(_("volunteer available until"), null=True)
 
     def __str__(self):
         return self.type
@@ -34,10 +32,8 @@ class VolunteeringOffer(CommonOfferModel, CommonCountyModel):
         verbose_name_plural = _("volunteering offers")
 
 
-class VolunteeringRequest(CommonRequestModel, CommonCountyModel):
+class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
-
-    town = models.CharField(_("town"), max_length=100, blank=False, null=False)
 
     def __str__(self):
         return self.type

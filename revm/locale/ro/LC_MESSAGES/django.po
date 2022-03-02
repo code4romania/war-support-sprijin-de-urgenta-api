@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-03 00:45+0200\n"
+"POT-Creation-Date: 2022-03-03 01:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,8 +69,8 @@ msgid "email address"
 msgstr "adresa e-mail"
 
 #: app_account/models.py:16 app_transport_service/models.py:28
-#: app_volunteering/models.py:22 app_volunteering/models.py:38
-#: app_volunteering/models.py:52
+#: app_volunteering/models.py:22 app_volunteering/models.py:36
+#: app_volunteering/models.py:48
 msgid "type"
 msgstr "tip"
 
@@ -112,117 +112,97 @@ msgstr "Cele două câmpuri de parolă nu corespund."
 msgid "Item"
 msgstr ""
 
-#: app_item/models.py:18
+#: app_item/models.py:22
 #, fuzzy
 #| msgid "resource category"
 msgid "Textile Category"
 msgstr "categoria resurselor"
 
-#: app_item/models.py:19
+#: app_item/models.py:23
 #, fuzzy
 #| msgid "resource categories"
 msgid "Textile Categories"
 msgstr "categoriile resurselor"
 
-#: app_item/models.py:25 app_item/models.py:65 app_item/models.py:109
-#: app_other/models.py:54 app_transport_service/models.py:95
-#: revm_site/models.py:31
-msgid "description"
-msgstr "descrierea categoriei"
-
-#: app_item/models.py:28 app_item/models.py:68
+#: app_item/models.py:30 app_item/models.py:59
 msgid "Product"
 msgstr ""
 
-#: app_item/models.py:29 app_item/models.py:70 app_item/models.py:108
+#: app_item/models.py:31 app_item/models.py:61 app_item/models.py:90
 msgid "total units"
 msgstr "număr de unități"
 
-#: app_item/models.py:30 app_item/models.py:72
+#: app_item/models.py:32 app_item/models.py:63
 #, fuzzy
 #| msgid "packaging type"
 msgid "packaging"
 msgstr "tip ambalaj"
 
-#: app_item/models.py:31 app_item/models.py:73
+#: app_item/models.py:33 app_item/models.py:64
 msgid "unit type"
 msgstr "unitate de măsură"
 
-#: app_item/models.py:32 app_item/models.py:74 app_other/models.py:36
+#: app_item/models.py:34 app_item/models.py:65 app_other/models.py:25
 msgid "expiration date"
 msgstr "data expirării"
 
-#: app_item/models.py:34 app_item/models.py:76
+#: app_item/models.py:36 app_item/models.py:67
 msgid "Stock"
 msgstr ""
 
-#: app_item/models.py:34
+#: app_item/models.py:36
 msgid "How many units of this type are left"
 msgstr "De câte ori poate fi această resursă utilizată"
 
-#: app_item/models.py:39 app_item/models.py:81
+#: app_item/models.py:41 app_item/models.py:72
 #, fuzzy
 #| msgid "Change"
 msgid "age"
 msgstr "Schimba"
 
-#: app_item/models.py:40 app_item/models.py:82
-#, fuzzy
-#| msgid "other offer"
+#: app_item/models.py:42 app_item/models.py:73
 msgid "other"
-msgstr "altă ofertă"
+msgstr "altele"
 
-#: app_item/models.py:44 app_item/models.py:85
+#: app_item/models.py:45 app_item/models.py:76
 msgid "capacity"
 msgstr ""
 
-#: app_item/models.py:46 app_item/models.py:87 app_other/models.py:38
-#: app_other/models.py:58
-msgid "county"
-msgstr "județ"
-
-#: app_item/models.py:47 app_item/models.py:88
-msgid "pickup town"
-msgstr "oraș de ridicare"
-
-#: app_item/models.py:49 app_item/models.py:90 app_other/models.py:33
-msgid "resource added on"
-msgstr "data adăugării"
-
-#: app_item/models.py:51 app_item/models.py:93 revm_site/models.py:35
-msgid "status"
-msgstr "status"
-
-#: app_item/models.py:58
+#: app_item/models.py:51
 msgid "item offer"
-msgstr "oferta de resursa"
+msgstr "donație de produse"
 
-#: app_item/models.py:59
+#: app_item/models.py:52
 msgid "item offers"
-msgstr "oferte de resurse"
+msgstr "donații de produse"
 
-#: app_item/models.py:76
+#: app_item/models.py:67
 #, fuzzy
 #| msgid "How many units of this type are still needed"
 msgid "How many units are still needed"
 msgstr "Câte produse mai sunt necesare?"
 
-#: app_item/models.py:100
+#: app_item/models.py:82
 msgid "item request"
 msgstr "cerere de resurse"
 
-#: app_item/models.py:101
+#: app_item/models.py:83
 msgid "item requests"
 msgstr "cereri de resurse"
 
-#: app_item/models.py:111 app_other/models.py:56 revm_site/models.py:33
+#: app_item/models.py:91 app_transport_service/models.py:95
+#: revm_site/models.py:38
+msgid "description"
+msgstr "descrierea categoriei"
+
+#: app_item/models.py:93 revm_site/models.py:40
 msgid "added on"
 msgstr "data adăugării"
 
-#: app_item/models.py:114 app_item/models.py:115 app_other/models.py:75
-#: app_other/models.py:76 app_transport_service/models.py:98
-#: app_transport_service/models.py:99 app_volunteering/models.py:55
-#: app_volunteering/models.py:56
+#: app_item/models.py:96 app_item/models.py:97 app_other/models.py:53
+#: app_other/models.py:54 app_transport_service/models.py:98
+#: app_transport_service/models.py:99 app_volunteering/models.py:51
+#: app_volunteering/models.py:52
 msgid "Offer - Request"
 msgstr "Donație - Cerere"
 
@@ -230,69 +210,57 @@ msgstr "Donație - Cerere"
 msgid "Other"
 msgstr ""
 
-#: app_other/models.py:16
-msgid "subcategory name"
-msgstr "Numele Subcategoriei"
+#: app_other/models.py:20 app_other/models.py:36
+#: app_transport_service/models.py:19 app_transport_service/models.py:60
+#: revm_site/models.py:19
+msgid "category"
+msgstr "Categorie"
 
-#: app_other/models.py:17
-msgid "subcategory description"
-msgstr "descrierea subcategoriei"
-
-#: app_other/models.py:23
-msgid "subcategory"
-msgstr "Subcategorie"
-
-#: app_other/models.py:24
-msgid "subcategories"
-msgstr "Subcategorii"
-
-#: app_other/models.py:30
+#: app_other/models.py:21
 msgid "resource name"
 msgstr "numele resursei"
 
-#: app_other/models.py:31
-msgid "resource description"
-msgstr "descrierea resursei"
-
-#: app_other/models.py:34 app_volunteering/models.py:26
+#: app_other/models.py:23
 msgid "resource available from"
 msgstr "disponibilitate de la"
 
-#: app_other/models.py:35 app_volunteering/models.py:27
+#: app_other/models.py:24
 msgid "resource available until"
 msgstr "disponibilitate până la"
 
-#: app_other/models.py:39 app_other/models.py:59 app_volunteering/models.py:24
-#: app_volunteering/models.py:40
-msgid "town"
-msgstr "oraș"
-
-#: app_other/models.py:45 app_other/models.py:46
+#: app_other/models.py:31 app_other/models.py:32
 msgid "other offer"
-msgstr "altă ofertă"
+msgstr "altă donație"
 
-#: app_other/models.py:53 app_transport_service/models.py:41
+#: app_other/models.py:37 app_transport_service/models.py:41
 msgid "name"
 msgstr "nume"
 
-#: app_other/models.py:65
+#: app_other/models.py:43
 msgid "other request"
 msgstr "altă cerere"
 
-#: app_other/models.py:66
+#: app_other/models.py:44
 msgid "other requests"
 msgstr "alte cereri"
+
+#: app_other/models.py:48 app_transport_service/models.py:88
+#, fuzzy
+#| msgid "National"
+msgid "donation"
+msgstr "Național"
+
+#: app_other/models.py:49 app_transport_service/models.py:91
+#, fuzzy
+#| msgid "item request"
+msgid "request"
+msgstr "cerere de resurse"
 
 #: app_transport_service/apps.py:8
 #, fuzzy
 #| msgid "transport service offers"
 msgid "Transport services"
-msgstr "oferte de servicii de transport"
-
-#: app_transport_service/models.py:19 app_transport_service/models.py:60
-#: revm_site/models.py:19
-msgid "category"
-msgstr "Categorie"
+msgstr "donații de servicii de transport"
 
 #: app_transport_service/models.py:22 app_transport_service/models.py:63
 msgid "Capacity"
@@ -350,11 +318,11 @@ msgstr ""
 
 #: app_transport_service/models.py:55
 msgid "transport service offer"
-msgstr "oferta de servicii de transport"
+msgstr "donație de servicii de transport"
 
 #: app_transport_service/models.py:56
 msgid "transport service offers"
-msgstr "oferte de servicii de transport"
+msgstr "donații de servicii de transport"
 
 #: app_transport_service/models.py:73
 #, fuzzy
@@ -379,18 +347,6 @@ msgstr "cerere de servicii de transport"
 #: app_transport_service/models.py:83
 msgid "transport service requests"
 msgstr "cereri de servicii de transport"
-
-#: app_transport_service/models.py:88
-#, fuzzy
-#| msgid "National"
-msgid "donation"
-msgstr "Național"
-
-#: app_transport_service/models.py:91
-#, fuzzy
-#| msgid "item request"
-msgid "request"
-msgstr "cerere de resurse"
 
 #: app_transport_service/models.py:93
 msgid "transport date"
@@ -424,23 +380,35 @@ msgstr "tip de voluntariat"
 msgid "volunteering types"
 msgstr "tipuri de voluntariat"
 
-#: app_volunteering/models.py:33
+#: app_volunteering/models.py:24
+#, fuzzy
+#| msgid "resource available from"
+msgid "volunteer available from"
+msgstr "disponibilitate de la"
+
+#: app_volunteering/models.py:25
+#, fuzzy
+#| msgid "resource available until"
+msgid "volunteer available until"
+msgstr "disponibilitate până la"
+
+#: app_volunteering/models.py:31
 msgid "volunteering offer"
-msgstr "oferta voluntar"
+msgstr "donație voluntar"
 
-#: app_volunteering/models.py:34
+#: app_volunteering/models.py:32
 msgid "volunteering offers"
-msgstr "oferte voluntari"
+msgstr "donații voluntari"
 
-#: app_volunteering/models.py:46
+#: app_volunteering/models.py:42
 msgid "volunteering request"
 msgstr "cerere de voluntariat"
 
-#: app_volunteering/models.py:47
+#: app_volunteering/models.py:43
 msgid "volunteering requests"
 msgstr "cereri de voluntariat"
 
-#: app_volunteering/models.py:51
+#: app_volunteering/models.py:47
 msgid "made_by"
 msgstr ""
 
@@ -460,61 +428,108 @@ msgstr "Categorii"
 msgid "county coverage"
 msgstr "județ"
 
-#: revm_site/models.py:43
+#: revm_site/models.py:31
+msgid "town"
+msgstr "oraș"
+
+#: revm_site/models.py:42
+msgid "status"
+msgstr "status"
+
+#: revm_site/models.py:50
 msgid "donor"
 msgstr ""
 
-#: revm_site/models.py:51
+#: revm_site/models.py:58
 #, fuzzy
 #| msgid "used by"
 msgid "requested by"
 msgstr "utilizat de"
 
-#: revm_site/settings/base.py:142
+#: revm_site/settings/base.py:26
+msgid "Sprijin de Urgență"
+msgstr "Sprijin de Urgență"
+
+#: revm_site/settings/base.py:27
+msgid "RVM"
+msgstr "SdU"
+
+#: revm_site/settings/base.py:145
 msgid "Romanian"
 msgstr "Română"
 
-#: revm_site/settings/base.py:143
+#: revm_site/settings/base.py:146
 msgid "English"
 msgstr "Engleză"
 
-#: revm_site/settings/base.py:226
+#: revm_site/settings/base.py:229
 msgid "Not Verified"
 msgstr "Nu a fost verificat"
 
-#: revm_site/settings/base.py:227
+#: revm_site/settings/base.py:230
 msgid "Verified"
 msgstr "Verificat"
 
-#: revm_site/settings/base.py:230
+#: revm_site/settings/base.py:233
 msgid "National"
 msgstr "Național"
 
-#: revm_site/settings/base.py:230
+#: revm_site/settings/base.py:233
 #, fuzzy
 #| msgid "county"
 msgid "County"
 msgstr "județ"
 
-#: revm_site/settings/base.py:233
-msgid "Available in weekend"
+#: revm_site/settings/base.py:236
+#, fuzzy
+#| msgid "Available in weekend"
+msgid "Disponibil in weekend"
 msgstr "Disponibil în weekend"
 
-#: revm_site/settings/base.py:234
-msgid "Available in week day"
-msgstr "Disponibil în timpul săptămânii"
+#: revm_site/settings/base.py:237
+msgid "Disponibil in timpul saptamanii"
+msgstr ""
 
-#: revm_site/settings/base.py:235
-msgid "Available anytime"
-msgstr "Disponibil oricând"
+#: revm_site/settings/base.py:238
+msgid "Disponibil oricand"
+msgstr ""
 
-#: revm_site/settings/base.py:236
-msgid "Fixed intervals"
-msgstr "Intervale fixe"
+#: revm_site/settings/base.py:239
+msgid "Intervale fixe"
+msgstr ""
 
-#: revm_site/urls.py:35
-msgid "RVM"
-msgstr "SdU"
+#~ msgid "county"
+#~ msgstr "județ"
+
+#~ msgid "pickup town"
+#~ msgstr "oraș de ridicare"
+
+#~ msgid "resource added on"
+#~ msgstr "data adăugării"
+
+#~ msgid "subcategory name"
+#~ msgstr "Numele Subcategoriei"
+
+#~ msgid "subcategory description"
+#~ msgstr "descrierea subcategoriei"
+
+#~ msgid "subcategory"
+#~ msgstr "Subcategorie"
+
+#~ msgid "subcategories"
+#~ msgstr "Subcategorii"
+
+#~ msgid "resource description"
+#~ msgstr "descrierea resursei"
+
+#~ msgid "Available in week day"
+#~ msgstr "Disponibil în timpul săptămânii"
+
+#~ msgid "Available anytime"
+#~ msgstr "Disponibil oricând"
+
+#~ msgid "Fixed intervals"
+#~ msgstr "Intervale fixe"
 
 #~ msgid "in use by"
 #~ msgstr "folosit de"

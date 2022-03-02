@@ -1,6 +1,6 @@
-from django.db.models import TextField
-from django.forms import TextInput, Textarea
 from django.contrib import admin
+from django.db.models import TextField
+from django.forms import Textarea
 
 from app_item import models
 
@@ -25,6 +25,7 @@ class AdminCategory(admin.ModelAdmin):
     ordering = ("pk",)
 
     view_on_site = False
+
 
 @admin.register(models.TextileCategory)
 class AdminTextileCategory(admin.ModelAdmin):
@@ -73,7 +74,6 @@ class AdminItemOffer(admin.ModelAdmin):
             "Detalii produs",
             {
                 "fields": (
-
                     "textile_category",
                     "kids_age",
                     "other_textiles",
@@ -93,7 +93,7 @@ class AdminItemOffer(admin.ModelAdmin):
             {
                 "fields": (
                     "county_coverage",
-                    "pickup_town",
+                    "town",
                 )
             },
         ),
@@ -105,10 +105,13 @@ class AdminItemRequest(admin.ModelAdmin):
     list_display = ("id", "name", "category", "made_by", "status")
     list_display_links = ("id", "name")
     search_fields = ["name"]
-    readonly_fields = ["made_by", "added_on", "stock"]
+    readonly_fields = ["added_on", "stock"]
 
-    list_filter = ["county_coverage", "category", "status", ]
-
+    list_filter = [
+        "county_coverage",
+        "category",
+        "status",
+    ]
 
     inlines = (OtherResourceRequestInline,)
 
@@ -156,7 +159,7 @@ class AdminItemRequest(admin.ModelAdmin):
             {
                 "fields": (
                     "county_coverage",
-                    "pickup_town",
+                    "town",
                 )
             },
         ),
