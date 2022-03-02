@@ -25,7 +25,6 @@ from app_transport_service.views import (
     CreateTransportServiceRequestViewSet,
     CreateTransportServiceOfferViewSet,
     GetTransportServiceCategoryViewSet,
-    GetTransportServiceSubcategoryViewSet,
 )
 from app_volunteering.views import (
     CreateVolunteeringOfferViewSet,
@@ -48,9 +47,6 @@ router.register(r"categories/volunteering", GetVolunteeringCategoryViewSet, base
 
 router.register(r"subcategories/item", GetItemSubcategoryViewSet, basename="volunteering_subcategories")
 router.register(r"subcategories/other", GetOtherSubcategoryViewSet, basename="volunteering_subcategories")
-router.register(
-    r"subcategories/transport_service", GetTransportServiceSubcategoryViewSet, basename="volunteering_subcategories"
-)
 
 router.register(r"request/item", CreateItemRequestViewSet, basename="item_request")
 router.register(r"request/other", CreateOtherRequestViewSet, basename="other_request")
