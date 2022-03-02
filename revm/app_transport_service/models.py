@@ -68,7 +68,7 @@ class TransportServiceOffer(models.Model):
     pets_allowed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return f"#{self.id} {self.category}"
 
     class Meta:
         verbose_name = _("transport service offer")
@@ -92,13 +92,15 @@ class TransportServiceRequest(models.Model):
     volume = models.FloatField(blank=True, null=True)
     volume_unit = models.CharField(_("volume unit"), max_length=3, default="mc", blank=True, null=True)
     has_refrigeration = models.BooleanField(default=False)
+
     type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=1, blank=True, null=True)
-    available_seats = models.PositiveSmallIntegerField(_("total units"), default=0, blank=True, null=True)
+
+    seats_number = models.PositiveSmallIntegerField(_("number of seats"), default=0, blank=True, null=True)
     has_disabled_access = models.BooleanField(default=False)
     pets_allowed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return f"#{self.id} {self.category}"
 
     class Meta:
         verbose_name = _("transport service request")
@@ -108,6 +110,9 @@ class TransportServiceRequest(models.Model):
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(TransportServiceOffer, on_delete=models.SET_NULL, null=True, blank=True)
     request = models.ForeignKey(TransportServiceRequest, on_delete=models.SET_NULL, null=True, blank=True)
+    date = models.DateTimeField(_("transport date"))
+    units = models.SmallIntegerField(_("units"), null=True, blank=True)
+    description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
 
     class Meta:
         verbose_name = _("Offer - Request")
