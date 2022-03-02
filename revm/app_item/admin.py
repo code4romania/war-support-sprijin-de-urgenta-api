@@ -26,6 +26,7 @@ class AdminCategory(admin.ModelAdmin):
 
     view_on_site = False
 
+
 @admin.register(models.TextileCategory)
 class AdminTextileCategory(admin.ModelAdmin):
     list_display = ("id", "name", "description")
@@ -73,7 +74,6 @@ class AdminItemOffer(admin.ModelAdmin):
             "Detalii produs",
             {
                 "fields": (
-
                     "textile_category",
                     "kids_age",
                     "other_textiles",
@@ -107,8 +107,11 @@ class AdminItemRequest(admin.ModelAdmin):
     search_fields = ["name"]
     readonly_fields = ["made_by", "added_on", "stock"]
 
-    list_filter = ["county_coverage", "category", "status", ]
-
+    list_filter = [
+        "county_coverage",
+        "category",
+        "status",
+    ]
 
     inlines = (OtherResourceRequestInline,)
 

@@ -18,6 +18,7 @@ class TextileCategory(CommonCategoryModel):
         verbose_name = _("Textile Category")
         verbose_name_plural = _("Textile Categories")
 
+
 class ItemOffer(models.Model):
     donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
