@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -16,7 +15,7 @@ class Category(CommonCategoryModel):
     ...
 
 
-class TransportServiceOffer(CommonOfferModel, CommonCountyModel):
+class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
 
     # Detalii transport marfă

@@ -20,7 +20,7 @@ class CommonCategoryModel(models.Model):
         verbose_name_plural = _("categories")
 
 
-class CommonCountyModel:
+class CommonCountyModel(models.Model):
     county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES)
 
     class Meta:
