@@ -4,6 +4,7 @@ from .models import ItemRequest, ItemOffer, Category
 
 
 class ItemCategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Category
         fields = "__all__"

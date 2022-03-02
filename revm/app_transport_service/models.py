@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -16,7 +15,7 @@ class Category(CommonCategoryModel):
     ...
 
 
-class TransportServiceOffer(CommonRequestModel, CommonCountyModel):
+class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
 
     # Detalii transport marfă
@@ -49,8 +48,6 @@ class TransportServiceOffer(CommonRequestModel, CommonCountyModel):
     has_disabled_access = models.BooleanField(_("has disabled access"), default=False)
     pets_allowed = models.BooleanField(_("pets allowed"), default=False)
 
-    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
-
     def __str__(self):
         return f"#{self.id} {self.category}"
 
@@ -59,7 +56,7 @@ class TransportServiceOffer(CommonRequestModel, CommonCountyModel):
         verbose_name_plural = _("transport service offers")
 
 
-class TransportServiceRequest(CommonOfferModel):
+class TransportServiceRequest(CommonRequestModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
 
     # Detalii transport marfă
@@ -77,8 +74,6 @@ class TransportServiceRequest(CommonOfferModel):
     from_city = models.CharField(_("From city"), max_length=150)
     to_county = models.CharField(_("To county"), choices=settings.COUNTY_CHOICES, max_length=50)
     to_city = models.CharField(_("From city"), max_length=150)
-
-    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
 
     def __str__(self):
         return f"#{self.id} {self.category}"
