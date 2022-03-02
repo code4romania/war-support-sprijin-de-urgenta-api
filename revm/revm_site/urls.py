@@ -39,12 +39,12 @@ admin.site.site_header = admin_site_string
 admin.site.index_title = admin_site_string
 
 router = routers.DefaultRouter()
-router.register(r"categories/item", GetItemCategoryViewSet, basename="volunteering_categories")
-router.register(r"categories/other", GetOtherCategoryViewSet, basename="volunteering_categories")
-router.register(r"categories/transport_service", GetTransportServiceCategoryViewSet, basename="volunteering_categories")
+router.register(r"categories/item", GetItemCategoryViewSet, basename="item_categories")
+router.register(r"categories/other", GetOtherCategoryViewSet, basename="other_categories")
+router.register(r"categories/transport_service", GetTransportServiceCategoryViewSet, basename="transport_categories")
 router.register(r"categories/volunteering", GetVolunteeringCategoryViewSet, basename="volunteering_categories")
 
-router.register(r"subcategories/other", GetOtherSubcategoryViewSet, basename="volunteering_subcategories")
+router.register(r"subcategories/other", GetOtherSubcategoryViewSet, basename="other_subcategories")
 
 router.register(r"request/item", CreateItemRequestViewSet, basename="item_request")
 router.register(r"request/other", CreateOtherRequestViewSet, basename="other_request")
@@ -83,9 +83,6 @@ urlpatterns = (
         ),
         path("admin/", admin.site.urls, name="admin"),
         path("logout", LogoutView.as_view(), name="logout"),
-    )
-    + [
-        # URL patterns which do not use a language prefix
         path("api/v1/", include(router.urls)),
         path("auth/", include("dj_rest_auth.urls")),
         path("registration/", include("dj_rest_auth.registration.urls")),
@@ -96,7 +93,7 @@ urlpatterns = (
             SpectacularSwaggerView.as_view(url_name="swagger-ui"),
             name="swagger-ui",
         ),
-    ]
+    )
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
 
