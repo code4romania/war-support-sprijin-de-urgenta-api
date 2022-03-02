@@ -249,7 +249,7 @@ JAZZMIN_SETTINGS = {
     # title of the window
     "site_title": "Ajutor",
     # Title on the brand, and the login screen (19 chars max)
-    "site_header": "#TM4UA",
+    "site_header": "Resource Volunteer Management Admin",
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     "site_logo": "images/logo.png",
     # Welcome text on the login screen
