@@ -33,3 +33,4 @@ drf-spectacular
 
 # admin
 django-jazzmin
+django-multiselectfield>=0.1.12,<1.0.0

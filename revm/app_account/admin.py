@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.auth.models import Group
@@ -17,7 +16,6 @@ DjangoUserAdmin.add_fieldsets = (
         },
     ),
 )
-
 
 
 @admin.register(models.CustomUser)
@@ -42,8 +40,10 @@ class AdminCustomUser(DjangoUserAdmin):
                 (_("Personal info"), {"fields": ("first_name", "last_name", "password")}),
                 (_("Profile data"), {"fields": ("phone_number", "address")}),
                 (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions")}),
-
-                (_("RVM User"), {"fields": ("type", "business_name", "phone_number", "address", "details", "description")}),
+                (
+                    _("RVM User"),
+                    {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
+                ),
             )
         else:
             return self.add_fieldsets
@@ -53,7 +53,6 @@ class AdminCustomUser(DjangoUserAdmin):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
                 return False
         return True
-
 
 
 admin.site.unregister(Site)

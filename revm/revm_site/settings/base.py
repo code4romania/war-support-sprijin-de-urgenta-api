@@ -60,12 +60,12 @@ INSTALLED_APPS = [
     # project apps
     "app_account",
     "app_item",
-    "app_service",
     "app_transport_service",
     "app_volunteering",
     "app_other",
     # api documentation
     "drf_spectacular",
+    "multiselectfield",
 ]
 
 MIDDLEWARE = [
@@ -220,8 +220,22 @@ COUNTIES_SHORTNAME = {
     "VS": "Vaslui",
     "VL": "Vâlcea",
     "VN": "Vrancea",
-    "RO": "Național",
 }
+
+RESOURCE_STATUS = (
+    ("NV", _("Not Verified")),
+    ("V", _("Verified")),
+)
+
+TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
+
+TRANSPORT_AVAILABILTY = (
+    ("WK", _("Available in weekend")),
+    ("WD", _("Available in week day")),
+    ("A", _("Available anytime")),
+    ("FI", _("Fixed intervals")),
+)
+
 COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
 AUTH_USER_MODEL = "app_account.CustomUser"
@@ -247,7 +261,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializer
 
 JAZZMIN_SETTINGS = {
     # title of the window
-    "site_title": "Ajutor",
+    "site_title": "Resource Volunteer Management Admin",
     # Title on the brand, and the login screen (19 chars max)
     "site_header": "Resource Volunteer Management Admin",
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
@@ -300,7 +314,7 @@ JAZZMIN_SETTINGS = {
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["app_item", "app_service", "app_transport_service", "app_volunteering"],
+    "order_with_respect_to": ["app_item", "app_transport_service", "app_volunteering"],
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
         "books": [
@@ -318,12 +332,21 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
-        "donors.Campaign": "fas fa-campground",
-        "donors.Donor": "fas fa-hand-holding-medical",
-        "donors.Expense": "fas fa-euro-sign",
-        "donors.Need": "fas fa-syringe",
-        "donors.Partner": "fas fa-hands-helping",
-        "donors.Quote": "fas fa-quote-right",
+        "app_item.Category": "fas fa-cube",
+        "app_item.Subcategory": "fas fa-cubes",
+        "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
+        "app_item.ItemRequest": "far fa-arrow-alt-circle-left",
+        "app_other.Category": "fas fa-cube",
+        "app_other.Subcategory": "fas fa-cubes",
+        "app_other.OtherOffer": "fas fa-arrow-alt-circle-right",
+        "app_other.OtherRequest": "far fa-arrow-alt-circle-left",
+        "app_volunteering.Category": "fas fa-cube",
+        "app_volunteering.Subcategory": "fas fa-cubes",
+        "app_volunteering.VolunteeringOffer": "fas fa-arrow-alt-circle-right",
+        "app_volunteering.VolunteeringRequest": "far fa-arrow-alt-circle-left",
+        "app_transport_service.Category": "fas fa-cube",
+        "app_transport_service.TransportServiceOffer": "fas fa-arrow-alt-circle-right",
+        "app_transport_service.TransportServiceRequest": "far fa-arrow-alt-circle-left",
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
