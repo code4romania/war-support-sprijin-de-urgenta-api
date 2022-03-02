@@ -5,38 +5,74 @@
     <script type="text/javascript" >
 
     var detect_category = function(){
-        if($('#id_category').find('option:selected').text() == 'Altele') {
-            console.log('is altele')
-            $('.detalii-produs').hide();
-        } else {
-            $('.detalii-produs').show();
-            if($('#id_category').find('option:selected').text() == 'Corturi') {
-                console.log('is corturi')
-                    $('.field-packaging_type').hide();
-                    $('.field-name').hide();
-                    $('.field-expiration_date').hide();
-                    $('.field-unit_type').hide();
-                    $('.field-textile_category').hide();
-                    $('.field-kids_age').hide();
-                    $('.field-other_textiles').hide();
-            } else {
-                $('.field-tent_capacity').hide();
-                $('.field-quantity').show();
-                $('.field-packaging_type').show();
-                if($('#id_category').find('option:selected').text() == 'Îmbrăcăminte și alte textile') {
-                    console.log('is imbracaminte')
-                        $('.field-textile_category').show();
-                        $('.field-kids_age').show();
-                        $('.field-other_textiles').show();
-                } else {
-                    $('.field-name').show();
-                    $('.field-textile_category').hide();
-                    $('.field-kids_age').hide();
-                    $('.field-other_textiles').hide();
-                }
-            }
 
+
+
+        switch($('#id_category').find('option:selected').text()) {
+          case "Altele":
+            $('.detalii-produs').hide();
+            console.log('altele');
+            break;
+          case "Corturi":
+          console.log('cort');
+            $('.detalii-produs').show();
+            $('.field-quantity').show();
+            $('.field-stock').show();
+            $('.field-tent_capacity').show();
+            $('.field-packaging_type').hide();
+            $('.field-name').hide();
+            $('.field-expiration_date').hide();
+            $('.field-unit_type').hide();
+            $('.field-textile_category').hide();
+            $('.field-kids_age').hide();
+            $('.field-other_textiles').hide();
+            break;
+          case "Îmbrăcăminte și alte textile":
+            $('.detalii-produs').show();
+            $('.field-name').hide();
+            $('.field-quantity').show();
+            $('.field-stock').show();
+            $('.field-tent_capacity').hide();
+            $('.field-packaging_type').show();
+            $('.field-expiration_date').hide();
+            $('.field-unit_type').hide();
+            $('.field-textile_category').show();
+            $('.field-kids_age').show();
+            $('.field-other_textiles').show();
+            break;
+          case "Materiale de construcții":
+            $('.detalii-produs').show();
+            $('.field-name').show();
+            $('.field-quantity').show();
+            $('.field-stock').show();
+            $('.field-tent_capacity').hide();
+            $('.field-packaging_type').show();
+            $('.field-expiration_date').hide();
+            $('.field-unit_type').show();
+            $('.field-textile_category').hide();
+            $('.field-kids_age').hide();
+            $('.field-other_textiles').hide();
+            break;
+          default:
+            $('.detalii-produs').show();
+
+            $('.field-name').show();
+            $('.field-quantity').show();
+            $('.field-stock').show();
+            $('.field-tent_capacity').hide();
+            $('.field-packaging_type').show();
+            $('.field-expiration_date').show();
+            $('.field-unit_type').show();
+            $('.field-textile_category').hide();
+            $('.field-kids_age').hide();
+            $('.field-other_textiles').hide();
+            break;
         }
+
+
+
+
+
     }
 
 
@@ -49,13 +85,3 @@
 
     </script>
 {% endblock %}
-
-
-
-
-Alimente
-Produse de igienă generală
-Produse de igienă feminină
-
-Materiale de construcții
-

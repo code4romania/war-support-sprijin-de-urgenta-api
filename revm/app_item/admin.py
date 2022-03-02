@@ -43,6 +43,7 @@ class AdminItemOffer(admin.ModelAdmin):
     list_display_links = ("id", "name")
     search_fields = ["name"]
     list_filter = ["county_coverage", "category", "unit_type", "textile_category", "kids_age", "status"]
+
     readonly_fields = ["added_on", "stock"]
 
     inlines = (OtherResourceRequestInline,)
@@ -72,18 +73,19 @@ class AdminItemOffer(admin.ModelAdmin):
             "Detalii produs",
             {
                 "fields": (
+
+                    "textile_category",
+                    "kids_age",
+                    "other_textiles",
                     "name",
                     "quantity",
                     "packaging_type",
                     "unit_type",
                     "expiration_date",
-                    "textile_category",
-                    "kids_age",
-                    "other_textiles",
                     "tent_capacity",
                     "stock",
                 ),
-                "classes": ("detalii-produs", )
+                "classes": ("detalii-produs",),
             },
         ),
         (
@@ -104,7 +106,9 @@ class AdminItemRequest(admin.ModelAdmin):
     list_display_links = ("id", "name")
     search_fields = ["name"]
     readonly_fields = ["made_by", "added_on", "stock"]
+
     list_filter = ["county_coverage", "category", "status", ]
+
 
     inlines = (OtherResourceRequestInline,)
 
@@ -133,17 +137,18 @@ class AdminItemRequest(admin.ModelAdmin):
             "Detalii produs",
             {
                 "fields": (
+                    "textile_category",
+                    "kids_age",
+                    "other_textiles",
                     "name",
                     "quantity",
                     "packaging_type",
                     "unit_type",
                     "expiration_date",
-                    "stock",
-                    "textile_category",
-                    "kids_age",
-                    "other_textiles",
                     "tent_capacity",
-                )
+                    "stock",
+                ),
+                "classes": ("detalii-produs",),
             },
         ),
         (

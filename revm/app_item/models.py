@@ -25,7 +25,7 @@ class ItemOffer(models.Model):
     description = models.TextField(_("description"), default="", blank=True, null=False)
 
     # Descriere produs
-    name = models.CharField(_("Product"), max_length=100, db_index=True)
+    name = models.CharField(_("Product"), max_length=100, db_index=True, blank=True, null=False)
     quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
@@ -40,7 +40,8 @@ class ItemOffer(models.Model):
     other_textiles = models.TextField(_("other"), blank=True, null=True)
 
     # Corturi
-    tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=False)
+
+    tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
     pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
@@ -65,7 +66,9 @@ class ItemRequest(models.Model):
 
     # Descriere produs
     name = models.CharField(_("Product"), max_length=100, db_index=True)
-    quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
+
+    quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=True, null=False)
+
     packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
     expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
@@ -79,15 +82,12 @@ class ItemRequest(models.Model):
     other_textiles = models.TextField(_("other"), blank=True, null=True)
 
     # Corturi
-    tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=False)
+    tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
     pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
 
     added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
-    status = models.CharField(
-        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
-    )
 
     status = models.CharField(
         _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
