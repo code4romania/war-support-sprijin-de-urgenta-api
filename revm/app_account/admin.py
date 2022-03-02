@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.auth.models import Group
@@ -17,7 +16,6 @@ DjangoUserAdmin.add_fieldsets = (
         },
     ),
 )
-
 
 
 @admin.register(models.CustomUser)
@@ -53,7 +51,6 @@ class AdminCustomUser(DjangoUserAdmin):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
                 return False
         return True
-
 
 
 admin.site.unregister(Site)

@@ -1,0 +1,746 @@
+[
+    {
+        "name": "Alimente",
+        "subcategories": [
+            {
+                "name": "Legume"
+            },
+            {
+                "name": "Fructe"
+            },
+            {
+                "name": "Lactate"
+            },
+            {
+                "name": "Băuturi"
+            },
+            {
+                "name": "Conserve"
+            },
+            {
+                "name": "Panificație"
+            },
+            {
+                "name": "Cereale"
+            },
+            {
+                "name": "Mezeluri"
+            },
+            {
+                "name": "Carne"
+            },
+            {
+                "name": "Pește"
+            },
+            {
+                "name": "Semipreparate"
+            },
+            {
+                "name": "Congelate"
+            },
+            {
+                "name": "Dulciuri"
+            },
+            {
+                "name": "Condimente"
+            },
+            {
+                "name": "Gustări"
+            },
+            {
+                "name": "Mâncare gătită"
+            },
+            {
+                "name": "Alimente de bază",
+                "description": "Ex: ulei, paste, faină, orez, etc."
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Produse de igienă",
+        "subcategories": [
+            {
+                "name": "Igienă feminină"
+            },
+            {
+                "name": "Șervețele umede pentru copii"
+            },
+            {
+                "name": "Șervețele umede"
+            },
+            {
+                "name": "Scutece adulți"
+            },
+            {
+                "name": "Scutece copii"
+            },
+            {
+                "name": "Șampon"
+            },
+            {
+                "name": "Gel de duș"
+            },
+            {
+                "name": "Săpun"
+            },
+            {
+                "name": "Pastă de dinți"
+            },
+            {
+                "name": "Periuțe de dinți"
+            },
+            {
+                "name": "Apă de gură"
+            },
+            {
+                "name": "Periuțe de dinți electrice"
+            },
+            {
+                "name": "Loțiuni / Creme"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Produse pentru animale",
+        "subcategories": [
+            {
+                "name": "Mâncare pisici"
+            },
+            {
+                "name": "Mâncare câini"
+            },
+            {
+                "name": "Mâncare alte animale"
+            },
+            {
+                "name": "Detergenți"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Îmbrăcăminte Femei",
+        "subcategories": [
+            {
+                "name": "Geci / Veste"
+            },
+            {
+                "name": "Pulovere / Bluze / Hanorace"
+            },
+            {
+                "name": "Pantaloni"
+            },
+            {
+                "name": "Tricouri"
+            },
+            {
+                "name": "Pijamale"
+            },
+            {
+                "name": "Căciuli"
+            },
+            {
+                "name": "Mânuși"
+            },
+            {
+                "name": "Ghete"
+            },
+            {
+                "name": "Cizme"
+            },
+            {
+                "name": "Teniși"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Îmbrăcăminte Bărbați",
+        "subcategories": [
+            {
+                "name": "Geci / Veste"
+            },
+            {
+                "name": "Pulovere / Bluze / Hanorace"
+            },
+            {
+                "name": "Pantaloni"
+            },
+            {
+                "name": "Tricouri"
+            },
+            {
+                "name": "Pijamale"
+            },
+            {
+                "name": "Căciuli"
+            },
+            {
+                "name": "Mânuși"
+            },
+            {
+                "name": "Ghete"
+            },
+            {
+                "name": "Cizme"
+            },
+            {
+                "name": "Teniși"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Îmbrăcăminte Copii",
+        "subcategories": [
+            {
+                "name": "Geci / Veste"
+            },
+            {
+                "name": "Pulovere / Bluze / Hanorace"
+            },
+            {
+                "name": "Pantaloni"
+            },
+            {
+                "name": "Tricouri"
+            },
+            {
+                "name": "Pijamale"
+            },
+            {
+                "name": "Căciuli"
+            },
+            {
+                "name": "Mânuși"
+            },
+            {
+                "name": "Ghete"
+            },
+            {
+                "name": "Cizme"
+            },
+            {
+                "name": "Teniși"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Altele",
+        "subcategories": [
+            {
+                "name": "Carduri de cumpărături"
+            },
+            {
+                "name": "Cartele telefonice"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Electronice",
+        "subcategories": [
+            {
+                "name": "Televizor"
+            },
+            {
+                "name": "PC(personal computer)"
+            },
+            {
+                "name": "UPS(uninterruptible power supply)"
+            },
+            {
+                "name": "Baterie externă"
+            },
+            {
+                "name": "Monitoare"
+            },
+            {
+                "name": "Căști"
+            },
+            {
+                "name": "Boxe"
+            },
+            {
+                "name": "Alte periferice calculator"
+            },
+            {
+                "name": "Microfoane"
+            },
+            {
+                "name": "Laptopuri"
+            },
+            {
+                "name": "Telefoane mobile"
+            },
+            {
+                "name": "Telefoane mobile inteligente"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Electrocasnice",
+        "subcategories": [
+            {
+                "name": "Fierbător apă"
+            },
+            {
+                "name": "Cuptor cu microunde"
+            },
+            {
+                "name": "Aspirator"
+            },
+            {
+                "name": "Frigider"
+            },
+            {
+                "name": "Mașină de spălat haine"
+            },
+            {
+                "name": "Mașină de spălat vase"
+            },
+            {
+                "name": "Aragaz"
+            },
+            {
+                "name": "Cuptor electric"
+            },
+            {
+                "name": "Plită electrică"
+            },
+            {
+                "name": "Plită gaz"
+            },
+            {
+                "name": "Aparat încălzire aer mobil"
+            },
+            {
+                "name": "Aparat încălzire aer staționar"
+            },
+            {
+                "name": "Aparat răcire aer mobil"
+            },
+            {
+                "name": "Aparat răcire aer staționar"
+            },
+            {
+                "name": "Aparat purificare aer"
+            },
+            {
+                "name": "Cântar de bucătărie"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Articole de uz casnic",
+        "subcategories": [
+            {
+                "name": "Cearceafuri"
+            },
+            {
+                "name": "Perne"
+            },
+            {
+                "name": "Pilote"
+            },
+            {
+                "name": "Oale si cratițe"
+            },
+            {
+                "name": "Tigăi"
+            },
+            {
+                "name": "Coșuri de gunoi"
+            },
+            {
+                "name": "Pături"
+            },
+            {
+                "name": "Saltele cu arcuri/spumă"
+            },
+            {
+                "name": "Saltele gonflabile"
+            },
+            {
+                "name": "Pături electrice"
+            },
+            {
+                "name": "Prosoape"
+            },
+            {
+                "name": "Papuci de casă"
+            },
+            {
+                "name": "Dulapuri"
+            },
+            {
+                "name": "Scaune"
+            },
+            {
+                "name": "Farfurii"
+            },
+            {
+                "name": "Pahare"
+            },
+            {
+                "name": "Tacâmuri"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Produse de curățenie",
+        "subcategories": [
+            {
+                "name": "Detergenți rufe spălare manuală"
+            },
+            {
+                "name": "Detergenți vase spălare manuală"
+            },
+            {
+                "name": "Detergenți rufe spălare automată"
+            },
+            {
+                "name": "Detergenți vase spălare automată"
+            },
+            {
+                "name": "Detergenți grupuri sanitare"
+            },
+            {
+                "name": "Detergenți de bucătărie"
+            },
+            {
+                "name": "Dezinfectant general"
+            },
+            {
+                "name": "Bureți"
+            },
+            {
+                "name": "Lavete"
+            },
+            {
+                "name": "Perii"
+            },
+            {
+                "name": "Șervețele uscate"
+            },
+            {
+                "name": "Șervețele umede"
+            },
+            {
+                "name": "Mop"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Construcții",
+        "subcategories": [
+            {
+                "name": "Termoizolații"
+            },
+            {
+                "name": "Hidroizolații"
+            },
+            {
+                "name": "Echipamente de protecție"
+            },
+            {
+                "name": "Sisteme de scurgere"
+            },
+            {
+                "name": "Acoperișuri"
+            },
+            {
+                "name": "Produse din lemn"
+            },
+            {
+                "name": "Gips carton"
+            },
+            {
+                "name": "Tablă"
+            },
+            {
+                "name": "Țevi și profile metalice"
+            },
+            {
+                "name": "Plăci și profile policarbonat"
+            },
+            {
+                "name": "Garduri"
+            },
+            {
+                "name": "Zidărie"
+            },
+            {
+                "name": "Vopsea"
+            },
+            {
+                "name": "Feronerie"
+            },
+            {
+                "name": "Pavaje"
+            },
+            {
+                "name": "Scări"
+            },
+            {
+                "name": "Iluminat"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Produse medicale generale",
+        "subcategories": [
+            {
+                "name": "Vitamine"
+            },
+            {
+                "name": "Antibiotice"
+            },
+            {
+                "name": "Dezinfectant suprafețe"
+            },
+            {
+                "name": "Dezinfectant chirurgical"
+            },
+            {
+                "name": "Alcool sanitar"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Produse medicale mobilier",
+        "subcategories": [
+            {
+                "name": "Scaun ginecologic"
+            },
+            {
+                "name": "Scaun dentist"
+            },
+            {
+                "name": "Scaun simplu"
+            },
+            {
+                "name": "Pat"
+            },
+            {
+                "name": "Pat articulat"
+            },
+            {
+                "name": "Masă suport instrumente"
+            },
+            {
+                "name": "Masă intervenție chirurgicală"
+            },
+            {
+                "name": "Saltea"
+            },
+            {
+                "name": "Dulap"
+            },
+            {
+                "name": "Corpuri de iluminat"
+            },
+            {
+                "name": "Lampă chirurgicală"
+            },
+            {
+                "name": "Suport perfuzii"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Produse medicale unică folosință",
+        "subcategories": [
+            {
+                "name": "Măști chirurgicale"
+            },
+            {
+                "name": "Măști FFP1"
+            },
+            {
+                "name": "Măști FFP2"
+            },
+            {
+                "name": "Măști FFP3"
+            },
+            {
+                "name": "Măști - altele"
+            },
+            {
+                "name": "Bandaje adezive"
+            },
+            {
+                "name": "Bandaje elastice"
+            },
+            {
+                "name": "Pansamente"
+            },
+            {
+                "name": "Garou"
+            },
+            {
+                "name": "Garou pneumatic"
+            },
+            {
+                "name": "Halat"
+            },
+            {
+                "name": "Protecție cap"
+            },
+            {
+                "name": "Pantaloni"
+            },
+            {
+                "name": "Ochelari de protecție"
+            },
+            {
+                "name": "Mânuși chirurgicale"
+            },
+            {
+                "name": "Manșete"
+            },
+            {
+                "name": "Saboți/papuci"
+            },
+            {
+                "name": "Acoperitori pantofi de unică folosință"
+            },
+            {
+                "name": "Electrozi adezivi"
+            },
+            {
+                "name": "Electrod"
+            },
+            {
+                "name": "Seringi cu ac"
+            },
+            {
+                "name": "Ace seringă"
+            },
+            {
+                "name": "Containere eliminare produse periculoase"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Produse medicale diagnosticare/intervenție",
+        "subcategories": [
+            {
+                "name": "Tensiometru"
+            },
+            {
+                "name": "Cântar adulți"
+            },
+            {
+                "name": "Cântar copii"
+            },
+            {
+                "name": "Termometru"
+            },
+            {
+                "name": "Termometru digital"
+            },
+            {
+                "name": "Termometru digital infraroșu"
+            },
+            {
+                "name": "Glucometru"
+            },
+            {
+                "name": "Pulsoximetru digital"
+            },
+            {
+                "name": "Pulsoximetru - sondă"
+            },
+            {
+                "name": "Defibrilator"
+            },
+            {
+                "name": "Ecograf portabil"
+            },
+            {
+                "name": "Ecograf staționar"
+            },
+            {
+                "name": "Electrocardiograf"
+            },
+            {
+                "name": "Aparatură pentru sterilizare"
+            },
+            {
+                "name": "Stetoscop"
+            },
+            {
+                "name": "Monitor semnale vitale"
+            },
+            {
+                "name": "Sondă laser"
+            },
+            {
+                "name": "Spirometru"
+            },
+            {
+                "name": "Otoscop"
+            },
+            {
+                "name": "Frontală"
+            },
+            {
+                "name": "Ciocănel"
+            },
+            {
+                "name": "Audiometru"
+            },
+            {
+                "name": "Laringoscop"
+            },
+            {
+                "name": "Microscop"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    }
+]

@@ -21,19 +21,6 @@ class Category(models.Model):
         verbose_name_plural = _("categories")
 
 
-class Subcategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(_("subcategory name"), max_length=50, null=False, blank=False, db_index=True)
-    description = models.CharField(_("subcategory description"), default="", blank=True, null=False, max_length=500)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _("subcategory")
-        verbose_name_plural = _("subcategories")
-
-
 class TransportServiceOffer(models.Model):
     donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)

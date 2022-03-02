@@ -20,17 +20,6 @@ class AdminOtherRequest(admin.ModelAdmin):
     view_on_site = False
 
 
-@admin.register(models.Subcategory)
-class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ("id", "name", "category")
-    list_display_links = ("id", "name")
-    search_fields = ["name"]
-
-    ordering = ("pk",)
-
-    view_on_site = False
-
-
 @admin.register(models.TransportServiceOffer)
 class AdminTransportServiceOffer(admin.ModelAdmin):
     list_display = ("id", "donor", "name", "category")
