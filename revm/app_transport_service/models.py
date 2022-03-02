@@ -33,6 +33,7 @@ class TransportServiceOffer(models.Model):
     type = models.SmallIntegerField(
         _("type"), choices=settings.TRANSPORT_TYPES_CHOICES, default=1, blank=True, null=True
     )
+
     county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES)
 
     availability = models.CharField(
