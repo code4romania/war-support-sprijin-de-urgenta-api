@@ -33,7 +33,7 @@ class AdminOtherRequest(admin.ModelAdmin):
 
 @admin.register(models.TransportServiceOffer)
 class AdminTransportServiceOffer(admin.ModelAdmin):
-    list_display = ("id", "donor", "name", "subcategory")
+    list_display = ("id", "donor", "name", "category")
     list_display_links = ("id", "name")
     search_fields = ["name"]
 
@@ -46,7 +46,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
 
 @admin.register(models.TransportServiceRequest)
 class AdminTransportServiceRequest(admin.ModelAdmin):
-    list_display = ("id", "made_by", "name", "subcategory")
+    list_display = ("id", "made_by", "name", "category")
     list_display_links = ("id", "name")
     search_fields = ["name"]
 

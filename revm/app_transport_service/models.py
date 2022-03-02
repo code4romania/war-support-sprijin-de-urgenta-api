@@ -35,8 +35,8 @@ class Subcategory(models.Model):
 
 
 class TransportServiceOffer(models.Model):
-    donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(_("name"), max_length=100, db_index=True)
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
@@ -45,11 +45,13 @@ class TransportServiceOffer(models.Model):
     car_registration_number = models.CharField(_("car registration number"), max_length=50)
 
     added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
-    available_from = models.DateTimeField(_("available from"), auto_now_add=timezone.now, null=False)
-    available_until = models.DateTimeField(_("available until"), null=True)
-    available_in_weekend = models.BooleanField(default=False)
-    available_in_weekday = models.BooleanField(default=False)
-    available_anytime = models.BooleanField(default=False)
+    available_from = models.DateField(_("available from"), null=False)
+    available_until = models.DateField(_("available until"), null=True)
+
+    availability = models.CharField(_("availability"), max_length=2,
+        choices=settings.TRANSPORT_AVAILABILTY, default=settings.TRANSPORT_AVAILABILTY[0][0])
+    availability_interval_from = models.TimeField(_("availability from hour"), null=True, blank=True)
+    availability_interval_to = models.TimeField(_("availability until hour"), null=True, blank=True)
 
     county_coverage = models.CharField(_("county coverage"), max_length=2, choices=settings.COUNTY_CHOICES)
     town = models.CharField(_("town"), max_length=100, blank=False, null=False)
@@ -59,8 +61,9 @@ class TransportServiceOffer(models.Model):
     volume = models.FloatField(blank=True, null=True)
     volume_unit = models.CharField(_("volume unit"), max_length=3, default="mc", blank=True, null=True)
     has_refrigeration = models.BooleanField(default=False, blank=True, null=True)
+
     type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=1, blank=True, null=True)
-    available_seats = models.PositiveSmallIntegerField(_("total units"), default=0, blank=True, null=True)
+    available_seats = models.PositiveSmallIntegerField(_("available seats"), default=0, blank=True, null=True)
     has_disabled_access = models.BooleanField(default=False)
     pets_allowed = models.BooleanField(default=False)
 
@@ -73,8 +76,8 @@ class TransportServiceOffer(models.Model):
 
 
 class TransportServiceRequest(models.Model):
-    made_by = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    made_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 
     name = models.CharField(_("name"), max_length=100, db_index=True)
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
@@ -103,8 +106,8 @@ class TransportServiceRequest(models.Model):
 
 
 class ResourceRequest(models.Model):
-    resource = models.ForeignKey(TransportServiceOffer, on_delete=models.DO_NOTHING)
-    request = models.ForeignKey(TransportServiceRequest, on_delete=models.DO_NOTHING)
+    resource = models.ForeignKey(TransportServiceOffer, on_delete=models.SET_NULL, null=True, blank=True)
+    request = models.ForeignKey(TransportServiceRequest, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name = _("Offer - Request")

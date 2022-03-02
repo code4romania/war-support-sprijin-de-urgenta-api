@@ -228,6 +228,13 @@ RESOURCE_STATUS = (
     ("V", _("Verified")),
 )
 
+TRANSPORT_AVAILABILTY = (
+    ('WK', _("Available in weekend")),
+    ('WD', _("Available in week day")),
+    ('A', _("Available anytime")),
+    ('FI', _("Fixed intervals")),
+    )
+
 COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
 AUTH_USER_MODEL = "app_account.CustomUser"
