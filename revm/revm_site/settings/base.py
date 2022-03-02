@@ -229,17 +229,14 @@ RESOURCE_STATUS = (
     ("V", _("Verified")),
 )
 
-TRANSPORT_TYPES_CHOICES = (
-    (1, _("National")),
-    (2, _("County"))
-    )
+TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
 
 TRANSPORT_AVAILABILTY = (
-    ('WK', _("Available in weekend")),
-    ('WD', _("Available in week day")),
-    ('A', _("Available anytime")),
-    ('FI', _("Fixed intervals")),
-    )
+    ("WK", _("Available in weekend")),
+    ("WD", _("Available in week day")),
+    ("A", _("Available anytime")),
+    ("FI", _("Fixed intervals")),
+)
 
 COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
