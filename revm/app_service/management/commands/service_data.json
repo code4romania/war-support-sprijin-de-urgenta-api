@@ -1,0 +1,88 @@
+[
+    {
+        "name": "Asistență juridică",
+        "subcategories": [
+            {
+                "name": "Cerere azil politic / refugiat"
+            },
+            {
+                "name": "Obținere cetățenie"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Asistență medicală",
+        "subcategories": [
+            {
+                "name": "Îngrijire medicală"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Asistență psihologică",
+        "subcategories": [
+            {
+                "name": "Consiliere"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Preparare Hrană",
+        "subcategories": [
+            {
+                "name": "Bucătar"
+            },
+            {
+                "name": "Ajutor bucătar"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Altele",
+        "subcategories": [
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Consultanță transport / cazare",
+        "subcategories": [
+            {
+                "name": "Consultanță transport"
+            },
+            {
+                "name": "Consultanță cazare"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    },
+    {
+        "name": "Traduceri",
+        "subcategories": [
+            {
+                "name": "Ucraineană - Română"
+            },
+            {
+                "name": "Rusă - Română"
+            },
+            {
+                "name": "Altele"
+            }
+        ]
+    }
+]
