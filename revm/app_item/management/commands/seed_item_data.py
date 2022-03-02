@@ -24,7 +24,6 @@ class Command(BaseCommand):
             for category in categories:
                 category_obj, _ = TextileCategory.objects.get_or_create(name=category["name"])
 
-
     def handle(self, *args, **kwargs):
         self.populate_item_categories_and_subcategories()
         print("Item Categories & Subcategories created")

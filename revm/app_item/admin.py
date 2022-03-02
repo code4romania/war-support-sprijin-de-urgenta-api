@@ -26,6 +26,7 @@ class AdminCategory(admin.ModelAdmin):
 
     view_on_site = False
 
+
 @admin.register(models.TextileCategory)
 class AdminTextileCategory(admin.ModelAdmin):
     list_display = ("id", "name", "description")
@@ -72,18 +73,18 @@ class AdminItemOffer(admin.ModelAdmin):
             "Detalii produs",
             {
                 "fields": (
+                    "textile_category",
+                    "kids_age",
+                    "other_textiles",
                     "name",
                     "quantity",
                     "packaging_type",
                     "unit_type",
                     "expiration_date",
-                    "textile_category",
-                    "kids_age",
-                    "other_textiles",
                     "tent_capacity",
                     "stock",
                 ),
-                "classes": ("detalii-produs", )
+                "classes": ("detalii-produs",),
             },
         ),
         (
@@ -104,7 +105,11 @@ class AdminItemRequest(admin.ModelAdmin):
     list_display_links = ("id", "name")
     search_fields = ["name"]
     readonly_fields = ["made_by", "added_on", "stock"]
-    list_filter = ["county_coverage", "category", "status", ]
+    list_filter = [
+        "county_coverage",
+        "category",
+        "status",
+    ]
 
     inlines = (OtherResourceRequestInline,)
 
@@ -133,17 +138,18 @@ class AdminItemRequest(admin.ModelAdmin):
             "Detalii produs",
             {
                 "fields": (
+                    "textile_category",
+                    "kids_age",
+                    "other_textiles",
                     "name",
                     "quantity",
                     "packaging_type",
                     "unit_type",
                     "expiration_date",
-                    "stock",
-                    "textile_category",
-                    "kids_age",
-                    "other_textiles",
                     "tent_capacity",
-                )
+                    "stock",
+                ),
+                "classes": ("detalii-produs",),
             },
         ),
         (
