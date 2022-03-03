@@ -8,7 +8,10 @@ from app_account.models import USERS_GROUP, DSU_GROUP
 
 
 def deactivate_offers(modeladmin, request, queryset):
-    queryset.update(status="D")
+    if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
+        queryset.update(status="D")
+
+    queryset.filter(donor=request.user).update(status="D")
 
 
 deactivate_offers.short_description = _("Deactivate selected offers")
@@ -107,11 +110,15 @@ class AdminItemOffer(admin.ModelAdmin):
             },
         ),
     )
+
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
 
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
+
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
+            return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():
             return queryset.filter(donor=request.user)
