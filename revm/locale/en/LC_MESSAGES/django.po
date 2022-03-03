@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-03 01:27+0200\n"
+"POT-Creation-Date: 2022-03-03 03:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,11 +96,11 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: app_account/serializers.py:34
+#: app_account/serializers.py:33
 msgid "A user is already registered with this e-mail address."
 msgstr ""
 
-#: app_account/serializers.py:43
+#: app_account/serializers.py:42
 msgid "The two password fields didn't match."
 msgstr ""
 
