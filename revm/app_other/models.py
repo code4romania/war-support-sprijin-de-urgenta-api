@@ -52,3 +52,9 @@ class ResourceRequest(models.Model):
     class Meta:
         verbose_name = _("Offer - Request")
         verbose_name_plural = _("Offer - Request")
+
+    def save(self, *args, **kwargs):
+        self.request.status = 'C'
+        self.request.save()
+
+        super().save(*args, **kwargs)

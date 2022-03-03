@@ -56,12 +56,34 @@ class AdminOtherOffer(admin.ModelAdmin):
 
 @admin.register(models.OtherRequest)
 class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ("id", "name", "category")
+    list_display = ("id","category", "name", "county_coverage", "town", "status")
     list_display_links = ("id", "name")
     search_fields = ["name"]
+    readonly_fields = ["added_on"]
+    list_filter = ("category",  "status", CountyFilter)
 
     inlines = (OtherResourceRequestInline,)
 
     ordering = ("pk",)
 
     view_on_site = False
+
+
+
+    fieldsets = (
+        (
+            "Detalii ofertă",
+            {
+                "fields": (
+                    "made_by",
+                    "category",
+                    "name",
+                    "county_coverage",
+                    "town",
+                    "added_on",
+                    "status",
+                    
+                )
+            },
+        ),
+    )
