@@ -27,9 +27,7 @@ class OtherOffer(CommonOfferModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("other offer")
-        verbose_name_plural = lazy(
-            lambda: "{} ({})".format(_("other offers"), OtherOffer.objects.count()), str
-        )()
+        verbose_name_plural = lazy(lambda: "{} ({})".format(_("other offers"), OtherOffer.objects.count()), str)()
 
 
 class OtherRequest(CommonRequestModel, CommonLocationModel):
@@ -41,9 +39,7 @@ class OtherRequest(CommonRequestModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("other request")
-        verbose_name_plural = lazy(
-            lambda: "{} ({})".format(_("other request"), OtherRequest.objects.count()), str
-        )()
+        verbose_name_plural = lazy(lambda: "{} ({})".format(_("other request"), OtherRequest.objects.count()), str)()
 
 
 class ResourceRequest(models.Model):

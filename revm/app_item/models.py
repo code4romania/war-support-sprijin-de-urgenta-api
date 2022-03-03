@@ -52,9 +52,7 @@ class ItemOffer(CommonOfferModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("item offer")
-        verbose_name_plural = lazy(
-            lambda: "{} ({})".format(_("item offers"), ItemOffer.objects.count()), str
-        )()
+        verbose_name_plural = lazy(lambda: "{} ({})".format(_("item offers"), ItemOffer.objects.count()), str)()
 
     def save(self, *args, **kwargs):
         if not self.stock:
@@ -92,9 +90,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("item request")
-        verbose_name_plural = lazy(
-            lambda: "{} ({})".format(_("item requests"), ItemRequest.objects.count()), str
-        )()
+        verbose_name_plural = lazy(lambda: "{} ({})".format(_("item requests"), ItemRequest.objects.count()), str)()
 
     def save(self, *args, **kwargs):
         if not self.stock:
