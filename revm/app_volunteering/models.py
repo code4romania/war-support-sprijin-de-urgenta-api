@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import lazy
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -27,7 +28,9 @@ class VolunteeringOffer(CommonOfferModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("volunteering offer")
-        verbose_name_plural = _("volunteering offers")
+        verbose_name_plural = lazy(
+            lambda: _("volunteering offers ({})").format(VolunteeringOffer.objects.count()), str
+        )()
 
 
 class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
@@ -38,7 +41,9 @@ class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("volunteering request")
-        verbose_name_plural = _("volunteering requests")
+        verbose_name_plural = lazy(
+            lambda: _("volunteering request ({})").format(VolunteeringRequest.objects.count()), str
+        )()
 
 
 class ResourceRequest(models.Model):

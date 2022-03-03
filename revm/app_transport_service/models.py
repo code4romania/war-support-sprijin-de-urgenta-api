@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.functional import lazy
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -53,7 +54,9 @@ class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
 
     class Meta:
         verbose_name = _("transport service offer")
-        verbose_name_plural = _("transport service offers")
+        verbose_name_plural = lazy(
+            lambda: _("transport service offers ({})").format(TransportServiceOffer.objects.count()), str
+        )()
 
 
 class TransportServiceRequest(CommonRequestModel):
@@ -80,7 +83,9 @@ class TransportServiceRequest(CommonRequestModel):
 
     class Meta:
         verbose_name = _("transport service request")
-        verbose_name_plural = _("transport service requests")
+        verbose_name_plural = lazy(
+            lambda: _("transport service request ({})").format(TransportServiceRequest.objects.count()), str
+        )()
 
 
 class ResourceRequest(models.Model):
