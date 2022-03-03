@@ -114,7 +114,8 @@ class ResourceRequest(models.Model):
 
         resource.stock -= self.total_units
         request.stock -= self.total_units
-
+        if request.stock <= 0:
+            request.status = 'C'
         resource.save()
         request.save()
 

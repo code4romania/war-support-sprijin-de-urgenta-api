@@ -228,7 +228,6 @@ COUNTIES_SHORTNAME = {
 RESOURCE_STATUS = (
     ("NV", _("Not Verified")),
     ("V", _("Verified")),
-    ("A", _("Active")),
     ("D", _("Deactivated")),
     ("C", _("Complete")),
 )
