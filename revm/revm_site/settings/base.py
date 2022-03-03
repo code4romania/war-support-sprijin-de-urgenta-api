@@ -23,6 +23,9 @@ env = environ.Env(
     MEMCACHED_HOST=(str, "cache:11211"),
 )
 
+ADMIN_TITLE = _("Sprijin de Urgență")
+ADMIN_TITLE_SHORT = _("RVM")
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
 
@@ -230,10 +233,10 @@ RESOURCE_STATUS = (
 TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
 
 TRANSPORT_AVAILABILTY = (
-    ("WK", _("Available in weekend")),
-    ("WD", _("Available in week day")),
-    ("A", _("Available anytime")),
-    ("FI", _("Fixed intervals")),
+    ("WK", _("Disponibil in weekend")),
+    ("WD", _("Disponibil in timpul saptamanii")),
+    ("A", _("Disponibil oricand")),
+    ("FI", _("Intervale fixe")),
 )
 
 COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
@@ -261,9 +264,9 @@ REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializer
 
 JAZZMIN_SETTINGS = {
     # title of the window
-    "site_title": "Resource Volunteer Management Admin",
+    "site_title": ADMIN_TITLE,
     # Title on the brand, and the login screen (19 chars max)
-    "site_header": "Resource Volunteer Management Admin",
+    "site_header": ADMIN_TITLE,
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     "site_logo": "images/logo.png",
     # Welcome text on the login screen
@@ -332,6 +335,8 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
+        "account.EmailAddress": "fas fa-at",
+        "app_account.CustomUser": "fas fa-user",
         "app_item.Category": "fas fa-cube",
         "app_item.TextileCategory": "fas fa-cubes",
         "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
@@ -340,8 +345,7 @@ JAZZMIN_SETTINGS = {
         "app_other.Subcategory": "fas fa-cubes",
         "app_other.OtherOffer": "fas fa-arrow-alt-circle-right",
         "app_other.OtherRequest": "far fa-arrow-alt-circle-left",
-        "app_volunteering.Category": "fas fa-cube",
-        "app_volunteering.Subcategory": "fas fa-cubes",
+        "app_volunteering.Type": "fas fa-cube",
         "app_volunteering.VolunteeringOffer": "fas fa-arrow-alt-circle-right",
         "app_volunteering.VolunteeringRequest": "far fa-arrow-alt-circle-left",
         "app_transport_service.Category": "fas fa-cube",
