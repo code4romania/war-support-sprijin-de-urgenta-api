@@ -1,8 +1,20 @@
 from django.contrib import admin
 from django.db.models import TextField
 from django.forms import Textarea
+from django.utils.translation import ugettext_lazy as _
 
 from app_item import models
+from app_account.models import USERS_GROUP, DSU_GROUP
+
+
+def deactivate_offers(modeladmin, request, queryset):
+    if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
+        queryset.update(status="D")
+
+    queryset.filter(donor=request.user).update(status="D")
+
+
+deactivate_offers.short_description = _("Deactivate selected offers")
 
 
 class OtherResourceRequestInline(admin.TabularInline):
@@ -40,12 +52,12 @@ class AdminTextileCategory(admin.ModelAdmin):
 
 @admin.register(models.ItemOffer)
 class AdminItemOffer(admin.ModelAdmin):
-    list_display = ("id", "name", "category", "quantity", "stock", "unit_type", "donor", "status")
-    list_display_links = ("id", "name")
+    list_display = ["name", "category", "quantity", "stock", "unit_type", "donor", "status"]
+    list_display_links = ["name"]
     search_fields = ["name"]
     list_filter = ["county_coverage", "category", "unit_type", "textile_category", "kids_age", "status"]
-
     readonly_fields = ["added_on", "stock"]
+    actions = [deactivate_offers]
 
     inlines = (OtherResourceRequestInline,)
 
@@ -100,11 +112,25 @@ class AdminItemOffer(admin.ModelAdmin):
         ),
     )
 
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(donor=request.user)
+
+        return queryset
+
 
 @admin.register(models.ItemRequest)
 class AdminItemRequest(admin.ModelAdmin):
-    list_display = ("id", "name", "category", "made_by", "status")
-    list_display_links = ("id", "name")
+    list_display = ["name", "category", "made_by", "status"]
+    list_display_links = ["name"]
     search_fields = ["name"]
     readonly_fields = ["added_on", "stock"]
 
