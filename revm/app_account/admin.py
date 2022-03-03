@@ -8,28 +8,18 @@ from app_account import models
 
 DjangoUserAdmin.add_fieldsets = (
     (
-        None,
-        {
-            "classes": ("wide",),
-            "fields": ("first_name", "last_name", "email", "password1", "password2", "is_staff", "is_superuser"),
-        },
+        _("Personal info"),
+        {"classes": ("wide",), "fields": ("first_name", "last_name", "email")},
+    ),
+    (
+        _("Password"),
+        {"classes": ("wide",), "fields": ("password1", "password2")},
+    ),
+    (
+        _("Permissions"),
+        {"classes": ("wide",), "fields": ("is_staff", "is_superuser", "groups")},
     ),
 )
-
-# def user_offers_view(request, model_admin, object):
-#     print('****')
-#     print(request.POST)
-#     print('****')
-#     model = model_admin.model
-#     opts = model._meta
-#     return render(
-#         request,
-#         'app_account/user_offers.html', {
-#             'opts': opts,
-#             'has_change_permission': model_admin.has_change_permission(request, object),
-#             'original': object,
-#         }
-#     )
 
 
 @admin.register(models.CustomUser)
@@ -94,35 +84,6 @@ class AdminCustomUser(DjangoUserAdmin):
         if request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists():
             return qs
         return qs.filter(pk=request.user.id)
-
-    # def change_view(self, request, object_id, form_url='', extra_context=None):
-    #     extra_context = extra_context or {}
-    #     user = models.CustomUser.objects.get(pk=object_id)
-
-    #     extra_context['user'] = user
-    #     return super().change_view(
-    #         request, object_id, form_url, extra_context=extra_context,
-    #     )
-
-    # def get_urls(self):
-    #     info = self.model._meta.app_label, self.model._meta.model_name
-    #     urls = super().get_urls()
-    #     my_urls = [
-
-    #         url(r'^(?P<object_id>.*)/offers/$',
-    #         self.admin_site.admin_view(self.user_offers), {},
-    #         name="%s_%s_schema" % info),
-    #     ]
-    #     return my_urls + urls
-
-    # def user_offers(self, request, object_id):
-    #     user = get_object_or_404(models.CustomUser, id=int(object_id))
-
-    #     print('****')
-    #     print(request.POST)
-    #     print('****')
-    #     return user_offers_view(request, self, user)
-    #     return render(request, "app_account/user_offers.html", context)
 
 
 admin.site.unregister(Site)

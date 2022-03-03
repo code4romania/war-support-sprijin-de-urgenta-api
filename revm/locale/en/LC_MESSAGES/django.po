@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-03 23:51+0200\n"
+"POT-Creation-Date: 2022-03-04 00:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app_account/admin.py:57
+#: app_account/admin.py:11 app_account/admin.py:47
 msgid "Personal info"
 msgstr ""
 
-#: app_account/admin.py:58
-msgid "Profile data"
+#: app_account/admin.py:15
+msgid "Password"
 msgstr ""
 
-#: app_account/admin.py:61
+#: app_account/admin.py:19 app_account/admin.py:51
 msgid "Permissions"
 msgstr ""
 
-#: app_account/admin.py:69
+#: app_account/admin.py:48
+msgid "Profile data"
+msgstr ""
+
+#: app_account/admin.py:59
 msgid "RVM User"
 msgstr "SdU User"
 
