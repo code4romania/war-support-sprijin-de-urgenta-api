@@ -368,9 +368,9 @@ JAZZMIN_SETTINGS = {
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
     "custom_css": "css/admin.css",
-    "custom_js": None,
+    "custom_js": "js/admin.js",
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": False,
+    "show_ui_builder": DEBUG,
     ###############
     # Change view #
     ###############
@@ -409,7 +409,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_child_indent": True,
     "sidebar_nav_compact_style": True,
     "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": False,
+    "sidebar_nav_flat_style": True,
     "theme": "default",
     "dark_mode_theme": "darkly",
 }
