@@ -20,12 +20,12 @@ class OtherOffer(CommonOfferModel, CommonLocationModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
 
-    available_from = models.DateTimeField(_("resource available from"), auto_now_add=timezone.now, null=False)
-    available_until = models.DateTimeField(_("resource available until"), null=True)
-    expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
+
+    available_until = models.DateField(_("resource available until"), null=True)
+
 
     def __str__(self):
-        return self.name
+        return f"#{self.pk} {self.name} {self.category} {self.town}({self.county_coverage})"
 
     class Meta:
         verbose_name = _("other offer")
@@ -37,7 +37,7 @@ class OtherRequest(CommonRequestModel, CommonLocationModel):
     name = models.CharField(_("name"), max_length=100, db_index=True)
 
     def __str__(self):
-        return self.name
+        return f"#{self.pk} {self.name} {self.category} {self.town}({self.county_coverage})"
 
     class Meta:
         verbose_name = _("other request")

@@ -21,11 +21,10 @@ class Type(models.Model):
 class VolunteeringOffer(CommonOfferModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
-    available_from = models.DateTimeField(_("volunteer available from"), auto_now_add=timezone.now, null=False)
-    available_until = models.DateTimeField(_("volunteer available until"), null=True)
+    available_until = models.DateField(_("volunteer available until"), null=True)
 
     def __str__(self):
-        return self.type.name
+        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
 
     class Meta:
         verbose_name = _("volunteering offer")
@@ -36,7 +35,7 @@ class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     def __str__(self):
-        return self.type.name
+        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
 
     class Meta:
         verbose_name = _("volunteering request")
@@ -50,3 +49,9 @@ class ResourceRequest(models.Model):
     class Meta:
         verbose_name = _("Offer - Request")
         verbose_name_plural = _("Offer - Request")
+
+    def save(self, *args, **kwargs):
+        self.request.status = 'C'
+        self.request.save()
+
+        super().save(*args, **kwargs)
