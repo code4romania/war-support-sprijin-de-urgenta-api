@@ -65,7 +65,7 @@ class TransportServiceRequest(CommonRequestModel):
     has_refrigeration = models.BooleanField(_("has refrigeration"), default=False, blank=True, null=True)
 
     # Detalii transport persoane
-    available_seats = models.PositiveSmallIntegerField(_("available seats"), default=0, blank=True, null=True)
+    available_seats = models.PositiveSmallIntegerField(_("needed seats"), default=0, blank=True, null=True)
     has_disabled_access = models.BooleanField(_("has disabled access"), default=False)
     pets_allowed = models.BooleanField(_("pets allowed"), default=False)
 
