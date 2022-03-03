@@ -30,9 +30,9 @@ class ItemOffer(models.Model):
     quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
-    expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
+    expiration_date = models.DateField(_("expiration date"), blank=True, null=True)
     stock = models.PositiveSmallIntegerField(
-        _("Stock"), help_text=_("How many units of this type are left"), null=True, blank=True, editable=False
+        _("Stock"), help_text=_("How many units of this type are left"), null=True, blank=True
     )
 
     # Textile
@@ -46,6 +46,7 @@ class ItemOffer(models.Model):
 
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
     pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
+    pickup_address = models.CharField(_("pickup address"), max_length=100, blank=True, null=True)
 
     added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
     status = models.CharField(
@@ -58,6 +59,11 @@ class ItemOffer(models.Model):
     class Meta:
         verbose_name = _("item offer")
         verbose_name_plural = _("item offers")
+
+    def save(self, *args, **kwargs):
+        if not self.stock:
+            self.stock = self.quantity
+        super().save(*args, **kwargs)
 
 
 class ItemRequest(models.Model):
@@ -72,9 +78,9 @@ class ItemRequest(models.Model):
 
     packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
-    expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
+
     stock = models.PositiveSmallIntegerField(
-        _("Stock"), help_text=_("How many units are still needed"), null=True, blank=True, editable=False
+        _("Stock"), help_text=_("How many units are still needed"), null=True, blank=True
     )
 
     # Textile
@@ -87,6 +93,7 @@ class ItemRequest(models.Model):
 
     county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
     pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
+    pickup_address = models.CharField(_("pickup address"), max_length=100, blank=True, null=True)
 
     added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
 
@@ -101,6 +108,10 @@ class ItemRequest(models.Model):
         verbose_name = _("item request")
         verbose_name_plural = _("item requests")
 
+    def save(self, *args, **kwargs):
+        if not self.stock:
+            self.stock = self.quantity
+        super().save(*args, **kwargs)
 
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING)
@@ -120,8 +131,8 @@ class ResourceRequest(models.Model):
         resource = self.resource
         request = self.request
 
-        resource.units_left -= self.total_units
-        request.units_left -= self.total_units
+        resource.stock -= self.total_units
+        request.stock -= self.total_units
 
         resource.save()
         request.save()

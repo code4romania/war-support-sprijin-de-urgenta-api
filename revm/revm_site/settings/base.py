@@ -265,7 +265,8 @@ JAZZMIN_SETTINGS = {
     # Title on the brand, and the login screen (19 chars max)
     "site_header": "Resource Volunteer Management Admin",
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
-    "site_logo": "images/logo.png",
+    "site_logo": "images/De urgenta.png",
+    "site_logo_classes": "site-logo",
     # Welcome text on the login screen
     "welcome_sign": "",
     # Copyright on the footer
@@ -360,7 +361,7 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": None,
+    "custom_css": "css/admin.css",
     "custom_js": None,
     # Whether to show the UI customizer on the sidebar
     "show_ui_builder": False,

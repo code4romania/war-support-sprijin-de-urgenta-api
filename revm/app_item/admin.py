@@ -94,6 +94,7 @@ class AdminItemOffer(admin.ModelAdmin):
                 "fields": (
                     "county_coverage",
                     "pickup_town",
+                    "pickup_address"
                 )
             },
         ),
@@ -105,7 +106,7 @@ class AdminItemRequest(admin.ModelAdmin):
     list_display = ("id", "name", "category", "made_by", "status")
     list_display_links = ("id", "name")
     search_fields = ["name"]
-    readonly_fields = ["made_by", "added_on", "stock"]
+    readonly_fields = ["added_on", "stock"]
 
     list_filter = [
         "county_coverage",
@@ -147,7 +148,6 @@ class AdminItemRequest(admin.ModelAdmin):
                     "quantity",
                     "packaging_type",
                     "unit_type",
-                    "expiration_date",
                     "tent_capacity",
                     "stock",
                 ),

@@ -32,7 +32,7 @@ from app_volunteering.views import (
 )
 
 
-admin_site_string = _("RVM")
+admin_site_string = _("")
 
 admin.site.site_title = admin_site_string
 admin.site.site_header = admin_site_string

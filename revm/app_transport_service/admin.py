@@ -83,6 +83,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
             {
                 "fields": (
                     "driver_name",
+                    "driver_contact",
                     "driver_id",
                     "car_registration_number",
                 )
