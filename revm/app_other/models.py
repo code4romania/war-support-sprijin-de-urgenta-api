@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -20,9 +19,7 @@ class OtherOffer(CommonOfferModel, CommonLocationModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
 
-
     available_until = models.DateField(_("resource available until"), null=True)
-
 
     def __str__(self):
         return f"#{self.pk} {self.name} {self.category} {self.town}({self.county_coverage})"
@@ -54,7 +51,7 @@ class ResourceRequest(models.Model):
         verbose_name_plural = _("Offer - Request")
 
     def save(self, *args, **kwargs):
-        self.request.status = 'C'
+        self.request.status = "C"
         self.request.save()
 
         super().save(*args, **kwargs)

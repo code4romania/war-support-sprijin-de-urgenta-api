@@ -1,12 +1,10 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from django.utils.translation import gettext_lazy as _
-from django.conf import settings
 from django.contrib.sites.models import Site
-from django.shortcuts import get_object_or_404, render
-from django.conf.urls import url
-from app_account import models
+from django.utils.translation import gettext_lazy as _
 
+from app_account import models
 
 DjangoUserAdmin.add_fieldsets = (
     (
@@ -33,6 +31,7 @@ DjangoUserAdmin.add_fieldsets = (
 #         }
 #     )
 
+
 @admin.register(models.CustomUser)
 class AdminCustomUser(DjangoUserAdmin):
     list_display = ("id", "first_name", "last_name", "email", "phone_number", "type")
@@ -58,7 +57,14 @@ class AdminCustomUser(DjangoUserAdmin):
                 (_("Personal info"), {"fields": ("first_name", "last_name", "password")}),
                 (_("Profile data"), {"fields": ("phone_number", "address")}),
                 # Restricting Set Superuser to superuser
-                (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups") if request.user.is_superuser else ("is_active", "is_staff")}),
+                (
+                    _("Permissions"),
+                    {
+                        "fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")
+                        if request.user.is_superuser
+                        else ("is_active", "is_staff")
+                    },
+                ),
                 (
                     _("RVM User"),
                     {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
@@ -89,17 +95,14 @@ class AdminCustomUser(DjangoUserAdmin):
             return qs
         return qs.filter(pk=request.user.id)
 
-
     # def change_view(self, request, object_id, form_url='', extra_context=None):
     #     extra_context = extra_context or {}
     #     user = models.CustomUser.objects.get(pk=object_id)
-        
+
     #     extra_context['user'] = user
     #     return super().change_view(
     #         request, object_id, form_url, extra_context=extra_context,
     #     )
-
-
 
     # def get_urls(self):
     #     info = self.model._meta.app_label, self.model._meta.model_name
@@ -120,7 +123,6 @@ class AdminCustomUser(DjangoUserAdmin):
     #     print('****')
     #     return user_offers_view(request, self, user)
     #     return render(request, "app_account/user_offers.html", context)
-
 
 
 admin.site.unregister(Site)

@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import Group, Permission
 
@@ -106,13 +105,27 @@ dsu_manager_permissions = [
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         users_group, _ = Group.objects.get_or_create(name=USERS_GROUP)
-        users_group.permissions.set(Permission.objects.filter(codename__in=user_and_dsu_permissions).values_list("id", flat=True))
-        self.stdout.write(self.style.SUCCESS(f"'{USERS_GROUP}' group has been created and appropriate permissions were assigned"))
+        users_group.permissions.set(
+            Permission.objects.filter(codename__in=user_and_dsu_permissions).values_list("id", flat=True)
+        )
+        self.stdout.write(
+            self.style.SUCCESS(f"'{USERS_GROUP}' group has been created and appropriate permissions were assigned")
+        )
 
         dsu_manager_group, _ = Group.objects.get_or_create(name=DSU_MANAGER_GROUP)
-        dsu_manager_group.permissions.set(Permission.objects.filter(codename__in=dsu_manager_permissions).values_list("id", flat=True))
-        self.stdout.write(self.style.SUCCESS(f"'{DSU_MANAGER_GROUP}' group has been created and appropriate permissions were assigned"))
+        dsu_manager_group.permissions.set(
+            Permission.objects.filter(codename__in=dsu_manager_permissions).values_list("id", flat=True)
+        )
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"'{DSU_MANAGER_GROUP}' group has been created and appropriate permissions were assigned"
+            )
+        )
 
         dsu_group, _ = Group.objects.get_or_create(name=DSU_GROUP)
-        dsu_group.permissions.set(Permission.objects.filter(codename__in=user_and_dsu_permissions).values_list("id", flat=True))
-        self.stdout.write(self.style.SUCCESS(f"'{DSU_GROUP}' group has been created and appropriate permissions were assigned"))
+        dsu_group.permissions.set(
+            Permission.objects.filter(codename__in=user_and_dsu_permissions).values_list("id", flat=True)
+        )
+        self.stdout.write(
+            self.style.SUCCESS(f"'{DSU_GROUP}' group has been created and appropriate permissions were assigned")
+        )

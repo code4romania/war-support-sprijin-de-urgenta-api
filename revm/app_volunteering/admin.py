@@ -5,6 +5,7 @@ from revm_site.utils import CountyFilter
 
 from app_account.models import USERS_GROUP, DSU_GROUP
 
+
 class OtherResourceRequestInline(admin.TabularInline):
     model = models.ResourceRequest
     extra = 1
@@ -48,7 +49,6 @@ class AdminVolunteeringOffer(admin.ModelAdmin):
                     "town",
                     "added_on",
                     "status",
-                    
                 )
             },
         ),
@@ -60,16 +60,14 @@ class AdminVolunteeringOffer(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():
             return queryset.filter(donor=request.user)
 
         return queryset
+
 
 @admin.register(models.VolunteeringRequest)
 class AdminVolunteeringRequest(admin.ModelAdmin):
@@ -95,7 +93,6 @@ class AdminVolunteeringRequest(admin.ModelAdmin):
                     "town",
                     "added_on",
                     "status",
-                    
                 )
             },
         ),
@@ -107,10 +104,7 @@ class AdminVolunteeringRequest(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():

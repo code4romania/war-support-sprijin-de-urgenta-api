@@ -4,9 +4,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CountyFilter(admin.SimpleListFilter):
-    title = _('County')
+    title = _("County")
 
-    parameter_name = 'county'
+    parameter_name = "county"
 
     def lookups(self, request, model_admin):
         return settings.COUNTY_CHOICES
