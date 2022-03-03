@@ -49,18 +49,10 @@ class AdminTextileCategory(admin.ModelAdmin):
 
 @admin.register(models.ItemOffer)
 class AdminItemOffer(admin.ModelAdmin):
-    list_display = [
-        "category",
-        "name",
-        "expiration_date",
-        "unit_type",
-        "units_left",
-        "county_coverage",
-        "pickup_town",
-    ]
+    list_display = ["name", "category", "quantity", "stock", "unit_type", "donor", "status"]
     list_display_links = ["name"]
     search_fields = ["name"]
-    list_filter = ["subcategory", "unit_type", "county_coverage"]
+    list_filter = ["county_coverage", "category", "unit_type", "textile_category", "kids_age", "status"]
     readonly_fields = ["added_on", "stock"]
     actions = [deactivate_offers]
 
@@ -129,11 +121,16 @@ class AdminItemOffer(admin.ModelAdmin):
 
 @admin.register(models.ItemRequest)
 class AdminItemRequest(admin.ModelAdmin):
-    list_display = ["subcategory", "name", "units_left", "unit_type", "county_coverage", "pickup_town"]
+    list_display = ["name", "category", "made_by", "status"]
     list_display_links = ["name"]
     search_fields = ["name"]
-    readonly_fields = ["added_on"]
-    list_filter = ["subcategory", "unit_type", "county_coverage"]
+    readonly_fields = ["added_on", "stock"]
+
+    list_filter = [
+        "county_coverage",
+        "category",
+        "status",
+    ]
 
     inlines = (OtherResourceRequestInline,)
 
