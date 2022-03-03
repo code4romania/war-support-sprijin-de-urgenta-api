@@ -55,7 +55,7 @@ class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
     class Meta:
         verbose_name = _("transport service offer")
         verbose_name_plural = lazy(
-            lambda: _("transport service offers ({})").format(TransportServiceOffer.objects.count()), str
+            lambda: "{} ({})".format(_("transport service offers"), TransportServiceOffer.objects.count()), str
         )()
 
 
@@ -84,7 +84,7 @@ class TransportServiceRequest(CommonRequestModel):
     class Meta:
         verbose_name = _("transport service request")
         verbose_name_plural = lazy(
-            lambda: _("transport service request ({})").format(TransportServiceRequest.objects.count()), str
+            lambda: "{} ({})".format(_("transport service request"), TransportServiceRequest.objects.count()), str
         )()
 
 
