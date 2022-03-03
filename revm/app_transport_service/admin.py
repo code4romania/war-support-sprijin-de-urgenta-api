@@ -1,6 +1,6 @@
 from django.contrib import admin
 from app_transport_service import models
-
+from revm_site.utils import CountyFilter
 
 class OtherResourceRequestInline(admin.TabularInline):
     model = models.ResourceRequest
@@ -22,8 +22,9 @@ class AdminOtherRequest(admin.ModelAdmin):
 
 @admin.register(models.TransportServiceOffer)
 class AdminTransportServiceOffer(admin.ModelAdmin):
-    list_display = ("id", "__str__", "donor", "category")
-    list_display_links = ("id", "__str__")
+    list_display = ("id", "category", "capacitate", "type", "availability", "county_coverage", "status")
+    list_display_links = ("id", "category")
+    list_filter = ("category",  "status", "availability", CountyFilter)
     search_fields = []
     readonly_fields = ("added_on",)
     inlines = (OtherResourceRequestInline,)
@@ -32,6 +33,13 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
 
     view_on_site = False
     change_form_template = "admin/transport_offer_admin.html"
+
+
+    def capacitate(self, obj):
+        if obj.available_seats:
+            return f"{obj.available_seats} locuri"
+        return f"{obj.weight_capacity} {obj.weight_unit}"
+
 
     fieldsets = (
         (
@@ -101,10 +109,11 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
     )
 
 
+
 @admin.register(models.TransportServiceRequest)
 class AdminTransportServiceRequest(admin.ModelAdmin):
-    list_display = ("id", "__str__", "made_by", "category")
-    list_display_links = ("id", "__str__")
+    list_display = ("id", "category", "capacitate", "de_la", "la", "status")
+    list_display_links = ("id", "category")
     search_fields = []
     readonly_fields = ["added_on"]
     inlines = (OtherResourceRequestInline,)
@@ -113,6 +122,21 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
     view_on_site = False
 
     change_form_template = "admin/transport_offer_admin.html"
+
+
+    def capacitate(self, obj):
+        if obj.available_seats:
+            return f"{obj.available_seats} locuri"
+        return f"{obj.weight_capacity} {obj.weight_unit}"
+
+
+    def de_la(self, obj):
+        return f"{obj.from_city} ({obj.from_county})"
+
+
+    def la(self, obj):
+        return f"{obj.to_city} ({obj.to_county})"
+
 
     fieldsets = (
         (
