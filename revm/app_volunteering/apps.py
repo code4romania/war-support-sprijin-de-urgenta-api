@@ -6,3 +6,4 @@ class AppVolunteeringConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "app_volunteering"
     verbose_name = _("Volunteering")
+    verbose_name_plural = _("Volunteering")
