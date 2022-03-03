@@ -270,7 +270,7 @@ JAZZMIN_SETTINGS = {
     # Title on the brand, and the login screen (19 chars max)
     "site_header": ADMIN_TITLE,
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
-    "site_logo": "images/De urgenta.png",
+    "site_logo": "images/De urgenta.svg",
     "site_logo_classes": "site-logo",
     # Welcome text on the login screen
     "welcome_sign": "",
