@@ -20,7 +20,7 @@ class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
-    weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
+    weight_unit = models.CharField(_("weight unit"), max_length=10, default="tone", blank=True, null=True)
     has_refrigeration = models.BooleanField(_("has refrigeration"), default=False, blank=True, null=True)
 
     # Disponibilitate
@@ -61,7 +61,7 @@ class TransportServiceRequest(CommonRequestModel):
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
-    weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
+    weight_unit = models.CharField(_("weight unit"), max_length=10, default="tone", blank=True, null=True)
     has_refrigeration = models.BooleanField(_("has refrigeration"), default=False, blank=True, null=True)
 
     # Detalii transport persoane
