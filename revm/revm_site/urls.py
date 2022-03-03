@@ -33,6 +33,7 @@ admin.site.site_title = settings.ADMIN_TITLE
 admin.site.site_header = settings.ADMIN_TITLE
 admin.site.index_title = settings.ADMIN_TITLE_SHORT
 
+
 router = routers.DefaultRouter()
 router.register(r"categories/item", GetItemCategoryViewSet, basename="item_categories")
 router.register(r"categories/other", GetOtherCategoryViewSet, basename="other_categories")

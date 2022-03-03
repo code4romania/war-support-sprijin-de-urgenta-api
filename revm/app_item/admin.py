@@ -93,7 +93,8 @@ class AdminItemOffer(admin.ModelAdmin):
             {
                 "fields": (
                     "county_coverage",
-                    "town",
+                    "pickup_town",
+                    "pickup_address"
                 )
             },
         ),
@@ -147,7 +148,6 @@ class AdminItemRequest(admin.ModelAdmin):
                     "quantity",
                     "packaging_type",
                     "unit_type",
-                    "expiration_date",
                     "tent_capacity",
                     "stock",
                 ),

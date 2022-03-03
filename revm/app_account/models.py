@@ -19,6 +19,8 @@ class CustomUser(AbstractUser):
     details = models.JSONField(_("details"), null=True, blank=True)
     description = models.CharField(_("general user description"), default="", blank=True, null=False, max_length=500)
 
+    is_validated = models.BooleanField(default=False)
+
     class Meta:
         verbose_name = _("user")
         verbose_name_plural = _("users")
