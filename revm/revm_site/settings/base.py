@@ -228,6 +228,9 @@ COUNTIES_SHORTNAME = {
 RESOURCE_STATUS = (
     ("NV", _("Not Verified")),
     ("V", _("Verified")),
+    ("A", _("Active")),
+    ("D", _("Deactivated")),
+    ("C", _("Complete")),
 )
 
 TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
