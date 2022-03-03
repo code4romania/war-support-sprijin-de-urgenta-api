@@ -1,19 +1,22 @@
 from django.contrib import admin
-from app_account.models import USERS_GROUP, DSU_GROUP
+from django.utils.translation import gettext_lazy as _
 
+from app_account.models import USERS_GROUP, DSU_GROUP
 from app_other import models
+from revm_site.admin import CommonRequestInline, CommonOfferInline
 from revm_site.utils import CountyFilter
 
 
-class OtherResourceRequestInline(admin.TabularInline):
+class OtherOfferInline(CommonOfferInline):
     model = models.ResourceRequest
-    extra = 1
-    show_change_link = True
-    view_on_site = True
+
+
+class OtherRequestInline(CommonRequestInline):
+    model = models.ResourceRequest
 
 
 @admin.register(models.Category)
-class AdminOtherRequest(admin.ModelAdmin):
+class AdminCategoryRequest(admin.ModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -30,7 +33,7 @@ class AdminOtherOffer(admin.ModelAdmin):
     search_fields = ["name"]
     readonly_fields = ["added_on"]
     list_filter = ("category", "status", CountyFilter)
-    inlines = (OtherResourceRequestInline,)
+    inlines = (OtherOfferInline,)
 
     ordering = ("pk",)
 
@@ -38,7 +41,7 @@ class AdminOtherOffer(admin.ModelAdmin):
 
     fieldsets = (
         (
-            "Detalii ofertă",
+            _("Offer details"),
             {
                 "fields": (
                     "donor",
@@ -77,7 +80,7 @@ class AdminOtherRequest(admin.ModelAdmin):
     readonly_fields = ["added_on"]
     list_filter = ("category", "status", CountyFilter)
 
-    inlines = (OtherResourceRequestInline,)
+    inlines = (OtherRequestInline,)
 
     ordering = ("pk",)
 
@@ -85,7 +88,7 @@ class AdminOtherRequest(admin.ModelAdmin):
 
     fieldsets = (
         (
-            "Detalii ofertă",
+            _("Request details"),
             {
                 "fields": (
                     "made_by",

@@ -1,20 +1,22 @@
 from django.contrib import admin
-from app_volunteering import models
-
-from revm_site.utils import CountyFilter
+from django.utils.translation import gettext_lazy as _
 
 from app_account.models import USERS_GROUP, DSU_GROUP
+from app_volunteering import models
+from revm_site.admin import CommonRequestInline, CommonOfferInline
+from revm_site.utils import CountyFilter
 
 
-class OtherResourceRequestInline(admin.TabularInline):
+class VolunteeringOfferInline(CommonOfferInline):
     model = models.ResourceRequest
-    extra = 1
-    show_change_link = True
-    view_on_site = True
+
+
+class VolunteeringRequestInline(CommonRequestInline):
+    model = models.ResourceRequest
 
 
 @admin.register(models.Type)
-class AdminOtherRequest(admin.ModelAdmin):
+class AdminTypeRequest(admin.ModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -31,7 +33,7 @@ class AdminVolunteeringOffer(admin.ModelAdmin):
     list_filter = ["type", CountyFilter, "status"]
     search_fields = ["name"]
     readonly_fields = ["added_on"]
-    inlines = (OtherResourceRequestInline,)
+    inlines = (VolunteeringOfferInline,)
 
     ordering = ("pk",)
 
@@ -39,7 +41,7 @@ class AdminVolunteeringOffer(admin.ModelAdmin):
 
     fieldsets = (
         (
-            "Detalii ofertă",
+            _("Offer details"),
             {
                 "fields": (
                     "donor",
@@ -76,7 +78,7 @@ class AdminVolunteeringRequest(admin.ModelAdmin):
     list_filter = ["type", CountyFilter, "status"]
     search_fields = ["name"]
     readonly_fields = ["added_on"]
-    inlines = (OtherResourceRequestInline,)
+    inlines = (VolunteeringRequestInline,)
 
     ordering = ("pk",)
 
@@ -84,7 +86,7 @@ class AdminVolunteeringRequest(admin.ModelAdmin):
 
     fieldsets = (
         (
-            "Detalii ofertă",
+            _("Request details"),
             {
                 "fields": (
                     "made_by",
