@@ -25,7 +25,7 @@ class VolunteeringOffer(CommonOfferModel, CommonLocationModel):
     available_until = models.DateTimeField(_("volunteer available until"), null=True)
 
     def __str__(self):
-        return self.type
+        return self.type.name
 
     class Meta:
         verbose_name = _("volunteering offer")
@@ -36,7 +36,7 @@ class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     def __str__(self):
-        return self.type
+        return self.type.name
 
     class Meta:
         verbose_name = _("volunteering request")
