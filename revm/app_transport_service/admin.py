@@ -1,6 +1,7 @@
 from django.contrib import admin
 from app_transport_service import models
 from revm_site.utils import CountyFilter
+from app_account.models import USERS_GROUP, DSU_GROUP
 
 class OtherResourceRequestInline(admin.TabularInline):
     model = models.ResourceRequest
@@ -108,6 +109,22 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
         ),
     )
 
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name=DSU_GROUP).exists()
+        ):
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(donor=request.user)
+
+        return queryset
 
 
 @admin.register(models.TransportServiceRequest)
@@ -192,3 +209,20 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
             },
         ),
     )
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name=DSU_GROUP).exists()
+        ):
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(made_by=request.user)
+
+        return queryset

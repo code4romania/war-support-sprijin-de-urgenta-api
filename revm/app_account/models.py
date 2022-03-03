@@ -4,6 +4,7 @@ from django.db import models
 
 USERS_GROUP = "Users"
 DSU_GROUP = "DSU"
+DSU_MANAGER_GROUP = "DSU Manager"
 
 
 class CustomUser(AbstractUser):
