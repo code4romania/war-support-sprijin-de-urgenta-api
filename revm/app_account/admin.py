@@ -35,7 +35,7 @@ DjangoUserAdmin.add_fieldsets = (
 
 @admin.register(models.CustomUser)
 class AdminCustomUser(DjangoUserAdmin):
-    list_display = ("id", "first_name", "last_name", "email", "phone_number")
+    list_display = ("id", "first_name", "last_name", "email", "phone_number", "type")
     list_display_links = ["id", "first_name", "last_name", "email"]
     search_fields = ("email", "first_name", "last_name")
     list_filter = ["is_validated"]
@@ -57,7 +57,8 @@ class AdminCustomUser(DjangoUserAdmin):
                 ),
                 (_("Personal info"), {"fields": ("first_name", "last_name", "password")}),
                 (_("Profile data"), {"fields": ("phone_number", "address")}),
-                (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions")}),
+                # Restricting Set Superuser to superuser
+                (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups") if request.user.is_superuser else ("is_active", "is_staff")}),
                 (
                     _("RVM User"),
                     {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
@@ -67,10 +68,26 @@ class AdminCustomUser(DjangoUserAdmin):
             return self.add_fieldsets
 
     def has_delete_permission(self, request, obj=None):
+        if not (request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists()):
+            return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
                 return False
         return True
+
+    def has_change_permission(self, request, obj=None):
+        if not (request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists()):
+            return False
+        if obj and hasattr(obj, "email"):
+            if obj.email == settings.SUPER_ADMIN_EMAIL:
+                return False
+        return True
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists():
+            return qs
+        return qs.filter(pk=request.user.id)
 
 
     # def change_view(self, request, object_id, form_url='', extra_context=None):

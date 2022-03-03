@@ -52,10 +52,27 @@ class AdminTextileCategory(admin.ModelAdmin):
 
 @admin.register(models.ItemOffer)
 class AdminItemOffer(admin.ModelAdmin):
-    list_display = ["id", "category", "name",  "quantity", "stock", "unit_type", "county_coverage", "town", "status"]
+    list_display = [
+        "id",
+        "category",
+        "name",
+        "quantity",
+        "stock",
+        "unit_type",
+        "county_coverage",
+        "town",
+        "status",
+    ]
     list_display_links = ["name"]
     search_fields = ["name"]
-    list_filter = ["county_coverage", "category", "unit_type", "textile_category", "kids_age", "status"]
+    list_filter = [
+        "county_coverage",
+        "category",
+        "unit_type",
+        "textile_category",
+        "kids_age",
+        "status",
+    ]
     readonly_fields = ["added_on", "stock"]
     actions = [deactivate_offers]
 
@@ -106,7 +123,7 @@ class AdminItemOffer(admin.ModelAdmin):
                 "fields": (
                     "county_coverage",
                     "town",
-                    "pickup_address"
+                    # "pickup_address"
                 )
             },
         ),
@@ -118,7 +135,10 @@ class AdminItemOffer(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name=DSU_GROUP).exists()
+        ):
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():
@@ -129,7 +149,16 @@ class AdminItemOffer(admin.ModelAdmin):
 
 @admin.register(models.ItemRequest)
 class AdminItemRequest(admin.ModelAdmin):
-    list_display = ["id", "category", "name", "quantity",  "unit_type", "county_coverage", "town", "status"]
+    list_display = [
+        "id",
+        "category",
+        "name",
+        "quantity",
+        "unit_type",
+        "county_coverage",
+        "town",
+        "status",
+    ]
     list_display_links = ["category"]
     search_fields = ["name"]
     readonly_fields = ["added_on", "stock"]
@@ -190,3 +219,20 @@ class AdminItemRequest(admin.ModelAdmin):
             },
         ),
     )
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name=DSU_GROUP).exists()
+        ):
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(made_by=request.user)
+
+        return queryset

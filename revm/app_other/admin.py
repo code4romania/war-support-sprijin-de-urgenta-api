@@ -1,4 +1,5 @@
 from django.contrib import admin
+from app_account.models import USERS_GROUP, DSU_GROUP
 
 from app_other import models
 from revm_site.utils import CountyFilter
@@ -54,6 +55,23 @@ class AdminOtherOffer(admin.ModelAdmin):
         ),
     )
 
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name=DSU_GROUP).exists()
+        ):
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(donor=request.user)
+
+        return queryset
+
 @admin.register(models.OtherRequest)
 class AdminOtherRequest(admin.ModelAdmin):
     list_display = ("id","category", "name", "county_coverage", "town", "status")
@@ -87,3 +105,20 @@ class AdminOtherRequest(admin.ModelAdmin):
             },
         ),
     )
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name=DSU_GROUP).exists()
+        ):
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(made_by=request.user)
+
+        return queryset
