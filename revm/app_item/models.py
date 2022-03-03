@@ -1,10 +1,14 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import CommonCategoryModel
+from revm_site.models import (
+    CommonCategoryModel,
+    CommonCountyModel,
+    CommonRequestModel,
+    CommonOfferModel,
+    CommonLocationModel,
+)
 
 
 class Category(CommonCategoryModel):
@@ -19,11 +23,9 @@ class TextileCategory(CommonCategoryModel):
         verbose_name_plural = _("Textile Categories")
 
 
-class ItemOffer(models.Model):
-    donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 
-    description = models.TextField(_("description"), default="", blank=True, null=False)
+class ItemOffer(CommonOfferModel, CommonLocationModel):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 
     # Descriere produs
     name = models.CharField(_("Product"), max_length=100, db_index=True, blank=True, null=False)
@@ -41,17 +43,7 @@ class ItemOffer(models.Model):
     other_textiles = models.TextField(_("other"), blank=True, null=True)
 
     # Corturi
-
     tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
-
-    county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
-    pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
-    pickup_address = models.CharField(_("pickup address"), max_length=100, blank=True, null=True)
-
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
-    status = models.CharField(
-        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
-    )
 
     def __str__(self):
         return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type})"
@@ -66,10 +58,8 @@ class ItemOffer(models.Model):
         super().save(*args, **kwargs)
 
 
-class ItemRequest(models.Model):
-    made_by = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
+class ItemRequest(CommonRequestModel, CommonLocationModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    description = models.TextField(_("description"), default="", blank=True, null=False)
 
     # Descriere produs
     name = models.CharField(_("Product"), max_length=100, db_index=True)
@@ -91,15 +81,6 @@ class ItemRequest(models.Model):
     # Corturi
     tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
-    county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
-    pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
-    pickup_address = models.CharField(_("pickup address"), max_length=100, blank=True, null=True)
-
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
-
-    status = models.CharField(
-        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
-    )
 
     def __str__(self):
         return f"#{self.id} {self.name} (Stoc: {self.stock}/{self.quantity} {self.unit_type})"
@@ -127,7 +108,7 @@ class ResourceRequest(models.Model):
         verbose_name_plural = _("Offer - Request")
 
     def save(self, *args, **kwargs):
-        # substract amount from offer and request
+        # subtract amount from offer and request
         resource = self.resource
         request = self.request
 

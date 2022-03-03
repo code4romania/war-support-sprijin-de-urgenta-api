@@ -21,7 +21,14 @@ class CommonCategoryModel(models.Model):
 
 
 class CommonCountyModel(models.Model):
-    county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES)
+    county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES, blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
+class CommonLocationModel(CommonCountyModel):
+    town = models.CharField(_("town"), max_length=100, blank=True, null=True)
 
     class Meta:
         abstract = True

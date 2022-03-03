@@ -1,6 +1,6 @@
-from django.db.models import TextField
-from django.forms import TextInput, Textarea
 from django.contrib import admin
+from django.db.models import TextField
+from django.forms import Textarea
 
 from app_item import models
 
@@ -159,7 +159,7 @@ class AdminItemRequest(admin.ModelAdmin):
             {
                 "fields": (
                     "county_coverage",
-                    "pickup_town",
+                    "town",
                 )
             },
         ),
