@@ -29,7 +29,7 @@ class VolunteeringOffer(CommonOfferModel, CommonLocationModel):
     class Meta:
         verbose_name = _("volunteering offer")
         verbose_name_plural = lazy(
-            lambda: _("volunteering offers ({})").format(VolunteeringOffer.objects.count()), str
+            lambda: "{} ({})".format(_("volunteering offers"), VolunteeringOffer.objects.count()), str
         )()
 
 
@@ -42,7 +42,7 @@ class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
     class Meta:
         verbose_name = _("volunteering request")
         verbose_name_plural = lazy(
-            lambda: _("volunteering request ({})").format(VolunteeringRequest.objects.count()), str
+            lambda: "{} ({})".format(_("volunteering request"), VolunteeringRequest.objects.count()), str
         )()
 
 
