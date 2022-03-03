@@ -91,7 +91,6 @@ class ResourceRequest(models.Model):
         TransportServiceRequest, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("request")
     )
     date = models.DateTimeField(_("transport date"))
-    units = models.SmallIntegerField(_("units"), null=True, blank=True)
     description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
 
     class Meta:

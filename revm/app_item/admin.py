@@ -52,7 +52,7 @@ class AdminTextileCategory(admin.ModelAdmin):
 
 @admin.register(models.ItemOffer)
 class AdminItemOffer(admin.ModelAdmin):
-    list_display = ["name", "category", "quantity", "stock", "unit_type", "donor", "status"]
+    list_display = ["id", "category", "name",  "quantity", "stock", "unit_type", "county_coverage", "town", "status"]
     list_display_links = ["name"]
     search_fields = ["name"]
     list_filter = ["county_coverage", "category", "unit_type", "textile_category", "kids_age", "status"]
@@ -105,7 +105,7 @@ class AdminItemOffer(admin.ModelAdmin):
             {
                 "fields": (
                     "county_coverage",
-                    "pickup_town",
+                    "town",
                     "pickup_address"
                 )
             },
@@ -129,8 +129,8 @@ class AdminItemOffer(admin.ModelAdmin):
 
 @admin.register(models.ItemRequest)
 class AdminItemRequest(admin.ModelAdmin):
-    list_display = ["name", "category", "made_by", "status"]
-    list_display_links = ["name"]
+    list_display = ["id", "category", "name", "quantity",  "unit_type", "county_coverage", "town", "status"]
+    list_display_links = ["category"]
     search_fields = ["name"]
     readonly_fields = ["added_on", "stock"]
 
