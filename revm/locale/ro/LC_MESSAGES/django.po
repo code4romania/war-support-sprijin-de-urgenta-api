@@ -148,11 +148,11 @@ msgstr "data expirării"
 
 #: app_item/models.py:36 app_item/models.py:67
 msgid "Stock"
-msgstr ""
+msgstr "Stoc"
 
 #: app_item/models.py:36
 msgid "How many units of this type are left"
-msgstr "De câte ori poate fi această resursă utilizată"
+msgstr "Disponibilitate"
 
 #: app_item/models.py:41 app_item/models.py:72
 #, fuzzy
@@ -166,15 +166,15 @@ msgstr "altele"
 
 #: app_item/models.py:45 app_item/models.py:76
 msgid "capacity"
-msgstr ""
+msgstr "Capacitate"
 
 #: app_item/models.py:51
 msgid "item offer"
-msgstr "donație de produse"
+msgstr "Donație de produse"
 
 #: app_item/models.py:52
 msgid "item offers"
-msgstr "donații de produse"
+msgstr "Donație de produse"
 
 #: app_item/models.py:67
 #, fuzzy
@@ -204,11 +204,11 @@ msgstr "data adăugării"
 #: app_transport_service/models.py:99 app_volunteering/models.py:51
 #: app_volunteering/models.py:52
 msgid "Offer - Request"
-msgstr "Donație - Cerere"
+msgstr "Aloca din resursele disponibile"
 
 #: app_other/apps.py:8
 msgid "Other"
-msgstr ""
+msgstr "Altele"
 
 #: app_other/models.py:20 app_other/models.py:36
 #: app_transport_service/models.py:19 app_transport_service/models.py:60
@@ -222,11 +222,11 @@ msgstr "numele resursei"
 
 #: app_other/models.py:23
 msgid "resource available from"
-msgstr "disponibilitate de la"
+msgstr "disponibilă din"
 
 #: app_other/models.py:24
 msgid "resource available until"
-msgstr "disponibilitate până la"
+msgstr "disponibilă până la"
 
 #: app_other/models.py:31 app_other/models.py:32
 msgid "other offer"
@@ -260,11 +260,11 @@ msgstr "cerere de resurse"
 #, fuzzy
 #| msgid "transport service offers"
 msgid "Transport services"
-msgstr "donații de servicii de transport"
+msgstr "donații servicii transport"
 
 #: app_transport_service/models.py:22 app_transport_service/models.py:63
 msgid "Capacity"
-msgstr ""
+msgstr "Capacitate"
 
 #: app_transport_service/models.py:23 app_transport_service/models.py:64
 msgid "weight unit"
@@ -280,13 +280,13 @@ msgstr "disponibilitate"
 
 #: app_transport_service/models.py:37
 msgid "from hour"
-msgstr ""
+msgstr "De la "
 
 #: app_transport_service/models.py:38
 #, fuzzy
 #| msgid "availability until hour"
 msgid "until hour"
-msgstr "disponibilitate până la ora"
+msgstr "până la"
 
 #: app_transport_service/models.py:42
 #, fuzzy
@@ -296,7 +296,7 @@ msgstr "nume contact"
 
 #: app_transport_service/models.py:43
 msgid "id"
-msgstr ""
+msgstr "id"
 
 #: app_transport_service/models.py:44
 msgid "car registration number"
@@ -310,7 +310,7 @@ msgstr "locuri disponibile"
 #, fuzzy
 #| msgid "has disability access"
 msgid "has disabled access"
-msgstr "are acces pentru persoane cu dizabilități"
+msgstr "facilitati persoane cu dizabilități"
 
 #: app_transport_service/models.py:49 app_transport_service/models.py:70
 msgid "pets allowed"
@@ -318,11 +318,11 @@ msgstr ""
 
 #: app_transport_service/models.py:55
 msgid "transport service offer"
-msgstr "donație de servicii de transport"
+msgstr "donație servicii transport"
 
 #: app_transport_service/models.py:56
 msgid "transport service offers"
-msgstr "donații de servicii de transport"
+msgstr "donații servicii transport"
 
 #: app_transport_service/models.py:73
 #, fuzzy
@@ -332,7 +332,7 @@ msgstr "județ"
 
 #: app_transport_service/models.py:74 app_transport_service/models.py:76
 msgid "From city"
-msgstr ""
+msgstr "oraș"
 
 #: app_transport_service/models.py:75
 #, fuzzy
@@ -342,15 +342,15 @@ msgstr "județ"
 
 #: app_transport_service/models.py:82
 msgid "transport service request"
-msgstr "cerere de servicii de transport"
+msgstr "cerere servicii transport"
 
 #: app_transport_service/models.py:83
 msgid "transport service requests"
-msgstr "cereri de servicii de transport"
+msgstr "cereri servicii transport"
 
 #: app_transport_service/models.py:93
 msgid "transport date"
-msgstr ""
+msgstr "Data transportului"
 
 #: app_transport_service/models.py:94
 #, fuzzy
@@ -384,13 +384,13 @@ msgstr "tipuri de voluntariat"
 #, fuzzy
 #| msgid "resource available from"
 msgid "volunteer available from"
-msgstr "disponibilitate de la"
+msgstr "disponibil de la"
 
 #: app_volunteering/models.py:25
 #, fuzzy
 #| msgid "resource available until"
 msgid "volunteer available until"
-msgstr "disponibilitate până la"
+msgstr "disponibil până la"
 
 #: app_volunteering/models.py:31
 msgid "volunteering offer"
@@ -410,7 +410,7 @@ msgstr "cereri de voluntariat"
 
 #: app_volunteering/models.py:47
 msgid "made_by"
-msgstr ""
+msgstr "Inregistrat de"
 
 #: revm_site/models.py:11
 msgid "category name"
@@ -438,7 +438,7 @@ msgstr "status"
 
 #: revm_site/models.py:50
 msgid "donor"
-msgstr ""
+msgstr "Donator"
 
 #: revm_site/models.py:58
 #, fuzzy
@@ -488,15 +488,15 @@ msgstr "Disponibil în weekend"
 
 #: revm_site/settings/base.py:237
 msgid "Disponibil in timpul saptamanii"
-msgstr ""
+msgstr "Disponibil in timpul saptamanii"
 
 #: revm_site/settings/base.py:238
 msgid "Disponibil oricand"
-msgstr ""
+msgstr "Disponibil oricand"
 
 #: revm_site/settings/base.py:239
 msgid "Intervale fixe"
-msgstr ""
+msgstr "Intervale fixe"
 
 #~ msgid "county"
 #~ msgstr "județ"
@@ -535,7 +535,7 @@ msgstr ""
 #~ msgstr "folosit de"
 
 #~ msgid "reuses left"
-#~ msgstr "reutilizări rămase"
+#~ msgstr "stoc ramas"
 
 #~ msgid "usable weight"
 #~ msgstr "greutate utilă"
@@ -605,7 +605,7 @@ msgstr ""
 #~ msgstr "Deschide"
 
 #~ msgid "You don’t have permission to view or edit anything."
-#~ msgstr "Nu ai permisiunea sa faceti schimbari"
+#~ msgstr "Nu ai permisiunea sa faci schimbari"
 
 #~ msgid "Box"
 #~ msgstr "Cutie"
@@ -626,7 +626,7 @@ msgstr ""
 #~ msgstr "E această resursă complet utilizată"
 
 #~ msgid "reusable resource currently under use"
-#~ msgstr "resursă reutilizabilă în utilizare"
+#~ msgstr "resursă în utilizare"
 
 #~ msgid "total passengers"
 #~ msgstr "număr de pasageri"
