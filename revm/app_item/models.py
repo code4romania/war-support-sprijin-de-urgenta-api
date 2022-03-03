@@ -23,7 +23,6 @@ class TextileCategory(CommonCategoryModel):
         verbose_name_plural = _("Textile Categories")
 
 
-
 class ItemOffer(CommonOfferModel, CommonLocationModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -81,7 +80,6 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
     # Corturi
     tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
-
     def __str__(self):
         return f"#{self.id} {self.name} (Stoc: {self.stock}/{self.quantity} {self.unit_type})"
 
@@ -93,6 +91,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         if not self.stock:
             self.stock = self.quantity
         super().save(*args, **kwargs)
+
 
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING)
@@ -115,7 +114,7 @@ class ResourceRequest(models.Model):
         resource.stock -= self.total_units
         request.stock -= self.total_units
         if request.stock <= 0:
-            request.status = 'C'
+            request.status = "C"
         resource.save()
         request.save()
 

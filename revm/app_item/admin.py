@@ -135,10 +135,7 @@ class AdminItemOffer(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():
@@ -226,10 +223,7 @@ class AdminItemRequest(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():

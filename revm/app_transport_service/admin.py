@@ -3,6 +3,7 @@ from app_transport_service import models
 from revm_site.utils import CountyFilter
 from app_account.models import USERS_GROUP, DSU_GROUP
 
+
 class OtherResourceRequestInline(admin.TabularInline):
     model = models.ResourceRequest
     extra = 1
@@ -25,7 +26,7 @@ class AdminOtherRequest(admin.ModelAdmin):
 class AdminTransportServiceOffer(admin.ModelAdmin):
     list_display = ("id", "category", "capacitate", "type", "availability", "county_coverage", "status")
     list_display_links = ("id", "category")
-    list_filter = ("category",  "status", "availability", CountyFilter)
+    list_filter = ("category", "status", "availability", CountyFilter)
     search_fields = []
     readonly_fields = ("added_on",)
     inlines = (OtherResourceRequestInline,)
@@ -35,12 +36,10 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
     view_on_site = False
     change_form_template = "admin/transport_offer_admin.html"
 
-
     def capacitate(self, obj):
         if obj.available_seats:
             return f"{obj.available_seats} locuri"
         return f"{obj.weight_capacity} {obj.weight_unit}"
-
 
     fieldsets = (
         (
@@ -115,10 +114,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():
@@ -140,20 +136,16 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
 
     change_form_template = "admin/transport_offer_admin.html"
 
-
     def capacitate(self, obj):
         if obj.available_seats:
             return f"{obj.available_seats} locuri"
         return f"{obj.weight_capacity} {obj.weight_unit}"
 
-
     def de_la(self, obj):
         return f"{obj.from_city} ({obj.from_county})"
 
-
     def la(self, obj):
         return f"{obj.to_city} ({obj.to_county})"
-
 
     fieldsets = (
         (
@@ -216,10 +208,7 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():

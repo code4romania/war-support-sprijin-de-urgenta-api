@@ -4,6 +4,7 @@ from app_account.models import USERS_GROUP, DSU_GROUP
 from app_other import models
 from revm_site.utils import CountyFilter
 
+
 class OtherResourceRequestInline(admin.TabularInline):
     model = models.ResourceRequest
     extra = 1
@@ -24,17 +25,16 @@ class AdminOtherRequest(admin.ModelAdmin):
 
 @admin.register(models.OtherOffer)
 class AdminOtherOffer(admin.ModelAdmin):
-    list_display = ("id","category", "name", "available_until", "county_coverage", "town", "status")
+    list_display = ("id", "category", "name", "available_until", "county_coverage", "town", "status")
     list_display_links = ("id", "name")
     search_fields = ["name"]
     readonly_fields = ["added_on"]
-    list_filter = ("category",  "status", CountyFilter)
+    list_filter = ("category", "status", CountyFilter)
     inlines = (OtherResourceRequestInline,)
 
     ordering = ("pk",)
 
     view_on_site = False
-
 
     fieldsets = (
         (
@@ -49,7 +49,6 @@ class AdminOtherOffer(admin.ModelAdmin):
                     "town",
                     "added_on",
                     "status",
-                    
                 )
             },
         ),
@@ -61,10 +60,7 @@ class AdminOtherOffer(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():
@@ -72,21 +68,20 @@ class AdminOtherOffer(admin.ModelAdmin):
 
         return queryset
 
+
 @admin.register(models.OtherRequest)
 class AdminOtherRequest(admin.ModelAdmin):
-    list_display = ("id","category", "name", "county_coverage", "town", "status")
+    list_display = ("id", "category", "name", "county_coverage", "town", "status")
     list_display_links = ("id", "name")
     search_fields = ["name"]
     readonly_fields = ["added_on"]
-    list_filter = ("category",  "status", CountyFilter)
+    list_filter = ("category", "status", CountyFilter)
 
     inlines = (OtherResourceRequestInline,)
 
     ordering = ("pk",)
 
     view_on_site = False
-
-
 
     fieldsets = (
         (
@@ -100,7 +95,6 @@ class AdminOtherRequest(admin.ModelAdmin):
                     "town",
                     "added_on",
                     "status",
-                    
                 )
             },
         ),
@@ -112,10 +106,7 @@ class AdminOtherRequest(admin.ModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name=DSU_GROUP).exists()
-        ):
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
             return queryset
 
         if request.user.groups.filter(name=USERS_GROUP).exists():

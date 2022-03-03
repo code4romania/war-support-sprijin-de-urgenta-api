@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -51,7 +50,7 @@ class ResourceRequest(models.Model):
         verbose_name_plural = _("Offer - Request")
 
     def save(self, *args, **kwargs):
-        self.request.status = 'C'
+        self.request.status = "C"
         self.request.save()
 
         super().save(*args, **kwargs)
