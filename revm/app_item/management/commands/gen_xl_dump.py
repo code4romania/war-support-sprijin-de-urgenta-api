@@ -24,9 +24,7 @@ class Command(BaseCommand):
         hours_ago_24 = now - timezone.timedelta(hours=24)
 
         item_offers = pd.DataFrame(
-            ItemOffer.objects.filter(
-                added_on__gte=hours_ago_24
-            ).values(
+            ItemOffer.objects.filter(added_on__gte=hours_ago_24).values(
                 "county_coverage",
                 "town",
                 "description",
@@ -66,9 +64,7 @@ class Command(BaseCommand):
             "Capacitate Cort",
         ]
         item_requests = pd.DataFrame(
-            ItemRequest.objects.filter(
-                added_on__gte=hours_ago_24
-            ).values(
+            ItemRequest.objects.filter(added_on__gte=hours_ago_24).values(
                 "county_coverage",
                 "town",
                 "description",
@@ -117,9 +113,7 @@ class Command(BaseCommand):
         writer = pd.ExcelWriter(bio, engine="xlsxwriter")
 
         for df, sheet in data:
-            df["Judete Acoperite"] = df["Judete Acoperite"].agg(
-                lambda x: ", ".join(map(str, x))
-            )
+            df["Judete Acoperite"] = df["Judete Acoperite"].agg(lambda x: ", ".join(map(str, x)))
             df["Adaugat in"] = df["Adaugat in"].dt.tz_localize(None)
 
             df.to_excel(writer, sheet_name=sheet, index=False)

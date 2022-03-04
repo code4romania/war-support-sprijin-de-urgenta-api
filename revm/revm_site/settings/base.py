@@ -23,6 +23,8 @@ env = environ.Env(
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
     MEMCACHED_HOST=(str, "cache:11211"),
+    REDIS_HOST=(str, "redis"),
+    REDIS_PORT=(int, 6379),
 )
 
 ADMIN_TITLE = _("Sprijin de Urgență")
@@ -277,18 +279,19 @@ REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializer
 # django-q https://django-q.readthedocs.io/en/latest/configure.html
 
 Q_CLUSTER = {
-    'name': 'SdU',
-    'recycle': 500,
-    'timeout': 60,
-    'compress': True,
-    'save_limit': 250,
-    'queue_limit': 500,
-    'cpu_affinity': 1,
-    'label': 'Django Q',
-    'redis': {
-        'host': 'redis',
-        'port': 6379,
-        'db': 0, }
+    "name": "SdU",
+    "recycle": 500,
+    "timeout": 60,
+    "compress": True,
+    "save_limit": 250,
+    "queue_limit": 500,
+    "cpu_affinity": 1,
+    "label": "Django Q",
+    "redis": {
+        "host": env("REDIS_HOST"),
+        "port": env("REDIS_PORT"),
+        "db": 0,
+    },
 }
 
 # django-jazzmin

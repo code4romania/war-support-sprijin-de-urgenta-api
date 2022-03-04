@@ -25,12 +25,10 @@ services:
       - internal
 
   redis:
+    container_name: redis
     image: redis:alpine
     networks:
       - internal
-    container_name: redis
-    expose:
-      - "6379"
 
   revm:
     container_name: revm-admin
