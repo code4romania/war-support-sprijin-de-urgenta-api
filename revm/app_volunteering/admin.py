@@ -26,6 +26,7 @@ class VolunteeringOfferInline(CommonOfferInline):
             return False
         return super().has_delete_permission(request, obj)
 
+
 class VolunteeringRequestInline(CommonRequestInline):
     model = models.ResourceRequest
 
@@ -43,6 +44,7 @@ class VolunteeringRequestInline(CommonRequestInline):
         if request.user.is_dsu_user():
             return False
         return super().has_delete_permission(request, obj)
+
 
 @admin.register(models.Type)
 class AdminTypeRequest(ImportExportModelAdmin):
@@ -82,6 +84,7 @@ class AdminVolunteeringOffer(ImportExportModelAdmin):
                     "donor",
                     "type",
                     "available_until",
+                    "has_transportation",
                     "county_coverage",
                     "town",
                     "added_on",

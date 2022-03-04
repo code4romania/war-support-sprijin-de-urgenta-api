@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from revm_site.serializers import CountyCoverageSerializer
 from .models import TransportServiceRequest, TransportServiceOffer, Category
 
 
@@ -9,7 +10,7 @@ class TransportServiceCategoryListSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class TransportServiceOfferSerializer(serializers.ModelSerializer):
+class TransportServiceOfferSerializer(CountyCoverageSerializer):
     class Meta:
         model = TransportServiceOffer
         fields = "__all__"

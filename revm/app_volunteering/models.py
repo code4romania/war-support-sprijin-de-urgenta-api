@@ -3,7 +3,13 @@ from django.utils.functional import lazy
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import CommonRequestModel, CommonCountyModel, CommonOfferModel, CommonLocationModel
+from revm_site.models import (
+    CommonRequestModel,
+    CommonCountyModel,
+    CommonOfferModel,
+    CommonLocationModel,
+    CommonTransportableModel,
+)
 
 
 class Type(models.Model):
@@ -18,7 +24,7 @@ class Type(models.Model):
         verbose_name_plural = _("volunteering types")
 
 
-class VolunteeringOffer(CommonOfferModel, CommonLocationModel):
+class VolunteeringOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     available_until = models.DateField(_("volunteer available until"), null=True)

@@ -9,6 +9,7 @@ from revm_site.models import (
     CommonRequestModel,
     CommonOfferModel,
     CommonLocationModel,
+    CommonTransportableModel,
 )
 
 
@@ -24,7 +25,7 @@ class TextileCategory(CommonCategoryModel):
         verbose_name_plural = _("Textile Categories")
 
 
-class ItemOffer(CommonOfferModel, CommonLocationModel):
+class ItemOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category"))
 
     # Descriere produs

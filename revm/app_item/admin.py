@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
 from app_item import models
-from app_account.models import  CustomUser, DSU_GROUP
+from app_account.models import CustomUser
 from revm_site.admin import CommonRequestInline, CommonOfferInline
 
 
@@ -21,9 +21,7 @@ deactivate_offers.short_description = _("Deactivate selected offers")
 
 class ItemOfferInline(CommonOfferInline):
     model = models.ResourceRequest
-    formfield_overrides = {
-        TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}
-    }
+    formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
 
     def has_change_permission(self, request, obj):
         if request.user.is_dsu_user():
@@ -43,9 +41,7 @@ class ItemOfferInline(CommonOfferInline):
 
 class ItemRequestInline(CommonRequestInline):
     model = models.ResourceRequest
-    formfield_overrides = {
-        TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}
-    }
+    formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
 
     def has_change_permission(self, request, obj):
         if request.user.is_dsu_user():
@@ -171,6 +167,7 @@ class AdminItemOffer(ImportExportModelAdmin):
             _("Where it is needed"),
             {
                 "fields": (
+                    "has_transportation",
                     "county_coverage",
                     "town",
                 )

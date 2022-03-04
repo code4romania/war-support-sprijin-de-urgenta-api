@@ -26,6 +26,7 @@ class TransportOfferInline(CommonOfferInline):
             return False
         return super().has_delete_permission(request, obj)
 
+
 class TransportRequestInline(CommonRequestInline):
     model = models.ResourceRequest
 
@@ -43,6 +44,7 @@ class TransportRequestInline(CommonRequestInline):
         if request.user.is_dsu_user():
             return False
         return super().has_delete_permission(request, obj)
+
 
 @admin.register(models.Category)
 class AdminCategoryRequest(ImportExportModelAdmin):
