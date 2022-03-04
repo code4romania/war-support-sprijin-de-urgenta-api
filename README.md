@@ -62,7 +62,7 @@ The `.env` files contain variables required to start the services and initialize
 - `ENVIRONMENT` - [`test`|`development`|`production`] sets the type of deployment (default `production`)
 - `RUN_MIGRATION` - [`yes`|`no`] run django migrations when you start the app (default `yes`)
 - `RUN_COMPILEMESSAGES` - [`yes`|`no`] compile i18n messages when you first start the app (default `yes`)
-- `RUN_LOAD_DUMMY_DATA` - [`yes`|`no`] load the data from the `fixtures/` folders (default `no`)
+- `RUN_SEED_DATA` - [`yes`|`no`] load the data from the `fixtures/` folders (default `no`)
 - `RUN_COLLECT_STATIC` - [`yes`|`no`] collects static data like images/fonts (default `yes` - has no effect if `ENVIRONMENT != production`)
 - `RUN_DEV_SERVER` - [`yes`|`no`] starts the app in development mode with a more comprehensive debugging toolbox (default `no`)
 - `DATABASE_URL` - the URL Django will use to connect to the database (should be changed if you're not running through Docker)

@@ -20,7 +20,3 @@ if ENABLE_DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": show_toolbar,
     }
-
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
-    STATICFILES_DIRS = []
