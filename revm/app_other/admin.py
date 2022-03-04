@@ -93,6 +93,7 @@ class AdminOtherOffer(ImportExportModelAdmin):
                     "category",
                     "name",
                     "available_until",
+                    "has_transportation",
                     "county_coverage",
                     "town",
                     "added_on",
@@ -166,10 +167,7 @@ class AdminOtherRequest(ImportExportModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if (
-            request.user.is_superuser
-            or request.user.is_dsu_user()
-        ):
+        if request.user.is_superuser or request.user.is_dsu_user():
             return queryset
 
         if request.user.is_regular_user():

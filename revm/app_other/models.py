@@ -9,6 +9,7 @@ from revm_site.models import (
     CommonOfferModel,
     CommonRequestModel,
     CommonLocationModel,
+    CommonTransportableModel,
 )
 
 
@@ -16,7 +17,7 @@ class Category(CommonCategoryModel):
     ...
 
 
-class OtherOffer(CommonOfferModel, CommonLocationModel):
+class OtherOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
 

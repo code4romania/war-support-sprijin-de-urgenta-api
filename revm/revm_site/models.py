@@ -20,6 +20,13 @@ class CommonCategoryModel(models.Model):
         verbose_name_plural = _("categories")
 
 
+class CommonTransportableModel(models.Model):
+    has_transportation = models.BooleanField(_("has transportation"), blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
 class CommonCountyModel(models.Model):
     county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES, blank=True, null=True)
 
