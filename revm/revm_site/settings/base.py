@@ -20,7 +20,11 @@ env = environ.Env(
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
+    MEMCACHED_HOST=(str, "cache:11211"),
 )
+
+ADMIN_TITLE = _("Sprijin de Urgență")
+ADMIN_TITLE_SHORT = _("RVM")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
@@ -33,6 +37,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CORS_ORIGIN_ALLOW_ALL = False
 
 INSTALLED_APPS = [
+    "jazzmin",
     # django apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -46,14 +51,24 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     # third-party apps
     "rest_framework",
+    "rest_framework.authtoken",
     "storages",
     "corsheaders",
+    "dj_rest_auth",
+    "import_export",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
     # project apps
-    "donors",
-    "available_resources",
-    "account",
+    "app_account",
+    "app_item",
+    "app_transport_service",
+    "app_volunteering",
+    "app_other",
     # api documentation
     "drf_spectacular",
+    "multiselectfield",
 ]
 
 MIDDLEWARE = [
@@ -144,10 +159,19 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
+MEMCACHED_HOST = env("MEMCACHED_HOST")
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": MEMCACHED_HOST,
+    },
+}
+
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -199,14 +223,211 @@ COUNTIES_SHORTNAME = {
     "VS": "Vaslui",
     "VL": "Vâlcea",
     "VN": "Vrancea",
-    "RO": "Național",
 }
 
-AUTH_USER_MODEL = "account.CustomUser"
-LOGIN_REDIRECT_URL = "admin"
+RESOURCE_STATUS = (
+    ("NV", _("Not Verified")),
+    ("V", _("Verified")),
+    ("D", _("Deactivated")),
+    ("C", _("Complete")),
+)
+
+TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
+
+TRANSPORT_AVAILABILTY = (
+    ("WK", _("Disponibil in weekend")),
+    ("WD", _("Disponibil in timpul saptamanii")),
+    ("A", _("Disponibil oricand")),
+    ("FI", _("Intervale fixe")),
+)
+
+COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
+
+AUTH_USER_MODEL = "app_account.CustomUser"
+# LOGIN_REDIRECT_URL = "admin"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = "revm-auth-cookie"
+JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
 SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
 SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
 SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")
+
+REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"}
+
+# django-jazzmin
+# -------------------------------------------------------------------------------
+# django-jazzmin - https://django-jazzmin.readthedocs.io/configuration/
+
+JAZZMIN_SETTINGS = {
+    # title of the window
+    "site_title": ADMIN_TITLE,
+    # Title on the brand, and the login screen (19 chars max)
+    "site_header": ADMIN_TITLE,
+    # square logo to use for your site, must be present in static files, used for favicon and brand on top left
+    "site_logo": "images/De urgenta.svg",
+    "site_logo_classes": "site-logo",
+    # Welcome text on the login screen
+    "welcome_sign": "",
+    # Copyright on the footer
+    "copyright": "Code4Romania - War Task Force",
+    # The model admin to search from the search bar, search bar omitted if excluded
+    # "search_model": "donors.Donor",
+    # Field name on user model that contains avatar image
+    "user_avatar": None,
+    ############
+    # Top Menu #
+    ############
+    # Links to put along the top menu
+    "topmenu_links": [
+        # Url that gets reversed (Permissions can be added)
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        # external url that opens in a new window (Permissions can be added)
+        # {
+        #     "name": "View website",
+        #     "url": "https://github.com/farridav/django-jazzmin/issues",
+        #     "new_window": True,
+        # },
+        # model admin to link to (Permissions checked against model)
+        # {"model": "auth.User"},
+    ],
+    #############
+    # User Menu #
+    #############
+    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
+    "usermenu_links": [
+        # {
+        #     "name": "Support",
+        #     "url": "https://github.com/farridav/django-jazzmin/issues",
+        #     "new_window": True,
+        # },
+        {"model": "auth.user"},
+    ],
+    #############
+    # Side Menu #
+    #############
+    # Whether to display the side menu
+    "show_sidebar": True,
+    # Whether to aut expand the menu
+    "navigation_expanded": True,
+    # Hide these apps when generating side menu e.g (auth)
+    "hide_apps": [],
+    # Hide these models when generating side menu (e.g auth.user)
+    "hide_models": [],
+    # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
+    "order_with_respect_to": [
+        "app_item",
+        "app_item.itemoffer",
+        "app_item.itemrequest",
+        "app_item.category",
+        "app_item.textilecategory",
+        "app_transport_service",
+        "app_transport_service.transportserviceoffer",
+        "app_transport_service.transportservicerequest",
+        "app_transport_service.category",
+        "app_volunteering",
+        "app_volunteering.volunteeringoffer",
+        "app_volunteering.volunteeringrequest",
+        "app_volunteering.category",
+        "app_other",
+        "app_other.otheroffer",
+        "app_other.otherrequest",
+        "app_other.category",
+    ],
+    # Custom links to append to app groups, keyed on app name
+    "custom_links": {
+        "books": [
+            {
+                "name": "Make Messages",
+                "url": "make_messages",
+                "icon": "fas fa-comments",
+                "permissions": ["books.view_book"],
+            }
+        ]
+    },
+    # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free
+    # for a list of icon classes
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "account.EmailAddress": "fas fa-at",
+        "app_account.CustomUser": "fas fa-user",
+        "app_item.Category": "fas fa-cube",
+        "app_item.TextileCategory": "fas fa-cubes",
+        "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
+        "app_item.ItemRequest": "far fa-arrow-alt-circle-left",
+        "app_other.Category": "fas fa-cube",
+        "app_other.Subcategory": "fas fa-cubes",
+        "app_other.OtherOffer": "fas fa-arrow-alt-circle-right",
+        "app_other.OtherRequest": "far fa-arrow-alt-circle-left",
+        "app_volunteering.Type": "fas fa-cube",
+        "app_volunteering.VolunteeringOffer": "fas fa-arrow-alt-circle-right",
+        "app_volunteering.VolunteeringRequest": "far fa-arrow-alt-circle-left",
+        "app_transport_service.Category": "fas fa-cube",
+        "app_transport_service.TransportServiceOffer": "fas fa-arrow-alt-circle-right",
+        "app_transport_service.TransportServiceRequest": "far fa-arrow-alt-circle-left",
+    },
+    # Icons that are used when one is not manually specified
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    #################
+    # Related Modal #
+    #################
+    # Use modals instead of popups
+    "related_modal_active": False,
+    #############
+    # UI Tweaks #
+    #############
+    # Relative paths to custom CSS/JS scripts (must be present in static files)
+    "custom_css": "css/admin.css",
+    "custom_js": "js/admin.js",
+    # Whether to show the UI customizer on the sidebar
+    "show_ui_builder": DEBUG,
+    ###############
+    # Change view #
+    ###############
+    # Render out the change view as a single form, or in tabs, current options are
+    # - single
+    # - horizontal_tabs (default)
+    # - vertical_tabs
+    # - collapsible
+    # - carousel
+    "changeform_format": "single",
+    # override change forms on a per modeladmin basis
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "auth.group": "vertical_tabs",
+    },
+    # Add a language dropdown into the admin
+    "language_chooser": True,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
+    "theme": "default",
+    "dark_mode_theme": "darkly",
+}

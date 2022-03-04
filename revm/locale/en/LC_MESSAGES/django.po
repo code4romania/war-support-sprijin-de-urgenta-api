@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-28 10:14+0200\n"
+"POT-Creation-Date: 2022-03-04 01:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,230 +17,539 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: account/admin.py:40
+#: app_account/admin.py:11 app_account/admin.py:47
 msgid "Personal info"
 msgstr ""
 
-#: account/admin.py:41
-msgid "Profile data"
+#: app_account/admin.py:15
+msgid "Password"
 msgstr ""
 
-#: account/admin.py:42
+#: app_account/admin.py:19 app_account/admin.py:51
 msgid "Permissions"
 msgstr ""
 
-#: account/models.py:11 donors/models.py:10
-msgid "email address"
+#: app_account/admin.py:48
+msgid "Profile data"
 msgstr ""
 
-#: account/models.py:12 donors/models.py:11
-msgid "phone number"
+#: app_account/admin.py:59
+msgid "RVM User"
+msgstr "SdU User"
+
+#: app_account/apps.py:8
+msgid "Accounts"
 msgstr ""
 
-#: account/models.py:16
-msgid "user"
-msgstr ""
-
-#: account/models.py:17
-msgid "users"
-msgstr ""
-
-#: available_resources/models.py:9
-msgid "Box"
-msgstr ""
-
-#: available_resources/models.py:10
-msgid "Bottle"
-msgstr ""
-
-#: available_resources/models.py:15
-msgid "category name"
-msgstr ""
-
-#: available_resources/models.py:16
-msgid "category description"
-msgstr ""
-
-#: available_resources/models.py:22
-msgid "resource category"
-msgstr ""
-
-#: available_resources/models.py:23
-msgid "resource categories"
-msgstr ""
-
-#: available_resources/models.py:28
-msgid "subcategory name"
-msgstr ""
-
-#: available_resources/models.py:29
-msgid "subcategory description"
-msgstr ""
-
-#: available_resources/models.py:35
-msgid "resource subcategory"
-msgstr ""
-
-#: available_resources/models.py:36
-msgid "resource subcategories"
-msgstr ""
-
-#: available_resources/models.py:42
-msgid "resource name"
-msgstr ""
-
-#: available_resources/models.py:49 available_resources/models.py:125
-msgid "resource description"
-msgstr ""
-
-#: available_resources/models.py:50
-msgid "resource added on"
-msgstr ""
-
-#: available_resources/models.py:51
-msgid "resource available from"
-msgstr ""
-
-#: available_resources/models.py:52
-msgid "resource available until"
-msgstr ""
-
-#: available_resources/models.py:54
-msgid "resource finished"
-msgstr ""
-
-#: available_resources/models.py:56
-msgid "Is this resource completely used up"
-msgstr ""
-
-#: available_resources/models.py:69
-msgid "county"
-msgstr ""
-
-#: available_resources/models.py:77
-msgid "reuses left"
-msgstr ""
-
-#: available_resources/models.py:77
-msgid "How many times can this resource be used"
-msgstr ""
-
-#: available_resources/models.py:79
-msgid "is infinitely reusable"
-msgstr ""
-
-#: available_resources/models.py:80
-msgid "reusable resource currently under use"
-msgstr ""
-
-#: available_resources/models.py:81
-msgid "used by"
-msgstr ""
-
-#: available_resources/models.py:88
-msgid "usable weight"
-msgstr ""
-
-#: available_resources/models.py:89
-msgid "has refrigeration"
-msgstr ""
-
-#: available_resources/models.py:93
-msgid "total passengers"
-msgstr ""
-
-#: available_resources/models.py:94
-msgid "has disability access"
-msgstr ""
-
-#: available_resources/models.py:95
-msgid "has pet accommodation"
-msgstr ""
-
-#: available_resources/models.py:99
-msgid "unit type"
-msgstr ""
-
-#: available_resources/models.py:100
-msgid "total units"
-msgstr ""
-
-#: available_resources/models.py:101
-msgid "expiration date"
-msgstr ""
-
-#: available_resources/models.py:102
-msgid "pickup town"
-msgstr ""
-
-#: available_resources/models.py:114
-msgid "psychologist"
-msgstr ""
-
-#: available_resources/models.py:115
-msgid "medic"
-msgstr ""
-
-#: available_resources/models.py:116
-msgid "nurse"
-msgstr ""
-
-#: available_resources/models.py:117
-msgid "lawyer"
-msgstr ""
-
-#: available_resources/models.py:118
-msgid "cook"
-msgstr ""
-
-#: available_resources/models.py:119
-msgid "manager"
-msgstr ""
-
-#: available_resources/models.py:121
-msgid "volunteer type"
-msgstr ""
-
-#: donors/models.py:6
+#: app_account/models.py:13
 msgid "Individual"
 msgstr ""
 
-#: donors/models.py:6
+#: app_account/models.py:13
 msgid "Corporate"
 msgstr ""
 
-#: donors/models.py:6
+#: app_account/models.py:13
 msgid "Non-Profit"
 msgstr ""
 
-#: donors/models.py:6
+#: app_account/models.py:13
 msgid "Government"
 msgstr ""
 
-#: donors/models.py:8
-msgid "name"
+#: app_account/models.py:15
+msgid "bussiness name"
+msgstr "business name"
+
+#: app_account/models.py:16
+msgid "identification number"
 msgstr ""
 
-#: donors/models.py:9
-msgid "contact name"
+#: app_account/models.py:18
+msgid "email address"
 msgstr ""
 
-#: donors/models.py:12
+#: app_account/models.py:20 app_transport_service/models.py:29
+#: app_volunteering/models.py:22 app_volunteering/models.py:37
+#: app_volunteering/models.py:51
 msgid "type"
 msgstr ""
 
-#: donors/models.py:13
+#: app_account/models.py:21
+msgid "phone number"
+msgstr ""
+
+#: app_account/models.py:22
+msgid "address"
+msgstr ""
+
+#: app_account/models.py:23
 msgid "details"
 msgstr ""
 
-#: revm_site/settings/base.py:130
+#: app_account/models.py:24
+msgid "general user description"
+msgstr ""
+
+#: app_account/models.py:29
+msgid "user"
+msgstr ""
+
+#: app_account/models.py:30
+msgid "users"
+msgstr ""
+
+#: app_account/serializers.py:33
+msgid "A user is already registered with this e-mail address."
+msgstr ""
+
+#: app_account/serializers.py:42
+msgid "The two password fields didn't match."
+msgstr ""
+
+#: app_item/admin.py:18
+msgid "Deactivate selected offers"
+msgstr ""
+
+#: app_item/admin.py:103 app_item/admin.py:192
+msgid "Product details"
+msgstr ""
+
+#: app_item/admin.py:121 app_item/admin.py:209
+msgid "Where it is needed"
+msgstr ""
+
+#: app_item/apps.py:8
+msgid "Item"
+msgstr ""
+
+#: app_item/apps.py:9
+msgid "Items"
+msgstr ""
+
+#: app_item/models.py:23
+msgid "Textile Category"
+msgstr ""
+
+#: app_item/models.py:24
+msgid "Textile Categories"
+msgstr ""
+
+#: app_item/models.py:28 app_item/models.py:42 app_item/models.py:64
+#: app_item/models.py:80 app_other/models.py:20 app_other/models.py:34
+#: app_transport_service/models.py:20 app_transport_service/models.py:63
+#: revm_site/models.py:19
+msgid "category"
+msgstr ""
+
+#: app_item/models.py:31 app_item/models.py:67
+msgid "Product"
+msgstr ""
+
+#: app_item/models.py:32 app_item/models.py:69 app_item/models.py:105
+msgid "total units"
+msgstr ""
+
+#: app_item/models.py:33 app_item/models.py:71
+msgid "packaging"
+msgstr ""
+
+#: app_item/models.py:34 app_item/models.py:72
+msgid "unit type"
+msgstr ""
+
+#: app_item/models.py:35
+msgid "expiration date"
+msgstr ""
+
+#: app_item/models.py:37 app_item/models.py:75
+msgid "Stock"
+msgstr ""
+
+#: app_item/models.py:37
+msgid "How many units of this type are left"
+msgstr ""
+
+#: app_item/models.py:44 app_item/models.py:82
+msgid "age"
+msgstr ""
+
+#: app_item/models.py:45 app_item/models.py:83
+msgid "other"
+msgstr ""
+
+#: app_item/models.py:48 app_item/models.py:86
+msgid "capacity"
+msgstr ""
+
+#: app_item/models.py:54
+msgid "item offer"
+msgstr ""
+
+#: app_item/models.py:55
+msgid "item offers"
+msgstr ""
+
+#: app_item/models.py:75
+msgid "How many units are still needed"
+msgstr ""
+
+#: app_item/models.py:92
+msgid "item request"
+msgstr ""
+
+#: app_item/models.py:93
+msgid "item requests"
+msgstr ""
+
+#: app_item/models.py:102 app_other/models.py:46
+#: app_transport_service/models.py:93
+msgid "donation"
+msgstr ""
+
+#: app_item/models.py:103 app_other/models.py:47
+#: app_transport_service/models.py:96
+msgid "request"
+msgstr ""
+
+#: app_item/models.py:106 app_transport_service/models.py:99
+#: revm_site/models.py:38
+msgid "description"
+msgstr ""
+
+#: app_item/models.py:108 revm_site/models.py:40
+msgid "added on"
+msgstr ""
+
+#: app_item/models.py:111 app_item/models.py:112 app_other/models.py:51
+#: app_other/models.py:52 app_transport_service/models.py:102
+#: app_transport_service/models.py:103 app_volunteering/models.py:54
+#: app_volunteering/models.py:55
+msgid "Offer - Request"
+msgstr "Allocate available resources"
+
+#: app_other/admin.py:44 app_transport_service/admin.py:50
+#: app_volunteering/admin.py:44
+msgid "Offer details"
+msgstr ""
+
+#: app_other/admin.py:91 app_transport_service/admin.py:156
+#: app_volunteering/admin.py:89
+msgid "Request details"
+msgstr ""
+
+#: app_other/apps.py:8 app_other/apps.py:9
+msgid "Other"
+msgstr ""
+
+#: app_other/models.py:21
+msgid "resource name"
+msgstr ""
+
+#: app_other/models.py:23
+msgid "resource available until"
+msgstr ""
+
+#: app_other/models.py:29
+msgid "other offer"
+msgstr ""
+
+#: app_other/models.py:30
+msgid "other offers"
+msgstr ""
+
+#: app_other/models.py:35 app_transport_service/models.py:42
+msgid "name"
+msgstr ""
+
+#: app_other/models.py:41 app_other/models.py:42
+msgid "other request"
+msgstr ""
+
+#: app_transport_service/admin.py:60 app_transport_service/admin.py:71
+#: app_transport_service/admin.py:166 app_transport_service/admin.py:177
+msgid "Transport details"
+msgstr ""
+
+#: app_transport_service/admin.py:82
+msgid "Availability"
+msgstr ""
+
+#: app_transport_service/admin.py:94
+msgid "Driver details"
+msgstr ""
+
+#: app_transport_service/admin.py:105
+msgid "Offer status"
+msgstr ""
+
+#: app_transport_service/admin.py:188
+msgid "Location details"
+msgstr ""
+
+#: app_transport_service/admin.py:199
+msgid "Request status"
+msgstr ""
+
+#: app_transport_service/apps.py:8
+msgid "Transport service"
+msgstr ""
+
+#: app_transport_service/apps.py:9
+msgid "Transport services"
+msgstr ""
+
+#: app_transport_service/models.py:23 app_transport_service/models.py:66
+msgid "Capacity"
+msgstr ""
+
+#: app_transport_service/models.py:24 app_transport_service/models.py:67
+msgid "weight unit"
+msgstr ""
+
+#: app_transport_service/models.py:25 app_transport_service/models.py:68
+msgid "has refrigeration"
+msgstr ""
+
+#: app_transport_service/models.py:33
+msgid "availability"
+msgstr ""
+
+#: app_transport_service/models.py:38
+msgid "from hour"
+msgstr ""
+
+#: app_transport_service/models.py:39
+msgid "until hour"
+msgstr ""
+
+#: app_transport_service/models.py:43
+msgid "contact"
+msgstr ""
+
+#: app_transport_service/models.py:44
+msgid "id"
+msgstr ""
+
+#: app_transport_service/models.py:45
+msgid "car registration number"
+msgstr ""
+
+#: app_transport_service/models.py:48
+msgid "available seats"
+msgstr ""
+
+#: app_transport_service/models.py:49 app_transport_service/models.py:72
+msgid "has disabled access"
+msgstr ""
+
+#: app_transport_service/models.py:50 app_transport_service/models.py:73
+msgid "pets allowed"
+msgstr ""
+
+#: app_transport_service/models.py:56
+msgid "transport service offer"
+msgstr ""
+
+#: app_transport_service/models.py:58
+msgid "transport service offers"
+msgstr ""
+
+#: app_transport_service/models.py:71
+msgid "needed seats"
+msgstr ""
+
+#: app_transport_service/models.py:76
+msgid "From county"
+msgstr ""
+
+#: app_transport_service/models.py:77 app_transport_service/models.py:79
+msgid "From city"
+msgstr ""
+
+#: app_transport_service/models.py:78
+msgid "To county"
+msgstr ""
+
+#: app_transport_service/models.py:85 app_transport_service/models.py:87
+msgid "transport service request"
+msgstr ""
+
+#: app_transport_service/models.py:98
+msgid "transport date"
+msgstr ""
+
+#: app_volunteering/apps.py:8 app_volunteering/apps.py:9
+msgid "Volunteering"
+msgstr ""
+
+#: app_volunteering/models.py:10
+msgid "type name"
+msgstr ""
+
+#: app_volunteering/models.py:11
+msgid "type description"
+msgstr ""
+
+#: app_volunteering/models.py:17
+msgid "volunteering type"
+msgstr ""
+
+#: app_volunteering/models.py:18
+msgid "volunteering types"
+msgstr ""
+
+#: app_volunteering/models.py:24
+msgid "volunteer available until"
+msgstr ""
+
+#: app_volunteering/models.py:30
+msgid "volunteering offer"
+msgstr ""
+
+#: app_volunteering/models.py:32
+msgid "volunteering offers"
+msgstr ""
+
+#: app_volunteering/models.py:43 app_volunteering/models.py:45
+msgid "volunteering request"
+msgstr ""
+
+#: app_volunteering/models.py:50
+msgid "made_by"
+msgstr ""
+
+#: revm_site/admin.py:12
+msgid "Allocate this resource to a request"
+msgstr ""
+
+#: revm_site/admin.py:16
+msgid "Allocate from the available offers"
+msgstr ""
+
+#: revm_site/models.py:11
+msgid "category name"
+msgstr ""
+
+#: revm_site/models.py:12
+msgid "category description"
+msgstr ""
+
+#: revm_site/models.py:20
+msgid "categories"
+msgstr ""
+
+#: revm_site/models.py:24
+msgid "county coverage"
+msgstr ""
+
+#: revm_site/models.py:31
+msgid "town"
+msgstr ""
+
+#: revm_site/models.py:42
+msgid "status"
+msgstr ""
+
+#: revm_site/models.py:50
+msgid "donor"
+msgstr ""
+
+#: revm_site/models.py:58
+msgid "requested by"
+msgstr ""
+
+#: revm_site/settings/base.py:26
+msgid "Sprijin de Urgență"
+msgstr "Sprijin de Urgență"
+
+#: revm_site/settings/base.py:27
+msgid "RVM"
+msgstr "E-S"
+
+#: revm_site/settings/base.py:145
 msgid "Romanian"
 msgstr ""
 
-#: revm_site/settings/base.py:131
+#: revm_site/settings/base.py:146
 msgid "English"
 msgstr ""
 
-#: revm_site/urls.py:23
-msgid "Resource Volunteer Management Admin"
+#: revm_site/settings/base.py:229
+msgid "Not Verified"
+msgstr ""
+
+#: revm_site/settings/base.py:230
+msgid "Verified"
+msgstr ""
+
+#: revm_site/settings/base.py:231
+msgid "Deactivated"
+msgstr ""
+
+#: revm_site/settings/base.py:232
+msgid "Complete"
+msgstr ""
+
+#: revm_site/settings/base.py:235
+msgid "National"
+msgstr ""
+
+#: revm_site/settings/base.py:235 revm_site/utils.py:7
+msgid "County"
+msgstr ""
+
+#: revm_site/settings/base.py:238
+msgid "Disponibil in weekend"
+msgstr ""
+
+#: revm_site/settings/base.py:239
+msgid "Disponibil in timpul saptamanii"
+msgstr ""
+
+#: revm_site/settings/base.py:240
+msgid "Disponibil oricand"
+msgstr ""
+
+#: revm_site/settings/base.py:241
+msgid "Intervale fixe"
+msgstr ""
+
+#: templates/app_account/user_offers.html:14
+#: templates/app_account/user_offers.html:22
+msgid "Delete"
+msgstr ""
+
+#: templates/app_account/user_offers.html:29
+#, python-format
+msgid ""
+"Deleting the %(object_name)s '%(escaped_object)s' would result in deleting "
+"related objects, but your account doesn't have permission to delete the "
+"following types of objects:"
+msgstr ""
+
+#: templates/app_account/user_offers.html:36
+#, python-format
+msgid ""
+"Deleting the %(object_name)s '%(escaped_object)s' would require deleting the "
+"following protected related objects:"
+msgstr ""
+
+#: templates/app_account/user_offers.html:43
+#, python-format
+msgid ""
+"Are you sure you want to delete the %(object_name)s '%(escaped_object)s'? "
+"All of the following related items will be deleted:"
+msgstr ""
+
+#: templates/app_account/user_offers.html:46
+msgid "Objects"
+msgstr ""
+
+#: templates/app_account/user_offers.html:56
+msgid "Yes, I’m sure"
+msgstr ""
+
+#: templates/app_account/user_offers.html:59
+msgid "No, take me back"
 msgstr ""

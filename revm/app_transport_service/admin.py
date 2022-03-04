@@ -1,0 +1,221 @@
+from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
+
+from app_account.models import USERS_GROUP, DSU_GROUP
+from app_transport_service import models
+from revm_site.admin import CommonRequestInline, CommonOfferInline
+from revm_site.utils import CountyFilter
+
+
+class TransportOfferInline(CommonOfferInline):
+    model = models.ResourceRequest
+
+
+class TransportRequestInline(CommonRequestInline):
+    model = models.ResourceRequest
+
+
+@admin.register(models.Category)
+class AdminCategoryRequest(admin.ModelAdmin):
+    list_display = ("id", "name", "description")
+    list_display_links = ("id", "name")
+    search_fields = ["name"]
+
+    ordering = ("pk",)
+
+    view_on_site = False
+
+
+@admin.register(models.TransportServiceOffer)
+class AdminTransportServiceOffer(admin.ModelAdmin):
+    list_display = ("id", "category", "capacitate", "type", "availability", "county_coverage", "status")
+    list_display_links = ("id", "category")
+    list_filter = ("category", "status", "availability", CountyFilter)
+    search_fields = []
+    readonly_fields = ("added_on",)
+    inlines = (TransportOfferInline,)
+
+    ordering = ("pk",)
+
+    view_on_site = False
+    change_form_template = "admin/transport_offer_admin.html"
+
+    def capacitate(self, obj):
+        if obj.available_seats:
+            return f"{obj.available_seats} locuri"
+        return f"{obj.weight_capacity} {obj.weight_unit}"
+
+    fieldsets = (
+        (
+            _("Offer details"),
+            {
+                "fields": (
+                    "donor",
+                    "category",
+                    "description",
+                )
+            },
+        ),
+        (
+            _("Transport details"),
+            {
+                "fields": (
+                    "weight_capacity",
+                    "weight_unit",
+                    "has_refrigeration",
+                ),
+                "classes": ("transport-marfa",),
+            },
+        ),
+        (
+            _("Transport details"),
+            {
+                "fields": (
+                    "available_seats",
+                    "has_disabled_access",
+                    "pets_allowed",
+                ),
+                "classes": ("transport-persoane",),
+            },
+        ),
+        (
+            _("Availability"),
+            {
+                "fields": (
+                    "type",
+                    "county_coverage",
+                    "availability",
+                    "availability_interval_from",
+                    "availability_interval_to",
+                )
+            },
+        ),
+        (
+            _("Driver details"),
+            {
+                "fields": (
+                    "driver_name",
+                    "driver_contact",
+                    "driver_id",
+                    "car_registration_number",
+                )
+            },
+        ),
+        (
+            _("Offer status"),
+            {
+                "fields": (
+                    "status",
+                    "added_on",
+                ),
+            },
+        ),
+    )
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(donor=request.user)
+
+        return queryset
+
+
+@admin.register(models.TransportServiceRequest)
+class AdminTransportServiceRequest(admin.ModelAdmin):
+    list_display = ("id", "category", "capacitate", "de_la", "la", "status")
+    list_display_links = ("id", "category")
+    search_fields = []
+    readonly_fields = ["added_on"]
+    inlines = (TransportRequestInline,)
+
+    ordering = ("pk",)
+    view_on_site = False
+
+    change_form_template = "admin/transport_offer_admin.html"
+
+    def capacitate(self, obj):
+        if obj.available_seats:
+            return f"{obj.available_seats} locuri"
+        return f"{obj.weight_capacity} {obj.weight_unit}"
+
+    def de_la(self, obj):
+        return f"{obj.from_city} ({obj.from_county})"
+
+    def la(self, obj):
+        return f"{obj.to_city} ({obj.to_county})"
+
+    fieldsets = (
+        (
+            _("Request details"),
+            {
+                "fields": (
+                    "made_by",
+                    "category",
+                    "description",
+                )
+            },
+        ),
+        (
+            _("Transport details"),
+            {
+                "fields": (
+                    "weight_capacity",
+                    "weight_unit",
+                    "has_refrigeration",
+                ),
+                "classes": ("transport-marfa",),
+            },
+        ),
+        (
+            _("Transport details"),
+            {
+                "fields": (
+                    "available_seats",
+                    "has_disabled_access",
+                    "pets_allowed",
+                ),
+                "classes": ("transport-persoane",),
+            },
+        ),
+        (
+            _("Location details"),
+            {
+                "fields": (
+                    "from_county",
+                    "from_city",
+                    "to_county",
+                    "to_city",
+                )
+            },
+        ),
+        (
+            _("Request status"),
+            {
+                "fields": (
+                    "status",
+                    "added_on",
+                ),
+            },
+        ),
+    )
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+
+        if not self.has_view_or_change_permission(request):
+            queryset = queryset.none()
+
+        if request.user.is_superuser or request.user.groups.filter(name=DSU_GROUP).exists():
+            return queryset
+
+        if request.user.groups.filter(name=USERS_GROUP).exists():
+            return queryset.filter(made_by=request.user)
+
+        return queryset
