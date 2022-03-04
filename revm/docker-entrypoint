@@ -30,6 +30,9 @@ if [[ ${RUN_SEED_DATA} = "yes" ]] ; then
   ./manage.py seed_item_data
   ./manage.py seed_transport_service_categories
   ./manage.py seed_volunteering_types
+
+  ./manage.py seed_schedule
+
 fi
 
 if [[ ${RUN_COLLECT_STATIC} = "yes" ]] ; then
