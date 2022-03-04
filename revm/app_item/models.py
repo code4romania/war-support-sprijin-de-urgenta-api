@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.functional import lazy
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -53,7 +52,7 @@ class ItemOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel)
 
     class Meta:
         verbose_name = _("item offer")
-        verbose_name_plural = lazy(lambda: "{} ({})".format(_("item offers"), ItemOffer.objects.count()), str)()
+        verbose_name_plural = _("item offers")
 
     def save(self, *args, **kwargs):
         if not self.stock:
@@ -91,7 +90,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("item request")
-        verbose_name_plural = lazy(lambda: "{} ({})".format(_("item requests"), ItemRequest.objects.count()), str)()
+        verbose_name_plural = _("item requests")
 
     def save(self, *args, **kwargs):
         if not self.stock:
