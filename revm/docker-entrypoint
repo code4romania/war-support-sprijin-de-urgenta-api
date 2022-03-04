@@ -37,6 +37,9 @@ if [[ ${RUN_COLLECT_STATIC} = "yes" ]] ; then
   ./manage.py collectstatic --no-input
 fi
 
+echo "Starting Django Q Scheduler via supervisor"
+supervisord -c supervisord.conf
+
 if [[ ${RUN_DEV_SERVER} = "yes" ]] ; then
   echo "Start web server on ${API_PORT}"
   ./manage.py runserver_plus "0.0.0.0:${API_PORT}"

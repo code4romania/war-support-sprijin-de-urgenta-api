@@ -30,6 +30,8 @@ RUN if [ "${ENVIRONMENT}" = "production" ]; \
     else pip install -r requirements-dev.txt; \
     fi
 
+COPY ./supervisord.conf /
+
 WORKDIR /code/
 
 COPY ./docker-entrypoint /

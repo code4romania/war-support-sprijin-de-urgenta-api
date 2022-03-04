@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
+    "django_q",
     # project apps
     "static_custom",
     "app_account",
@@ -271,6 +272,24 @@ SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
 SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")
 
 REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"}
+
+
+# django-q https://django-q.readthedocs.io/en/latest/configure.html
+
+Q_CLUSTER = {
+    'name': 'SdU',
+    'recycle': 500,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': {
+        'host': 'redis',
+        'port': 6379,
+        'db': 0, }
+}
 
 # django-jazzmin
 # -------------------------------------------------------------------------------

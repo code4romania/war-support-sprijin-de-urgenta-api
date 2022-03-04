@@ -3,6 +3,10 @@ django-debug-toolbar
 django-extensions
 werkzeug
 
+# data analysis
+pandas
+xlsxwriter
+
 # utils
 pdbpp
 ipython

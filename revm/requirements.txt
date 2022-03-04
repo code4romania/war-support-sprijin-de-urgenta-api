@@ -63,6 +63,10 @@ djangorestframework-simplejwt==5.0.0
     # via -r requirements.in
 drf-spectacular==0.21.2
     # via -r requirements.in
+django-q==1.3.9
+    # via -r requirements.in
+supervisor==4.2.4
+    # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
 gevent==21.12.0
@@ -133,6 +137,9 @@ zope-event==4.5.0
     # via gevent
 zope-interface==5.4.0
     # via gevent
+pandas==1.4.1
+xlsxwriter==3.0.3
+django-q-email==5.0.1
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

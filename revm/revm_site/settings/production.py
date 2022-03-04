@@ -4,6 +4,6 @@ DEBUG = False
 
 SECRET_KEY = env.str("SECRET_KEY")
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django_q_email.backend.DjangoQBackend"
 
 ALLOWED_HOSTS = ["*"]
