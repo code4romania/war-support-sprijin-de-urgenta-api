@@ -33,6 +33,27 @@ DEBUG = env("ENVIRONMENT") != "production"
 
 ENABLE_DEBUG_TOOLBAR = bool(DEBUG and env("ENABLE_DEBUG_TOOLBAR"))
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CORS_ORIGIN_ALLOW_ALL = False
 
