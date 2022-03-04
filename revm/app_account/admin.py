@@ -52,9 +52,7 @@ class AdminCustomUser(DjangoUserAdmin):
                 (_("Profile data"), {"fields": ("phone_number", "address")}),
                 (
                     _("Permissions"),
-                    {
-                        "fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")
-                    },
+                    {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")},
                 ),
                 (
                     _("RVM User"),

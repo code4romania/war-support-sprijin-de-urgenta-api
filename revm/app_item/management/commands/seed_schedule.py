@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class Command(BaseCommand):
-    help="Seed Schedules for Django Q"
+    help = "Seed Schedules for Django Q"
 
     def handle(self, *args, **kwargs):
 
@@ -31,10 +31,6 @@ class Command(BaseCommand):
                     next_run=next_run,
                 )
         except Exception as e:
-            self.stdout.write(
-                self.style.ERROR(f"Error seeding schedules -> {e}")
-            )
+            self.stdout.write(self.style.ERROR(f"Error seeding schedules -> {e}"))
 
-        self.stdout.write(
-            self.style.SUCCESS("Seeded Schedules successfully")
-        )
+        self.stdout.write(self.style.SUCCESS("Seeded Schedules successfully"))
