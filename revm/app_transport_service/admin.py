@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_transport_service import models
@@ -44,7 +45,7 @@ class TransportRequestInline(CommonRequestInline):
         return super().has_delete_permission(request, obj)
 
 @admin.register(models.Category)
-class AdminCategoryRequest(admin.ModelAdmin):
+class AdminCategoryRequest(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -55,7 +56,7 @@ class AdminCategoryRequest(admin.ModelAdmin):
 
 
 @admin.register(models.TransportServiceOffer)
-class AdminTransportServiceOffer(admin.ModelAdmin):
+class AdminTransportServiceOffer(ImportExportModelAdmin):
     list_display = ("id", "category", "capacitate", "type", "availability", "county_coverage", "status")
     list_display_links = ("id", "category")
     list_filter = ("category", "status", "availability", CountyFilter)
@@ -168,7 +169,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
 
 
 @admin.register(models.TransportServiceRequest)
-class AdminTransportServiceRequest(admin.ModelAdmin):
+class AdminTransportServiceRequest(ImportExportModelAdmin):
     list_display = ("id", "category", "capacitate", "de_la", "la", "status")
     list_display_links = ("id", "category")
     search_fields = []
