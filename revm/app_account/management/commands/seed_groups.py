@@ -5,7 +5,6 @@ from app_account.models import USERS_GROUP, DSU_GROUP, DSU_MANAGER_GROUP
 
 
 # NOTE restricted for current user via admin `get_queryset` if current user in USER_GROUP, no restrictions for DSU_GROUP
-# TODO #78 Special permissions
 user_and_dsu_permissions = [
     "view_customuser",
     "view_itemoffer",
