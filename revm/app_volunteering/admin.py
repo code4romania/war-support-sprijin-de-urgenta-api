@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_volunteering import models
@@ -44,7 +45,7 @@ class VolunteeringRequestInline(CommonRequestInline):
         return super().has_delete_permission(request, obj)
 
 @admin.register(models.Type)
-class AdminTypeRequest(admin.ModelAdmin):
+class AdminTypeRequest(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -55,7 +56,7 @@ class AdminTypeRequest(admin.ModelAdmin):
 
 
 @admin.register(models.VolunteeringOffer)
-class AdminVolunteeringOffer(admin.ModelAdmin):
+class AdminVolunteeringOffer(ImportExportModelAdmin):
     list_display = ("id", "donor", "type", "county_coverage", "town", "available_until", "status")
     list_display_links = ("id", "donor")
     list_filter = ["type", CountyFilter, "status"]
@@ -112,7 +113,7 @@ class AdminVolunteeringOffer(admin.ModelAdmin):
 
 
 @admin.register(models.VolunteeringRequest)
-class AdminVolunteeringRequest(admin.ModelAdmin):
+class AdminVolunteeringRequest(ImportExportModelAdmin):
     list_display = ("id", "made_by", "type", "county_coverage", "town", "status")
     list_display_links = ("id", "made_by")
     list_filter = ["type", CountyFilter, "status"]

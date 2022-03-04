@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db.models import TextField
 from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
+from import_export.admin import ImportExportModelAdmin
 
 from app_item import models
 from app_account.models import  CustomUser, DSU_GROUP
@@ -63,7 +64,7 @@ class ItemRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategory(admin.ModelAdmin):
+class AdminCategory(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -74,7 +75,7 @@ class AdminCategory(admin.ModelAdmin):
 
 
 @admin.register(models.TextileCategory)
-class AdminTextileCategory(admin.ModelAdmin):
+class AdminTextileCategory(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -85,8 +86,7 @@ class AdminTextileCategory(admin.ModelAdmin):
 
 
 @admin.register(models.ItemOffer)
-class AdminItemOffer(admin.ModelAdmin):
-
+class AdminItemOffer(ImportExportModelAdmin):
     list_display = [
         "id",
         "category",
@@ -200,7 +200,7 @@ class AdminItemOffer(admin.ModelAdmin):
 
 
 @admin.register(models.ItemRequest)
-class AdminItemRequest(admin.ModelAdmin):
+class AdminItemRequest(ImportExportModelAdmin):
     list_display = [
         "id",
         "category",

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_other import models
@@ -46,7 +47,7 @@ class OtherRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategoryRequest(admin.ModelAdmin):
+class AdminCategoryRequest(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -57,7 +58,7 @@ class AdminCategoryRequest(admin.ModelAdmin):
 
 
 @admin.register(models.OtherOffer)
-class AdminOtherOffer(admin.ModelAdmin):
+class AdminOtherOffer(ImportExportModelAdmin):
     list_display = (
         "id",
         "category",
@@ -123,7 +124,7 @@ class AdminOtherOffer(admin.ModelAdmin):
 
 
 @admin.register(models.OtherRequest)
-class AdminOtherRequest(admin.ModelAdmin):
+class AdminOtherRequest(ImportExportModelAdmin):
     list_display = ("id", "category", "name", "county_coverage", "town", "status")
     list_display_links = ("id", "name")
     search_fields = ["name"]
