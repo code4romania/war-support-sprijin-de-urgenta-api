@@ -5,6 +5,11 @@ djangorestframework
 django-cors-headers
 django-storages
 
+# scheduler
+django-q
+django-q-email
+supervisor
+
 # authentication
 dj-rest-auth==2.2.3
 dj-rest-auth[with_social]
@@ -20,6 +25,10 @@ pymemcache
 # database
 psycopg2<2.10
 dj-database-url
+
+# data analysis
+pandas
+xlsxwriter
 
 # file handling
 whitenoise

@@ -23,6 +23,7 @@ seed_data:                        ## seed categories and subcategories
 	docker-compose exec revm ./manage.py seed_item_data
 	docker-compose exec revm ./manage.py seed_transport_service_categories
 	docker-compose exec revm ./manage.py seed_volunteering_types
+	docker-compose exec revm ./manage.py seed_schedule
 
 seed: seed_groups seed_superuser seed_data    ## create a superuser and seed the data
 

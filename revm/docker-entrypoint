@@ -30,12 +30,18 @@ if [[ ${RUN_SEED_DATA} = "yes" ]] ; then
   ./manage.py seed_item_data
   ./manage.py seed_transport_service_categories
   ./manage.py seed_volunteering_types
+
+  ./manage.py seed_schedule
+
 fi
 
 if [[ ${RUN_COLLECT_STATIC} = "yes" ]] ; then
   echo "Collect static files (this will take a while)"
   ./manage.py collectstatic --no-input
 fi
+
+echo "Starting Django Q Scheduler via supervisor"
+supervisord -c supervisord.conf
 
 if [[ ${RUN_DEV_SERVER} = "yes" ]] ; then
   echo "Start web server on ${API_PORT}"
