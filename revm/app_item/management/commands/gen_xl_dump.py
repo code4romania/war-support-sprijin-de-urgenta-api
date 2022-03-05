@@ -23,85 +23,60 @@ class Command(BaseCommand):
         now = timezone.now()
         hours_ago_24 = now - timezone.timedelta(hours=24)
 
-        item_offers = pd.DataFrame(
-            ItemOffer.objects.filter(added_on__gte=hours_ago_24).values(
-                "county_coverage",
-                "town",
-                "description",
-                "added_on",
-                "status",
-                "donor__username",
-                "category__name",
-                "name",
-                "quantity",
-                "packaging_type",
-                "unit_type",
-                "expiration_date",
-                "stock",
-                "textile_category__name",
-                "kids_age",
-                "other_textiles",
-                "tent_capacity",
-            )
-        )
-        item_offers.columns = [
-            "Judete Acoperite",
-            "Oras",
-            "Descriere",
-            "Adaugat in",
-            "Stare",
-            "Donator",
-            "Categorie",
-            "Nume",
-            "Cantitate",
-            "Ambalaj",
-            "UM",
-            "Data de Expirare",
-            "Stoc",
-            "Categorie Textile",
-            "Varsta Copii",
-            "Alte Textile",
-            "Capacitate Cort",
-        ]
-        item_requests = pd.DataFrame(
-            ItemRequest.objects.filter(added_on__gte=hours_ago_24).values(
-                "county_coverage",
-                "town",
-                "description",
-                "added_on",
-                "status",
-                "made_by__username",
-                "category__name",
-                "name",
-                "quantity",
-                "packaging_type",
-                "unit_type",
-                "stock",
-                "textile_category__name",
-                "kids_age",
-                "other_textiles",
-                "tent_capacity",
-            )
-        )
+        item_offer_data_mapping = {
+            "county_coverage": "Judete Acoperite",
+            "town": "Oras",
+            "description": "Descriere",
+            "added_on": "Adaugat in",
+            "status": "Stare",
+            "donor__username": "Donator",
+            "category__name": "Categorie",
+            "name": "Nume",
+            "quantity": "Cantitate",
+            "packaging_type": "Ambalaj",
+            "unit_type": "UM",
+            "expiration_date": "Data de Expirare",
+            "stock": "Stoc",
+            "textile_category__name": "Categorie Textile",
+            "kids_age": "Varsta Copii",
+            "other_textiles": "Alte Textile",
+            "tent_capacity": "Capacitate Cort",
+        }
 
-        item_requests.columns = [
-            "Judete Acoperite",
-            "Oras",
-            "Descriere",
-            "Adaugat in",
-            "Stare",
-            "Oferit de",
-            "Categorie",
-            "Nume",
-            "Cantitate",
-            "Ambalaj",
-            "UM",
-            "Stoc",
-            "Categorie Textile",
-            "Varsta Copii",
-            "Alte Textile",
-            "Capacitate Cort",
-        ]
+        item_offer_data = ItemOffer.objects.filter(added_on__gte=hours_ago_24).values(*item_offer_data_mapping.keys())
+        offers_data = (
+            item_offer_data if len(item_offer_data) > 0 else pd.np.empty((0, len(item_offer_data_mapping.keys())))
+        )
+        item_offers = pd.DataFrame(offers_data)
+        item_offers.columns = list(item_offer_data_mapping.values())
+
+        item_request_data_mapping = {
+            "county_coverage": "Judete Acoperite",
+            "town": "Oras",
+            "description": "Descriere",
+            "added_on": "Adaugat in",
+            "status": "Stare",
+            "made_by__username": "Oferit de",
+            "category__name": "Categorie",
+            "name": "Nume",
+            "quantity": "Cantitate",
+            "packaging_type": "Ambalaj",
+            "unit_type": "UM",
+            "stock": "Stoc",
+            "textile_category__name": "Categorie Textile",
+            "kids_age": "Varsta Copii",
+            "other_textiles": "Alte Textile",
+            "tent_capacity": "Capacitate Cort",
+        }
+
+        item_request_data = ItemRequest.objects.filter(added_on__gte=hours_ago_24).values(
+            *item_request_data_mapping.keys()
+        )
+        requests_data = (
+            item_request_data if len(item_request_data) > 0 else pd.np.empty((0, len(item_offer_data_mapping.keys())))
+        )
+        item_requests = pd.DataFrame(requests_data)
+        item_requests.columns = list(item_request_data_mapping.values())
 
         data = [
             (item_offers, "Donatii Produse"),
@@ -113,6 +88,8 @@ class Command(BaseCommand):
         writer = pd.ExcelWriter(bio, engine="xlsxwriter")
 
         for df, sheet in data:
+            if df.size == 0:
+                continue
             df["Judete Acoperite"] = df["Judete Acoperite"].agg(lambda x: ", ".join(map(str, x)))
             df["Adaugat in"] = df["Adaugat in"].dt.tz_localize(None)
 
