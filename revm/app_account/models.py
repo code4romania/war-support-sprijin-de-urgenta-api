@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group
-from django.utils.translation import gettext_lazy as _
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 USERS_GROUP = "Users"
 DSU_GROUP = "DSU"
@@ -35,6 +36,10 @@ class CustomUser(AbstractUser):
     )
 
     is_validated = models.BooleanField(default=False)
+
+    county = models.CharField(
+        _("county coverage"), max_length=2, choices=settings.COUNTY_CHOICES, blank=True, null=True
+    )
 
     class Meta:
         verbose_name = _("user")
