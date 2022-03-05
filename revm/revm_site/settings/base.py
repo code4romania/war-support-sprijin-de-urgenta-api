@@ -19,6 +19,7 @@ env = environ.Env(
     ENVIRONMENT=(str, "production"),
     DEBUG=(str, "no"),
     ENABLE_DEBUG_TOOLBAR=(str, "no"),
+    DEV_ENABLE_EMAIL_SMTP=(str, "no"),
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),

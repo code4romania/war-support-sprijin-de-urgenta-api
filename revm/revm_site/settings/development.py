@@ -6,7 +6,10 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
 SECRET_KEY = "secret"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+if env("DEV_ENABLE_EMAIL_SMTP") == "yes":
+    EMAIL_BACKEND = "django_q_email.backends.DjangoQBackend"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 INSTALLED_APPS = ["whitenoise.runserver_nostatic", "django_extensions"] + INSTALLED_APPS
 
