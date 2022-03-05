@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
     def __init__(self):
         super().__init__()
-        self.now = timezone.now()
+        self.now = timezone.localtime()
         self.hours_ago_24 = self.now - timezone.timedelta(hours=24)
 
     def add_arguments(self, parser):
@@ -59,35 +59,36 @@ class Command(BaseCommand):
             df.to_excel(writer, sheet_name=sheet, index=False)
 
         writer.save()
-        bio.seek(0)
 
-        if send_email or save_to_file or settings.ENABLE_DUMP_LOCAL_SAVE:
+        if save_to_file or settings.ENABLE_DUMP_LOCAL_SAVE:
+            bio.seek(0)
             folder_path = os.path.join(settings.BASE_DIR, "dump_data")
             if not os.path.exists(folder_path):
                 os.mkdir(folder_path)
             file_path = os.path.join(folder_path, f"data-dump-{self.now.strftime('%Y-%m-%d')}.xlsx")
             with open(file_path, "wb") as f:
-                f.write(bio.getvalue())
+                f.write(bio.read())
 
-            if send_email:
-                with open(file_path, "rb") as file_attachment:
-                    attachment = [file_attachment.name, file_attachment.read()]
-                    body = (
-                        "Situatia centralizata a datelor din sistemul integrat de management de "
-                        "resurse si voluntari sprijindeurgenta.ro pentru intevalul "
-                        f"{self.hours_ago_24.strftime('%c')} - {self.now.strftime('%c')}"
-                    )
-                    email = EmailMessage(
-                        subject="Raport zilnic situatie management resurse",
-                        from_email=settings.FROM_EMAIL,
-                        to=email_addresses,
-                        body=body,
-                        attachments=[attachment],
-                    )
-                    email.send()
-
-            if not (save_to_file or settings.ENABLE_DUMP_LOCAL_SAVE):
-                os.remove(file_path)
+        if send_email:
+            bio.seek(0)
+            attachment = [
+                "situatia_zilnica_sdu.xlsx",
+                bio.read(),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+            body = (
+                "Situatia centralizata a datelor din sistemul integrat de management de "
+                "resurse si voluntari sprijindeurgenta.ro pentru intevalul "
+                f"{self.hours_ago_24.strftime('%c')} - {self.now.strftime('%c')}"
+            )
+            email = EmailMessage(
+                subject="Raport zilnic situatie management resurse",
+                from_email=settings.FROM_EMAIL,
+                to=email_addresses,
+                body=body,
+                attachments=[attachment],
+            )
+            email.send()
 
     def _extract_database_data(self):
         item_offer_data_mapping = {
