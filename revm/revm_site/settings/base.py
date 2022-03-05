@@ -26,6 +26,7 @@ env = environ.Env(
     MEMCACHED_HOST=(str, "cache:11211"),
     REDIS_HOST=(str, "redis"),
     REDIS_PORT=(int, 6379),
+    FROM_EMAIL=(str, "noreply@code4.ro"),
 )
 
 ADMIN_TITLE = _("Sprijin de Urgență")
@@ -285,6 +286,8 @@ SIMPLE_JWT = {
 }
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+FROM_EMAIL = env("FROM_EMAIL")
 
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env("EMAIL_PORT")
