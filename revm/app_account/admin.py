@@ -19,6 +19,10 @@ DjangoUserAdmin.add_fieldsets = (
         _("Permissions"),
         {"classes": ("wide",), "fields": ("is_staff", "is_superuser", "groups")},
     ),
+    (
+        _("Location details"),
+        {"fields": ("county",)},
+    ),
 )
 
 
@@ -57,6 +61,10 @@ class AdminCustomUser(DjangoUserAdmin):
                 (
                     _("RVM User"),
                     {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
+                ),
+                (
+                    _("Location details"),
+                    {"fields": ("county",)},
                 ),
             )
         else:
