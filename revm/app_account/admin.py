@@ -28,7 +28,7 @@ DjangoUserAdmin.add_fieldsets = (
 
 @admin.register(models.CustomUser)
 class AdminCustomUser(DjangoUserAdmin):
-    list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type")
+    list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type", "county")
     list_display_links = ["id", "first_name", "last_name", "email"]
     search_fields = ("email", "first_name", "last_name")
     list_filter = ["is_validated"]
