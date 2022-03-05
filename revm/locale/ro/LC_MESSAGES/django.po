@@ -319,7 +319,7 @@ msgstr "Servicii de transport"
 
 #: app_transport_service/models.py:22 app_transport_service/models.py:63
 msgid "Capacity"
-msgstr "Capacitate"
+msgstr "Limită de greutate"
 
 #: app_transport_service/models.py:23 app_transport_service/models.py:64
 msgid "weight unit"

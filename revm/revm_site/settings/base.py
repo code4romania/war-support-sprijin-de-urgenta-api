@@ -20,6 +20,7 @@ env = environ.Env(
     DEBUG=(str, "no"),
     ENABLE_DEBUG_TOOLBAR=(str, "no"),
     DEV_ENABLE_EMAIL_SMTP=(str, "no"),
+    ENABLE_DUMP_LOCAL_SAVE=(str, "no"),
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
@@ -28,6 +29,8 @@ env = environ.Env(
     REDIS_PORT=(int, 6379),
     FROM_EMAIL=(str, "noreply@code4.ro"),
 )
+
+ENABLE_DUMP_LOCAL_SAVE = env("ENABLE_DUMP_LOCAL_SAVE") == "yes"
 
 ADMIN_TITLE = _("Sprijin de Urgență")
 ADMIN_TITLE_SHORT = _("RVM")
