@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import lazy
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -24,7 +25,7 @@ class TextileCategory(CommonCategoryModel):
 
 
 class ItemOffer(CommonOfferModel, CommonLocationModel):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category"))
 
     # Descriere produs
     name = models.CharField(_("Product"), max_length=100, db_index=True, blank=True, null=False)
@@ -37,7 +38,9 @@ class ItemOffer(CommonOfferModel, CommonLocationModel):
     )
 
     # Textile
-    textile_category = models.ForeignKey(TextileCategory, on_delete=models.CASCADE, null=True, blank=True)
+    textile_category = models.ForeignKey(
+        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category")
+    )
     kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
     other_textiles = models.TextField(_("other"), blank=True, null=True)
 
@@ -49,7 +52,7 @@ class ItemOffer(CommonOfferModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("item offer")
-        verbose_name_plural = _("item offers")
+        verbose_name_plural = lazy(lambda: "{} ({})".format(_("item offers"), ItemOffer.objects.count()), str)()
 
     def save(self, *args, **kwargs):
         if not self.stock:
@@ -58,7 +61,7 @@ class ItemOffer(CommonOfferModel, CommonLocationModel):
 
 
 class ItemRequest(CommonRequestModel, CommonLocationModel):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category"))
 
     # Descriere produs
     name = models.CharField(_("Product"), max_length=100, db_index=True)
@@ -73,7 +76,9 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
     )
 
     # Textile
-    textile_category = models.ForeignKey(TextileCategory, on_delete=models.CASCADE, null=True, blank=True)
+    textile_category = models.ForeignKey(
+        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category")
+    )
     kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
     other_textiles = models.TextField(_("other"), blank=True, null=True)
 
@@ -85,7 +90,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("item request")
-        verbose_name_plural = _("item requests")
+        verbose_name_plural = lazy(lambda: "{} ({})".format(_("item requests"), ItemRequest.objects.count()), str)()
 
     def save(self, *args, **kwargs):
         if not self.stock:
@@ -94,8 +99,8 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
 
 
 class ResourceRequest(models.Model):
-    resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING)
-    request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING)
+    resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
+    request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING, verbose_name=_("request"))
 
     total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)

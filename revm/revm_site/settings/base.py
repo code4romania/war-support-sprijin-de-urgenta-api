@@ -320,7 +320,25 @@ JAZZMIN_SETTINGS = {
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["app_item", "app_transport_service", "app_volunteering", "app_other"],
+    "order_with_respect_to": [
+        "app_item",
+        "app_item.itemoffer",
+        "app_item.itemrequest",
+        "app_item.category",
+        "app_item.textilecategory",
+        "app_transport_service",
+        "app_transport_service.transportserviceoffer",
+        "app_transport_service.transportservicerequest",
+        "app_transport_service.category",
+        "app_volunteering",
+        "app_volunteering.volunteeringoffer",
+        "app_volunteering.volunteeringrequest",
+        "app_volunteering.category",
+        "app_other",
+        "app_other.otheroffer",
+        "app_other.otherrequest",
+        "app_other.category",
+    ],
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
         "books": [
@@ -368,9 +386,9 @@ JAZZMIN_SETTINGS = {
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
     "custom_css": "css/admin.css",
-    "custom_js": None,
+    "custom_js": "js/admin.js",
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": False,
+    "show_ui_builder": DEBUG,
     ###############
     # Change view #
     ###############
@@ -409,7 +427,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_child_indent": True,
     "sidebar_nav_compact_style": True,
     "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": False,
+    "sidebar_nav_flat_style": True,
     "theme": "default",
     "dark_mode_theme": "darkly",
 }

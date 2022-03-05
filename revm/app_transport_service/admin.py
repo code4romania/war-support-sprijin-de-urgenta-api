@@ -1,18 +1,22 @@
 from django.contrib import admin
-from app_transport_service import models
-from revm_site.utils import CountyFilter
+from django.utils.translation import gettext_lazy as _
+
 from app_account.models import USERS_GROUP, DSU_GROUP
+from app_transport_service import models
+from revm_site.admin import CommonRequestInline, CommonOfferInline
+from revm_site.utils import CountyFilter
 
 
-class OtherResourceRequestInline(admin.TabularInline):
+class TransportOfferInline(CommonOfferInline):
     model = models.ResourceRequest
-    extra = 1
-    show_change_link = True
-    view_on_site = True
+
+
+class TransportRequestInline(CommonRequestInline):
+    model = models.ResourceRequest
 
 
 @admin.register(models.Category)
-class AdminOtherRequest(admin.ModelAdmin):
+class AdminCategoryRequest(admin.ModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
     search_fields = ["name"]
@@ -29,7 +33,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
     list_filter = ("category", "status", "availability", CountyFilter)
     search_fields = []
     readonly_fields = ("added_on",)
-    inlines = (OtherResourceRequestInline,)
+    inlines = (TransportOfferInline,)
 
     ordering = ("pk",)
 
@@ -43,7 +47,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
 
     fieldsets = (
         (
-            "Detalii ofertă",
+            _("Offer details"),
             {
                 "fields": (
                     "donor",
@@ -53,7 +57,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii transport marfa",
+            _("Transport details"),
             {
                 "fields": (
                     "weight_capacity",
@@ -64,7 +68,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii transport persoane",
+            _("Transport details"),
             {
                 "fields": (
                     "available_seats",
@@ -75,7 +79,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
             },
         ),
         (
-            "Disponibilitate",
+            _("Availability"),
             {
                 "fields": (
                     "type",
@@ -87,7 +91,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii șofer",
+            _("Driver details"),
             {
                 "fields": (
                     "driver_name",
@@ -98,7 +102,7 @@ class AdminTransportServiceOffer(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii ofertă",
+            _("Offer status"),
             {
                 "fields": (
                     "status",
@@ -129,7 +133,7 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
     list_display_links = ("id", "category")
     search_fields = []
     readonly_fields = ["added_on"]
-    inlines = (OtherResourceRequestInline,)
+    inlines = (TransportRequestInline,)
 
     ordering = ("pk",)
     view_on_site = False
@@ -149,7 +153,7 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
 
     fieldsets = (
         (
-            "Detalii ofertă",
+            _("Request details"),
             {
                 "fields": (
                     "made_by",
@@ -159,7 +163,7 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii transport marfa",
+            _("Transport details"),
             {
                 "fields": (
                     "weight_capacity",
@@ -170,7 +174,7 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii transport persoane",
+            _("Transport details"),
             {
                 "fields": (
                     "available_seats",
@@ -181,7 +185,7 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii transport",
+            _("Location details"),
             {
                 "fields": (
                     "from_county",
@@ -192,7 +196,7 @@ class AdminTransportServiceRequest(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii ofertă",
+            _("Request status"),
             {
                 "fields": (
                     "status",

@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.db.models import TextField
 from django.forms import Textarea
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from app_item import models
 from app_account.models import USERS_GROUP, DSU_GROUP
+from revm_site.admin import CommonRequestInline, CommonOfferInline
 
 
 def deactivate_offers(modeladmin, request, queryset):
@@ -17,15 +18,14 @@ def deactivate_offers(modeladmin, request, queryset):
 deactivate_offers.short_description = _("Deactivate selected offers")
 
 
-class OtherResourceRequestInline(admin.TabularInline):
+class ItemOfferInline(CommonOfferInline):
     model = models.ResourceRequest
-    extra = 1
-    show_change_link = True
-    view_on_site = True
+    formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
 
-    formfield_overrides = {
-        TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})},
-    }
+
+class ItemRequestInline(CommonRequestInline):
+    model = models.ResourceRequest
+    formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
 
 
 @admin.register(models.Category)
@@ -76,7 +76,7 @@ class AdminItemOffer(admin.ModelAdmin):
     readonly_fields = ["added_on", "stock"]
     actions = [deactivate_offers]
 
-    inlines = (OtherResourceRequestInline,)
+    inlines = (ItemOfferInline,)
 
     ordering = ("pk",)
 
@@ -100,7 +100,7 @@ class AdminItemOffer(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii produs",
+            _("Product details"),
             {
                 "fields": (
                     "textile_category",
@@ -118,12 +118,11 @@ class AdminItemOffer(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii ridicare",
+            _("Where it is needed"),
             {
                 "fields": (
                     "county_coverage",
                     "town",
-                    # "pickup_address"
                 )
             },
         ),
@@ -166,7 +165,7 @@ class AdminItemRequest(admin.ModelAdmin):
         "status",
     ]
 
-    inlines = (OtherResourceRequestInline,)
+    inlines = (ItemRequestInline,)
 
     ordering = ("pk",)
 
@@ -190,7 +189,7 @@ class AdminItemRequest(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii produs",
+            _("Product details"),
             {
                 "fields": (
                     "textile_category",
@@ -207,7 +206,7 @@ class AdminItemRequest(admin.ModelAdmin):
             },
         ),
         (
-            "Detalii ridicare",
+            _("Where it is needed"),
             {
                 "fields": (
                     "county_coverage",

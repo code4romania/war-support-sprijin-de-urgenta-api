@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.functional import lazy
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -20,7 +21,7 @@ class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
-    weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
+    weight_unit = models.CharField(_("weight unit"), max_length=10, default="tone", blank=True, null=True)
     has_refrigeration = models.BooleanField(_("has refrigeration"), default=False, blank=True, null=True)
 
     # Disponibilitate
@@ -53,7 +54,9 @@ class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
 
     class Meta:
         verbose_name = _("transport service offer")
-        verbose_name_plural = _("transport service offers")
+        verbose_name_plural = lazy(
+            lambda: "{} ({})".format(_("transport service offers"), TransportServiceOffer.objects.count()), str
+        )()
 
 
 class TransportServiceRequest(CommonRequestModel):
@@ -61,11 +64,11 @@ class TransportServiceRequest(CommonRequestModel):
 
     # Detalii transport marfă
     weight_capacity = models.FloatField(_("Capacity"), blank=True, null=True)
-    weight_unit = models.CharField(_("weight unit"), max_length=3, default="t", blank=True, null=True)
+    weight_unit = models.CharField(_("weight unit"), max_length=10, default="tone", blank=True, null=True)
     has_refrigeration = models.BooleanField(_("has refrigeration"), default=False, blank=True, null=True)
 
     # Detalii transport persoane
-    available_seats = models.PositiveSmallIntegerField(_("available seats"), default=0, blank=True, null=True)
+    available_seats = models.PositiveSmallIntegerField(_("needed seats"), default=0, blank=True, null=True)
     has_disabled_access = models.BooleanField(_("has disabled access"), default=False)
     pets_allowed = models.BooleanField(_("pets allowed"), default=False)
 
@@ -80,7 +83,9 @@ class TransportServiceRequest(CommonRequestModel):
 
     class Meta:
         verbose_name = _("transport service request")
-        verbose_name_plural = _("transport service requests")
+        verbose_name_plural = lazy(
+            lambda: "{} ({})".format(_("transport service request"), TransportServiceRequest.objects.count()), str
+        )()
 
 
 class ResourceRequest(models.Model):
