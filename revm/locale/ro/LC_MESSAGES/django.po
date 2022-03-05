@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-05 02:42+0200\n"
+"POT-Creation-Date: 2022-03-05 20:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,8 @@ msgstr "Parolă"
 msgid "Permissions"
 msgstr "Permisiuni"
 
-#: app_account/admin.py:23 app_account/admin.py:66
-#: app_transport_service/admin.py:237
+#: app_account/admin.py:23 app_account/admin.py:66 app_item/admin.py:167
+#: app_transport_service/admin.py:240
 msgid "Location details"
 msgstr "Localizare"
 
@@ -133,7 +133,7 @@ msgstr "Cele două câmpuri de parolă nu corespund."
 msgid "Deactivate selected offers"
 msgstr "Dezactivează donațiile selectate"
 
-#: app_item/admin.py:140 app_item/admin.py:250
+#: app_item/admin.py:140 app_item/admin.py:253
 msgid "Product details"
 msgstr "Detalii produs"
 
@@ -141,13 +141,13 @@ msgstr "Detalii produs"
 msgid "Offer status"
 msgstr "Status donație"
 
-#: app_item/admin.py:167 app_item/admin.py:276
-msgid "Where it is needed"
-msgstr "Unde este nevoie"
-
-#: app_item/admin.py:267 app_transport_service/admin.py:248
+#: app_item/admin.py:270 app_transport_service/admin.py:251
 msgid "Request status"
 msgstr "Status cerere"
+
+#: app_item/admin.py:279
+msgid "Where it is needed"
+msgstr "Unde este nevoie"
 
 #: app_item/apps.py:8
 msgid "Item"
@@ -263,8 +263,8 @@ msgstr "Alocă din resursele disponibile"
 msgid "Offer details"
 msgstr "Detalii donație"
 
-#: app_other/admin.py:149 app_transport_service/admin.py:205
-#: app_volunteering/admin.py:139
+#: app_other/admin.py:152 app_transport_service/admin.py:208
+#: app_volunteering/admin.py:142
 msgid "Request details"
 msgstr "Detalii cerere"
 
@@ -297,7 +297,7 @@ msgid "other request"
 msgstr "altă cerere"
 
 #: app_transport_service/admin.py:97 app_transport_service/admin.py:108
-#: app_transport_service/admin.py:215 app_transport_service/admin.py:226
+#: app_transport_service/admin.py:218 app_transport_service/admin.py:229
 msgid "Transport details"
 msgstr "Detalii transport"
 
@@ -477,59 +477,59 @@ msgstr "donator"
 msgid "requested by"
 msgstr "cerut de către"
 
-#: revm_site/settings/base.py:30
+#: revm_site/settings/base.py:35
 msgid "Sprijin de Urgență"
 msgstr "Sprijin de Urgență"
 
-#: revm_site/settings/base.py:31
+#: revm_site/settings/base.py:36
 msgid "RVM"
 msgstr "SdU"
 
-#: revm_site/settings/base.py:151
+#: revm_site/settings/base.py:177
 msgid "Romanian"
 msgstr "Română"
 
-#: revm_site/settings/base.py:152
+#: revm_site/settings/base.py:178
 msgid "English"
 msgstr "Engleză"
 
-#: revm_site/settings/base.py:235
+#: revm_site/settings/base.py:261
 msgid "Not Verified"
 msgstr "Neverificat"
 
-#: revm_site/settings/base.py:236
+#: revm_site/settings/base.py:262
 msgid "Verified"
 msgstr "Verificat"
 
-#: revm_site/settings/base.py:237
+#: revm_site/settings/base.py:263
 msgid "Deactivated"
 msgstr "Dezactivat"
 
-#: revm_site/settings/base.py:238
+#: revm_site/settings/base.py:264
 msgid "Complete"
 msgstr "Utilizat"
 
-#: revm_site/settings/base.py:241
+#: revm_site/settings/base.py:267
 msgid "National"
 msgstr "Național"
 
-#: revm_site/settings/base.py:241 revm_site/utils.py:7
+#: revm_site/settings/base.py:267 revm_site/utils.py:7
 msgid "County"
 msgstr "Județ"
 
-#: revm_site/settings/base.py:244
+#: revm_site/settings/base.py:270
 msgid "Disponibil in weekend"
 msgstr "Disponibil în weekend"
 
-#: revm_site/settings/base.py:245
+#: revm_site/settings/base.py:271
 msgid "Disponibil in timpul saptamanii"
 msgstr "Disponibil în timpul săptămânii"
 
-#: revm_site/settings/base.py:246
+#: revm_site/settings/base.py:272
 msgid "Disponibil oricand"
 msgstr "Disponibil oricand"
 
-#: revm_site/settings/base.py:247
+#: revm_site/settings/base.py:273
 msgid "Intervale fixe"
 msgstr "Intervale fixe"
 
