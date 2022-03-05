@@ -23,6 +23,9 @@ env = environ.Env(
     MEMCACHED_HOST=(str, "cache:11211"),
 )
 
+ADMIN_TITLE = _("Sprijin de Urgență")
+ADMIN_TITLE_SHORT = _("RVM")
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
 
@@ -60,12 +63,12 @@ INSTALLED_APPS = [
     # project apps
     "app_account",
     "app_item",
-    "app_service",
     "app_transport_service",
     "app_volunteering",
     "app_other",
     # api documentation
     "drf_spectacular",
+    "multiselectfield",
 ]
 
 MIDDLEWARE = [
@@ -220,8 +223,24 @@ COUNTIES_SHORTNAME = {
     "VS": "Vaslui",
     "VL": "Vâlcea",
     "VN": "Vrancea",
-    "RO": "Național",
 }
+
+RESOURCE_STATUS = (
+    ("NV", _("Not Verified")),
+    ("V", _("Verified")),
+    ("D", _("Deactivated")),
+    ("C", _("Complete")),
+)
+
+TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
+
+TRANSPORT_AVAILABILTY = (
+    ("WK", _("Disponibil in weekend")),
+    ("WD", _("Disponibil in timpul saptamanii")),
+    ("A", _("Disponibil oricand")),
+    ("FI", _("Intervale fixe")),
+)
+
 COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
 
 AUTH_USER_MODEL = "app_account.CustomUser"
@@ -239,9 +258,7 @@ SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
 SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
 SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")
 
-REST_AUTH_REGISTER_SERIALIZERS = {
-    "REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"
-}
+REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"}
 
 # django-jazzmin
 # -------------------------------------------------------------------------------
@@ -249,20 +266,16 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 JAZZMIN_SETTINGS = {
     # title of the window
-
-    "site_title": "Ajutor",
-
+    "site_title": ADMIN_TITLE,
     # Title on the brand, and the login screen (19 chars max)
-    "site_header": "#TM4UA",
-
-
+    "site_header": ADMIN_TITLE,
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
-    "site_logo": "images/logo.png",
+    "site_logo": "images/De urgenta.svg",
+    "site_logo_classes": "site-logo",
     # Welcome text on the login screen
-    "welcome_sign": "Welcome",
+    "welcome_sign": "",
     # Copyright on the footer
     "copyright": "Code4Romania - War Task Force",
-
     # The model admin to search from the search bar, search bar omitted if excluded
     # "search_model": "donors.Donor",
     # Field name on user model that contains avatar image
@@ -307,7 +320,7 @@ JAZZMIN_SETTINGS = {
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["app_item", "app_service", "app_transport_service", "app_volunteering"],
+    "order_with_respect_to": ["app_item", "app_transport_service", "app_volunteering", "app_other"],
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
         "books": [
@@ -325,12 +338,22 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
-        "donors.Campaign": "fas fa-campground",
-        "donors.Donor": "fas fa-hand-holding-medical",
-        "donors.Expense": "fas fa-euro-sign",
-        "donors.Need": "fas fa-syringe",
-        "donors.Partner": "fas fa-hands-helping",
-        "donors.Quote": "fas fa-quote-right",
+        "account.EmailAddress": "fas fa-at",
+        "app_account.CustomUser": "fas fa-user",
+        "app_item.Category": "fas fa-cube",
+        "app_item.TextileCategory": "fas fa-cubes",
+        "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
+        "app_item.ItemRequest": "far fa-arrow-alt-circle-left",
+        "app_other.Category": "fas fa-cube",
+        "app_other.Subcategory": "fas fa-cubes",
+        "app_other.OtherOffer": "fas fa-arrow-alt-circle-right",
+        "app_other.OtherRequest": "far fa-arrow-alt-circle-left",
+        "app_volunteering.Type": "fas fa-cube",
+        "app_volunteering.VolunteeringOffer": "fas fa-arrow-alt-circle-right",
+        "app_volunteering.VolunteeringRequest": "far fa-arrow-alt-circle-left",
+        "app_transport_service.Category": "fas fa-cube",
+        "app_transport_service.TransportServiceOffer": "fas fa-arrow-alt-circle-right",
+        "app_transport_service.TransportServiceRequest": "far fa-arrow-alt-circle-left",
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
@@ -344,7 +367,7 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": None,
+    "custom_css": "css/admin.css",
     "custom_js": None,
     # Whether to show the UI customizer on the sidebar
     "show_ui_builder": False,
@@ -357,7 +380,7 @@ JAZZMIN_SETTINGS = {
     # - vertical_tabs
     # - collapsible
     # - carousel
-    "changeform_format": "horizontal_tabs",
+    "changeform_format": "single",
     # override change forms on a per modeladmin basis
     "changeform_format_overrides": {
         "auth.user": "collapsible",
@@ -388,5 +411,5 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
     "theme": "default",
-    "dark_mode_theme": None,
+    "dark_mode_theme": "darkly",
 }

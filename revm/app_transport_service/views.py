@@ -1,12 +1,11 @@
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from .models import Category, Subcategory
+from .models import Category
 from .serializers import (
     TransportServiceRequestSerializer,
     TransportServiceOfferSerializer,
-    TransportServiceCategorySerializer,
-    TransportServiceSubcategorySerializer,
+    TransportServiceCategoryListSerializer,
 )
 from revm_site.views import CreateResourceViewSet
 
@@ -14,15 +13,12 @@ from revm_site.views import CreateResourceViewSet
 class GetTransportServiceCategoryViewSet(ReadOnlyModelViewSet):
     lookup_field = "name"
     permissions_classes = (AllowAny,)
-    queryset = Category.objects.all()
-    serializer_class = TransportServiceCategorySerializer
 
+    def get_queryset(self):
+        return Category.objects.all().order_by("name")
 
-class GetTransportServiceSubcategoryViewSet(ReadOnlyModelViewSet):
-    lookup_field = "name"
-    permissions_classes = (AllowAny,)
-    queryset = Subcategory.objects.all()
-    serializer_class = TransportServiceSubcategorySerializer
+    def get_serializer_class(self):
+        return TransportServiceCategoryListSerializer
 
 
 class CreateTransportServiceRequestViewSet(CreateResourceViewSet):

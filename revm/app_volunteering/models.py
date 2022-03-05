@@ -1,9 +1,8 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
+from revm_site.models import CommonRequestModel, CommonCountyModel, CommonOfferModel, CommonLocationModel
 
 
 class Type(models.Model):
@@ -18,37 +17,24 @@ class Type(models.Model):
         verbose_name_plural = _("volunteering types")
 
 
-class VolunteeringOffer(models.Model):
-    donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE)
-    description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
+class VolunteeringOffer(CommonOfferModel, CommonLocationModel):
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
-    county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
-    town = models.CharField(_("town"), max_length=100, blank=False, null=False)
-
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
-    available_from = models.DateTimeField(_("resource available from"), auto_now_add=timezone.now, null=False)
-    available_until = models.DateTimeField(_("resource available until"), null=True)
+    available_until = models.DateField(_("volunteer available until"), null=True)
 
     def __str__(self):
-        return self.name
+        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
 
     class Meta:
         verbose_name = _("volunteering offer")
         verbose_name_plural = _("volunteering offers")
 
 
-class VolunteeringRequest(models.Model):
-    made_by = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE)
-
-    description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
-    county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
-    town = models.CharField(_("town"), max_length=100, blank=False, null=False)
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
+class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     def __str__(self):
-        return self.name
+        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
 
     class Meta:
         verbose_name = _("volunteering request")
@@ -56,9 +42,15 @@ class VolunteeringRequest(models.Model):
 
 
 class ResourceRequest(models.Model):
-    resource = models.ForeignKey(VolunteeringOffer, on_delete=models.DO_NOTHING)
-    request = models.ForeignKey(VolunteeringRequest, on_delete=models.DO_NOTHING)
+    resource = models.ForeignKey(VolunteeringOffer, on_delete=models.DO_NOTHING, verbose_name=_("made_by"))
+    request = models.ForeignKey(VolunteeringRequest, on_delete=models.DO_NOTHING, verbose_name=_("type"))
 
     class Meta:
         verbose_name = _("Offer - Request")
         verbose_name_plural = _("Offer - Request")
+
+    def save(self, *args, **kwargs):
+        self.request.status = "C"
+        self.request.save()
+
+        super().save(*args, **kwargs)

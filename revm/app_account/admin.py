@@ -1,9 +1,10 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.sites.models import Site
+from django.utils.translation import gettext_lazy as _
 
 from app_account import models
-
 
 DjangoUserAdmin.add_fieldsets = (
     (
@@ -15,17 +16,113 @@ DjangoUserAdmin.add_fieldsets = (
     ),
 )
 
+# def user_offers_view(request, model_admin, object):
+#     print('****')
+#     print(request.POST)
+#     print('****')
+#     model = model_admin.model
+#     opts = model._meta
+#     return render(
+#         request,
+#         'app_account/user_offers.html', {
+#             'opts': opts,
+#             'has_change_permission': model_admin.has_change_permission(request, object),
+#             'original': object,
+#         }
+#     )
 
-class AdminCustomUser(admin.ModelAdmin):
-    list_display = ('id', 'full_name', 'email', 'phone_number')
-    list_display_links = ('id', 'full_name')
-    search_fields = ['first_name', 'last_name']
 
-    def full_name(self, obj):
-        return obj.__str__()
+@admin.register(models.CustomUser)
+class AdminCustomUser(DjangoUserAdmin):
+    list_display = ("id", "first_name", "last_name", "email", "phone_number", "type")
+    list_display_links = ["id", "first_name", "last_name", "email"]
+    search_fields = ("email", "first_name", "last_name")
+    list_filter = ["is_validated"]
 
-    full_name.short_description = "Full name"
+    ordering = ("first_name",)
+    change_form_template = "admin/user_admin.html"
+
+    def get_fieldsets(self, request, obj=None):
+        if obj:
+            return (
+                (
+                    None,
+                    {
+                        "fields": (
+                            "username",
+                            "email",
+                        )
+                    },
+                ),
+                (_("Personal info"), {"fields": ("first_name", "last_name", "password")}),
+                (_("Profile data"), {"fields": ("phone_number", "address")}),
+                # Restricting Set Superuser to superuser
+                (
+                    _("Permissions"),
+                    {
+                        "fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")
+                        if request.user.is_superuser
+                        else ("is_active", "is_staff")
+                    },
+                ),
+                (
+                    _("RVM User"),
+                    {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
+                ),
+            )
+        else:
+            return self.add_fieldsets
+
+    def has_delete_permission(self, request, obj=None):
+        if not (request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists()):
+            return False
+        if obj and hasattr(obj, "email"):
+            if obj.email == settings.SUPER_ADMIN_EMAIL:
+                return False
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        if not (request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists()):
+            return False
+        if obj and hasattr(obj, "email"):
+            if obj.email == settings.SUPER_ADMIN_EMAIL:
+                return False
+        return True
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists():
+            return qs
+        return qs.filter(pk=request.user.id)
+
+    # def change_view(self, request, object_id, form_url='', extra_context=None):
+    #     extra_context = extra_context or {}
+    #     user = models.CustomUser.objects.get(pk=object_id)
+
+    #     extra_context['user'] = user
+    #     return super().change_view(
+    #         request, object_id, form_url, extra_context=extra_context,
+    #     )
+
+    # def get_urls(self):
+    #     info = self.model._meta.app_label, self.model._meta.model_name
+    #     urls = super().get_urls()
+    #     my_urls = [
+
+    #         url(r'^(?P<object_id>.*)/offers/$',
+    #         self.admin_site.admin_view(self.user_offers), {},
+    #         name="%s_%s_schema" % info),
+    #     ]
+    #     return my_urls + urls
+
+    # def user_offers(self, request, object_id):
+    #     user = get_object_or_404(models.CustomUser, id=int(object_id))
+
+    #     print('****')
+    #     print(request.POST)
+    #     print('****')
+    #     return user_offers_view(request, self, user)
+    #     return render(request, "app_account/user_offers.html", context)
 
 
-admin.site.register(models.CustomUser, AdminCustomUser)
 admin.site.unregister(Site)

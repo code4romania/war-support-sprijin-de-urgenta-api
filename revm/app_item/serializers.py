@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import ItemRequest, ItemOffer, Category, Subcategory
+from .models import ItemRequest, ItemOffer, Category
 
 
 class ItemCategorySerializer(serializers.ModelSerializer):
@@ -9,9 +9,9 @@ class ItemCategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ItemSubcategorySerializer(serializers.ModelSerializer):
+class ItemCategoryListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Subcategory
+        model = Category
         fields = "__all__"
 
 

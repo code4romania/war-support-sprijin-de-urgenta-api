@@ -1,98 +1,121 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
+from revm_site.models import (
+    CommonCategoryModel,
+    CommonCountyModel,
+    CommonRequestModel,
+    CommonOfferModel,
+    CommonLocationModel,
+)
 
 
-class Category(models.Model):
-    name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
-    description = models.CharField(_("category description"), default="", blank=True, null=False, max_length=500)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _("category")
-        verbose_name_plural = _("categories")
+class Category(CommonCategoryModel):
+    ...
 
 
-class Subcategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(_("subcategory name"), max_length=50, null=False, blank=False, db_index=True)
-    description = models.CharField(_("subcategory description"), default="", blank=True, null=False, max_length=500)
-
-    def __str__(self):
-        return self.name
+class TextileCategory(CommonCategoryModel):
+    ...
 
     class Meta:
-        verbose_name = _("subcategory")
-        verbose_name_plural = _("subcategories")
+        verbose_name = _("Textile Category")
+        verbose_name_plural = _("Textile Categories")
 
 
-class ItemOffer(models.Model):
-    donor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
-    name = models.CharField(_("resource name"), max_length=100, db_index=True)
-    description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
+class ItemOffer(CommonOfferModel, CommonLocationModel):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
-    available_from = models.DateTimeField(_("resource available from"), auto_now_add=timezone.now, null=False)
-    available_until = models.DateTimeField(_("resource available until"), null=True)
-    expiration_date = models.DateTimeField(_("expiration date"), blank=True, null=True)
-
-    packaging_type = models.CharField(_("packaging type"), max_length=100, blank=True, null=True)
-
-    county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
-    pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
-
-    in_use_by = models.TextField(_("in use by"), null=True, blank=True)
-
-    total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
-    units_left = models.PositiveSmallIntegerField(
-        _("reuses left"), help_text=_("How many units of this type are left"), null=True, blank=True
-    )
+    # Descriere produs
+    name = models.CharField(_("Product"), max_length=100, db_index=True, blank=True, null=False)
+    quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
+    packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
+    expiration_date = models.DateField(_("expiration date"), blank=True, null=True)
+    stock = models.PositiveSmallIntegerField(
+        _("Stock"), help_text=_("How many units of this type are left"), null=True, blank=True
+    )
 
-    weight = models.PositiveSmallIntegerField(_("usable weight"), default=0, blank=False)
-    is_infinitely_reusable = models.BooleanField(_("is infinitely reusable"), default=False)
+    # Textile
+    textile_category = models.ForeignKey(TextileCategory, on_delete=models.CASCADE, null=True, blank=True)
+    kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
+    other_textiles = models.TextField(_("other"), blank=True, null=True)
+
+    # Corturi
+    tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
     def __str__(self):
-        return self.name
+        return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type})"
 
     class Meta:
         verbose_name = _("item offer")
         verbose_name_plural = _("item offers")
 
+    def save(self, *args, **kwargs):
+        if not self.stock:
+            self.stock = self.quantity
+        super().save(*args, **kwargs)
 
-class ItemRequest(models.Model):
-    made_by = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
 
-    name = models.CharField(_("resource name"), max_length=100, db_index=True)
-    description = models.CharField(_("resource description"), default="", blank=True, null=False, max_length=500)
+class ItemRequest(CommonRequestModel, CommonLocationModel):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 
-    added_on = models.DateTimeField(_("resource added on"), auto_now_add=timezone.now, editable=False)
+    # Descriere produs
+    name = models.CharField(_("Product"), max_length=100, db_index=True)
 
-    county_coverage = models.CharField(_("county"), max_length=2, choices=settings.COUNTY_CHOICES)
-    pickup_town = models.CharField(_("pickup town"), max_length=100, blank=False, null=False)
+    quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=True, null=False)
 
-    total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
+    packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
 
+    stock = models.PositiveSmallIntegerField(
+        _("Stock"), help_text=_("How many units are still needed"), null=True, blank=True
+    )
+
+    # Textile
+    textile_category = models.ForeignKey(TextileCategory, on_delete=models.CASCADE, null=True, blank=True)
+    kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
+    other_textiles = models.TextField(_("other"), blank=True, null=True)
+
+    # Corturi
+    tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
+
     def __str__(self):
-        return self.name
+        return f"#{self.id} {self.name} (Stoc: {self.stock}/{self.quantity} {self.unit_type})"
 
     class Meta:
         verbose_name = _("item request")
         verbose_name_plural = _("item requests")
+
+    def save(self, *args, **kwargs):
+        if not self.stock:
+            self.stock = self.quantity
+        super().save(*args, **kwargs)
 
 
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING)
     request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING)
 
+    total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
+    description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
+
+    added_on = models.DateTimeField(_("added on"), auto_now_add=True)
+
     class Meta:
         verbose_name = _("Offer - Request")
         verbose_name_plural = _("Offer - Request")
+
+    def save(self, *args, **kwargs):
+        # subtract amount from offer and request
+        resource = self.resource
+        request = self.request
+
+        resource.stock -= self.total_units
+        request.stock -= self.total_units
+        if request.stock <= 0:
+            request.status = "C"
+        resource.save()
+        request.save()
+
+        super().save(*args, **kwargs)

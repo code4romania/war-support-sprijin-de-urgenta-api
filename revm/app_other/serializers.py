@@ -1,17 +1,11 @@
 from rest_framework import serializers
 
-from .models import OtherRequest, OtherOffer, Category, Subcategory
+from .models import OtherRequest, OtherOffer, Category
 
 
-class OtherCategorySerializer(serializers.ModelSerializer):
+class OtherCategoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = "__all__"
-
-
-class OtherSubcategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Subcategory
         fields = "__all__"
 
 
