@@ -256,8 +256,11 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = "revm-auth-cookie"
 JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
-ACCESS_TOKEN_LIFETIME = timedelta(hours=2)
-REFRESH_TOKEN_LIFETIME = timedelta(days=3)
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=3),
+}
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
