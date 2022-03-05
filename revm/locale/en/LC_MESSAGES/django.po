@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-05 02:42+0200\n"
+"POT-Creation-Date: 2022-03-05 20:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,8 +29,8 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: app_account/admin.py:23 app_account/admin.py:66
-#: app_transport_service/admin.py:237
+#: app_account/admin.py:23 app_account/admin.py:66 app_item/admin.py:167
+#: app_transport_service/admin.py:240
 msgid "Location details"
 msgstr ""
 
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Deactivate selected offers"
 msgstr ""
 
-#: app_item/admin.py:140 app_item/admin.py:250
+#: app_item/admin.py:140 app_item/admin.py:253
 msgid "Product details"
 msgstr ""
 
@@ -140,12 +140,12 @@ msgstr ""
 msgid "Offer status"
 msgstr ""
 
-#: app_item/admin.py:167 app_item/admin.py:276
-msgid "Where it is needed"
+#: app_item/admin.py:270 app_transport_service/admin.py:251
+msgid "Request status"
 msgstr ""
 
-#: app_item/admin.py:267 app_transport_service/admin.py:248
-msgid "Request status"
+#: app_item/admin.py:279
+msgid "Where it is needed"
 msgstr ""
 
 #: app_item/apps.py:8
@@ -262,8 +262,8 @@ msgstr "Allocate available resources"
 msgid "Offer details"
 msgstr ""
 
-#: app_other/admin.py:149 app_transport_service/admin.py:205
-#: app_volunteering/admin.py:139
+#: app_other/admin.py:152 app_transport_service/admin.py:208
+#: app_volunteering/admin.py:142
 msgid "Request details"
 msgstr ""
 
@@ -296,7 +296,7 @@ msgid "other request"
 msgstr ""
 
 #: app_transport_service/admin.py:97 app_transport_service/admin.py:108
-#: app_transport_service/admin.py:215 app_transport_service/admin.py:226
+#: app_transport_service/admin.py:218 app_transport_service/admin.py:229
 msgid "Transport details"
 msgstr ""
 
@@ -476,59 +476,59 @@ msgstr ""
 msgid "requested by"
 msgstr ""
 
-#: revm_site/settings/base.py:30
+#: revm_site/settings/base.py:35
 msgid "Sprijin de Urgență"
 msgstr "Sprijin de Urgență"
 
-#: revm_site/settings/base.py:31
+#: revm_site/settings/base.py:36
 msgid "RVM"
-msgstr "E-S"
+msgstr "SdU"
 
-#: revm_site/settings/base.py:151
+#: revm_site/settings/base.py:177
 msgid "Romanian"
 msgstr ""
 
-#: revm_site/settings/base.py:152
+#: revm_site/settings/base.py:178
 msgid "English"
 msgstr ""
 
-#: revm_site/settings/base.py:235
+#: revm_site/settings/base.py:261
 msgid "Not Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:236
+#: revm_site/settings/base.py:262
 msgid "Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:237
+#: revm_site/settings/base.py:263
 msgid "Deactivated"
 msgstr ""
 
-#: revm_site/settings/base.py:238
+#: revm_site/settings/base.py:264
 msgid "Complete"
 msgstr ""
 
-#: revm_site/settings/base.py:241
+#: revm_site/settings/base.py:267
 msgid "National"
 msgstr ""
 
-#: revm_site/settings/base.py:241 revm_site/utils.py:7
+#: revm_site/settings/base.py:267 revm_site/utils.py:7
 msgid "County"
 msgstr ""
 
-#: revm_site/settings/base.py:244
+#: revm_site/settings/base.py:270
 msgid "Disponibil in weekend"
 msgstr ""
 
-#: revm_site/settings/base.py:245
+#: revm_site/settings/base.py:271
 msgid "Disponibil in timpul saptamanii"
 msgstr ""
 
-#: revm_site/settings/base.py:246
+#: revm_site/settings/base.py:272
 msgid "Disponibil oricand"
 msgstr ""
 
-#: revm_site/settings/base.py:247
+#: revm_site/settings/base.py:273
 msgid "Intervale fixe"
 msgstr ""
 

@@ -164,7 +164,7 @@ class AdminItemOffer(ImportExportModelAdmin):
             },
         ),
         (
-            _("Where it is needed"),
+            _("Location details"),
             {
                 "fields": (
                     "has_transportation",
