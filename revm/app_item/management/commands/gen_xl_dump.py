@@ -43,13 +43,6 @@ class Command(BaseCommand):
             "tent_capacity": "Capacitate Cort",
         }
 
-        item_offer_data = ItemOffer.objects.filter(added_on__gte=hours_ago_24).values(*item_offer_data_mapping.keys())
-        offers_data = (
-            item_offer_data if len(item_offer_data) > 0 else pd.np.empty((0, len(item_offer_data_mapping.keys())))
-        )
-        item_offers = pd.DataFrame(offers_data)
-        item_offers.columns = list(item_offer_data_mapping.values())
-
         item_request_data_mapping = {
             "county_coverage": "Judete Acoperite",
             "town": "Oras",
@@ -69,14 +62,8 @@ class Command(BaseCommand):
             "tent_capacity": "Capacitate Cort",
         }
 
-        item_request_data = ItemRequest.objects.filter(added_on__gte=hours_ago_24).values(
-            *item_request_data_mapping.keys()
-        )
-        requests_data = (
-            item_request_data if len(item_request_data) > 0 else pd.np.empty((0, len(item_offer_data_mapping.keys())))
-        )
-        item_requests = pd.DataFrame(requests_data)
-        item_requests.columns = list(item_request_data_mapping.values())
+        item_offers = self.get_dataframe_with_objects(hours_ago_24, ItemOffer, item_offer_data_mapping)
+        item_requests = self.get_dataframe_with_objects(hours_ago_24, ItemRequest, item_request_data_mapping)
 
         data = [
             (item_offers, "Donatii Produse"),
@@ -113,3 +100,11 @@ class Command(BaseCommand):
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
         email.send()
+
+    @staticmethod
+    def get_dataframe_with_objects(hours_ago_24, object_model, data_mapping):
+        item_data = object_model.objects.filter(added_on__gte=hours_ago_24).values(*data_mapping.keys())
+        item_data = item_data if len(item_data) > 0 else pd.np.empty((0, len(data_mapping.keys())))
+        items = pd.DataFrame(item_data)
+        items.columns = list(data_mapping.values())
+        return items
