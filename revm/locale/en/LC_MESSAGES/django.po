@@ -318,7 +318,7 @@ msgstr ""
 
 #: app_transport_service/models.py:22 app_transport_service/models.py:63
 msgid "Capacity"
-msgstr ""
+msgstr "Weight capacity"
 
 #: app_transport_service/models.py:23 app_transport_service/models.py:64
 msgid "weight unit"
