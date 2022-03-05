@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core.mail import EmailMessage
 from django.utils import timezone
@@ -87,7 +88,7 @@ class Command(BaseCommand):
 
         email = EmailMessage(
             subject="Raport zilnic situatie management resurse",
-            from_email="no-reply@code4.ro",
+            from_email=settings.FROM_EMAIL,
             body=(
                 "Situatia centralizata a datelor din sistemul integrat de management de "
                 f"resurse si voluntari sprijindeurgenta.ro pentru intevalul {hours_ago_24.strftime('%c')} - {now.strftime('%c')}"
