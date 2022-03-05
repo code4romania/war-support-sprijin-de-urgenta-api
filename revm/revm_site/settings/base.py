@@ -289,6 +289,7 @@ REST_USE_JWT = True
 JWT_AUTH_COOKIE = "revm-auth-cookie"
 JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
 
+# DRF-simplejwt https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=3),

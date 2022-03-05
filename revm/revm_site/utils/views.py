@@ -4,7 +4,7 @@ from rest_framework.throttling import AnonRateThrottle
 
 
 class CreateResourceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     throttle_classes = (AnonRateThrottle,)
 
     def create(self, request, *args, **kwargs):
