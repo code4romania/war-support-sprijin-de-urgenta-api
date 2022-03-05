@@ -100,7 +100,7 @@ class AdminVolunteeringOffer(ImportExportModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if not request.user.is_superuser and request.user.is_dsu_user():
+        if not request.user.is_superuser and request.user.is_dsu_manager_user():
             return queryset.filter(county_coverage__contains=request.user.county)
 
         if request.user.is_superuser or request.user.is_dsu_user():
@@ -159,7 +159,7 @@ class AdminVolunteeringRequest(ImportExportModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if not request.user.is_superuser and request.user.is_dsu_user():
+        if not request.user.is_superuser and request.user.is_dsu_manager_user():
             return queryset.filter(county_coverage__contains=request.user.county)
 
         if request.user.is_superuser or request.user.is_dsu_user():
