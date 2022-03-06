@@ -1,3 +1,4 @@
+import logging
 import os
 from io import BytesIO
 
@@ -42,9 +43,17 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **kwargs):
+        logger = logging.getLogger("django")
+
         email_addresses = kwargs["emails"]
         save_to_file = kwargs["save_to_file"] == "y"
         send_email = kwargs["send_email"] == "y"
+
+        logger.info(
+            f"Starting script with the emails: {', '.join(email_addresses)}."
+            f" Saving to file: {save_to_file}."
+            f" Sending email: {send_email}"
+        )
 
         data = self._extract_database_data()
 
@@ -60,7 +69,10 @@ class Command(BaseCommand):
 
         writer.save()
 
+        logger.info("Saved excel file to BytesIO")
+
         if save_to_file or settings.ENABLE_DUMP_LOCAL_SAVE:
+            logger.info("Saving excel file to local directory")
             bio.seek(0)
             folder_path = os.path.join(settings.BASE_DIR, "dump_data")
             if not os.path.exists(folder_path):
@@ -70,6 +82,7 @@ class Command(BaseCommand):
                 f.write(bio.read())
 
         if send_email:
+            logger.info("Sending email")
             bio.seek(0)
             attachment = [
                 "situatia_zilnica_sdu.xlsx",
@@ -89,6 +102,8 @@ class Command(BaseCommand):
                 attachments=[attachment],
             )
             email.send()
+
+        logger.info("Script finished")
 
     def _extract_database_data(self):
         item_offer_data_mapping = {
