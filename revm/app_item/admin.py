@@ -6,11 +6,11 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_item import models
 from app_account.models import CustomUser
-from revm_site.admin import CommonRequestInline, CommonOfferInline
+from revm_site.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin
 
 
 def deactivate_offers(modeladmin, request, queryset):
-    if request.user.is_superuser or request.user.is_dsu_user():
+    if request.user.is_superuser or request.user.is_cjcci_user():
         queryset.update(status="D")
 
     queryset.filter(donor=request.user).update(status="D")
@@ -24,17 +24,17 @@ class ItemOfferInline(CommonOfferInline):
     formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
 
     def has_change_permission(self, request, obj):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return False
         return super().has_change_permission(request, obj)
 
     def has_add_permission(self, request, obj):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return False
         return super().has_add_permission(request, obj)
 
     def has_delete_permission(self, request, obj):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return False
         return super().has_delete_permission(request, obj)
 
@@ -44,17 +44,17 @@ class ItemRequestInline(CommonRequestInline):
     formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
 
     def has_change_permission(self, request, obj):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return False
         return super().has_change_permission(request, obj)
 
     def has_add_permission(self, request, obj):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return False
         return super().has_add_permission(request, obj)
 
     def has_delete_permission(self, request, obj):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return False
         return super().has_delete_permission(request, obj)
 
@@ -82,7 +82,7 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 
 @admin.register(models.ItemOffer)
-class AdminItemOffer(ImportExportModelAdmin):
+class AdminItemOffer(CommonResourceAdmin):
     list_display = [
         "id",
         "category",
@@ -107,7 +107,7 @@ class AdminItemOffer(ImportExportModelAdmin):
     readonly_fields = ["added_on", "stock"]
 
     def get_readonly_fields(self, request, obj=None):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
@@ -175,23 +175,6 @@ class AdminItemOffer(ImportExportModelAdmin):
         ),
     )
 
-    def get_queryset(self, request):
-        queryset = super().get_queryset(request)
-
-        if not self.has_view_or_change_permission(request):
-            queryset = queryset.none()
-
-        if not request.user.is_superuser and request.user.is_dsu_manager_user():
-            return queryset.filter(county_coverage__contains=request.user.county)
-
-        if request.user.is_superuser or request.user.is_dsu_user():
-            return queryset
-
-        if request.user.is_regular_user():
-            return queryset.filter(donor=request.user)
-
-        return queryset
-
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if request.user.is_regular_user():
             if db_field.name == "donor":
@@ -200,7 +183,7 @@ class AdminItemOffer(ImportExportModelAdmin):
 
 
 @admin.register(models.ItemRequest)
-class AdminItemRequest(ImportExportModelAdmin):
+class AdminItemRequest(CommonResourceAdmin):
     list_display = [
         "id",
         "category",
@@ -211,12 +194,12 @@ class AdminItemRequest(ImportExportModelAdmin):
         "town",
         "status",
     ]
-    list_display_links = ["category"]
+    list_display_links = ["category", "name", "status"]
     search_fields = ["name"]
     readonly_fields = ["added_on", "stock"]
 
     def get_readonly_fields(self, request, obj=None):
-        if request.user.is_dsu_user():
+        if request.user.is_cjcci_user():
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
@@ -285,23 +268,6 @@ class AdminItemRequest(ImportExportModelAdmin):
             },
         ),
     )
-
-    def get_queryset(self, request):
-        queryset = super().get_queryset(request)
-
-        if not self.has_view_or_change_permission(request):
-            queryset = queryset.none()
-
-        if not request.user.is_superuser and request.user.is_dsu_manager_user():
-            return queryset.filter(county_coverage__contains=request.user.county)
-
-        if request.user.is_superuser or request.user.is_dsu_user():
-            return queryset
-
-        if request.user.is_regular_user():
-            return queryset.filter(made_by=request.user)
-
-        return queryset
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if request.user.is_regular_user():

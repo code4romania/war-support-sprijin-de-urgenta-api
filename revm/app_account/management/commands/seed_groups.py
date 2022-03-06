@@ -109,8 +109,8 @@ class Command(BaseCommand):
             self.style.SUCCESS(f"'{USERS_GROUP}' group has been created and appropriate permissions were assigned")
         )
 
-        dsu_manager_group, _ = Group.objects.get_or_create(name=CNCCI_GROUP)
-        dsu_manager_group.permissions.set(
+        cncci_group, _ = Group.objects.get_or_create(name=CNCCI_GROUP)
+        cncci_group.permissions.set(
             Permission.objects.filter(codename__in=cncci_permissions).values_list("id", flat=True)
         )
         self.stdout.write(
@@ -119,8 +119,8 @@ class Command(BaseCommand):
             )
         )
 
-        dsu_group, _ = Group.objects.get_or_create(name=CJCCI_GROUP)
-        dsu_group.permissions.set(
+        cjcci_group, _ = Group.objects.get_or_create(name=CJCCI_GROUP)
+        cjcci_group.permissions.set(
             Permission.objects.filter(codename__in=user_permissions).values_list("id", flat=True)
         )
         self.stdout.write(
