@@ -3,9 +3,9 @@ from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-USERS_GROUP = _("Users")
-CJCCI_GROUP = _("CJCCI")
-CNCCI_GROUP = _("CNCCI")
+USERS_GROUP = "Users"
+CJCCI_GROUP = "CJCCI"
+CNCCI_GROUP = "CNCCI"
 
 
 class CustomUser(AbstractUser):
@@ -60,27 +60,27 @@ class CustomUser(AbstractUser):
 
     def is_regular_user(self):
         return self.groups.filter(name=USERS_GROUP).exists() and not (
-            self.is_dsu_user() or self.is_dsu_manager_user() or self.is_superuser
+            self.is_cjcci_user() or self.is_cncci_user() or self.is_superuser
         )
 
-    def is_dsu_user(self):
-        return self.groups.filter(name=CJCCI_GROUP).exists() and not (self.is_dsu_manager_user() or self.is_superuser)
+    def is_cjcci_user(self):
+        return self.groups.filter(name=CJCCI_GROUP).exists() and not (self.is_cncci_user() or self.is_superuser)
 
-    def is_dsu_manager_user(self):
+    def is_cncci_user(self):
         return self.groups.filter(name=CNCCI_GROUP).exists() and not self.is_superuser
 
     def user_type(self):
         if self.is_superuser:
             return _("Admin")
 
-        if self.is_dsu_manager_user():
-            return CNCCI_GROUP
+        if self.is_cncci_user():
+            return _(CNCCI_GROUP)
 
-        if self.is_dsu_user():
-            return CJCCI_GROUP
+        if self.is_cjcci_user():
+            return _(CJCCI_GROUP)
 
         if self.is_regular_user():
-            return USERS_GROUP
+            return _(USERS_GROUP)
 
         return _("NO GROUP ASSIGNED")
 

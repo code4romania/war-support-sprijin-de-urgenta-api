@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-06 22:59+0200\n"
+"POT-Creation-Date: 2022-03-06 23:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgid "Permissions"
 msgstr "Permisiuni"
 
 #: app_account/admin.py:23 app_account/admin.py:66 app_item/admin.py:167
-#: app_transport_service/admin.py:240
+#: app_transport_service/admin.py:223
 msgid "Location details"
 msgstr "Localizare"
 
@@ -46,18 +46,6 @@ msgstr "Utilizator Sprijin de Urgență"
 #: app_account/apps.py:8
 msgid "Accounts"
 msgstr "Conturi"
-
-#: app_account/models.py:6
-msgid "Users"
-msgstr "Utilizatori"
-
-#: app_account/models.py:7
-msgid "CJCCI"
-msgstr ""
-
-#: app_account/models.py:8
-msgid "CNCCI"
-msgstr ""
 
 #: app_account/models.py:15
 msgid "Individual"
@@ -145,7 +133,7 @@ msgstr "Cele două câmpuri de parolă nu corespund."
 msgid "Deactivate selected offers"
 msgstr "Dezactivează donațiile selectate"
 
-#: app_item/admin.py:140 app_item/admin.py:253
+#: app_item/admin.py:140 app_item/admin.py:236
 msgid "Product details"
 msgstr "Detalii produs"
 
@@ -153,11 +141,11 @@ msgstr "Detalii produs"
 msgid "Offer status"
 msgstr "Status donație"
 
-#: app_item/admin.py:270 app_transport_service/admin.py:251
+#: app_item/admin.py:253 app_transport_service/admin.py:234
 msgid "Request status"
 msgstr "Status cerere"
 
-#: app_item/admin.py:279
+#: app_item/admin.py:262
 msgid "Where it is needed"
 msgstr "Unde este nevoie"
 
@@ -275,8 +263,8 @@ msgstr "Alocă din resursele disponibile"
 msgid "Offer details"
 msgstr "Detalii donație"
 
-#: app_other/admin.py:152 app_transport_service/admin.py:208
-#: app_volunteering/admin.py:143
+#: app_other/admin.py:135 app_transport_service/admin.py:191
+#: app_volunteering/admin.py:126
 msgid "Request details"
 msgstr "Detalii cerere"
 
@@ -310,7 +298,7 @@ msgid "other request"
 msgstr "altă cerere"
 
 #: app_transport_service/admin.py:97 app_transport_service/admin.py:108
-#: app_transport_service/admin.py:218 app_transport_service/admin.py:229
+#: app_transport_service/admin.py:201 app_transport_service/admin.py:212
 msgid "Transport details"
 msgstr "Detalii transport"
 
@@ -450,13 +438,17 @@ msgstr "cerere de voluntariat"
 msgid "made_by"
 msgstr "înregistrat de"
 
-#: revm_site/admin.py:12
+#: revm_site/admin.py:13
 msgid "Allocate this resource to a request"
 msgstr "Alocă din această resursă către o cerere de ajutor"
 
-#: revm_site/admin.py:16
+#: revm_site/admin.py:17
 msgid "Allocate from the available offers"
 msgstr "Alocă din resursele disponibile"
+
+#: revm_site/admin.py:29
+msgid "You are not assigned to any county. Please contact your administrator."
+msgstr "Nu ai alocat niciun județ. Contactează administratorul."
 
 #: revm_site/models.py:11
 msgid "category name"
@@ -591,6 +583,9 @@ msgstr "Da, sunt sigur"
 #: templates/app_account/user_offers.html:59
 msgid "No, take me back"
 msgstr "Nu, du-mă înapoi"
+
+#~ msgid "Users"
+#~ msgstr "Utilizatori"
 
 #~ msgid "other requests"
 #~ msgstr "alte cereri"
