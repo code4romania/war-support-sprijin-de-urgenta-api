@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-06 23:23+0200\n"
+"POT-Creation-Date: 2022-03-06 23:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -175,7 +175,7 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: app_item/models.py:32 app_item/models.py:69 app_item/models.py:105
+#: app_item/models.py:32 app_item/models.py:69 app_item/models.py:106
 msgid "total units"
 msgstr ""
 
@@ -223,34 +223,38 @@ msgstr ""
 msgid "How many units are still needed"
 msgstr ""
 
-#: app_item/models.py:92
-msgid "item request"
+#: app_item/models.py:89
+msgid "Requested"
 msgstr ""
 
 #: app_item/models.py:93
+msgid "item request"
+msgstr ""
+
+#: app_item/models.py:94
 msgid "item requests"
 msgstr ""
 
-#: app_item/models.py:102 app_other/models.py:46
+#: app_item/models.py:103 app_other/models.py:46
 #: app_transport_service/models.py:88
 msgid "donation"
 msgstr ""
 
-#: app_item/models.py:103 app_other/models.py:47
+#: app_item/models.py:104 app_other/models.py:47
 #: app_transport_service/models.py:91
 msgid "request"
 msgstr ""
 
-#: app_item/models.py:106 app_transport_service/models.py:94
+#: app_item/models.py:107 app_transport_service/models.py:94
 #: revm_site/models.py:45
 msgid "description"
 msgstr ""
 
-#: app_item/models.py:108 revm_site/models.py:47
+#: app_item/models.py:109 revm_site/models.py:47
 msgid "added on"
 msgstr ""
 
-#: app_item/models.py:111 app_item/models.py:112 app_other/models.py:51
+#: app_item/models.py:112 app_item/models.py:113 app_other/models.py:51
 #: app_other/models.py:52 app_transport_service/models.py:97
 #: app_transport_service/models.py:98 app_volunteering/models.py:56
 #: app_volunteering/models.py:57
