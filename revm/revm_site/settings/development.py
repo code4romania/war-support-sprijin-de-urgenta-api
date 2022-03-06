@@ -4,7 +4,7 @@ from revm_site.settings.base import *
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 SECRET_KEY = "secret"
 if env("DEV_ENABLE_EMAIL_SMTP") == "yes":
     EMAIL_BACKEND = "django_q_email.backends.DjangoQBackend"
