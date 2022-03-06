@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 import environ
 from django.utils.translation import gettext_lazy as _
@@ -16,12 +17,20 @@ from django.utils.translation import gettext_lazy as _
 env = environ.Env(
     # set casting, default value
     ENVIRONMENT=(str, "production"),
-    ENABLE_DEBUG_TOOLBAR=(bool, True),
+    DEBUG=(str, "no"),
+    ENABLE_DEBUG_TOOLBAR=(str, "no"),
+    DEV_ENABLE_EMAIL_SMTP=(str, "no"),
+    ENABLE_DUMP_LOCAL_SAVE=(str, "no"),
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
     MEMCACHED_HOST=(str, "cache:11211"),
+    REDIS_HOST=(str, "redis"),
+    REDIS_PORT=(int, 6379),
+    FROM_EMAIL=(str, "noreply@code4.ro"),
 )
+
+ENABLE_DUMP_LOCAL_SAVE = env("ENABLE_DUMP_LOCAL_SAVE") == "yes"
 
 ADMIN_TITLE = _("Sprijin de Urgență")
 ADMIN_TITLE_SHORT = _("RVM")
@@ -29,9 +38,30 @@ ADMIN_TITLE_SHORT = _("RVM")
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
 
-DEBUG = env("ENVIRONMENT") != "production"
+DEBUG = env("DEBUG") == "yes"
+ENVIRONMENT = env("ENVIRONMENT")
+ENABLE_DEBUG_TOOLBAR = bool(DEBUG and (env("ENABLE_DEBUG_TOOLBAR")) == "yes")
 
-ENABLE_DEBUG_TOOLBAR = bool(DEBUG and env("ENABLE_DEBUG_TOOLBAR"))
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CORS_ORIGIN_ALLOW_ALL = False
@@ -60,7 +90,9 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
+    "django_q",
     # project apps
+    "static_custom",
     "app_account",
     "app_item",
     "app_transport_service",
@@ -176,7 +208,7 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    "VERSION": "0.1.0",
+    "VERSION": "1.0.0",
     "SWAGGER_UI_SETTINGS": {"url": "/api/v1/schema"},
 }
 
@@ -251,7 +283,21 @@ REST_USE_JWT = True
 JWT_AUTH_COOKIE = "revm-auth-cookie"
 JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=3),
+}
+
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+FROM_EMAIL = env("FROM_EMAIL")
+
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS") == "yes"
+EMAIL_USE_SSL = env("EMAIL_USE_SSL") == "yes"
 
 SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
 SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
@@ -259,6 +305,25 @@ SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
 SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")
 
 REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"}
+
+
+# django-q https://django-q.readthedocs.io/en/latest/configure.html
+
+Q_CLUSTER = {
+    "name": "SdU",
+    "recycle": 500,
+    "timeout": 60,
+    "compress": True,
+    "save_limit": 250,
+    "queue_limit": 500,
+    "cpu_affinity": 1,
+    "label": "Django Q",
+    "redis": {
+        "host": env("REDIS_HOST"),
+        "port": env("REDIS_PORT"),
+        "db": 0,
+    },
+}
 
 # django-jazzmin
 # -------------------------------------------------------------------------------
@@ -270,7 +335,8 @@ JAZZMIN_SETTINGS = {
     # Title on the brand, and the login screen (19 chars max)
     "site_header": ADMIN_TITLE,
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
-    "site_logo": "images/De urgenta.svg",
+    "site_logo": "jazzmin/img/sprijin-de-urgenta.svg",
+    "site_icon": "jazzmin/img/sprijin-de-urgenta-logo.svg",
     "site_logo_classes": "site-logo",
     # Welcome text on the login screen
     "welcome_sign": "",
@@ -385,10 +451,10 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": "css/admin.css",
-    "custom_js": "js/admin.js",
+    "custom_css": "jazzmin/css/admin.css",
+    "custom_js": "jazzmin/js/admin.js",
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": DEBUG,
+    "show_ui_builder": bool(ENVIRONMENT != "production"),
     ###############
     # Change view #
     ###############

@@ -24,6 +24,12 @@ services:
     networks:
       - internal
 
+  redis:
+    container_name: redis
+    image: redis:alpine
+    networks:
+      - internal
+
   revm:
     container_name: revm-admin
     build:

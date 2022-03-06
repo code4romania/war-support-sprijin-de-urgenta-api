@@ -19,18 +19,26 @@ DjangoUserAdmin.add_fieldsets = (
         _("Permissions"),
         {"classes": ("wide",), "fields": ("is_staff", "is_superuser", "groups")},
     ),
+    (
+        _("Location details"),
+        {"fields": ("county",)},
+    ),
 )
 
 
 @admin.register(models.CustomUser)
 class AdminCustomUser(DjangoUserAdmin):
-    list_display = ("id", "first_name", "last_name", "email", "phone_number", "type")
+    list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type", "county")
     list_display_links = ["id", "first_name", "last_name", "email"]
     search_fields = ("email", "first_name", "last_name")
     list_filter = ["is_validated"]
-
     ordering = ("first_name",)
     change_form_template = "admin/user_admin.html"
+
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_dsu_manager_user():
+            return ["is_superuser", "user_permissions", "groups"]
+        return self.readonly_fields
 
     def get_fieldsets(self, request, obj=None):
         if obj:
@@ -46,25 +54,24 @@ class AdminCustomUser(DjangoUserAdmin):
                 ),
                 (_("Personal info"), {"fields": ("first_name", "last_name", "password")}),
                 (_("Profile data"), {"fields": ("phone_number", "address")}),
-                # Restricting Set Superuser to superuser
                 (
                     _("Permissions"),
-                    {
-                        "fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")
-                        if request.user.is_superuser
-                        else ("is_active", "is_staff")
-                    },
+                    {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")},
                 ),
                 (
                     _("RVM User"),
                     {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
+                ),
+                (
+                    _("Location details"),
+                    {"fields": ("county",)},
                 ),
             )
         else:
             return self.add_fieldsets
 
     def has_delete_permission(self, request, obj=None):
-        if not (request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists()):
+        if not (request.user.is_superuser or request.user.is_dsu_manager_user()):
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
@@ -72,7 +79,7 @@ class AdminCustomUser(DjangoUserAdmin):
         return True
 
     def has_change_permission(self, request, obj=None):
-        if not (request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists()):
+        if not (request.user.is_superuser or request.user.is_dsu_manager_user()):
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
@@ -81,7 +88,7 @@ class AdminCustomUser(DjangoUserAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser or request.user.groups.filter(name=models.DSU_MANAGER_GROUP).exists():
+        if request.user.is_superuser or request.user.is_dsu_manager_user():
             return qs
         return qs.filter(pk=request.user.id)
 

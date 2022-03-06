@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.functional import lazy
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -9,6 +8,7 @@ from revm_site.models import (
     CommonOfferModel,
     CommonRequestModel,
     CommonLocationModel,
+    CommonTransportableModel,
 )
 
 
@@ -16,7 +16,7 @@ class Category(CommonCategoryModel):
     ...
 
 
-class OtherOffer(CommonOfferModel, CommonLocationModel):
+class OtherOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
 
@@ -27,7 +27,7 @@ class OtherOffer(CommonOfferModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("other offer")
-        verbose_name_plural = lazy(lambda: "{} ({})".format(_("other offers"), OtherOffer.objects.count()), str)()
+        verbose_name_plural = _("other offers")
 
 
 class OtherRequest(CommonRequestModel, CommonLocationModel):
@@ -39,7 +39,7 @@ class OtherRequest(CommonRequestModel, CommonLocationModel):
 
     class Meta:
         verbose_name = _("other request")
-        verbose_name_plural = lazy(lambda: "{} ({})".format(_("other request"), OtherRequest.objects.count()), str)()
+        verbose_name_plural = _("other request")
 
 
 class ResourceRequest(models.Model):
