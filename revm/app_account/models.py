@@ -3,9 +3,9 @@ from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-USERS_GROUP = "Users"
-DSU_GROUP = "DSU"
-DSU_MANAGER_GROUP = "DSU Manager"
+USERS_GROUP = _("Users")
+CJCCI_GROUP = _("CJCCI")
+CNCCI_GROUP = _("CNCCI")
 
 
 class CustomUser(AbstractUser):
@@ -64,23 +64,23 @@ class CustomUser(AbstractUser):
         )
 
     def is_dsu_user(self):
-        return self.groups.filter(name=DSU_GROUP).exists() and not (self.is_dsu_manager_user() or self.is_superuser)
+        return self.groups.filter(name=CJCCI_GROUP).exists() and not (self.is_dsu_manager_user() or self.is_superuser)
 
     def is_dsu_manager_user(self):
-        return self.groups.filter(name=DSU_MANAGER_GROUP).exists() and not self.is_superuser
+        return self.groups.filter(name=CNCCI_GROUP).exists() and not self.is_superuser
 
     def user_type(self):
         if self.is_superuser:
             return _("Admin")
 
         if self.is_dsu_manager_user():
-            return _(DSU_MANAGER_GROUP)
+            return CNCCI_GROUP
 
         if self.is_dsu_user():
-            return _(DSU_GROUP)
+            return CJCCI_GROUP
 
         if self.is_regular_user():
-            return _(USERS_GROUP)
+            return USERS_GROUP
 
         return _("NO GROUP ASSIGNED")
 
