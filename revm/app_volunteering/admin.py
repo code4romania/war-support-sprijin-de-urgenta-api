@@ -83,6 +83,7 @@ class AdminVolunteeringOffer(ImportExportModelAdmin):
                 "fields": (
                     "donor",
                     "type",
+                    "name",
                     "available_until",
                     "has_transportation",
                     "county_coverage",
