@@ -372,7 +372,7 @@ JAZZMIN_SETTINGS = {
         #     "url": "https://github.com/farridav/django-jazzmin/issues",
         #     "new_window": True,
         # },
-        {"model": "auth.user", "new_window": False, "icon": "fas fa-book"},
+        {"model": "auth.user", "new_window": False},
     ],
     #############
     # Side Menu #
