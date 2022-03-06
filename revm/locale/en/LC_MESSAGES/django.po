@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-05 20:56+0200\n"
+"POT-Creation-Date: 2022-03-06 20:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,8 +75,8 @@ msgid "email address"
 msgstr ""
 
 #: app_account/models.py:26 app_transport_service/models.py:28
-#: app_volunteering/models.py:27 app_volunteering/models.py:40
-#: app_volunteering/models.py:52
+#: app_volunteering/models.py:27 app_volunteering/models.py:41
+#: app_volunteering/models.py:53
 msgid "type"
 msgstr ""
 
@@ -252,8 +252,8 @@ msgstr ""
 
 #: app_item/models.py:111 app_item/models.py:112 app_other/models.py:51
 #: app_other/models.py:52 app_transport_service/models.py:97
-#: app_transport_service/models.py:98 app_volunteering/models.py:55
-#: app_volunteering/models.py:56
+#: app_transport_service/models.py:98 app_volunteering/models.py:56
+#: app_volunteering/models.py:57
 msgid "Offer - Request"
 msgstr "Allocate available resources"
 
@@ -288,6 +288,7 @@ msgid "other offers"
 msgstr ""
 
 #: app_other/models.py:35 app_transport_service/models.py:41
+#: app_volunteering/models.py:29
 msgid "name"
 msgstr ""
 
@@ -416,23 +417,23 @@ msgstr ""
 msgid "volunteering types"
 msgstr ""
 
-#: app_volunteering/models.py:29
+#: app_volunteering/models.py:30
 msgid "volunteer available until"
 msgstr ""
 
-#: app_volunteering/models.py:35
+#: app_volunteering/models.py:36
 msgid "volunteering offer"
 msgstr ""
 
-#: app_volunteering/models.py:36
+#: app_volunteering/models.py:37
 msgid "volunteering offers"
 msgstr ""
 
-#: app_volunteering/models.py:46 app_volunteering/models.py:47
+#: app_volunteering/models.py:47 app_volunteering/models.py:48
 msgid "volunteering request"
 msgstr ""
 
-#: app_volunteering/models.py:51
+#: app_volunteering/models.py:52
 msgid "made_by"
 msgstr ""
 
