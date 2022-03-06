@@ -64,7 +64,7 @@ LOGGING = {
 }
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
     "jazzmin",
@@ -344,7 +344,7 @@ JAZZMIN_SETTINGS = {
     "copyright": "Code4Romania - War Task Force",
     # The model admin to search from the search bar, search bar omitted if excluded
     # "search_model": "donors.Donor",
-    # Field name on user model that contains avatar image
+    # The field name on user model that contains avatar image
     "user_avatar": None,
     ############
     # Top Menu #
@@ -372,14 +372,14 @@ JAZZMIN_SETTINGS = {
         #     "url": "https://github.com/farridav/django-jazzmin/issues",
         #     "new_window": True,
         # },
-        {"model": "auth.user"},
+        {"model": "auth.user", "new_window": False, "icon": "fas fa-book"},
     ],
     #############
     # Side Menu #
     #############
     # Whether to display the side menu
     "show_sidebar": True,
-    # Whether to aut expand the menu
+    # Whether to auto expand the menu
     "navigation_expanded": True,
     # Hide these apps when generating side menu e.g (auth)
     "hide_apps": [],
@@ -404,6 +404,19 @@ JAZZMIN_SETTINGS = {
         "app_other.otheroffer",
         "app_other.otherrequest",
         "app_other.category",
+        "auth",
+        "app_account",
+        "django_q",
+        "django_q.schedule",
+        "django_q.success",
+        "django_q.failed",
+        "account",
+        "socialaccount",
+        "socialaccount.socialaccount",
+        "socialaccount.socialapp",
+        "socialaccount.socialtoken",
+        "authtoken",
+        "authtoken.tokenproxy",
     ],
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
@@ -422,8 +435,20 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
+        "account": "fas fa-envelope",
         "account.EmailAddress": "fas fa-at",
+        "app_account": "fas fa-users",
         "app_account.CustomUser": "fas fa-user",
+        "django_q": "fas fa-layer-group",
+        "django_q.schedule": "fas fa-layer-group",
+        "django_q.success": "fas fa-check",
+        "django_q.failure": "fas fa-exclamation",
+        "socialaccount": "fas fa-share-nodes",
+        "socialaccount.socialaccount": "fas fa-hashtag",
+        "socialaccount.socialapp": "fas fa-user-cog",
+        "socialaccount.socialtoken": "fas fa-user-lock",
+        "authtoken": "fas fa-lock",
+        "authtoken.tokenproxy": "fas fa-user-lock",
         "app_item.Category": "fas fa-cube",
         "app_item.TextileCategory": "fas fa-cubes",
         "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
@@ -473,6 +498,16 @@ JAZZMIN_SETTINGS = {
     # Add a language dropdown into the admin
     "language_chooser": True,
 }
+
+if ENVIRONMENT == "development":
+    JAZZMIN_SETTINGS["usermenu_links"].append(
+        {
+            "name": "Support",
+            "url": "https://django-jazzmin.readthedocs.io/configuration/",
+            "new_window": True,
+            "icon": "fas fa-book",
+        }
+    )
 
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
