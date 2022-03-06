@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-06 20:31+0200\n"
+"POT-Creation-Date: 2022-03-06 22:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,6 +46,18 @@ msgstr "Utilizator Sprijin de Urgență"
 #: app_account/apps.py:8
 msgid "Accounts"
 msgstr "Conturi"
+
+#: app_account/models.py:6
+msgid "Users"
+msgstr "Utilizatori"
+
+#: app_account/models.py:7
+msgid "CJCCI"
+msgstr ""
+
+#: app_account/models.py:8
+msgid "CNCCI"
+msgstr ""
 
 #: app_account/models.py:15
 msgid "Individual"
@@ -264,7 +276,7 @@ msgid "Offer details"
 msgstr "Detalii donație"
 
 #: app_other/admin.py:152 app_transport_service/admin.py:208
-#: app_volunteering/admin.py:142
+#: app_volunteering/admin.py:143
 msgid "Request details"
 msgstr "Detalii cerere"
 
