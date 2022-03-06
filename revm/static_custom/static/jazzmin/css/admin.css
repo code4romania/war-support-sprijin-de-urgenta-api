@@ -1,0 +1,12 @@
+.site-logo {
+    box-shadow: none!important;
+    height: 37px!important;
+}
+
+#jazzy-logo {
+    background-color: #fff;
+}
+
+#jazzy-logo img {
+    margin-left: .75rem;
+}

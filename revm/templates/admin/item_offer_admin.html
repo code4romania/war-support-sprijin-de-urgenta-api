@@ -1,0 +1,56 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n admin_urls static admin_modify %}
+{% block extrajs %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        let detect_category = function () {
+
+            $('.detalii-produs').show();
+            $('.field-quantity').show();
+            $('.field-stock').show();
+            $('.field-name').show();
+            $('.field-unit_type').show();
+
+            switch ($('#id_category').find('option:selected').text()) {
+                case "Corturi":
+                    $('.field-tent_capacity').show();
+                    $('.field-packaging_type').hide();
+                    $('.field-expiration_date').hide();
+                    $('.field-textile_category').hide();
+                    $('.field-kids_age').hide();
+                    $('.field-other_textiles').hide();
+                    break;
+                case "Îmbrăcăminte și alte textile":
+                    $('.field-tent_capacity').hide();
+                    $('.field-packaging_type').show();
+                    $('.field-expiration_date').hide();
+                    $('.field-textile_category').show();
+                    $('.field-kids_age').show();
+                    $('.field-other_textiles').show();
+                    break;
+                case "Materiale de construcții":
+                    $('.field-tent_capacity').hide();
+                    $('.field-packaging_type').show();
+                    $('.field-expiration_date').hide();
+                    $('.field-textile_category').hide();
+                    $('.field-kids_age').hide();
+                    $('.field-other_textiles').hide();
+                    break;
+                default:
+                    $('.field-tent_capacity').hide();
+                    $('.field-packaging_type').show();
+                    $('.field-expiration_date').show();
+                    $('.field-textile_category').hide();
+                    $('.field-kids_age').hide();
+                    $('.field-other_textiles').hide();
+                    break;
+            }
+        }
+
+        $('#id_category').on('change', function () {
+            detect_category();
+        });
+        detect_category();
+    </script>
+{% endblock %}

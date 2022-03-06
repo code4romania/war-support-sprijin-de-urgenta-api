@@ -5,9 +5,30 @@ djangorestframework
 django-cors-headers
 django-storages
 
+# scheduler
+django-q
+django-q-email
+supervisor
+
+# authentication
+dj-rest-auth==2.2.3
+dj-rest-auth[with_social]
+djangorestframework-simplejwt==5.0.0
+
+# django dashboard
+django-import-export==2.7.1
+django-jazzmin==2.4.9
+
+# py caching
+pymemcache
+
 # database
 psycopg2<2.10
 dj-database-url
+
+# data analysis
+pandas
+xlsxwriter
 
 # file handling
 whitenoise
@@ -18,3 +39,7 @@ gevent
 
 # doc-generation
 drf-spectacular
+
+# admin
+django-jazzmin
+django-multiselectfield>=0.1.12,<1.0.0
