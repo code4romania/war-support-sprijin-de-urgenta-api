@@ -26,6 +26,7 @@ class Type(models.Model):
 class VolunteeringOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
+    name = models.CharField(_("name"), max_length=50, null=False, blank=False)
     available_until = models.DateField(_("volunteer available until"), null=True)
 
     def __str__(self):
