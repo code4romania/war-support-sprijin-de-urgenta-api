@@ -9,6 +9,7 @@ from revm_site.models import (
     CommonOfferModel,
     CommonCategoryModel,
 )
+from revm_site.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
@@ -90,7 +91,7 @@ class ResourceRequest(models.Model):
     request = models.ForeignKey(
         TransportServiceRequest, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("request")
     )
-    date = models.DateTimeField(_("transport date"))
+    date = models.DateTimeField(_("transport date"), validators=[validate_date_disallow_past])
     description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
 
     class Meta:

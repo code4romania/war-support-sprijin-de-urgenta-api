@@ -11,6 +11,7 @@ from revm_site.models import (
     CommonTransportableModel,
     CommonLocationModel,
 )
+from revm_site.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
@@ -21,7 +22,9 @@ class OtherOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransporta
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
 
-    available_until = models.DateField(_("resource available until"), null=True)
+    available_until = models.DateField(
+        _("resource available until"), validators=[validate_date_disallow_past], null=True
+    )
 
     def __str__(self):
         return f"#{self.pk} {self.name} {self.category} {self.town}({self.county_coverage})"
