@@ -114,9 +114,7 @@ class Command(BaseCommand):
             Permission.objects.filter(codename__in=cncci_permissions).values_list("id", flat=True)
         )
         self.stdout.write(
-            self.style.SUCCESS(
-                f"'{CNCCI_GROUP}' group has been created and appropriate permissions were assigned"
-            )
+            self.style.SUCCESS(f"'{CNCCI_GROUP}' group has been created and appropriate permissions were assigned")
         )
 
         cjcci_group, _ = Group.objects.get_or_create(name=CJCCI_GROUP)

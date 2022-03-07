@@ -4,10 +4,10 @@ from django.utils.translation import gettext_lazy as _
 from app_account.models import CustomUser
 from revm_site.models import (
     CommonCategoryModel,
-    CommonCountyModel,
+    CommonMultipleCountyModel,
     CommonOfferModel,
     CommonRequestModel,
-    CommonLocationModel,
+    CommonMultipleLocationModel,
     CommonTransportableModel,
 )
 
@@ -16,7 +16,7 @@ class Category(CommonCategoryModel):
     ...
 
 
-class OtherOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
+class OtherOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportableModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
 
@@ -30,7 +30,7 @@ class OtherOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel
         verbose_name_plural = _("other offers")
 
 
-class OtherRequest(CommonRequestModel, CommonLocationModel):
+class OtherRequest(CommonRequestModel, CommonMultipleLocationModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("name"), max_length=100, db_index=True)
 
