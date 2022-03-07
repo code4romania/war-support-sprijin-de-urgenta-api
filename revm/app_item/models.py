@@ -176,8 +176,8 @@ class ResourceRequest(models.Model):
 
 def get_updated_stock_value(previous, current):
     logger = logging.getLogger("django")
-    #No previous record -> stock = total_quantity
-    if previous is None or current.stock is None or previous.stock is None:
+    no_previous_record_or_stock = previous is None or current.stock is None or previous.stock is None
+    if no_previous_record_or_stock:
         logger.info("Stock initialise {0}".format(current.quantity))
         return current.quantity
 
