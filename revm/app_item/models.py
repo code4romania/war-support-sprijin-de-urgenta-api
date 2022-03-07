@@ -126,7 +126,7 @@ class ResourceRequest(models.Model):
         self.total_units = min(self.total_units, available_to_transfer)
 
         if self.total_units == 0:
-            raise Exception("OOPS")
+            raise Exception(_("Attempted to fulfill request from offer with 0 stock. Please select an offer that has available stock or wait for one to come in"))
 
         resource.stock -= self.total_units
         request.stock -= self.total_units
