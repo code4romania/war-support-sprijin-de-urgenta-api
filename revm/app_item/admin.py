@@ -189,6 +189,7 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin):
         "category",
         "name",
         "quantity",
+        "stock",
         "unit_type",
         "county_coverage",
         "town",

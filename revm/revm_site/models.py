@@ -6,6 +6,7 @@ from multiselectfield import MultiSelectField
 
 from app_account.models import CustomUser
 
+
 class CommonCategoryModel(models.Model):
     name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
     description = models.CharField(_("category description"), default="", blank=True, null=False, max_length=500)
@@ -66,7 +67,7 @@ class CommonResourceModel(models.Model):
 
 
 class CommonOfferModel(CommonResourceModel):
-    donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("donor"))
+    donor = models.ForeignKey(CustomUser, on_delete=models.PROTECT, verbose_name=_("donor"))
     status = models.CharField(
         _("status"), max_length=5, choices=settings.OFFER_STATUS, default=settings.OFFER_STATUS[0][0]
     )

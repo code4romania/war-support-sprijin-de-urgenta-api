@@ -14,7 +14,7 @@ from revm_site.models import (
     CommonMultipleLocationModel,
     CommonTransportableModel,
     CommonCountyModel,
-    CommonLocationModel
+    CommonLocationModel,
 )
 
 
@@ -65,7 +65,7 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         try:
             previous = ItemOffer.objects.get(pk=self.pk)
         except Exception as e:
-            #ToDo: map DoesNotExist execption and tell user
+            # ToDo: map DoesNotExist execption and tell user
             pass
         self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
@@ -109,13 +109,14 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         try:
             previous = ItemRequest.objects.get(pk=self.pk)
         except Exception as e:
-            #ToDo: map DoesNotExist execption and tell user
+            # ToDo: map DoesNotExist execption and tell user
             pass
 
         self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
 
-#ToDo: handle situation where admin changes total_units
+
+# ToDo: handle situation where admin changes total_units
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
     request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING, verbose_name=_("request"))
@@ -135,38 +136,52 @@ class ResourceRequest(models.Model):
         try:
             previous = ResourceRequest.objects.get(pk=self.pk)
         except Exception as e:
-            #ToDo: map DoesNotExist execption and tell user
+            # ToDo: map DoesNotExist execption and tell user
             pass
 
         requested_amount = self.total_units
-        #Matching a request with negative stock is nonsensical.
+        # Matching a request with negative stock is nonsensical.
         if requested_amount < 0:
-            #ToDo: notify user
-            logger.error("You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here.")
+            # ToDo: notify user
+            logger.error(
+                "You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here."
+            )
             return
-        #if this is a modificatioon operation. Gotta deal with the delta
-        if not (previous is None) and not(previous.total_units is None):
+        # if this is a modificatioon operation. Gotta deal with the delta
+        if not (previous is None) and not (previous.total_units is None):
             requested_amount -= previous.total_units
 
         resource = self.resource
         request = self.request
 
         if requested_amount > request.stock:
-            logger.error("The amount you're trying to transfer {0} is larger than the need {1}".format(requested_amount, request.stock))
-            #ToDo: tell user
+            logger.error(
+                "The amount you're trying to transfer {0} is larger than the need {1}".format(
+                    requested_amount, request.stock
+                )
+            )
+            # ToDo: tell user
             return
 
         if requested_amount > resource.stock:
-            logger.error("The amount you're trying to transfer {0} is larger than the available stock {1}".format(requested_amount, resource.stock))
-            #ToDo: tell user
+            logger.error(
+                "The amount you're trying to transfer {0} is larger than the available stock {1}".format(
+                    requested_amount, resource.stock
+                )
+            )
+            # ToDo: tell user
             return
 
         resource.stock -= requested_amount
         request.stock -= requested_amount
-        logger.info("Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(requested_amount, resource.stock, request.stock))
+        logger.info(
+            "Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(
+                requested_amount, resource.stock, request.stock
+            )
+        )
 
         if request.stock == 0:
-           request.status = ITEM_STATUS_COMPLETE
+            request.status = ITEM_STATUS_COMPLETE
 
         resource.save()
         request.save()
@@ -185,7 +200,11 @@ def get_updated_stock_value(previous, current):
     delta = current.quantity - previous.quantity
     stock += delta
 
-    logger.info("Stock delta {delta}. New Stock {stock}. New Quantity {qty}".format(delta=delta, stock=stock, qty=current.quantity))
+    logger.info(
+        "Stock delta {delta}. New Stock {stock}. New Quantity {qty}".format(
+            delta=delta, stock=stock, qty=current.quantity
+        )
+    )
     if stock < 0:
         stock = 0
 
