@@ -175,6 +175,8 @@ USE_TZ = True
 LANGUAGES = [
     ("ro", _("Romanian")),
     ("en", _("English")),
+    ("uk", _("Ukrainian")),
+    ("ru", _("Russian")),
 ]
 
 # Static files (CSS, JavaScript, Images)
