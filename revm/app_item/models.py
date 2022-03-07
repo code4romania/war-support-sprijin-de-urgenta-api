@@ -11,8 +11,7 @@ from revm_site.models import (
     CommonMultipleLocationModel,
     CommonTransportableModel,
     CommonCountyModel,
-    CommonLocationModel,
-    ItemStatus
+    CommonLocationModel
 )
 
 
