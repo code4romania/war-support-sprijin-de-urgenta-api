@@ -9,6 +9,7 @@ from revm_site.models import (
     CommonRequestModel,
     CommonMultipleLocationModel,
     CommonTransportableModel,
+    CommonLocationModel,
 )
 
 
@@ -30,7 +31,7 @@ class OtherOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransporta
         verbose_name_plural = _("other offers")
 
 
-class OtherRequest(CommonRequestModel, CommonMultipleLocationModel):
+class OtherRequest(CommonRequestModel, CommonLocationModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("name"), max_length=100, db_index=True)
 
