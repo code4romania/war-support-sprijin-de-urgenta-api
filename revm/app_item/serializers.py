@@ -22,7 +22,7 @@ class ItemOfferSerializer(CountyCoverageSerializer):
         fields = "__all__"
 
 
-class ItemRequestSerializer(CountyCoverageSerializer):
+class ItemRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemRequest
         fields = "__all__"
