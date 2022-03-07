@@ -1,11 +1,11 @@
 import logging
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from revm_site.settings.base import ITEM_STATUS_COMPLETE
-
 from app_account.models import CustomUser
-from revm_site.models import (
+from revm_site.settings.base import ITEM_STATUS_COMPLETE
+from revm_site.utils.models import (
     CommonCategoryModel,
     CommonMultipleCountyModel,
     CommonRequestModel,
@@ -15,7 +15,7 @@ from revm_site.models import (
     CommonCountyModel,
     CommonLocationModel,
 )
-from revm_site.validators import validate_date_disallow_past
+from revm_site.utils.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
