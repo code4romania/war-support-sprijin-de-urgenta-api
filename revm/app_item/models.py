@@ -68,6 +68,7 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         try:
             previous = ItemOffer.objects.get(pk=self.pk)
         except Exception as e:
+            #ToDo: map DoesNotExist execption and tell user
             pass
         self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
@@ -111,6 +112,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         try:
             previous = ItemRequest.objects.get(pk=self.pk)
         except Exception as e:
+            #ToDo: map DoesNotExist execption and tell user
             pass
 
         self.stock = get_updated_stock_value(previous, self)
