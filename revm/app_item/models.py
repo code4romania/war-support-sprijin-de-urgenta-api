@@ -11,6 +11,7 @@ from revm_site.models import (
     CommonTransportableModel,
     CommonCountyModel,
     CommonLocationModel,
+    ItemStatus
 )
 
 
@@ -57,7 +58,8 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         verbose_name_plural = _("item offers")
 
     def save(self, *args, **kwargs):
-        if not self.stock:
+        #ToDo: don't attepmt to define the stock every time a save is called. Define it once on creation.
+        if self.stock is None:
             self.stock = self.quantity
         super().save(*args, **kwargs)
 
@@ -96,7 +98,8 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         verbose_name_plural = _("item requests")
 
     def save(self, *args, **kwargs):
-        if not self.stock:
+        #ToDo: don't attepmt to define the stock every time a save is called. Define it once on creation.
+        if self.stock is None:
             self.stock = self.quantity
         super().save(*args, **kwargs)
 
@@ -119,10 +122,22 @@ class ResourceRequest(models.Model):
         resource = self.resource
         request = self.request
 
+        available_to_transfer = min(resource.stock, request.stock)
+        self.total_units = min(self.total_units, available_to_transfer)
+
+        if self.total_units == 0:
+            raise Exception("OOPS")
+
         resource.stock -= self.total_units
         request.stock -= self.total_units
-        if request.stock <= 0:
-            request.status = "C"
+
+        #ToDo: use enum instead of magic string
+        if request.stock == 0:
+           request.status = "C"
+
+        if resource.stock == 0:
+            resource.status = "C"
+
         resource.save()
         request.save()
 
