@@ -60,16 +60,16 @@ class CommonResourceModel(models.Model):
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
     added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
-    status = models.CharField(
-        _("status"), max_length=5, choices=settings.RESOURCE_STATUS, default=settings.RESOURCE_STATUS[0][0]
-    )
-
     class Meta:
         abstract = True
 
 
 class CommonOfferModel(CommonResourceModel):
     donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("donor"))
+    status = models.CharField(
+        _("status"), max_length=5, choices=settings.OFFER_STATUS, default=settings.OFFER_STATUS[0][0]
+    )
+
 
     class Meta:
         abstract = True
@@ -79,6 +79,10 @@ class CommonRequestModel(CommonResourceModel):
     made_by = models.ForeignKey(
         CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("requested by")
     )
+    status = models.CharField(
+        _("status"), max_length=5, choices=settings.REQUEST_STATUS, default=settings.REQUEST_STATUS[0][0]
+    )
+
 
     class Meta:
         abstract = True
