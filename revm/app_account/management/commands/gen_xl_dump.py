@@ -126,7 +126,7 @@ class Command(BaseCommand):
             self._field_name(ItemOffer.tent_capacity): "Capacitate Cort",
         }
         item_request_data_mapping = {
-            self._field_name(ItemRequest.county_coverage): "Judete Acoperite",
+            self._field_name(ItemRequest.county_coverage): "Judet Acoperit",
             self._field_name(ItemRequest.town): "Oras",
             self._field_name(ItemRequest.description): "Descriere",
             self._field_name(ItemRequest.added_on): "Adaugat in",
