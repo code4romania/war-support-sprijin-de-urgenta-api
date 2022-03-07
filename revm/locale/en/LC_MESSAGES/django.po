@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-07 10:38+0200\n"
+"POT-Creation-Date: 2022-03-07 13:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -476,71 +476,75 @@ msgstr ""
 msgid "town"
 msgstr ""
 
-#: revm_site/models.py:65
-msgid "status"
+#: revm_site/models.py:69
+msgid "donor"
 msgstr ""
 
-#: revm_site/models.py:73
-msgid "donor"
+#: revm_site/models.py:71 revm_site/models.py:84
+msgid "status"
 msgstr ""
 
 #: revm_site/models.py:81
 msgid "requested by"
 msgstr ""
 
-#: revm_site/settings/base.py:35
+#: revm_site/settings/base.py:34
 msgid "Sprijin de Urgență"
 msgstr "Sprijin de Urgență"
 
-#: revm_site/settings/base.py:36
+#: revm_site/settings/base.py:35
 msgid "RVM"
 msgstr "SdU"
 
-#: revm_site/settings/base.py:177
+#: revm_site/settings/base.py:176
 msgid "Romanian"
 msgstr ""
 
-#: revm_site/settings/base.py:178
+#: revm_site/settings/base.py:177
 msgid "English"
 msgstr ""
 
-#: revm_site/settings/base.py:261
+#: revm_site/settings/base.py:252 revm_site/settings/base.py:259
 msgid "Not Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:262
+#: revm_site/settings/base.py:253 revm_site/settings/base.py:260
 msgid "Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:263
+#: revm_site/settings/base.py:254 revm_site/settings/base.py:261
 msgid "Deactivated"
 msgstr ""
 
-#: revm_site/settings/base.py:264
+#: revm_site/settings/base.py:255
 msgid "Complete"
 msgstr ""
 
-#: revm_site/settings/base.py:267
+#: revm_site/settings/base.py:262
+msgid "Solved"
+msgstr ""
+
+#: revm_site/settings/base.py:265
 msgid "National"
 msgstr ""
 
-#: revm_site/settings/base.py:267 revm_site/utils.py:7
+#: revm_site/settings/base.py:265 revm_site/utils.py:7
 msgid "County"
 msgstr ""
 
-#: revm_site/settings/base.py:270
+#: revm_site/settings/base.py:268
 msgid "Disponibil in weekend"
 msgstr ""
 
-#: revm_site/settings/base.py:271
+#: revm_site/settings/base.py:269
 msgid "Disponibil in timpul saptamanii"
 msgstr ""
 
-#: revm_site/settings/base.py:272
+#: revm_site/settings/base.py:270
 msgid "Disponibil oricand"
 msgstr ""
 
-#: revm_site/settings/base.py:273
+#: revm_site/settings/base.py:271
 msgid "Intervale fixe"
 msgstr ""
 
