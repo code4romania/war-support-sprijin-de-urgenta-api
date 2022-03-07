@@ -154,9 +154,9 @@ class ResourceRequest(models.Model):
             #ToDo: tell user
             return
 
-        resource.stock -= self.total_units
-        request.stock -= self.total_units
-        logger.info("Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(self.total_units, resource.stock, request.stock))
+        resource.stock -= requested_amount
+        request.stock -= requested_amount
+        logger.info("Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(requested_amount, resource.stock, request.stock))
 
         if request.stock == 0:
            request.status = ITEM_STATUS_COMPLETE
