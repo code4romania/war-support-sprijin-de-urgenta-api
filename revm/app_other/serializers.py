@@ -16,7 +16,7 @@ class OtherOfferSerializer(CountyCoverageSerializer):
         fields = "__all__"
 
 
-class OtherRequestSerializer(CountyCoverageSerializer):
+class OtherRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = OtherRequest
         fields = "__all__"

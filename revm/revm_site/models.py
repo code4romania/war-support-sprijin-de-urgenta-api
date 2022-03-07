@@ -61,6 +61,7 @@ class CommonResourceModel(models.Model):
     description = models.CharField(_("description"), default="", blank=True, null=False, max_length=500)
 
     added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
+
     class Meta:
         abstract = True
 
@@ -70,7 +71,6 @@ class CommonOfferModel(CommonResourceModel):
     status = models.CharField(
         _("status"), max_length=5, choices=settings.OFFER_STATUS, default=settings.OFFER_STATUS[0][0]
     )
-
 
     class Meta:
         abstract = True
@@ -83,7 +83,6 @@ class CommonRequestModel(CommonResourceModel):
     status = models.CharField(
         _("status"), max_length=5, choices=settings.REQUEST_STATUS, default=settings.REQUEST_STATUS[0][0]
     )
-
 
     class Meta:
         abstract = True

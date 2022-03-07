@@ -16,7 +16,7 @@ class VolunteeringOfferSerializer(CountyCoverageSerializer):
         fields = "__all__"
 
 
-class VolunteeringRequestSerializer(CountyCoverageSerializer):
+class VolunteeringRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = VolunteeringRequest
         fields = "__all__"
