@@ -3,13 +3,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import (
+from revm_site.utils.models import (
     CommonMultipleCountyModel,
     CommonRequestModel,
     CommonOfferModel,
     CommonCategoryModel,
 )
-from revm_site.validators import validate_date_disallow_past
+from revm_site.utils.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
