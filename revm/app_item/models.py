@@ -1,5 +1,9 @@
+import logging
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
+
+from revm_site.settings.base import ITEM_STATUS_COMPLETE
 
 from app_account.models import CustomUser
 from revm_site.models import (
@@ -10,7 +14,7 @@ from revm_site.models import (
     CommonMultipleLocationModel,
     CommonTransportableModel,
     CommonCountyModel,
-    CommonLocationModel,
+    CommonLocationModel
 )
 
 
@@ -57,8 +61,13 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         verbose_name_plural = _("item offers")
 
     def save(self, *args, **kwargs):
-        if not self.stock:
-            self.stock = self.quantity
+        previous = None
+        try:
+            previous = ItemOffer.objects.get(pk=self.pk)
+        except Exception as e:
+            #ToDo: map DoesNotExist execption and tell user
+            pass
+        self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
 
 
@@ -96,11 +105,17 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         verbose_name_plural = _("item requests")
 
     def save(self, *args, **kwargs):
-        if not self.stock:
-            self.stock = self.quantity
+        previous = None
+        try:
+            previous = ItemRequest.objects.get(pk=self.pk)
+        except Exception as e:
+            #ToDo: map DoesNotExist execption and tell user
+            pass
+
+        self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
 
-
+#ToDo: handle situation where admin changes total_units
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
     request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING, verbose_name=_("request"))
@@ -115,15 +130,63 @@ class ResourceRequest(models.Model):
         verbose_name_plural = _("Offer - Request")
 
     def save(self, *args, **kwargs):
-        # subtract amount from offer and request
+        logger = logging.getLogger("django")
+        previous = None
+        try:
+            previous = ResourceRequest.objects.get(pk=self.pk)
+        except Exception as e:
+            #ToDo: map DoesNotExist execption and tell user
+            pass
+
+        requested_amount = self.total_units
+        #Matching a request with negative stock is nonsensical.
+        if requested_amount < 0:
+            #ToDo: notify user
+            logger.error("You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here.")
+            return
+        #if this is a modificatioon operation. Gotta deal with the delta
+        if not (previous is None) and not(previous.total_units is None):
+            requested_amount -= previous.total_units
+
         resource = self.resource
         request = self.request
 
-        resource.stock -= self.total_units
-        request.stock -= self.total_units
-        if request.stock <= 0:
-            request.status = "C"
+        if requested_amount > request.stock:
+            logger.error("The amount you're trying to transfer {0} is larger than the need {1}".format(requested_amount, request.stock))
+            #ToDo: tell user
+            return
+
+        if requested_amount > resource.stock:
+            logger.error("The amount you're trying to transfer {0} is larger than the available stock {1}".format(requested_amount, resource.stock))
+            #ToDo: tell user
+            return
+
+        resource.stock -= requested_amount
+        request.stock -= requested_amount
+        logger.info("Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(requested_amount, resource.stock, request.stock))
+
+        if request.stock == 0:
+           request.status = ITEM_STATUS_COMPLETE
+
         resource.save()
         request.save()
 
         super().save(*args, **kwargs)
+
+
+def get_updated_stock_value(previous, current):
+    logger = logging.getLogger("django")
+    no_previous_record_or_stock = previous is None or current.stock is None or previous.stock is None
+    if no_previous_record_or_stock:
+        logger.info("Stock initialise {0}".format(current.quantity))
+        return current.quantity
+
+    stock = current.stock
+    delta = current.quantity - previous.quantity
+    stock += delta
+
+    logger.info("Stock delta {delta}. New Stock {stock}. New Quantity {qty}".format(delta=delta, stock=stock, qty=current.quantity))
+    if stock < 0:
+        stock = 0
+
+    return stock

@@ -248,18 +248,23 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
 }
 
+ITEM_STATUS_NOT_VERIFIED = "NV"
+ITEM_STATUS_VERIFIED = "V"
+ITEM_STATUS_DEACTIVATED = "D"
+ITEM_STATUS_COMPLETE = "C"
+
 OFFER_STATUS = (
-    ("NV", _("Not Verified")),
-    ("V", _("Verified")),
-    ("D", _("Deactivated")),
-    ("C", _("Complete")),
+    (ITEM_STATUS_NOT_VERIFIED, _("Not Verified")),
+    (ITEM_STATUS_VERIFIED, _("Verified")),
+    (ITEM_STATUS_DEACTIVATED, _("Deactivated")),
+    (ITEM_STATUS_COMPLETE, _("Complete")),
 )
 
 REQUEST_STATUS = (
-    ("NV", _("Not Verified")),
-    ("V", _("Verified")),
-    ("D", _("Deactivated")),
-    ("C", _("Solved")),
+    (ITEM_STATUS_NOT_VERIFIED, _("Not Verified")),
+    (ITEM_STATUS_VERIFIED, _("Verified")),
+    (ITEM_STATUS_DEACTIVATED, _("Deactivated")),
+    (ITEM_STATUS_COMPLETE, _("Solved")),
 )
 
 TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
