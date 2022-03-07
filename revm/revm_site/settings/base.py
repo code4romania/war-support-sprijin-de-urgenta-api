@@ -248,11 +248,18 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
 }
 
-RESOURCE_STATUS = (
+OFFER_STATUS = (
     ("NV", _("Not Verified")),
     ("V", _("Verified")),
     ("D", _("Deactivated")),
     ("C", _("Complete")),
+)
+
+REQUEST_STATUS = (
+    ("NV", _("Not Verified")),
+    ("V", _("Verified")),
+    ("D", _("Deactivated")),
+    ("C", _("Solved")),
 )
 
 TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
