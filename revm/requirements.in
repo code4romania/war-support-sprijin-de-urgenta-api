@@ -19,9 +19,6 @@ djangorestframework-simplejwt==5.0.0
 django-import-export==2.7.1
 django-jazzmin==2.4.9
 
-# py caching
-pymemcache
-
 # database
 psycopg2<2.10
 dj-database-url

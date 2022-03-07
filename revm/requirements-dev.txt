@@ -4,8 +4,6 @@
 #
 #    pip-compile --output-file=requirements-dev.txt requirements-dev.in
 #
-appnope==0.1.2
-    # via ipython
 arrow==1.2.2
     # via
     #   -r requirements.txt
@@ -215,8 +213,6 @@ pyjwt[crypto]==2.3.0
     #   -r requirements.txt
     #   django-allauth
     #   djangorestframework-simplejwt
-pymemcache==3.5.1
-    # via -r requirements.txt
 pyrepl==0.9.0
     # via fancycompleter
 pyrsistent==0.18.1
@@ -260,7 +256,6 @@ six==1.16.0
     # via
     #   -r requirements.txt
     #   blessed
-    #   pymemcache
     #   python-dateutil
 sqlparse==0.4.2
     # via
