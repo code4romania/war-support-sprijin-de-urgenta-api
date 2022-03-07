@@ -85,7 +85,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
 
     stock = models.PositiveSmallIntegerField(
-        _("Stock"), help_text=_("How many units are still needed"), null=True, blank=True
+        _("Necessary"), help_text=_("How many units are still needed"), null=True, blank=True
     )
 
     # Textile

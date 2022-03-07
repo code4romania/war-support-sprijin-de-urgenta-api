@@ -8,6 +8,7 @@ from revm_site.models import (
     CommonOfferModel,
     CommonMultipleLocationModel,
     CommonTransportableModel,
+    CommonLocationModel,
 )
 
 
@@ -37,7 +38,7 @@ class VolunteeringOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTra
         verbose_name_plural = _("volunteering offers")
 
 
-class VolunteeringRequest(CommonRequestModel, CommonMultipleLocationModel):
+class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     def __str__(self):

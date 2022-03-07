@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-07 13:07+0200\n"
+"POT-Creation-Date: 2022-03-07 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,7 +191,7 @@ msgstr "unitate de măsură"
 msgid "expiration date"
 msgstr "data expirării"
 
-#: app_item/models.py:39 app_item/models.py:77
+#: app_item/models.py:39
 msgid "Stock"
 msgstr "Stoc"
 
@@ -222,6 +222,10 @@ msgstr "donație de produse"
 #: app_item/models.py:57
 msgid "item offers"
 msgstr "donații de produse"
+
+#: app_item/models.py:77
+msgid "Necessary"
+msgstr "Necesar"
 
 #: app_item/models.py:77
 msgid "How many units are still needed"
