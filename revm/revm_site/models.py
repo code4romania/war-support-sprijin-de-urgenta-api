@@ -6,24 +6,6 @@ from multiselectfield import MultiSelectField
 
 from app_account.models import CustomUser
 
-from enum import Enum
-
-class ItemStatus(Enum):
-    UNVERIFIED = ('NV', 'Not Verified')
-    VERIFIED = ('V', 'Verified')
-    DEACTIVETED = ('D', 'Deactivated')
-    COMPLETE = ('C', 'Complete')
-
-    def __str__(self):
-        return self.value[1]
-
-    def code(self):
-        return self.value[0]
-
-    #ToDo: add enumeration function and plecase all of the usaged of the below list...
-    #[('NV', 'Not Verified'), ('V', 'Verified'), ('D', 'Deactivated'), ('C', 'Complete')]
-
-
 class CommonCategoryModel(models.Model):
     name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
     description = models.CharField(_("category description"), default="", blank=True, null=False, max_length=500)
