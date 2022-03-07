@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from app_account.models import CustomUser
 from revm_site.models import (
@@ -126,7 +127,9 @@ class ResourceRequest(models.Model):
         self.total_units = min(self.total_units, available_to_transfer)
 
         if self.total_units == 0:
-            raise Exception(_("Attempted to fulfill request from offer with 0 stock. Please select an offer that has available stock or wait for one to come in"))
+            #ToDo: use a middleware or find a way to message the user directly intead
+            #raise ValidationError(_("Attempted to fulfill request from offer with 0 stock. Please select an offer that has available stock or wait for one to come in"))
+            return #for now refuse to save the change.
 
         resource.stock -= self.total_units
         request.stock -= self.total_units
