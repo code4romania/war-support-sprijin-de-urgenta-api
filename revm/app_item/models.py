@@ -133,16 +133,26 @@ class ResourceRequest(models.Model):
         verbose_name_plural = _("Offer - Request")
 
     def save(self, *args, **kwargs):
-        # subtract amount from offer and request
+        logger = logging.getLogger("django")
+        previous = None
+        try:
+            previous = ResourceRequest.objects.get(pk=self.pk)
+        except Exception as e:
+            #ToDo: map DoesNotExist execption and tell user
+            pass
+
         requested_amount = self.total_units
+        #Matching a request with negative stock is nonsensical.
+        if requested_amount < 0:
+            #ToDo: notify user
+            logger.error("You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here.")
+            return
+        #if this is a modificatioon operation. Gotta deal with the delta
+        if not (previous is None) and not(previous.total_units is None):
+            requested_amount -= previous.total_units
+
         resource = self.resource
         request = self.request
-
-        logger = logging.getLogger("django")
-        if requested_amount < 0:
-            logger.error("What on earth are you doing?...")
-            #ToDo: tell user
-            return
 
         if requested_amount > request.stock:
             logger.error("The amount you're trying to transfer {0} is larger than the need {1}".format(requested_amount, request.stock))
