@@ -41,7 +41,7 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
 
     # Textile
     textile_category = models.ForeignKey(
-        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category")
+        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("textile category")
     )
     kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
     other_textiles = models.TextField(_("other"), blank=True, null=True)
@@ -79,7 +79,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
 
     # Textile
     textile_category = models.ForeignKey(
-        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category")
+        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("textile category")
     )
     kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
     other_textiles = models.TextField(_("other"), blank=True, null=True)
