@@ -1,7 +1,6 @@
 import logging
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import ValidationError
 
 from revm_site.settings.base import ITEM_STATUS_COMPLETE
 
@@ -16,6 +15,7 @@ from revm_site.models import (
     CommonCountyModel,
     CommonLocationModel,
 )
+from revm_site.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
@@ -38,7 +38,9 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
     quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
-    expiration_date = models.DateField(_("expiration date"), blank=True, null=True)
+    expiration_date = models.DateField(
+        _("expiration date"), validators=[validate_date_disallow_past], blank=True, null=True
+    )
     stock = models.PositiveSmallIntegerField(
         _("Stock"), help_text=_("How many units of this type are left"), null=True, blank=True
     )
