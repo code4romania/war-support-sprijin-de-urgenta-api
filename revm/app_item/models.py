@@ -4,11 +4,13 @@ from django.utils.translation import gettext_lazy as _
 from app_account.models import CustomUser
 from revm_site.models import (
     CommonCategoryModel,
-    CommonCountyModel,
+    CommonMultipleCountyModel,
     CommonRequestModel,
     CommonOfferModel,
-    CommonLocationModel,
+    CommonMultipleLocationModel,
     CommonTransportableModel,
+    CommonCountyModel,
+    CommonLocationModel,
 )
 
 
@@ -24,7 +26,7 @@ class TextileCategory(CommonCategoryModel):
         verbose_name_plural = _("Textile Categories")
 
 
-class ItemOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
+class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportableModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category"))
 
     # Descriere produs

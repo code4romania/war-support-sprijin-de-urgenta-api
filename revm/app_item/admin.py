@@ -6,7 +6,7 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_item import models
 from app_account.models import CustomUser
-from revm_site.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin
+from revm_site.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CommonResourceSingleCountyAdmin
 
 
 def deactivate_offers(modeladmin, request, queryset):
@@ -183,7 +183,7 @@ class AdminItemOffer(CommonResourceAdmin):
 
 
 @admin.register(models.ItemRequest)
-class AdminItemRequest(CommonResourceAdmin):
+class AdminItemRequest(CommonResourceSingleCountyAdmin):
     list_display = [
         "id",
         "category",

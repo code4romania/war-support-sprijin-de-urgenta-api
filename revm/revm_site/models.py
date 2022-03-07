@@ -27,8 +27,24 @@ class CommonTransportableModel(models.Model):
         abstract = True
 
 
-class CommonCountyModel(models.Model):
+class CommonMultipleCountyModel(models.Model):
     county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES, blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
+class CommonMultipleLocationModel(CommonMultipleCountyModel):
+    town = models.CharField(_("town"), max_length=100, blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
+class CommonCountyModel(models.Model):
+    county_coverage = models.CharField(
+        _("county coverage"), choices=settings.COUNTY_CHOICES, max_length=3, blank=True, null=True
+    )
 
     class Meta:
         abstract = True
