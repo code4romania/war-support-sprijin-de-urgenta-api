@@ -3,10 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 
-from revm_site.settings.base import (ITEM_STATUS_NOT_VERIFIED,
-                                     ITEM_STATUS_VERIFIED,
-                                     ITEM_STATUS_DEACTIVATED,
-                                     ITEM_STATUS_COMPLETE)
+from revm_site.settings.base import ITEM_STATUS_COMPLETE
 
 from app_account.models import CustomUser
 from revm_site.models import (
