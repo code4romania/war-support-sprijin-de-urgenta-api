@@ -29,14 +29,14 @@ DjangoUserAdmin.add_fieldsets = (
 @admin.register(models.CustomUser)
 class AdminCustomUser(DjangoUserAdmin):
     list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type", "county")
-    list_display_links = ["id", "first_name", "last_name", "email"]
+    list_display_links = ("id", "first_name", "last_name", "email")
     search_fields = ("email", "first_name", "last_name")
-    list_filter = ["is_validated"]
+    list_filter = ("is_validated", "type")
     ordering = ("first_name",)
     change_form_template = "admin/user_admin.html"
 
     def get_readonly_fields(self, request, obj=None):
-        if request.user.is_dsu_manager_user():
+        if request.user.is_cncci_user():
             return ["is_superuser", "user_permissions", "groups"]
         return self.readonly_fields
 
@@ -71,7 +71,7 @@ class AdminCustomUser(DjangoUserAdmin):
             return self.add_fieldsets
 
     def has_delete_permission(self, request, obj=None):
-        if not (request.user.is_superuser or request.user.is_dsu_manager_user()):
+        if not (request.user.is_superuser or request.user.is_cncci_user()):
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
@@ -79,7 +79,7 @@ class AdminCustomUser(DjangoUserAdmin):
         return True
 
     def has_change_permission(self, request, obj=None):
-        if not (request.user.is_superuser or request.user.is_dsu_manager_user()):
+        if not (request.user.is_superuser or request.user.is_cncci_user()):
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
@@ -88,7 +88,7 @@ class AdminCustomUser(DjangoUserAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser or request.user.is_dsu_manager_user():
+        if request.user.is_superuser or request.user.is_cncci_user():
             return qs
         return qs.filter(pk=request.user.id)
 

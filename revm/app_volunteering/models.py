@@ -4,9 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from app_account.models import CustomUser
 from revm_site.models import (
     CommonRequestModel,
-    CommonCountyModel,
+    CommonMultipleCountyModel,
     CommonOfferModel,
-    CommonLocationModel,
+    CommonMultipleLocationModel,
     CommonTransportableModel,
 )
 
@@ -23,9 +23,10 @@ class Type(models.Model):
         verbose_name_plural = _("volunteering types")
 
 
-class VolunteeringOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
+class VolunteeringOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportableModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
+    name = models.CharField(_("name"), max_length=50, null=False, blank=False)
     available_until = models.DateField(_("volunteer available until"), null=True)
 
     def __str__(self):
@@ -36,7 +37,7 @@ class VolunteeringOffer(CommonOfferModel, CommonLocationModel, CommonTransportab
         verbose_name_plural = _("volunteering offers")
 
 
-class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
+class VolunteeringRequest(CommonRequestModel, CommonMultipleLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     def __str__(self):

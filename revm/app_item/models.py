@@ -4,11 +4,13 @@ from django.utils.translation import gettext_lazy as _
 from app_account.models import CustomUser
 from revm_site.models import (
     CommonCategoryModel,
-    CommonCountyModel,
+    CommonMultipleCountyModel,
     CommonRequestModel,
     CommonOfferModel,
-    CommonLocationModel,
+    CommonMultipleLocationModel,
     CommonTransportableModel,
+    CommonCountyModel,
+    CommonLocationModel,
 )
 
 
@@ -24,7 +26,7 @@ class TextileCategory(CommonCategoryModel):
         verbose_name_plural = _("Textile Categories")
 
 
-class ItemOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
+class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportableModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category"))
 
     # Descriere produs
@@ -39,7 +41,7 @@ class ItemOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel)
 
     # Textile
     textile_category = models.ForeignKey(
-        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category")
+        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("textile category")
     )
     kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
     other_textiles = models.TextField(_("other"), blank=True, null=True)
@@ -48,7 +50,7 @@ class ItemOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel)
     tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
     def __str__(self):
-        return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type})"
+        return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type}) - {','.join(self.county_coverage)}"
 
     class Meta:
         verbose_name = _("item offer")
@@ -77,7 +79,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
 
     # Textile
     textile_category = models.ForeignKey(
-        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("category")
+        TextileCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("textile category")
     )
     kids_age = models.CharField(_("age"), max_length=100, blank=True, null=True)
     other_textiles = models.TextField(_("other"), blank=True, null=True)
@@ -86,7 +88,8 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
     tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
     def __str__(self):
-        return f"#{self.id} {self.name} (Stoc: {self.stock}/{self.quantity} {self.unit_type})"
+        str_name = _("Requested")
+        return f"#{self.id} {self.name} ({str_name}: {self.stock}/{self.quantity} {self.unit_type})"
 
     class Meta:
         verbose_name = _("item request")

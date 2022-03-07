@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-05 20:56+0200\n"
+"POT-Creation-Date: 2022-03-07 10:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Permissions"
 msgstr ""
 
 #: app_account/admin.py:23 app_account/admin.py:66 app_item/admin.py:167
-#: app_transport_service/admin.py:240
+#: app_transport_service/admin.py:223
 msgid "Location details"
 msgstr ""
 
@@ -75,8 +75,8 @@ msgid "email address"
 msgstr ""
 
 #: app_account/models.py:26 app_transport_service/models.py:28
-#: app_volunteering/models.py:27 app_volunteering/models.py:40
-#: app_volunteering/models.py:52
+#: app_volunteering/models.py:27 app_volunteering/models.py:41
+#: app_volunteering/models.py:53
 msgid "type"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgstr ""
 msgid "general user description"
 msgstr ""
 
-#: app_account/models.py:41 revm_site/models.py:31
+#: app_account/models.py:41 revm_site/models.py:31 revm_site/models.py:46
 msgid "county coverage"
 msgstr ""
 
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Deactivate selected offers"
 msgstr ""
 
-#: app_item/admin.py:140 app_item/admin.py:253
+#: app_item/admin.py:140 app_item/admin.py:236
 msgid "Product details"
 msgstr ""
 
@@ -140,11 +140,11 @@ msgstr ""
 msgid "Offer status"
 msgstr ""
 
-#: app_item/admin.py:270 app_transport_service/admin.py:251
+#: app_item/admin.py:253 app_transport_service/admin.py:234
 msgid "Request status"
 msgstr ""
 
-#: app_item/admin.py:279
+#: app_item/admin.py:262
 msgid "Where it is needed"
 msgstr ""
 
@@ -156,104 +156,111 @@ msgstr ""
 msgid "Items"
 msgstr ""
 
-#: app_item/models.py:23
+#: app_item/models.py:25
 msgid "Textile Category"
 msgstr ""
 
-#: app_item/models.py:24
+#: app_item/models.py:26
 msgid "Textile Categories"
 msgstr ""
 
-#: app_item/models.py:28 app_item/models.py:42 app_item/models.py:64
-#: app_item/models.py:80 app_other/models.py:20 app_other/models.py:34
-#: app_transport_service/models.py:19 app_transport_service/models.py:60
-#: revm_site/models.py:19
+#: app_item/models.py:30 app_item/models.py:66 app_other/models.py:20
+#: app_other/models.py:34 app_transport_service/models.py:19
+#: app_transport_service/models.py:60 revm_site/models.py:19
 msgid "category"
 msgstr ""
 
-#: app_item/models.py:31 app_item/models.py:67
+#: app_item/models.py:33 app_item/models.py:69
 msgid "Product"
 msgstr ""
 
-#: app_item/models.py:32 app_item/models.py:69 app_item/models.py:105
+#: app_item/models.py:34 app_item/models.py:71 app_item/models.py:108
 msgid "total units"
 msgstr ""
 
-#: app_item/models.py:33 app_item/models.py:71
+#: app_item/models.py:35 app_item/models.py:73
 msgid "packaging"
 msgstr ""
 
-#: app_item/models.py:34 app_item/models.py:72
+#: app_item/models.py:36 app_item/models.py:74
 msgid "unit type"
 msgstr ""
 
-#: app_item/models.py:35
+#: app_item/models.py:37
 msgid "expiration date"
 msgstr ""
 
-#: app_item/models.py:37 app_item/models.py:75
+#: app_item/models.py:39 app_item/models.py:77
 msgid "Stock"
 msgstr ""
 
-#: app_item/models.py:37
+#: app_item/models.py:39
 msgid "How many units of this type are left"
 msgstr ""
 
 #: app_item/models.py:44 app_item/models.py:82
+msgid "textile category"
+msgstr ""
+
+#: app_item/models.py:46 app_item/models.py:84
 msgid "age"
 msgstr ""
 
-#: app_item/models.py:45 app_item/models.py:83
+#: app_item/models.py:47 app_item/models.py:85
 msgid "other"
 msgstr ""
 
-#: app_item/models.py:48 app_item/models.py:86
+#: app_item/models.py:50 app_item/models.py:88
 msgid "capacity"
 msgstr ""
 
-#: app_item/models.py:54
+#: app_item/models.py:56
 msgid "item offer"
 msgstr ""
 
-#: app_item/models.py:55
+#: app_item/models.py:57
 msgid "item offers"
 msgstr ""
 
-#: app_item/models.py:75
+#: app_item/models.py:77
 msgid "How many units are still needed"
 msgstr ""
 
-#: app_item/models.py:92
+#: app_item/models.py:91
+msgid "Requested"
+msgstr ""
+
+#: app_item/models.py:95
 msgid "item request"
 msgstr ""
 
-#: app_item/models.py:93
+#: app_item/models.py:96
 msgid "item requests"
 msgstr ""
 
-#: app_item/models.py:102 app_other/models.py:46
+#: app_item/models.py:105 app_other/models.py:46
 #: app_transport_service/models.py:88
 msgid "donation"
 msgstr ""
 
-#: app_item/models.py:103 app_other/models.py:47
+#: app_item/models.py:106 app_other/models.py:47
 #: app_transport_service/models.py:91
 msgid "request"
 msgstr ""
 
-#: app_item/models.py:106 app_transport_service/models.py:94
-#: revm_site/models.py:45
+#: app_item/models.py:109 app_transport_service/models.py:94
+#: revm_site/models.py:61
 msgid "description"
 msgstr ""
 
-#: app_item/models.py:108 revm_site/models.py:47
+#: app_item/models.py:111 revm_site/models.py:63
 msgid "added on"
 msgstr ""
 
-#: app_item/models.py:111 app_item/models.py:112 app_other/models.py:51
+#: app_item/models.py:114 app_item/models.py:115 app_other/models.py:51
 #: app_other/models.py:52 app_transport_service/models.py:97
-#: app_transport_service/models.py:98 app_volunteering/models.py:55
-#: app_volunteering/models.py:56
+#: app_transport_service/models.py:98 app_volunteering/models.py:56
+#: app_volunteering/models.py:57
 msgid "Offer - Request"
 msgstr "Allocate available resources"
 
@@ -262,8 +269,8 @@ msgstr "Allocate available resources"
 msgid "Offer details"
 msgstr ""
 
-#: app_other/admin.py:152 app_transport_service/admin.py:208
-#: app_volunteering/admin.py:142
+#: app_other/admin.py:135 app_transport_service/admin.py:191
+#: app_volunteering/admin.py:126
 msgid "Request details"
 msgstr ""
 
@@ -288,6 +295,7 @@ msgid "other offers"
 msgstr ""
 
 #: app_other/models.py:35 app_transport_service/models.py:41
+#: app_volunteering/models.py:29
 msgid "name"
 msgstr ""
 
@@ -296,7 +304,7 @@ msgid "other request"
 msgstr ""
 
 #: app_transport_service/admin.py:97 app_transport_service/admin.py:108
-#: app_transport_service/admin.py:218 app_transport_service/admin.py:229
+#: app_transport_service/admin.py:201 app_transport_service/admin.py:212
 msgid "Transport details"
 msgstr ""
 
@@ -416,32 +424,36 @@ msgstr ""
 msgid "volunteering types"
 msgstr ""
 
-#: app_volunteering/models.py:29
+#: app_volunteering/models.py:30
 msgid "volunteer available until"
 msgstr ""
 
-#: app_volunteering/models.py:35
+#: app_volunteering/models.py:36
 msgid "volunteering offer"
 msgstr ""
 
-#: app_volunteering/models.py:36
+#: app_volunteering/models.py:37
 msgid "volunteering offers"
 msgstr ""
 
-#: app_volunteering/models.py:46 app_volunteering/models.py:47
+#: app_volunteering/models.py:47 app_volunteering/models.py:48
 msgid "volunteering request"
 msgstr ""
 
-#: app_volunteering/models.py:51
+#: app_volunteering/models.py:52
 msgid "made_by"
 msgstr ""
 
-#: revm_site/admin.py:12
+#: revm_site/admin.py:13
 msgid "Allocate this resource to a request"
 msgstr ""
 
-#: revm_site/admin.py:16
+#: revm_site/admin.py:17
 msgid "Allocate from the available offers"
+msgstr ""
+
+#: revm_site/admin.py:29 revm_site/admin.py:56
+msgid "You are not assigned to any county. Please contact your administrator."
 msgstr ""
 
 #: revm_site/models.py:11
@@ -460,19 +472,19 @@ msgstr ""
 msgid "has transportation"
 msgstr ""
 
-#: revm_site/models.py:38
+#: revm_site/models.py:38 revm_site/models.py:54
 msgid "town"
 msgstr ""
 
-#: revm_site/models.py:49
+#: revm_site/models.py:65
 msgid "status"
 msgstr ""
 
-#: revm_site/models.py:57
+#: revm_site/models.py:73
 msgid "donor"
 msgstr ""
 
-#: revm_site/models.py:65
+#: revm_site/models.py:81
 msgid "requested by"
 msgstr ""
 
@@ -570,3 +582,8 @@ msgstr ""
 #: templates/app_account/user_offers.html:59
 msgid "No, take me back"
 msgstr ""
+
+#, fuzzy
+#~| msgid "RVM User"
+#~ msgid "Users"
+#~ msgstr "Emergency Support User"

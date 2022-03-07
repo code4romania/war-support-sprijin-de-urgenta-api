@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
 from revm_site.models import (
-    CommonCountyModel,
+    CommonMultipleCountyModel,
     CommonRequestModel,
     CommonOfferModel,
     CommonCategoryModel,
@@ -15,7 +15,7 @@ class Category(CommonCategoryModel):
     ...
 
 
-class TransportServiceOffer(CommonCountyModel, CommonOfferModel):
+class TransportServiceOffer(CommonMultipleCountyModel, CommonOfferModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
 
     # Detalii transport marfă

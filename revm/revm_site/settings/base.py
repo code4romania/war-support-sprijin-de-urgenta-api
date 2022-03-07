@@ -24,7 +24,6 @@ env = environ.Env(
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
-    MEMCACHED_HOST=(str, "cache:11211"),
     REDIS_HOST=(str, "redis"),
     REDIS_PORT=(int, 6379),
     FROM_EMAIL=(str, "noreply@code4.ro"),
@@ -190,14 +189,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
-
-MEMCACHED_HOST = env("MEMCACHED_HOST")
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": MEMCACHED_HOST,
-    },
-}
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
