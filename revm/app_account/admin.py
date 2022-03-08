@@ -49,6 +49,7 @@ class AdminCustomUser(DjangoUserAdmin):
                         "fields": (
                             "username",
                             "email",
+                            "phone_number",
                         )
                     },
                 ),
