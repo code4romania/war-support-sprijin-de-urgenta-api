@@ -3,7 +3,7 @@ from rest_framework import serializers
 from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
-
+from django.utils.translation import gettext_lazy as _
 from .models import CustomUser
 
 
