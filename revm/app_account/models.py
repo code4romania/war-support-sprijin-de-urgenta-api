@@ -48,7 +48,7 @@ class CustomUser(AbstractUser):
     def __str__(self):
         if self.type == 1:
             return self.get_full_name()
-        else
+        else:
             return self.business_name
 
     def save(self, *args, **kwargs):
