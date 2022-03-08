@@ -77,7 +77,7 @@ class AdminCustomUser(DjangoUserAdmin):
             return (
                 (
                     None,
-                    {"classes": ("wide",), "fields": ("username", "password1", "password2")},
+                    {"classes": ("wide",), "fields": ("email", "password1", "password2")},
                 ),
                 (
                     _("Profile data"),
@@ -85,7 +85,7 @@ class AdminCustomUser(DjangoUserAdmin):
                 ),
                 (
                     _("Profile details"),
-                    {"classes": ("wide",), "fields": ("type", "groups")},
+                    {"classes": ("wide",), "fields": ("type", "business_name", "identification_no", "groups")},
                 ),
             )
 
