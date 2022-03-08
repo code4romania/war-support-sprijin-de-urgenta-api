@@ -49,19 +49,24 @@ class AdminCustomUser(DjangoUserAdmin):
                         "fields": (
                             "username",
                             "email",
-                            "phone_number",
                         )
                     },
                 ),
-                (_("Personal info"), {"fields": ("first_name", "last_name", "password")}),
-                (_("Profile data"), {"fields": ("phone_number", "address")}),
+                (
+                    _("Personal info"),
+                    {"fields": ("first_name", "last_name", "password")},
+                ),
+                (
+                    _("Profile data"),
+                    {"fields": ("phone_number", "address")},
+                ),
                 (
                     _("Permissions"),
                     {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")},
                 ),
                 (
                     _("RVM User"),
-                    {"fields": ("type", "business_name", "phone_number", "address", "details", "description")},
+                    {"fields": ("type", "business_name", "details", "description")},
                 ),
                 (
                     _("Location details"),
@@ -69,7 +74,20 @@ class AdminCustomUser(DjangoUserAdmin):
                 ),
             )
         else:
-            return self.add_fieldsets
+            return (
+                (
+                    None,
+                    {"classes": ("wide",), "fields": ("username", "password1", "password2")},
+                ),
+                (
+                    _("Profile data"),
+                    {"classes": ("wide",), "fields": ("phone_number", "address")},
+                ),
+                (
+                    _("Profile details"),
+                    {"classes": ("wide",), "fields": ("type", "groups")},
+                ),
+            )
 
     def has_delete_permission(self, request, obj=None):
         if not (request.user.is_superuser or request.user.is_cncci_user()):
