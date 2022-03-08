@@ -11,6 +11,7 @@ from revm_site.utils.admin import (
     CommonOfferInline,
     CommonResourceAdmin,
     CommonResourceSingleCountyAdmin,
+    CountyFilter,
 )
 
 
@@ -68,7 +69,7 @@ class ItemRequestInline(CommonRequestInline):
 class AdminCategory(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
-    search_fields = ["name"]
+    search_fields = ("name",)
 
     ordering = ("pk",)
 
@@ -79,7 +80,7 @@ class AdminCategory(ImportExportModelAdmin):
 class AdminTextileCategory(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
-    search_fields = ["name"]
+    search_fields = ("name",)
 
     ordering = ("pk",)
 
@@ -88,35 +89,18 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 @admin.register(models.ItemOffer)
 class AdminItemOffer(CommonResourceAdmin):
-    list_display = [
-        "id",
-        "category",
-        "name",
-        "quantity",
-        "stock",
-        "unit_type",
-        "county_coverage",
-        "town",
-        "status",
-    ]
-    list_display_links = ["category", "name", "status"]
-    search_fields = ["name"]
-    list_filter = [
-        "county_coverage",
-        "category",
-        "unit_type",
-        "textile_category",
-        "kids_age",
-        "status",
-    ]
-    readonly_fields = ["added_on", "stock"]
+    list_display = ("id", "category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
+    list_display_links = ("category", "name", "status")
+    search_fields = ("name",)
+    list_filter = (CountyFilter, "category", "unit_type", "textile_category", "kids_age", "status")
+    readonly_fields = ("added_on", "stock")
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_cjcci_user():
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    actions = [deactivate_offers]
+    actions = (deactivate_offers,)
 
     inlines = (ItemOfferInline,)
 
@@ -189,31 +173,17 @@ class AdminItemOffer(CommonResourceAdmin):
 
 @admin.register(models.ItemRequest)
 class AdminItemRequest(CommonResourceSingleCountyAdmin):
-    list_display = [
-        "id",
-        "category",
-        "name",
-        "quantity",
-        "stock",
-        "unit_type",
-        "county_coverage",
-        "town",
-        "status",
-    ]
-    list_display_links = ["category", "name", "status"]
-    search_fields = ["name"]
-    readonly_fields = ["added_on", "stock"]
+    list_display = ("id", "category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
+    list_display_links = ("category", "name", "status")
+    search_fields = ("name",)
+    readonly_fields = ("added_on", "stock")
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_cjcci_user():
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    list_filter = [
-        "county_coverage",
-        "category",
-        "status",
-    ]
+    list_filter = (CountyFilter, "category", "status")
 
     inlines = (ItemRequestInline,)
 
