@@ -10,39 +10,9 @@ from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, Common
 class OtherOfferInline(CommonOfferInline):
     model = models.ResourceRequest
 
-    def has_change_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_change_permission(request, obj)
-
-    def has_add_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_add_permission(request, obj)
-
-    def has_delete_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_delete_permission(request, obj)
-
 
 class OtherRequestInline(CommonRequestInline):
     model = models.ResourceRequest
-
-    def has_change_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_change_permission(request, obj)
-
-    def has_add_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_add_permission(request, obj)
-
-    def has_delete_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_delete_permission(request, obj)
 
 
 @admin.register(models.Category)

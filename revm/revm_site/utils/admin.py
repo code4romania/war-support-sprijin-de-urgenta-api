@@ -1,20 +1,29 @@
 from django.conf import settings
 from django.contrib import admin, messages
+from django.db.models import TextField
+from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
 
-class CommonInline(admin.TabularInline):
+class CommonResourceInline(admin.TabularInline):
     extra = 1
     show_change_link = True
     view_on_site = True
 
+    formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 2, "cols": 20})}}
 
-class CommonOfferInline(CommonInline):
+    def has_delete_permission(self, request, obj):
+        if request.user.is_cjcci_user() or request.user.is_cncci_user():
+            return False
+        return super().has_delete_permission(request, obj)
+
+
+class CommonOfferInline(CommonResourceInline):
     verbose_name_plural = _("Allocate this resource to a request")
 
 
-class CommonRequestInline(CommonInline):
+class CommonRequestInline(CommonResourceInline):
     verbose_name_plural = _("Allocate from the available offers")
 
 
