@@ -64,9 +64,11 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         previous = None
         try:
             previous = ItemOffer.objects.get(pk=self.pk)
-        except Exception as e:
-            #ToDo: map DoesNotExist execption and tell user
+        except ItemOffer.DoesNotExist as e:
             pass
+        except Exception as e:
+            raise Exception(_("Failed to communicat with database. Please try again later"))
+
         self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
 
@@ -108,14 +110,14 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         previous = None
         try:
             previous = ItemRequest.objects.get(pk=self.pk)
-        except Exception as e:
-            #ToDo: map DoesNotExist execption and tell user
+        except ItemOffer.DoesNotExist as e:
             pass
+        except Exception as e:
+            raise Exception(_("Failed to communicat with database. Please try again later"))
 
         self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
 
-#ToDo: handle situation where admin changes total_units
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
     request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING, verbose_name=_("request"))
@@ -135,15 +137,15 @@ class ResourceRequest(models.Model):
         try:
             previous = ResourceRequest.objects.get(pk=self.pk)
         except Exception as e:
-            #ToDo: map DoesNotExist execption and tell user
+            #ToDo match exception exactly
+            #raise ValidationError(_("Failed to read database. Please reload and try again"))
             pass
 
         requested_amount = self.total_units
         #Matching a request with negative stock is nonsensical.
         if requested_amount < 0:
-            #ToDo: notify user
-            logger.error("You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here.")
-            return
+            raise ValidationError(_("You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here."))
+
         #if this is a modificatioon operation. Gotta deal with the delta
         if not (previous is None) and not(previous.total_units is None):
             requested_amount -= previous.total_units
@@ -152,14 +154,15 @@ class ResourceRequest(models.Model):
         request = self.request
 
         if requested_amount > request.stock:
-            logger.error("The amount you're trying to transfer {0} is larger than the need {1}".format(requested_amount, request.stock))
-            #ToDo: tell user
-            return
+            raise ValidationError(_("The amount you're trying to transfer")
+                                  + " {0} ".format(requested_amount) +
+                                  _("is larger than the need") + " {0}".format(request.stock))
+
 
         if requested_amount > resource.stock:
-            logger.error("The amount you're trying to transfer {0} is larger than the available stock {1}".format(requested_amount, resource.stock))
-            #ToDo: tell user
-            return
+            raise ValidationError(_("The amount you're trying to transfer")
+                                  + " {0} ".format(requested_amount) +
+                                  _("is larger than the available stock") + " {0}".format(resource.stock))
 
         resource.stock -= requested_amount
         request.stock -= requested_amount
