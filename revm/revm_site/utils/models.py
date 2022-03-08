@@ -6,6 +6,7 @@ from multiselectfield import MultiSelectField
 
 from app_account.models import CustomUser
 
+
 class CommonCategoryModel(models.Model):
     name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
     description = models.CharField(_("category description"), default="", blank=True, null=False, max_length=500)
