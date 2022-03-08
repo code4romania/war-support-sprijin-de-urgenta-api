@@ -3,12 +3,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import (
+from revm_site.utils.models import (
     CommonMultipleCountyModel,
     CommonRequestModel,
     CommonOfferModel,
     CommonCategoryModel,
 )
+from revm_site.utils.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
@@ -90,7 +91,7 @@ class ResourceRequest(models.Model):
     request = models.ForeignKey(
         TransportServiceRequest, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("request")
     )
-    date = models.DateTimeField(_("transport date"))
+    date = models.DateTimeField(_("transport date"), validators=[validate_date_disallow_past])
     description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
 
     class Meta:

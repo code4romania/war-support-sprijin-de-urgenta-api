@@ -1,12 +1,10 @@
-import logging
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from revm_site.settings.base import ITEM_STATUS_COMPLETE
-
 from app_account.models import CustomUser
-from revm_site.models import (
+from revm_site.utils.models import (
     CommonCategoryModel,
     CommonMultipleCountyModel,
     CommonRequestModel,
@@ -16,6 +14,7 @@ from revm_site.models import (
     CommonCountyModel,
     CommonLocationModel
 )
+from revm_site.utils.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
@@ -38,7 +37,9 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
     quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
-    expiration_date = models.DateField(_("expiration date"), blank=True, null=True)
+    expiration_date = models.DateField(
+        _("expiration date"), validators=[validate_date_disallow_past], blank=True, null=True
+    )
     stock = models.PositiveSmallIntegerField(
         _("Stock"), help_text=_("How many units of this type are left"), null=True, blank=True
     )
@@ -110,13 +111,14 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         previous = None
         try:
             previous = ItemRequest.objects.get(pk=self.pk)
-        except ItemOffer.DoesNotExist as e:
+        except ItemRequest.DoesNotExist as e:
             pass
         except Exception as e:
             raise Exception(_("Failed to communicat with database. Please try again later"))
 
         self.stock = get_updated_stock_value(previous, self)
         super().save(*args, **kwargs)
+
 
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
@@ -136,10 +138,10 @@ class ResourceRequest(models.Model):
         previous = None
         try:
             previous = ResourceRequest.objects.get(pk=self.pk)
-        except Exception as e:
-            #ToDo match exception exactly
-            #raise ValidationError(_("Failed to read database. Please reload and try again"))
+        except ResourceRequest.DoesNotExist as e:
             pass
+        except Exception as e:
+            raise Exception(_("Failed to communicat with database. Please try again later"))
 
         requested_amount = self.total_units
         #Matching a request with negative stock is nonsensical.

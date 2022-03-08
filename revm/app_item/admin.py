@@ -4,9 +4,14 @@ from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
-from app_item import models
 from app_account.models import CustomUser
-from revm_site.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CommonResourceSingleCountyAdmin
+from app_item import models
+from revm_site.utils.admin import (
+    CommonRequestInline,
+    CommonOfferInline,
+    CommonResourceAdmin,
+    CommonResourceSingleCountyAdmin,
+)
 
 
 def deactivate_offers(modeladmin, request, queryset):
@@ -189,6 +194,7 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin):
         "category",
         "name",
         "quantity",
+        "stock",
         "unit_type",
         "county_coverage",
         "town",

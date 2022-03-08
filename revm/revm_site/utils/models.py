@@ -66,7 +66,7 @@ class CommonResourceModel(models.Model):
 
 
 class CommonOfferModel(CommonResourceModel):
-    donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("donor"))
+    donor = models.ForeignKey(CustomUser, on_delete=models.PROTECT, verbose_name=_("donor"))
     status = models.CharField(
         _("status"), max_length=5, choices=settings.OFFER_STATUS, default=settings.OFFER_STATUS[0][0]
     )

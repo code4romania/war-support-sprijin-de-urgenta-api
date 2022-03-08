@@ -1,13 +1,13 @@
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
+from revm_site.utils.views import CreateResourceViewSet
 from .models import Category
 from .serializers import (
     TransportServiceRequestSerializer,
     TransportServiceOfferSerializer,
     TransportServiceCategoryListSerializer,
 )
-from revm_site.views import CreateResourceViewSet
 
 
 class GetTransportServiceCategoryViewSet(ReadOnlyModelViewSet):

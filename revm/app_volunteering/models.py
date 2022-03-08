@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import (
+from revm_site.utils.models import (
     CommonRequestModel,
     CommonMultipleCountyModel,
     CommonOfferModel,
@@ -10,6 +10,7 @@ from revm_site.models import (
     CommonTransportableModel,
     CommonLocationModel,
 )
+from revm_site.utils.validators import validate_date_disallow_past
 
 
 class Type(models.Model):
@@ -28,7 +29,9 @@ class VolunteeringOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTra
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     name = models.CharField(_("name"), max_length=50, null=False, blank=False)
-    available_until = models.DateField(_("volunteer available until"), null=True)
+    available_until = models.DateField(
+        _("volunteer available until"), validators=[validate_date_disallow_past], null=True
+    )
 
     def __str__(self):
         return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from revm_site.serializers import CountyCoverageSerializer
+from revm_site.utils.serializers import CountyCoverageSerializer
 from .models import OtherRequest, OtherOffer, Category
 
 
