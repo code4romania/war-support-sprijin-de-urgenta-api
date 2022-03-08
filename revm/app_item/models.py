@@ -1,5 +1,6 @@
 import logging
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -68,10 +69,10 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         previous = None
         try:
             previous = ItemOffer.objects.get(pk=self.pk)
-        except Exception as e:
-            # ToDo: map DoesNotExist execption and tell user
+        except ItemOffer.DoesNotExist:
             pass
-        self.stock = get_updated_stock_value(previous, self)
+
+        self.stock = get_stock_value(previous, self)
         super().save(*args, **kwargs)
 
 
@@ -112,15 +113,13 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         previous = None
         try:
             previous = ItemRequest.objects.get(pk=self.pk)
-        except Exception as e:
-            # ToDo: map DoesNotExist execption and tell user
+        except ItemRequest.DoesNotExist:
             pass
 
-        self.stock = get_updated_stock_value(previous, self)
+        self.stock = get_stock_value(previous, self)
         super().save(*args, **kwargs)
 
 
-# ToDo: handle situation where admin changes total_units
 class ResourceRequest(models.Model):
     resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
     request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING, verbose_name=_("request"))
@@ -139,19 +138,11 @@ class ResourceRequest(models.Model):
         previous = None
         try:
             previous = ResourceRequest.objects.get(pk=self.pk)
-        except Exception as e:
-            # ToDo: map DoesNotExist execption and tell user
+        except ResourceRequest.DoesNotExist:
             pass
 
         requested_amount = self.total_units
-        # Matching a request with negative stock is nonsensical.
-        if requested_amount < 0:
-            # ToDo: notify user
-            logger.error(
-                "You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here."
-            )
-            return
-        # if this is a modificatioon operation. Gotta deal with the delta
+
         if not (previous is None) and not (previous.total_units is None):
             requested_amount -= previous.total_units
 
@@ -159,22 +150,20 @@ class ResourceRequest(models.Model):
         request = self.request
 
         if requested_amount > request.stock:
-            logger.error(
-                "The amount you're trying to transfer {0} is larger than the need {1}".format(
-                    requested_amount, request.stock
+            raise ValidationError(
+                _(
+                    f"The amount you're trying to transfer {requested_amount} "
+                    f"is larger than the need {request.stock}."
                 )
             )
-            # ToDo: tell user
-            return
 
         if requested_amount > resource.stock:
-            logger.error(
-                "The amount you're trying to transfer {0} is larger than the available stock {1}".format(
-                    requested_amount, resource.stock
+            raise ValidationError(
+                _(
+                    f"The amount you're trying to transfer {requested_amount} "
+                    f"is larger than the available stock {resource.stock}."
                 )
             )
-            # ToDo: tell user
-            return
 
         resource.stock -= requested_amount
         request.stock -= requested_amount
@@ -192,17 +181,25 @@ class ResourceRequest(models.Model):
 
         super().save(*args, **kwargs)
 
+    def delete(self, using=None, keep_parents=False):
+        self.resource.stock += self.total_units
+        self.request.stock += self.total_units
 
-def get_updated_stock_value(previous, current):
+        self.resource.save()
+        self.request.save()
+
+        super().delete(using, keep_parents)
+
+
+def get_stock_value(previous, current):
     logger = logging.getLogger("django")
+
     no_previous_record_or_stock = previous is None or current.stock is None or previous.stock is None
     if no_previous_record_or_stock:
-        logger.info("Stock initialise {0}".format(current.quantity))
         return current.quantity
 
-    stock = current.stock
     delta = current.quantity - previous.quantity
-    stock += delta
+    stock = current.stock + delta
 
     logger.info(
         "Stock delta {delta}. New Stock {stock}. New Quantity {qty}".format(
