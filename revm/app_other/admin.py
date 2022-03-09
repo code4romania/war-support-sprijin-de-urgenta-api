@@ -16,9 +16,10 @@ class OtherRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategoryRequest(ImportExportModelAdmin):
-    list_display = ("id", "name", "description")
-    list_display_links = ("id", "name")
+class AdminCategoryRequest(ImportExportModelAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("name", "description")
+    list_display_links = ("name",)
     search_fields = ["name"]
 
     ordering = ("pk",)
@@ -27,9 +28,9 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.OtherOffer)
-class AdminOtherOffer(CommonResourceAdmin):
+class AdminOtherOffer(CommonResourceAdmin, admin.ModelAdmin):
+    list_per_page = 20
     list_display = (
-        "id",
         "category",
         "name",
         "available_until",
@@ -37,7 +38,7 @@ class AdminOtherOffer(CommonResourceAdmin):
         "town",
         "status",
     )
-    list_display_links = ("id", "name")
+    list_display_links = ("name",)
     search_fields = ["name"]
     readonly_fields = ["added_on"]
 
@@ -80,9 +81,10 @@ class AdminOtherOffer(CommonResourceAdmin):
 
 
 @admin.register(models.OtherRequest)
-class AdminOtherRequest(CommonResourceAdmin):
-    list_display = ("id", "category", "name", "county_coverage", "town", "status")
-    list_display_links = ("id", "name")
+class AdminOtherRequest(CommonResourceAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("category", "name", "county_coverage", "town", "status")
+    list_display_links = ("name",)
     search_fields = ["name"]
     readonly_fields = ["added_on"]
 
