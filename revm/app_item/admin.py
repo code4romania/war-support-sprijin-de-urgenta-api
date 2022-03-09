@@ -1,3 +1,4 @@
+import logging
 from django.contrib import admin
 from django.db.models import TextField
 from django.forms import Textarea
@@ -34,9 +35,10 @@ class ItemRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategory(ImportExportModelAdmin):
-    list_display = ("id", "name", "description")
-    list_display_links = ("id", "name")
+class AdminCategory(ImportExportModelAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("name", "description")
+    list_display_links = ("name",)
     search_fields = ("name",)
 
     ordering = ("pk",)
@@ -45,9 +47,10 @@ class AdminCategory(ImportExportModelAdmin):
 
 
 @admin.register(models.TextileCategory)
-class AdminTextileCategory(ImportExportModelAdmin):
-    list_display = ("id", "name", "description")
-    list_display_links = ("id", "name")
+class AdminTextileCategory(ImportExportModelAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("name", "description")
+    list_display_links = ("name",)
     search_fields = ("name",)
 
     ordering = ("pk",)
@@ -56,8 +59,9 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 
 @admin.register(models.ItemOffer)
-class AdminItemOffer(CommonResourceAdmin):
-    list_display = ("id", "category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
+class AdminItemOffer(CommonResourceAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
     list_display_links = ("category", "name", "status")
     search_fields = ("name",)
     list_filter = (CountyFilter, "category", "unit_type", "textile_category", "kids_age", "status")
@@ -140,8 +144,9 @@ class AdminItemOffer(CommonResourceAdmin):
 
 
 @admin.register(models.ItemRequest)
-class AdminItemRequest(CommonResourceSingleCountyAdmin):
-    list_display = ("id", "category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
+class AdminItemRequest(CommonResourceSingleCountyAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
     list_display_links = ("category", "name", "status")
     search_fields = ("name",)
     readonly_fields = ("added_on", "stock")

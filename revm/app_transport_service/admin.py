@@ -16,9 +16,10 @@ class TransportRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategoryRequest(ImportExportModelAdmin):
-    list_display = ("id", "name", "description")
-    list_display_links = ("id", "name")
+class AdminCategoryRequest(ImportExportModelAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("name", "description")
+    list_display_links = ("name",)
     search_fields = ["name"]
 
     ordering = ("pk",)
@@ -27,9 +28,10 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.TransportServiceOffer)
-class AdminTransportServiceOffer(CommonResourceAdmin):
-    list_display = ("id", "category", "capacitate", "type", "availability", "county_coverage", "status")
-    list_display_links = ("id", "category")
+class AdminTransportServiceOffer(CommonResourceAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("category", "capacitate", "type", "availability", "county_coverage", "status")
+    list_display_links = ("category",)
     list_filter = ("category", "status", "availability", CountyFilter)
     search_fields = []
     readonly_fields = ("added_on",)
@@ -126,9 +128,10 @@ class AdminTransportServiceOffer(CommonResourceAdmin):
 
 
 @admin.register(models.TransportServiceRequest)
-class AdminTransportServiceRequest(CommonResourceAdmin):
-    list_display = ("id", "category", "capacitate", "de_la", "la", "status")
-    list_display_links = ("id", "category")
+class AdminTransportServiceRequest(CommonResourceAdmin, admin.ModelAdmin):
+    list_per_page = 20
+    list_display = ("category", "capacitate", "de_la", "la", "status")
+    list_display_links = ("category",)
     search_fields = []
     readonly_fields = ["added_on"]
 

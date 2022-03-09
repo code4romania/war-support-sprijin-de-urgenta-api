@@ -3,6 +3,8 @@ import logging
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Q
+from django.contrib import admin
 
 from app_account.models import CustomUser
 from revm_site.settings.base import (
@@ -135,8 +137,10 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
 
 
 class ResourceRequest(models.Model):
-    resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
     request = models.ForeignKey(ItemRequest, on_delete=models.DO_NOTHING, verbose_name=_("request"))
+
+    limit_choices_to = Q(status=ITEM_STATUS_VERIFIED) #can't use this for cateogry and product... you need a field who's choices have been preset...
+    resource = models.ForeignKey(ItemOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"), limit_choices_to=limit_choices_to)
 
     total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
