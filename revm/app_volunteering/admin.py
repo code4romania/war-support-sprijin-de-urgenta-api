@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
@@ -10,15 +9,25 @@ from revm_site.utils.admin import (
     CommonOfferInline,
     CommonResourceMultipleCountyAdmin,
     CountyFilter,
+    CommonPaginatedAdmin,
+    CommonReadonlyRequestInline,
+    CommonReadonlyOfferInline,
 )
-from revm_site.utils.admin import CommonPaginatedAdmin
 
 
 class VolunteeringOfferInline(CommonOfferInline):
     model = models.ResourceRequest
 
 
+class VolunteeringReadOnlyOfferInline(CommonReadonlyOfferInline):
+    model = models.ResourceRequest
+
+
 class VolunteeringRequestInline(CommonRequestInline):
+    model = models.ResourceRequest
+
+
+class VolunteeringReadOnlyRequestInline(CommonReadonlyRequestInline):
     model = models.ResourceRequest
 
 
@@ -47,9 +56,7 @@ class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedA
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
-            return (VolunteeringOfferInline,)
-        return ()
+        return (VolunteeringOfferInline,)
 
     ordering = ("pk",)
 
@@ -95,9 +102,7 @@ class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin, CommonPaginate
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
-            return (VolunteeringRequestInline,)
-        return ()
+        return (VolunteeringRequestInline,)
 
     ordering = ("pk",)
 
