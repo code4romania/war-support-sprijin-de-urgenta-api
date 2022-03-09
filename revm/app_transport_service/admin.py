@@ -5,6 +5,7 @@ from import_export.admin import ImportExportModelAdmin
 from app_account.models import CustomUser
 from app_transport_service import models
 from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
+from revm_site.utils.admin import CommonPaginatedAdmin
 
 
 class TransportOfferInline(CommonOfferInline):
@@ -17,8 +18,8 @@ class TransportRequestInline(CommonRequestInline):
 
 @admin.register(models.Category)
 class AdminCategoryRequest(ImportExportModelAdmin):
-    list_display = ("id", "name", "description")
-    list_display_links = ("id", "name")
+    list_display = ("name", "description")
+    list_display_links = ("name",)
     search_fields = ["name"]
 
     ordering = ("pk",)
@@ -27,9 +28,9 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.TransportServiceOffer)
-class AdminTransportServiceOffer(CommonResourceAdmin):
-    list_display = ("id", "category", "capacitate", "type", "availability", "county_coverage", "status")
-    list_display_links = ("id", "category")
+class AdminTransportServiceOffer(CommonResourceAdmin, CommonPaginatedAdmin):
+    list_display = ("category", "capacitate", "type", "availability", "county_coverage", "status")
+    list_display_links = ("category",)
     list_filter = ("category", "status", "availability", CountyFilter)
     search_fields = []
     readonly_fields = ("added_on",)
@@ -126,9 +127,9 @@ class AdminTransportServiceOffer(CommonResourceAdmin):
 
 
 @admin.register(models.TransportServiceRequest)
-class AdminTransportServiceRequest(CommonResourceAdmin):
-    list_display = ("id", "category", "capacitate", "de_la", "la", "status")
-    list_display_links = ("id", "category")
+class AdminTransportServiceRequest(CommonResourceAdmin, CommonPaginatedAdmin):
+    list_display = ("category", "capacitate", "de_la", "la", "status")
+    list_display_links = ("category",)
     search_fields = []
     readonly_fields = ["added_on"]
 
