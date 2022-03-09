@@ -86,3 +86,11 @@ class CommonRequestModel(CommonResourceModel):
 
     class Meta:
         abstract = True
+
+
+def get_county_coverage_str(county_coverage):
+    if len(county_coverage) < len(settings.COUNTY_CHOICES):
+        return ",".join(county_coverage)
+    elif len(county_coverage) == 0:
+        return _("no county")
+    return _("all counties")

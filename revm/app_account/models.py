@@ -46,12 +46,12 @@ class CustomUser(AbstractUser):
         verbose_name_plural = _("users")
 
     def __str__(self):
-        name = ''
+        name = ""
         if self.type == 1:
             name = self.get_full_name()
         else:
             name = self.business_name
-        return name if name else '-'
+        return name if name else "-"
 
     def save(self, *args, **kwargs):
         self.username = self.email
