@@ -1,0 +1,61 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n admin_urls static admin_modify %}
+{% block extrajs %}
+    {{  block.super }}
+    <script type="text/javascript" >
+
+    let detect_category = function(){
+        if($('#id_category').find('option:selected').text() === 'Persoane') {
+            show_persoane()
+        } else {
+            show_marfa()
+        }
+    }
+
+    let show_marfa = function(){
+        $('.transport-persoane').hide();
+        $('.transport-marfa').show();
+    }
+
+    let show_persoane = function(){
+        $('.transport-persoane').show();
+        $('.transport-marfa').hide();
+    }
+
+    $('#id_category').on('change', function() {
+        detect_category();
+      });
+    detect_category();
+
+
+    let detect_type = function(){
+        if($('#id_type').val() === 2) {
+            $('.field-county_coverage').show()
+        } else {
+            $('.field-county_coverage').hide()
+        }
+    }
+
+    $('#id_type').on('change', function() {
+        detect_type();
+      });
+    detect_type();
+
+
+    let detect_availability = function(){
+        if($('#id_availability').val() === 'FI') {
+            $('.field-availability_interval_from').show()
+            $('.field-availability_interval_to').show()
+        } else {
+            $('.field-availability_interval_from').hide()
+            $('.field-availability_interval_to').hide()
+        }
+    }
+
+    $('#id_availability').on('change', function() {
+        detect_availability();
+      });
+    detect_availability();
+
+    </script>
+{% endblock %}

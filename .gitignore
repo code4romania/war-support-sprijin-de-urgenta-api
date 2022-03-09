@@ -1,3 +1,6 @@
+# xlsx
+dump_data
+
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
@@ -142,7 +145,7 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-revm/static/*
+revm/static/
 revm/public/*
 
 # Flask stuff:

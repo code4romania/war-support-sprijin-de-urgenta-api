@@ -18,9 +18,9 @@ services:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_DB=${DATABASE_NAME}
 
-  cache:
-    container_name: revm-cache
-    image: memcached:1.6.14-alpine
+  redis:
+    container_name: redis
+    image: redis:alpine
     networks:
       - internal
 
@@ -39,7 +39,6 @@ services:
       - "8070:8070"
     depends_on:
       - db
-      - cache
 
 networks:
   internal:
