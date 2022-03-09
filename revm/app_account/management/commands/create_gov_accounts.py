@@ -30,6 +30,7 @@ class Command(BaseCommand):
 
         user.first_name = first_name
         user.last_name = last_name
+        user.type = CustomUser.TYPES_CHOICES[3][0]
         user.is_active = True
         user.is_superuser = False
         # user.is_staff = is_cncci
