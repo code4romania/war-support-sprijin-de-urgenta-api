@@ -4,7 +4,12 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_other import models
-from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
+from revm_site.utils.admin import (
+    CommonRequestInline,
+    CommonOfferInline,
+    CommonResourceMultipleCountyAdmin,
+    CountyFilter,
+)
 
 from revm_site.utils.admin import CommonPaginatedAdmin
 
@@ -29,7 +34,7 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.OtherOffer)
-class AdminOtherOffer(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminOtherOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = (
         "category",
         "name",
@@ -81,7 +86,7 @@ class AdminOtherOffer(CommonResourceAdmin, CommonPaginatedAdmin):
 
 
 @admin.register(models.OtherRequest)
-class AdminOtherRequest(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminOtherRequest(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("category", "name", "county_coverage", "town", "status")
     list_display_links = ("name",)
     search_fields = ["name"]
