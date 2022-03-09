@@ -67,21 +67,22 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         counties_str = get_county_coverage_str(self.county_coverage)
         return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type}) - {counties_str}"
 
+    def fetch_previous(self):
+        try:
+            return ItemOffer.objects.get(pk=self.pk)
+        except ItemOffer.DoesNotExist:
+            return None
+        raise Exception(_("Failed to communicat with database. Please try again later"))
+
     class Meta:
         verbose_name = _("item offer")
         verbose_name_plural = _("item offers")
 
     def save(self, *args, **kwargs):
-        previous = None
-        try:
-            previous = ItemOffer.objects.get(pk=self.pk)
-        except ItemOffer.DoesNotExist:
-            pass
-        except Exception:
-            raise Exception(_("Failed to communicat with database. Please try again later"))
-
-        validate_item_change(previous, self)
+        previous = self.fetch_previous()
         self.stock = get_stock_value(previous, self)
+        validate_item_change(previous, self)
+        update_related_fields(self)
         super().save(*args, **kwargs)
 
 
@@ -114,21 +115,22 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         str_name = _("Requested")
         return f"#{self.id} {self.name} ({str_name}: {self.stock}/{self.quantity} {self.unit_type})"
 
+    def fetch_previous(self):
+        try:
+            return ItemRequest.objects.get(pk=self.pk)
+        except ItemRequest.DoesNotExist:
+            return None
+        raise Exception(_("Failed to communicat with database. Please try again later"))
+
     class Meta:
         verbose_name = _("item request")
         verbose_name_plural = _("item requests")
 
     def save(self, *args, **kwargs):
-        previous = None
-        try:
-            previous = ItemRequest.objects.get(pk=self.pk)
-        except ItemRequest.DoesNotExist:
-            pass
-        except Exception:
-            raise Exception(_("Failed to communicat with database. Please try again later"))
-
-        validate_item_change(previous, self)
+        previous = self.fetch_previous()
         self.stock = get_stock_value(previous, self)
+        validate_item_change(previous, self)
+        update_related_fields(self)
         super().save(*args, **kwargs)
 
 
@@ -191,9 +193,12 @@ class ResourceRequest(models.Model):
             )
         )
 
+        #Validate entire set of operations before commiting them (to avoid needing rollbcks)
+        validate_item_change(resource.fetch_previous(), resource)
+        validate_item_change(request.fetch_previous(), request)
+
         resource.save()
         request.save()
-
         super().save(*args, **kwargs)
 
     def delete(self, using=None, keep_parents=False):
@@ -232,9 +237,10 @@ def validate_item_change(previous, current):
     if previous is None:
         return
 
-    #change detected, status must be verified, any other status does not allow changes
-    if current.status != ITEM_STATUS_VERIFIED:
+    if previous.status != ITEM_STATUS_VERIFIED and current.status != ITEM_STATUS_VERIFIED:
         raise ValidationError(_("Item is in incorrect status for the change you're tyring to make"))
 
+
+def update_related_fields(current):
     if current.stock == 0 and current.status == ITEM_STATUS_VERIFIED:
         current.status = ITEM_STATUS_COMPLETE
