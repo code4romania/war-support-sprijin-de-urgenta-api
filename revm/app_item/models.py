@@ -145,9 +145,11 @@ class ResourceRequest(models.Model):
 
         if not (previous is None) and not (previous.total_units is None):
             requested_amount -= previous.total_units
+            self._restore_amounts_if_connections_changed(previous)
 
         resource = self.resource
         request = self.request
+
 
         if requested_amount > request.stock:
             raise ValidationError(
@@ -189,6 +191,14 @@ class ResourceRequest(models.Model):
         self.request.save()
 
         super().delete(using, keep_parents)
+
+    def _restore_amounts_if_connections_changed(self, previous):
+        if previous.resource.id != self.resource.id:
+            previous.resource.stock += previous.total_units
+            previous.resource.save()
+        elif previous.request.id != self.request.id:
+            previous.request.stock += previous.total_units
+            previous.request.save()
 
 
 def get_stock_value(previous, current):

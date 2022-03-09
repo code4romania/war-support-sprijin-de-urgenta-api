@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import admin, messages
-from django.db.models import TextField
+from django.db.models import TextField, Q
 from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
@@ -19,6 +19,34 @@ class CommonResourceInline(admin.TabularInline):
 
     formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 2, "cols": 20})}}
 
+    def __init__(self, parent_model, admin_site):
+        super().__init__(parent_model, admin_site)
+        self.resource_obj = None
+        self.related_resource_name = None
+
+    def _get_formfield_queryset(self, related_model):
+        if self.related_resource_name == "request":
+            is_allocated_here = Q(resourcerequest__resource=self.resource_obj)
+        else:
+            is_allocated_here = Q(resourcerequest__request=self.resource_obj)
+        try:
+            return related_model.objects.filter(
+                is_allocated_here | Q(status=settings.ITEM_STATUS_VERIFIED, category=self.resource_obj.category)
+            ).distinct("pk")
+        except AttributeError:
+            return related_model.objects.filter(
+                is_allocated_here | Q(status=settings.ITEM_STATUS_VERIFIED, type=self.resource_obj.type)
+            ).distinct("pk")
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == self.related_resource_name:
+            related_model = self.model._meta.get_field(self.related_resource_name).related_model
+            if self.resource_obj:
+                kwargs["queryset"] = self._get_formfield_queryset(related_model)
+            else:
+                kwargs["queryset"] = related_model.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
     def has_delete_permission(self, request, obj=None):
         if request.user.is_cjcci_user() or request.user.is_cncci_user():
             return False
@@ -28,40 +56,29 @@ class CommonResourceInline(admin.TabularInline):
 class CommonOfferInline(CommonResourceInline):
     verbose_name_plural = _("Allocate this resource to a request")
 
+    def __init__(self, parent_model, admin_site):
+        super().__init__(parent_model, admin_site)
+        self.related_resource_name = "request"
+        self.is_allocated_q = Q(resourcerequest__resource=self.resource_obj)
+
     def get_formset(self, request, obj=None, **kwargs):
-        self.offer_obj = obj
+        self.resource_obj = obj
         formset = super().get_formset(request, obj, **kwargs)
         return formset
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "request":
-            RequestModel = self.model._meta.get_field('request').related_model
-            if self.offer_obj:
-                kwargs["queryset"] = RequestModel.objects.filter(status='V', category=self.offer_obj.category)
-            else:
-                kwargs["queryset"] = RequestModel.objects.none()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class CommonRequestInline(CommonResourceInline):
     verbose_name_plural = _("Allocate from the available offers")
 
+    def __init__(self, parent_model, admin_site):
+        super().__init__(parent_model, admin_site)
+        self.related_resource_name = "resource"
+        self.is_allocated_q = Q(resourcerequest__request=self.resource_obj)
+
     def get_formset(self, request, obj=None, **kwargs):
-        self.request_obj = obj
+        self.resource_obj = obj
         formset = super().get_formset(request, obj, **kwargs)
         return formset
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "resource":
-            OfferModel = self.model._meta.get_field('resource').related_model
-            if self.request_obj:
-                try:
-                    kwargs["queryset"] = OfferModel.objects.filter(status='V', category=self.request_obj.category)
-                except:
-                    kwargs["queryset"] = OfferModel.objects.filter(status='V', type=self.request_obj.type)
-            else:
-                kwargs["queryset"] = OfferModel.objects.none()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class CommonResourceAdmin(ImportExportModelAdmin):

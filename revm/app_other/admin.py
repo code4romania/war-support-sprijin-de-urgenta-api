@@ -52,8 +52,12 @@ class AdminOtherOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
+    def get_inlines(self, request, obj):
+        if obj:
+            return (OtherOfferInline,)
+        return ()
+
     list_filter = ("category", "status", CountyFilter)
-    inlines = (OtherOfferInline,)
 
     ordering = ("pk",)
 
@@ -97,9 +101,12 @@ class AdminOtherRequest(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin)
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    list_filter = ("category", "status", CountyFilter)
+    def get_inlines(self, request, obj):
+        if obj:
+            return (OtherRequestInline,)
+        return ()
 
-    inlines = (OtherRequestInline,)
+    list_filter = ("category", "status", CountyFilter)
 
     ordering = ("pk",)
 

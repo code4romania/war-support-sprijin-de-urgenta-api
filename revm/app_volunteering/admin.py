@@ -45,7 +45,10 @@ class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedA
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    inlines = (VolunteeringOfferInline,)
+    def get_inlines(self, request, obj):
+        if obj:
+            return (VolunteeringOfferInline,)
+        return ()
 
     ordering = ("pk",)
 
@@ -90,7 +93,10 @@ class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin, CommonPaginate
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    inlines = (VolunteeringRequestInline,)
+    def get_inlines(self, request, obj):
+        if obj:
+            return (VolunteeringRequestInline,)
+        return ()
 
     ordering = ("pk",)
 
