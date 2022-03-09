@@ -206,6 +206,7 @@ SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_SETTINGS": {"url": "/api/v1/schema"},
 }
 
+#ToDo: seed this in the DB, then cache in mem
 COUNTIES_SHORTNAME = {
     "AB": "Alba",
     "AR": "Arad",

@@ -5,7 +5,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.settings.base import ITEM_STATUS_COMPLETE
+from revm_site.settings.base import (
+    ITEM_STATUS_COMPLETE,
+    ITEM_STATUS_VERIFIED,
+    ITEM_STATUS_DEACTIVATED,
+    ITEM_STATUS_COMPLETE
+)
+
 from revm_site.utils.models import (
     CommonCategoryModel,
     CommonMultipleCountyModel,
@@ -61,18 +67,22 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         counties_str = get_county_coverage_str(self.county_coverage)
         return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type}) - {counties_str}"
 
+    def fetch_previous(self):
+        try:
+            return ItemOffer.objects.get(pk=self.pk)
+        except ItemOffer.DoesNotExist:
+            return None
+        raise Exception(_("Failed to communicat with database. Please try again later"))
+
     class Meta:
         verbose_name = _("item offer")
         verbose_name_plural = _("item offers")
 
     def save(self, *args, **kwargs):
-        previous = None
-        try:
-            previous = ItemOffer.objects.get(pk=self.pk)
-        except ItemOffer.DoesNotExist:
-            pass
-
+        previous = self.fetch_previous()
         self.stock = get_stock_value(previous, self)
+        validate_item_change(previous, self)
+        update_related_fields(self)
         super().save(*args, **kwargs)
 
 
@@ -105,18 +115,22 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         str_name = _("Requested")
         return f"#{self.id} {self.name} ({str_name}: {self.stock}/{self.quantity} {self.unit_type})"
 
+    def fetch_previous(self):
+        try:
+            return ItemRequest.objects.get(pk=self.pk)
+        except ItemRequest.DoesNotExist:
+            return None
+        raise Exception(_("Failed to communicat with database. Please try again later"))
+
     class Meta:
         verbose_name = _("item request")
         verbose_name_plural = _("item requests")
 
     def save(self, *args, **kwargs):
-        previous = None
-        try:
-            previous = ItemRequest.objects.get(pk=self.pk)
-        except ItemRequest.DoesNotExist:
-            pass
-
+        previous = self.fetch_previous()
         self.stock = get_stock_value(previous, self)
+        validate_item_change(previous, self)
+        update_related_fields(self)
         super().save(*args, **kwargs)
 
 
@@ -140,10 +154,16 @@ class ResourceRequest(models.Model):
             previous = ResourceRequest.objects.get(pk=self.pk)
         except ResourceRequest.DoesNotExist:
             pass
+        except Exception:
+            raise Exception(_("Failed to communicat with database. Please try again later"))
 
         requested_amount = self.total_units
+        #Matching a request with negative stock is nonsensical.
+        if requested_amount < 0:
+            raise ValidationError(_("You can't match a request with negative stock. You can give back stock if you've made a mistake by making the numbers reflect reality, but not using negative stock here."))
 
-        if not (previous is None) and not (previous.total_units is None):
+        #if this is a modificatioon operation. Gotta deal with the delta
+        if not (previous is None) and not(previous.total_units is None):
             requested_amount -= previous.total_units
             self._restore_amounts_if_connections_changed(previous)
 
@@ -175,12 +195,12 @@ class ResourceRequest(models.Model):
             )
         )
 
-        if request.stock == 0:
-            request.status = ITEM_STATUS_COMPLETE
+        #Validate entire set of operations before commiting them (to avoid needing rollbcks)
+        validate_item_change(resource.fetch_previous(), resource)
+        validate_item_change(request.fetch_previous(), request)
 
         resource.save()
         request.save()
-
         super().save(*args, **kwargs)
 
     def delete(self, using=None, keep_parents=False):
@@ -220,3 +240,17 @@ def get_stock_value(previous, current):
         stock = 0
 
     return stock
+
+
+def validate_item_change(previous, current):
+    #new record, is valid by default
+    if previous is None:
+        return
+
+    if previous.status != ITEM_STATUS_VERIFIED and current.status != ITEM_STATUS_VERIFIED:
+        raise ValidationError(_("Item is in incorrect status for the change you're tyring to make"))
+
+
+def update_related_fields(current):
+    if current.stock == 0 and current.status == ITEM_STATUS_VERIFIED:
+        current.status = ITEM_STATUS_COMPLETE
