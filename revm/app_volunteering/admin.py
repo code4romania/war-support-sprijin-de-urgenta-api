@@ -6,6 +6,8 @@ from app_account.models import CustomUser
 from app_volunteering import models
 from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
 
+from revm.revm_site.utils.admin import CommonPaginatedAdmin
+
 
 class VolunteeringOfferInline(CommonOfferInline):
     model = models.ResourceRequest
@@ -16,8 +18,7 @@ class VolunteeringRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Type)
-class AdminTypeRequest(ImportExportModelAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminTypeRequest(ImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
     search_fields = ["name"]
@@ -28,8 +29,7 @@ class AdminTypeRequest(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 @admin.register(models.VolunteeringOffer)
-class AdminVolunteeringOffer(CommonResourceAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminVolunteeringOffer(CommonResourceAdmin, CommonPaginatedAdmin):
     list_display = ("donor", "type", "county_coverage", "town", "available_until", "status")
     list_display_links = ("donor",)
     list_filter = ["type", CountyFilter, "status"]
@@ -74,8 +74,7 @@ class AdminVolunteeringOffer(CommonResourceAdmin, admin.ModelAdmin):
 
 
 @admin.register(models.VolunteeringRequest)
-class AdminVolunteeringRequest(CommonResourceAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminVolunteeringRequest(CommonResourceAdmin, CommonPaginatedAdmin):
     list_display = ("made_by", "type", "county_coverage", "town", "status")
     list_display_links = ("made_by",)
     list_filter = ["type", CountyFilter, "status"]

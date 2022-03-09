@@ -6,6 +6,8 @@ from app_account.models import CustomUser
 from app_other import models
 from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
 
+from revm.revm_site.utils.admin import CommonPaginatedAdmin
+
 
 class OtherOfferInline(CommonOfferInline):
     model = models.ResourceRequest
@@ -16,8 +18,7 @@ class OtherRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategoryRequest(ImportExportModelAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminCategoryRequest(ImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
     search_fields = ["name"]
@@ -28,8 +29,7 @@ class AdminCategoryRequest(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 @admin.register(models.OtherOffer)
-class AdminOtherOffer(CommonResourceAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminOtherOffer(CommonResourceAdmin, CommonPaginatedAdmin):
     list_display = (
         "category",
         "name",
@@ -81,8 +81,7 @@ class AdminOtherOffer(CommonResourceAdmin, admin.ModelAdmin):
 
 
 @admin.register(models.OtherRequest)
-class AdminOtherRequest(CommonResourceAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminOtherRequest(CommonResourceAdmin, CommonPaginatedAdmin):
     list_display = ("category", "name", "county_coverage", "town", "status")
     list_display_links = ("name",)
     search_fields = ["name"]

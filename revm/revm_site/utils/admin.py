@@ -6,6 +6,9 @@ from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
 
+class CommonPaginatedAdmin(admin.ModelAdmin):
+    list_per_page = 20
+
 class CommonResourceInline(admin.TabularInline):
     extra = 1
     show_change_link = True

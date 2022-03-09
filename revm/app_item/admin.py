@@ -14,6 +14,8 @@ from revm_site.utils.admin import (
     CountyFilter,
 )
 
+from revm.revm_site.utils.admin import CommonPaginatedAdmin
+
 
 def deactivate_offers(modeladmin, request, queryset):
     if request.user.is_superuser or request.user.is_cjcci_user():
@@ -34,8 +36,7 @@ class ItemRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategory(ImportExportModelAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminCategory(ImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
     search_fields = ("name",)
@@ -46,8 +47,7 @@ class AdminCategory(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 @admin.register(models.TextileCategory)
-class AdminTextileCategory(ImportExportModelAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminTextileCategory(ImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
     search_fields = ("name",)
@@ -58,8 +58,7 @@ class AdminTextileCategory(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 @admin.register(models.ItemOffer)
-class AdminItemOffer(CommonResourceAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminItemOffer(CommonResourceAdmin, CommonPaginatedAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
     list_display_links = ("category", "name", "status")
     search_fields = ("name",)
@@ -143,8 +142,7 @@ class AdminItemOffer(CommonResourceAdmin, admin.ModelAdmin):
 
 
 @admin.register(models.ItemRequest)
-class AdminItemRequest(CommonResourceSingleCountyAdmin, admin.ModelAdmin):
-    list_per_page = 20
+class AdminItemRequest(CommonResourceSingleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
     list_display_links = ("category", "name", "status")
     search_fields = ("name",)
