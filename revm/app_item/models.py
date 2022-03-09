@@ -150,7 +150,6 @@ class ResourceRequest(models.Model):
         resource = self.resource
         request = self.request
 
-
         if requested_amount > request.stock:
             raise ValidationError(
                 _(
