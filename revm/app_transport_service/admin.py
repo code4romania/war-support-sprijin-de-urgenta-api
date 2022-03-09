@@ -4,7 +4,13 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_transport_service import models
-from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
+from revm_site.utils.admin import (
+    CommonRequestInline,
+    CommonOfferInline,
+    CommonResourceMultipleCountyAdmin,
+    CountyFilter,
+    CommonResourceToFromCountyAdmin,
+)
 from revm_site.utils.admin import CommonPaginatedAdmin
 
 
@@ -28,7 +34,7 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.TransportServiceOffer)
-class AdminTransportServiceOffer(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("category", "capacitate", "type", "availability", "county_coverage", "status")
     list_display_links = ("category",)
     list_filter = ("category", "status", "availability", CountyFilter)
@@ -127,7 +133,7 @@ class AdminTransportServiceOffer(CommonResourceAdmin, CommonPaginatedAdmin):
 
 
 @admin.register(models.TransportServiceRequest)
-class AdminTransportServiceRequest(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin, CommonPaginatedAdmin):
     list_display = ("category", "capacitate", "de_la", "la", "status")
     list_display_links = ("category",)
     search_fields = []

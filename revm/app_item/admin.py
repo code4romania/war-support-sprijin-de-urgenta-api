@@ -9,7 +9,7 @@ from app_item import models
 from revm_site.utils.admin import (
     CommonRequestInline,
     CommonOfferInline,
-    CommonResourceAdmin,
+    CommonResourceMultipleCountyAdmin,
     CommonResourceSingleCountyAdmin,
     CountyFilter,
 )
@@ -58,7 +58,7 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 
 @admin.register(models.ItemOffer)
-class AdminItemOffer(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminItemOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
     list_display_links = ("category", "name", "status")
     search_fields = ("name",)
@@ -70,9 +70,12 @@ class AdminItemOffer(CommonResourceAdmin, CommonPaginatedAdmin):
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    actions = (deactivate_offers,)
+    def get_inlines(self, request, obj):
+        if obj:
+            return (ItemOfferInline,)
+        return ()
 
-    inlines = (ItemOfferInline,)
+    actions = (deactivate_offers,)
 
     ordering = ("pk",)
 
@@ -153,9 +156,12 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin, CommonPaginatedAdmin):
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    list_filter = (CountyFilter, "category", "status")
+    def get_inlines(self, request, obj):
+        if obj:
+            return (ItemRequestInline,)
+        return ()
 
-    inlines = (ItemRequestInline,)
+    list_filter = (CountyFilter, "category", "status")
 
     ordering = ("pk",)
 
