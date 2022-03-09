@@ -233,7 +233,7 @@ def validate_item_change(previous, current):
         return
 
     #change detected, status must be verified, any other status does not allow changes
-    if previous.status == current.status and current.status != ITEM_STATUS_VERIFIED:
+    if current.status != ITEM_STATUS_VERIFIED:
         raise ValidationError(_("Item is in incorrect status for the change you're tyring to make"))
 
     if current.stock == 0 and current.status == ITEM_STATUS_VERIFIED:
