@@ -5,8 +5,7 @@ from import_export.admin import ImportExportModelAdmin
 from app_account.models import CustomUser
 from app_volunteering import models
 from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
-
-from revm.revm_site.utils.admin import CommonPaginatedAdmin
+from revm_site.utils.admin import CommonPaginatedAdmin
 
 
 class VolunteeringOfferInline(CommonOfferInline):

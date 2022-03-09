@@ -14,7 +14,7 @@ from revm_site.utils.admin import (
     CountyFilter,
 )
 
-from revm.revm_site.utils.admin import CommonPaginatedAdmin
+from revm_site.utils.admin import CommonPaginatedAdmin
 
 
 def deactivate_offers(modeladmin, request, queryset):
