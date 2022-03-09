@@ -9,7 +9,7 @@ from app_item import models
 from revm_site.utils.admin import (
     CommonRequestInline,
     CommonOfferInline,
-    CommonResourceAdmin,
+    CommonResourceMultipleCountyAdmin,
     CommonResourceSingleCountyAdmin,
     CountyFilter,
 )
@@ -58,7 +58,7 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 
 @admin.register(models.ItemOffer)
-class AdminItemOffer(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminItemOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
     list_display_links = ("category", "name", "status")
     search_fields = ("name",)

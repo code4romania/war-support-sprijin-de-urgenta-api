@@ -4,7 +4,12 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_volunteering import models
-from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
+from revm_site.utils.admin import (
+    CommonRequestInline,
+    CommonOfferInline,
+    CommonResourceMultipleCountyAdmin,
+    CountyFilter,
+)
 from revm_site.utils.admin import CommonPaginatedAdmin
 
 
@@ -28,7 +33,7 @@ class AdminTypeRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.VolunteeringOffer)
-class AdminVolunteeringOffer(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("donor", "type", "county_coverage", "town", "available_until", "status")
     list_display_links = ("donor",)
     list_filter = ["type", CountyFilter, "status"]
@@ -73,7 +78,7 @@ class AdminVolunteeringOffer(CommonResourceAdmin, CommonPaginatedAdmin):
 
 
 @admin.register(models.VolunteeringRequest)
-class AdminVolunteeringRequest(CommonResourceAdmin, CommonPaginatedAdmin):
+class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("made_by", "type", "county_coverage", "town", "status")
     list_display_links = ("made_by",)
     list_filter = ["type", CountyFilter, "status"]
