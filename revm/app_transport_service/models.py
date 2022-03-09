@@ -8,6 +8,7 @@ from revm_site.utils.models import (
     CommonRequestModel,
     CommonOfferModel,
     CommonCategoryModel,
+    CommonResourceRequestModel,
 )
 from revm_site.utils.validators import validate_date_disallow_past
 
@@ -84,7 +85,7 @@ class TransportServiceRequest(CommonRequestModel):
         verbose_name_plural = _("transport service request")
 
 
-class ResourceRequest(models.Model):
+class ResourceRequest(CommonResourceRequestModel):
     resource = models.ForeignKey(
         TransportServiceOffer, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("donation")
     )
@@ -97,9 +98,3 @@ class ResourceRequest(models.Model):
     class Meta:
         verbose_name = _("Offer - Request")
         verbose_name_plural = _("Offer - Request")
-
-    def save(self, *args, **kwargs):
-        self.request.status = "C"
-        self.request.save()
-
-        super().save(*args, **kwargs)

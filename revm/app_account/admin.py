@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 from django.utils.translation import gettext_lazy as _
 
 from app_account import models
+from revm_site.utils.admin import CommonPaginatedAdmin
 
 DjangoUserAdmin.add_fieldsets = (
     (
@@ -27,7 +28,7 @@ DjangoUserAdmin.add_fieldsets = (
 
 
 @admin.register(models.CustomUser)
-class AdminCustomUser(DjangoUserAdmin):
+class AdminCustomUser(DjangoUserAdmin, CommonPaginatedAdmin):
     list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type", "county")
     list_display_links = ("id", "first_name", "last_name", "email")
     search_fields = ("email", "first_name", "last_name")

@@ -4,10 +4,22 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_other import models
-from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
+from revm_site.utils.admin import (
+    CommonRequestInline,
+    CommonOfferInline,
+    CommonResourceMultipleCountyAdmin,
+    CountyFilter,
+    CommonPaginatedAdmin,
+    CommonReadonlyOfferInline,
+    CommonReadonlyRequestInline,
+)
 
 
 class OtherOfferInline(CommonOfferInline):
+    model = models.ResourceRequest
+
+
+class OtherReadonlyOfferInline(CommonReadonlyOfferInline):
     model = models.ResourceRequest
 
 
@@ -15,10 +27,14 @@ class OtherRequestInline(CommonRequestInline):
     model = models.ResourceRequest
 
 
+class OtherReadonlyRequestInline(CommonReadonlyRequestInline):
+    model = models.ResourceRequest
+
+
 @admin.register(models.Category)
 class AdminCategoryRequest(ImportExportModelAdmin):
-    list_display = ("id", "name", "description")
-    list_display_links = ("id", "name")
+    list_display = ("name", "description")
+    list_display_links = ("name",)
     search_fields = ["name"]
 
     ordering = ("pk",)
@@ -27,9 +43,8 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.OtherOffer)
-class AdminOtherOffer(CommonResourceAdmin):
+class AdminOtherOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = (
-        "id",
         "category",
         "name",
         "available_until",
@@ -37,7 +52,7 @@ class AdminOtherOffer(CommonResourceAdmin):
         "town",
         "status",
     )
-    list_display_links = ("id", "name")
+    list_display_links = ("name",)
     search_fields = ["name"]
     readonly_fields = ["added_on"]
 
@@ -46,8 +61,10 @@ class AdminOtherOffer(CommonResourceAdmin):
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
+    def get_inlines(self, request, obj):
+        return (OtherOfferInline,)
+
     list_filter = ("category", "status", CountyFilter)
-    inlines = (OtherOfferInline,)
 
     ordering = ("pk",)
 
@@ -80,9 +97,9 @@ class AdminOtherOffer(CommonResourceAdmin):
 
 
 @admin.register(models.OtherRequest)
-class AdminOtherRequest(CommonResourceAdmin):
-    list_display = ("id", "category", "name", "county_coverage", "town", "status")
-    list_display_links = ("id", "name")
+class AdminOtherRequest(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
+    list_display = ("category", "name", "county_coverage", "town", "status")
+    list_display_links = ("name",)
     search_fields = ["name"]
     readonly_fields = ["added_on"]
 
@@ -91,9 +108,10 @@ class AdminOtherRequest(CommonResourceAdmin):
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    list_filter = ("category", "status", CountyFilter)
+    def get_inlines(self, request, obj):
+        return (OtherRequestInline,)
 
-    inlines = (OtherRequestInline,)
+    list_filter = ("category", "status", CountyFilter)
 
     ordering = ("pk",)
 

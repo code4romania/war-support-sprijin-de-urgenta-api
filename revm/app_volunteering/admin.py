@@ -4,10 +4,22 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from app_volunteering import models
-from revm_site.utils.admin import CommonRequestInline, CommonOfferInline, CommonResourceAdmin, CountyFilter
+from revm_site.utils.admin import (
+    CommonRequestInline,
+    CommonOfferInline,
+    CommonResourceMultipleCountyAdmin,
+    CountyFilter,
+    CommonPaginatedAdmin,
+    CommonReadonlyRequestInline,
+    CommonReadonlyOfferInline,
+)
 
 
 class VolunteeringOfferInline(CommonOfferInline):
+    model = models.ResourceRequest
+
+
+class VolunteeringReadOnlyOfferInline(CommonReadonlyOfferInline):
     model = models.ResourceRequest
 
 
@@ -15,10 +27,14 @@ class VolunteeringRequestInline(CommonRequestInline):
     model = models.ResourceRequest
 
 
+class VolunteeringReadOnlyRequestInline(CommonReadonlyRequestInline):
+    model = models.ResourceRequest
+
+
 @admin.register(models.Type)
 class AdminTypeRequest(ImportExportModelAdmin):
-    list_display = ("id", "name", "description")
-    list_display_links = ("id", "name")
+    list_display = ("name", "description")
+    list_display_links = ("name",)
     search_fields = ["name"]
 
     ordering = ("pk",)
@@ -27,9 +43,9 @@ class AdminTypeRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.VolunteeringOffer)
-class AdminVolunteeringOffer(CommonResourceAdmin):
-    list_display = ("id", "donor", "type", "county_coverage", "town", "available_until", "status")
-    list_display_links = ("id", "donor")
+class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
+    list_display = ("donor", "type", "county_coverage", "town", "available_until", "status")
+    list_display_links = ("donor",)
     list_filter = ["type", CountyFilter, "status"]
     search_fields = ["name"]
     readonly_fields = ["added_on"]
@@ -39,7 +55,8 @@ class AdminVolunteeringOffer(CommonResourceAdmin):
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    inlines = (VolunteeringOfferInline,)
+    def get_inlines(self, request, obj):
+        return (VolunteeringOfferInline,)
 
     ordering = ("pk",)
 
@@ -72,9 +89,9 @@ class AdminVolunteeringOffer(CommonResourceAdmin):
 
 
 @admin.register(models.VolunteeringRequest)
-class AdminVolunteeringRequest(CommonResourceAdmin):
-    list_display = ("id", "made_by", "type", "county_coverage", "town", "status")
-    list_display_links = ("id", "made_by")
+class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
+    list_display = ("made_by", "type", "county_coverage", "town", "status")
+    list_display_links = ("made_by",)
     list_filter = ["type", CountyFilter, "status"]
     search_fields = ["name"]
     readonly_fields = ["added_on"]
@@ -84,7 +101,8 @@ class AdminVolunteeringRequest(CommonResourceAdmin):
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    inlines = (VolunteeringRequestInline,)
+    def get_inlines(self, request, obj):
+        return (VolunteeringRequestInline,)
 
     ordering = ("pk",)
 

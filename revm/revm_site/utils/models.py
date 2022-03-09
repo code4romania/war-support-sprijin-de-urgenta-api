@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
 from app_account.models import CustomUser
+from revm_site.settings.base import ITEM_STATUS_COMPLETE, ITEM_STATUS_VERIFIED
 
 
 class CommonCategoryModel(models.Model):
@@ -83,6 +84,32 @@ class CommonRequestModel(CommonResourceModel):
     status = models.CharField(
         _("status"), max_length=5, choices=settings.REQUEST_STATUS, default=settings.REQUEST_STATUS[0][0]
     )
+
+    class Meta:
+        abstract = True
+
+
+class CommonResourceRequestModel(models.Model):
+    def __init__(self, *args, **kwargs):
+        super().__init__(args, kwargs)
+        self.resource = None
+        self.request = None
+
+    def save(self, *args, **kwargs):
+        self.request.status = ITEM_STATUS_COMPLETE
+        self.resource.status = ITEM_STATUS_COMPLETE
+        self.request.save()
+        self.resource.save()
+
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.request.status = ITEM_STATUS_VERIFIED
+        self.resource.status = ITEM_STATUS_VERIFIED
+        self.request.save()
+        self.resource.save()
+
+        super().save(*args, **kwargs)
 
     class Meta:
         abstract = True
