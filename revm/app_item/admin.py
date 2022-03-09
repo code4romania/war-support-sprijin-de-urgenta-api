@@ -11,6 +11,7 @@ from revm_site.utils.admin import (
     CommonOfferInline,
     CommonResourceAdmin,
     CommonResourceSingleCountyAdmin,
+    CountyFilter,
 )
 
 
@@ -26,49 +27,17 @@ deactivate_offers.short_description = _("Deactivate selected offers")
 
 class ItemOfferInline(CommonOfferInline):
     model = models.ResourceRequest
-    formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
-
-    def has_change_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_change_permission(request, obj)
-
-    def has_add_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_add_permission(request, obj)
-
-    def has_delete_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_delete_permission(request, obj)
 
 
 class ItemRequestInline(CommonRequestInline):
     model = models.ResourceRequest
-    formfield_overrides = {TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 40})}}
-
-    def has_change_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_change_permission(request, obj)
-
-    def has_add_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_add_permission(request, obj)
-
-    def has_delete_permission(self, request, obj):
-        if request.user.is_cjcci_user():
-            return False
-        return super().has_delete_permission(request, obj)
 
 
 @admin.register(models.Category)
 class AdminCategory(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
-    search_fields = ["name"]
+    search_fields = ("name",)
 
     ordering = ("pk",)
 
@@ -79,7 +48,7 @@ class AdminCategory(ImportExportModelAdmin):
 class AdminTextileCategory(ImportExportModelAdmin):
     list_display = ("id", "name", "description")
     list_display_links = ("id", "name")
-    search_fields = ["name"]
+    search_fields = ("name",)
 
     ordering = ("pk",)
 
@@ -88,35 +57,18 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 @admin.register(models.ItemOffer)
 class AdminItemOffer(CommonResourceAdmin):
-    list_display = [
-        "id",
-        "category",
-        "name",
-        "quantity",
-        "stock",
-        "unit_type",
-        "county_coverage",
-        "town",
-        "status",
-    ]
-    list_display_links = ["category", "name", "status"]
-    search_fields = ["name"]
-    list_filter = [
-        "county_coverage",
-        "category",
-        "unit_type",
-        "textile_category",
-        "kids_age",
-        "status",
-    ]
-    readonly_fields = ["added_on", "stock"]
+    list_display = ("id", "category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
+    list_display_links = ("category", "name", "status")
+    search_fields = ("name",)
+    list_filter = (CountyFilter, "category", "unit_type", "textile_category", "kids_age", "status")
+    readonly_fields = ("added_on", "stock")
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_cjcci_user():
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    actions = [deactivate_offers]
+    actions = (deactivate_offers,)
 
     inlines = (ItemOfferInline,)
 
@@ -189,31 +141,17 @@ class AdminItemOffer(CommonResourceAdmin):
 
 @admin.register(models.ItemRequest)
 class AdminItemRequest(CommonResourceSingleCountyAdmin):
-    list_display = [
-        "id",
-        "category",
-        "name",
-        "quantity",
-        "stock",
-        "unit_type",
-        "county_coverage",
-        "town",
-        "status",
-    ]
-    list_display_links = ["category", "name", "status"]
-    search_fields = ["name"]
-    readonly_fields = ["added_on", "stock"]
+    list_display = ("id", "category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
+    list_display_links = ("category", "name", "status")
+    search_fields = ("name",)
+    readonly_fields = ("added_on", "stock")
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_cjcci_user():
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    list_filter = [
-        "county_coverage",
-        "category",
-        "status",
-    ]
+    list_filter = (CountyFilter, "category", "status")
 
     inlines = (ItemRequestInline,)
 

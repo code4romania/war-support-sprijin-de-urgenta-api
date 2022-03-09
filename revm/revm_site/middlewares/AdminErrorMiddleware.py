@@ -1,5 +1,10 @@
 import logging
-from django.http import HttpResponse
+
+from django import http
+from django.conf import settings
+from django.contrib import messages
+from django.db import IntegrityError
+
 
 class AdminErrorMiddleware:
     def __init__(self, get_response):
@@ -11,4 +16,16 @@ class AdminErrorMiddleware:
         return response
 
     def process_exception(self, request, exception):
-        return HttpResponse(exception)
+        self.logger.error(exception)
+
+        if settings.ENVIRONMENT == "development":
+            return
+
+        if isinstance(exception, IntegrityError):
+            messages.add_message(
+                request,
+                messages.ERROR,
+                _("Delete operation not permitted. Please check that the object is not referenced by other objects."),
+            )
+            return http.HttpResponseForbidden(_("Integrity error: Delete operation not permitted"))
+        return http.HttpResponseForbidden(exception)

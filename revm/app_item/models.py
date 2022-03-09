@@ -1,11 +1,11 @@
 import logging
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import ValidationError
 
-from revm_site.settings.base import ITEM_STATUS_COMPLETE
 from app_account.models import CustomUser
+from revm_site.settings.base import ITEM_STATUS_COMPLETE
 from revm_site.utils.models import (
     CommonCategoryModel,
     CommonMultipleCountyModel,
@@ -14,7 +14,8 @@ from revm_site.utils.models import (
     CommonMultipleLocationModel,
     CommonTransportableModel,
     CommonCountyModel,
-    CommonLocationModel
+    CommonLocationModel,
+    get_county_coverage_str,
 )
 from revm_site.utils.validators import validate_date_disallow_past
 
@@ -57,7 +58,8 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
     tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
     def __str__(self):
-        return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type}) - {','.join(self.county_coverage)}"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type}) - {counties_str}"
 
     class Meta:
         verbose_name = _("item offer")
@@ -67,9 +69,9 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         previous = None
         try:
             previous = ItemOffer.objects.get(pk=self.pk)
-        except ItemOffer.DoesNotExist as e:
+        except ItemOffer.DoesNotExist:
             pass
-        except Exception as e:
+        except Exception:
             raise Exception(_("Failed to communicat with database. Please try again later"))
 
         self.stock = get_updated_stock_value(previous, self)
@@ -113,12 +115,12 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         previous = None
         try:
             previous = ItemRequest.objects.get(pk=self.pk)
-        except ItemRequest.DoesNotExist as e:
+        except ItemRequest.DoesNotExist:
             pass
-        except Exception as e:
+        except Exception:
             raise Exception(_("Failed to communicat with database. Please try again later"))
 
-        self.stock = get_updated_stock_value(previous, self)
+        self.stock = get_stock_value(previous, self)
         super().save(*args, **kwargs)
 
 
@@ -140,9 +142,9 @@ class ResourceRequest(models.Model):
         previous = None
         try:
             previous = ResourceRequest.objects.get(pk=self.pk)
-        except ResourceRequest.DoesNotExist as e:
+        except ResourceRequest.DoesNotExist:
             pass
-        except Exception as e:
+        except Exception:
             raise Exception(_("Failed to communicat with database. Please try again later"))
 
         requested_amount = self.total_units
@@ -158,41 +160,62 @@ class ResourceRequest(models.Model):
         request = self.request
 
         if requested_amount > request.stock:
-            raise ValidationError(_("The amount you're trying to transfer")
-                                  + " {0} ".format(requested_amount) +
-                                  _("is larger than the need") + " {0}".format(request.stock))
-
+            raise ValidationError(
+                _(
+                    f"The amount you're trying to transfer {requested_amount} "
+                    f"is larger than the need {request.stock}."
+                )
+            )
 
         if requested_amount > resource.stock:
-            raise ValidationError(_("The amount you're trying to transfer")
-                                  + " {0} ".format(requested_amount) +
-                                  _("is larger than the available stock") + " {0}".format(resource.stock))
+            raise ValidationError(
+                _(
+                    f"The amount you're trying to transfer {requested_amount} "
+                    f"is larger than the available stock {resource.stock}."
+                )
+            )
 
         resource.stock -= requested_amount
         request.stock -= requested_amount
-        logger.info("Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(requested_amount, resource.stock, request.stock))
+        logger.info(
+            "Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(
+                requested_amount, resource.stock, request.stock
+            )
+        )
 
         if request.stock == 0:
-           request.status = ITEM_STATUS_COMPLETE
+            request.status = ITEM_STATUS_COMPLETE
 
         resource.save()
         request.save()
 
         super().save(*args, **kwargs)
 
+    def delete(self, using=None, keep_parents=False):
+        self.resource.stock += self.total_units
+        self.request.stock += self.total_units
 
-def get_updated_stock_value(previous, current):
+        self.resource.save()
+        self.request.save()
+
+        super().delete(using, keep_parents)
+
+
+def get_stock_value(previous, current):
     logger = logging.getLogger("django")
+
     no_previous_record_or_stock = previous is None or current.stock is None or previous.stock is None
     if no_previous_record_or_stock:
-        logger.info("Stock initialise {0}".format(current.quantity))
         return current.quantity
 
-    stock = current.stock
     delta = current.quantity - previous.quantity
-    stock += delta
+    stock = current.stock + delta
 
-    logger.info("Stock delta {delta}. New Stock {stock}. New Quantity {qty}".format(delta=delta, stock=stock, qty=current.quantity))
+    logger.info(
+        "Stock delta {delta}. New Stock {stock}. New Quantity {qty}".format(
+            delta=delta, stock=stock, qty=current.quantity
+        )
+    )
     if stock < 0:
         stock = 0
 

@@ -9,6 +9,7 @@ from revm_site.utils.models import (
     CommonMultipleLocationModel,
     CommonTransportableModel,
     CommonLocationModel,
+    get_county_coverage_str,
 )
 from revm_site.utils.validators import validate_date_disallow_past
 
@@ -34,7 +35,8 @@ class VolunteeringOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTra
     )
 
     def __str__(self):
-        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.pk} {self.type.name} {self.town}({counties_str})"
 
     class Meta:
         verbose_name = _("volunteering offer")
@@ -45,7 +47,8 @@ class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     def __str__(self):
-        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.pk} {self.type.name} {self.town}({counties_str})"
 
     class Meta:
         verbose_name = _("volunteering request")
