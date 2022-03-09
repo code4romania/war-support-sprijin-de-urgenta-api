@@ -5,7 +5,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.settings.base import ITEM_STATUS_COMPLETE
+from revm_site.settings.base import (
+    ITEM_STATUS_COMPLETE,
+    ITEM_STATUS_VERIFIED,
+    ITEM_STATUS_DEACTIVATED,
+    ITEM_STATUS_COMPLETE
+)
+
 from revm_site.utils.models import (
     CommonCategoryModel,
     CommonMultipleCountyModel,
@@ -74,7 +80,8 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
         except Exception:
             raise Exception(_("Failed to communicat with database. Please try again later"))
 
-        self.stock = get_updated_stock_value(previous, self)
+        validate_item_change(previous, self)
+        self.stock = get_stock_value(previous, self)
         super().save(*args, **kwargs)
 
 
@@ -120,6 +127,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
         except Exception:
             raise Exception(_("Failed to communicat with database. Please try again later"))
 
+        validate_item_change(previous, self)
         self.stock = get_stock_value(previous, self)
         super().save(*args, **kwargs)
 
@@ -183,9 +191,6 @@ class ResourceRequest(models.Model):
             )
         )
 
-        if request.stock == 0:
-            request.status = ITEM_STATUS_COMPLETE
-
         resource.save()
         request.save()
 
@@ -220,3 +225,16 @@ def get_stock_value(previous, current):
         stock = 0
 
     return stock
+
+
+def validate_item_change(previous, current):
+    #new record, is valid by default
+    if previous is None:
+        return
+
+    #change detected, status must be verified, any other status does not allow changes
+    if previous.status == current.status and current.status != ITEM_STATUS_VERIFIED:
+        raise ValidationError(_("Item is in incorrect status for the change you're tyring to make"))
+
+    if current.stock == 0 and current.status == ITEM_STATUS_VERIFIED:
+        current.status = ITEM_STATUS_COMPLETE
