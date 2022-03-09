@@ -2,28 +2,34 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import (
+from revm_site.utils.models import (
     CommonCategoryModel,
-    CommonCountyModel,
+    CommonMultipleCountyModel,
     CommonOfferModel,
     CommonRequestModel,
-    CommonLocationModel,
+    CommonMultipleLocationModel,
     CommonTransportableModel,
+    CommonLocationModel,
+    get_county_coverage_str,
 )
+from revm_site.utils.validators import validate_date_disallow_past
 
 
 class Category(CommonCategoryModel):
     ...
 
 
-class OtherOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
+class OtherOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportableModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("category"))
     name = models.CharField(_("resource name"), max_length=100, db_index=True)
 
-    available_until = models.DateField(_("resource available until"), null=True)
+    available_until = models.DateField(
+        _("resource available until"), validators=[validate_date_disallow_past], null=True
+    )
 
     def __str__(self):
-        return f"#{self.pk} {self.name} {self.category} {self.town}({self.county_coverage})"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.pk} {self.name} {self.category} {self.town}({counties_str})"
 
     class Meta:
         verbose_name = _("other offer")
@@ -35,7 +41,8 @@ class OtherRequest(CommonRequestModel, CommonLocationModel):
     name = models.CharField(_("name"), max_length=100, db_index=True)
 
     def __str__(self):
-        return f"#{self.pk} {self.name} {self.category} {self.town}({self.county_coverage})"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.pk} {self.name} {self.category} {self.town}({counties_str})"
 
     class Meta:
         verbose_name = _("other request")

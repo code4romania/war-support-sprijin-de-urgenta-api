@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from revm_site.serializers import CountyCoverageSerializer
+from revm_site.utils.serializers import CountyCoverageSerializer
 from .models import VolunteeringRequest, VolunteeringOffer, Type
 
 
@@ -16,7 +16,7 @@ class VolunteeringOfferSerializer(CountyCoverageSerializer):
         fields = "__all__"
 
 
-class VolunteeringRequestSerializer(CountyCoverageSerializer):
+class VolunteeringRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = VolunteeringRequest
         fields = "__all__"

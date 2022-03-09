@@ -2,13 +2,16 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.models import (
+from revm_site.utils.models import (
     CommonRequestModel,
-    CommonCountyModel,
+    CommonMultipleCountyModel,
     CommonOfferModel,
-    CommonLocationModel,
+    CommonMultipleLocationModel,
     CommonTransportableModel,
+    CommonLocationModel,
+    get_county_coverage_str,
 )
+from revm_site.utils.validators import validate_date_disallow_past
 
 
 class Type(models.Model):
@@ -23,13 +26,17 @@ class Type(models.Model):
         verbose_name_plural = _("volunteering types")
 
 
-class VolunteeringOffer(CommonOfferModel, CommonLocationModel, CommonTransportableModel):
+class VolunteeringOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportableModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
-    available_until = models.DateField(_("volunteer available until"), null=True)
+    name = models.CharField(_("name"), max_length=50, null=False, blank=False)
+    available_until = models.DateField(
+        _("volunteer available until"), validators=[validate_date_disallow_past], null=True
+    )
 
     def __str__(self):
-        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.pk} {self.type.name} {self.town}({counties_str})"
 
     class Meta:
         verbose_name = _("volunteering offer")
@@ -40,7 +47,8 @@ class VolunteeringRequest(CommonRequestModel, CommonLocationModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
     def __str__(self):
-        return f"#{self.pk} {self.type.name} {self.town}({self.county_coverage})"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.pk} {self.type.name} {self.town}({counties_str})"
 
     class Meta:
         verbose_name = _("volunteering request")

@@ -24,7 +24,6 @@ env = environ.Env(
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
-    MEMCACHED_HOST=(str, "cache:11211"),
     REDIS_HOST=(str, "redis"),
     REDIS_PORT=(int, 6379),
     FROM_EMAIL=(str, "noreply@code4.ro"),
@@ -114,6 +113,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "revm_site.middlewares.AdminErrorMiddleware.AdminErrorMiddleware",
 ]
 
 SITE_ID = 1
@@ -176,6 +176,8 @@ USE_TZ = True
 LANGUAGES = [
     ("ro", _("Romanian")),
     ("en", _("English")),
+    ("uk", _("Ukrainian")),
+    ("ru", _("Russian")),
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -190,14 +192,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
-
-MEMCACHED_HOST = env("MEMCACHED_HOST")
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": MEMCACHED_HOST,
-    },
-}
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -257,11 +251,23 @@ COUNTIES_SHORTNAME = {
     "VN": "Vrancea",
 }
 
-RESOURCE_STATUS = (
-    ("NV", _("Not Verified")),
-    ("V", _("Verified")),
-    ("D", _("Deactivated")),
-    ("C", _("Complete")),
+ITEM_STATUS_NOT_VERIFIED = "NV"
+ITEM_STATUS_VERIFIED = "V"
+ITEM_STATUS_DEACTIVATED = "D"
+ITEM_STATUS_COMPLETE = "C"
+
+OFFER_STATUS = (
+    (ITEM_STATUS_NOT_VERIFIED, _("Not Verified")),
+    (ITEM_STATUS_VERIFIED, _("Verified")),
+    (ITEM_STATUS_DEACTIVATED, _("Deactivated")),
+    (ITEM_STATUS_COMPLETE, _("Complete")),
+)
+
+REQUEST_STATUS = (
+    (ITEM_STATUS_NOT_VERIFIED, _("Not Verified")),
+    (ITEM_STATUS_VERIFIED, _("Verified")),
+    (ITEM_STATUS_DEACTIVATED, _("Deactivated")),
+    (ITEM_STATUS_COMPLETE, _("Solved")),
 )
 
 TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))

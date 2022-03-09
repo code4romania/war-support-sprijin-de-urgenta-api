@@ -1,11 +1,11 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import Group, Permission
 
-from app_account.models import USERS_GROUP, DSU_GROUP, DSU_MANAGER_GROUP
+from app_account.models import USERS_GROUP, CJCCI_GROUP, CNCCI_GROUP
 
 
-# NOTE restricted for current user via admin `get_queryset` if current user in USER_GROUP, no restrictions for DSU_GROUP
-user_and_dsu_permissions = [
+# NOTE restricted for current user via admin `get_queryset` if current user in USER_GROUP, no restrictions for CNCCI
+user_permissions = [
     "view_customuser",
     "view_itemoffer",
     "add_itemoffer",
@@ -45,7 +45,7 @@ user_and_dsu_permissions = [
     "delete_volunteeringrequest",
 ]
 
-dsu_manager_permissions = [
+cjcci_permissions = cncci_permissions = [
     "add_customuser",
     "change_customuser",
     "delete_customuser",
@@ -64,11 +64,9 @@ dsu_manager_permissions = [
     "view_resourcerequest",
     "add_subcategory",
     "change_subcategory",
-    "delete_subcategory",
     "view_subcategory",
     "add_category",
     "change_category",
-    "delete_category",
     "view_category",
     "add_otheroffer",
     "change_otheroffer",
@@ -105,26 +103,24 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         users_group, _ = Group.objects.get_or_create(name=USERS_GROUP)
         users_group.permissions.set(
-            Permission.objects.filter(codename__in=user_and_dsu_permissions).values_list("id", flat=True)
+            Permission.objects.filter(codename__in=user_permissions).values_list("id", flat=True)
         )
         self.stdout.write(
             self.style.SUCCESS(f"'{USERS_GROUP}' group has been created and appropriate permissions were assigned")
         )
 
-        dsu_manager_group, _ = Group.objects.get_or_create(name=DSU_MANAGER_GROUP)
-        dsu_manager_group.permissions.set(
-            Permission.objects.filter(codename__in=dsu_manager_permissions).values_list("id", flat=True)
+        cncci_group, _ = Group.objects.get_or_create(name=CNCCI_GROUP)
+        cncci_group.permissions.set(
+            Permission.objects.filter(codename__in=cncci_permissions).values_list("id", flat=True)
         )
         self.stdout.write(
-            self.style.SUCCESS(
-                f"'{DSU_MANAGER_GROUP}' group has been created and appropriate permissions were assigned"
-            )
+            self.style.SUCCESS(f"'{CNCCI_GROUP}' group has been created and appropriate permissions were assigned")
         )
 
-        dsu_group, _ = Group.objects.get_or_create(name=DSU_GROUP)
-        dsu_group.permissions.set(
-            Permission.objects.filter(codename__in=user_and_dsu_permissions).values_list("id", flat=True)
+        cjcci_group, _ = Group.objects.get_or_create(name=CJCCI_GROUP)
+        cjcci_group.permissions.set(
+            Permission.objects.filter(codename__in=user_permissions).values_list("id", flat=True)
         )
         self.stdout.write(
-            self.style.SUCCESS(f"'{DSU_GROUP}' group has been created and appropriate permissions were assigned")
+            self.style.SUCCESS(f"'{CJCCI_GROUP}' group has been created and appropriate permissions were assigned")
         )

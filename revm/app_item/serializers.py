@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from revm_site.serializers import CountyCoverageSerializer
+from revm_site.utils.serializers import CountyCoverageSerializer
 from .models import ItemRequest, ItemOffer, Category
 
 
@@ -22,7 +22,7 @@ class ItemOfferSerializer(CountyCoverageSerializer):
         fields = "__all__"
 
 
-class ItemRequestSerializer(CountyCoverageSerializer):
+class ItemRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemRequest
         fields = "__all__"
