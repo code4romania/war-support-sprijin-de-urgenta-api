@@ -14,6 +14,7 @@ from revm_site.utils.models import (
     CommonTransportableModel,
     CommonCountyModel,
     CommonLocationModel,
+    get_county_coverage_str,
 )
 from revm_site.utils.validators import validate_date_disallow_past
 
@@ -56,7 +57,8 @@ class ItemOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportab
     tent_capacity = models.PositiveSmallIntegerField(_("capacity"), default=0, blank=True, null=False)
 
     def __str__(self):
-        return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type}) - {','.join(self.county_coverage)}"
+        counties_str = get_county_coverage_str(self.county_coverage)
+        return f"#{self.id} {self.name} (Stoc: {self.stock} {self.unit_type}) - {counties_str}"
 
     class Meta:
         verbose_name = _("item offer")
