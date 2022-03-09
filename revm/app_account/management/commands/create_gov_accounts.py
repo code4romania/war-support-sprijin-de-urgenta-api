@@ -21,7 +21,6 @@ class Command(BaseCommand):
         password = row[2].strip()
 
         group_name = CNCCI_GROUP if is_cncci else CJCCI_GROUP
-        print(Group.objects.get(name=group_name))
 
         # no CustomUser.get_or_create()
         try:
@@ -34,7 +33,7 @@ class Command(BaseCommand):
         user.is_active = True
         user.is_superuser = False
         # user.is_staff = is_cncci
-        user.is_staff = True
+        user.is_staff = False
         user.is_validated = True
 
         user.set_password(password)
@@ -42,7 +41,7 @@ class Command(BaseCommand):
         user.save()
 
         # group roles
-        user.groups.add(Group.objects.get(name=group_name))
+        user.groups.add(Group.objects.get(name=CNCCI_GROUP))
 
     def handle(self, *args, **kwargs):
         try:
