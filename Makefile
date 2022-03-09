@@ -14,6 +14,9 @@ build-dev:                        ## builds the container with the development f
 seed_superuser:                   ## creates a superuser for the API based on the data in the .env file
 	docker-compose exec revm ./manage.py seed_superuser
 
+create_gov_accounts:
+	docker-compose exec revm ./manage.py create_gov_accounts
+
 seed_groups:                      ## creates initial user groups
 	docker-compose exec revm ./manage.py seed_groups
 

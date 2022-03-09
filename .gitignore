@@ -147,6 +147,7 @@ db.sqlite3-journal
 
 revm/static/
 revm/public/*
+revm/data.csv
 
 # Flask stuff:
 instance/

@@ -23,6 +23,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             "email",
             "password",
             "re_password",
+            "groups"
         ]
 
     def validate_email(self, email):
