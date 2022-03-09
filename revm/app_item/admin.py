@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib import admin
 from django.db.models import TextField
 from django.forms import Textarea
@@ -13,9 +12,10 @@ from revm_site.utils.admin import (
     CommonResourceMultipleCountyAdmin,
     CommonResourceSingleCountyAdmin,
     CountyFilter,
+    CommonPaginatedAdmin,
+    CommonReadonlyOfferInline,
+    CommonReadonlyRequestInline,
 )
-
-from revm_site.utils.admin import CommonPaginatedAdmin
 
 
 def deactivate_offers(modeladmin, request, queryset):
@@ -32,7 +32,15 @@ class ItemOfferInline(CommonOfferInline):
     model = models.ResourceRequest
 
 
+class ItemReadonlyOfferInline(CommonReadonlyOfferInline):
+    model = models.ResourceRequest
+
+
 class ItemRequestInline(CommonRequestInline):
+    model = models.ResourceRequest
+
+
+class ItemReadonlyRequestInline(CommonReadonlyRequestInline):
     model = models.ResourceRequest
 
 
@@ -72,9 +80,7 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
-            return (ItemOfferInline,)
-        return ()
+        return (ItemOfferInline,)
 
     actions = (deactivate_offers,)
 
@@ -158,9 +164,7 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin, CommonPaginatedAdmin):
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
-            return (ItemRequestInline,)
-        return ()
+        return (ItemRequestInline,)
 
     list_filter = (CountyFilter, "category", "status")
 

@@ -11,6 +11,7 @@ from revm_site.utils.models import (
     CommonTransportableModel,
     CommonLocationModel,
     get_county_coverage_str,
+    CommonResourceRequestModel,
 )
 from revm_site.utils.validators import validate_date_disallow_past
 
@@ -49,17 +50,10 @@ class OtherRequest(CommonRequestModel, CommonLocationModel):
         verbose_name_plural = _("other request")
 
 
-class ResourceRequest(models.Model):
+class ResourceRequest(CommonResourceRequestModel):
     resource = models.ForeignKey(OtherOffer, on_delete=models.DO_NOTHING, verbose_name=_("donation"))
     request = models.ForeignKey(OtherRequest, on_delete=models.DO_NOTHING, verbose_name=_("request"))
-    # ToDo add here app_item, app_service, app_transport_service, app_volunteering | so we can match them up later
 
     class Meta:
         verbose_name = _("Offer - Request")
         verbose_name_plural = _("Offer - Request")
-
-    def save(self, *args, **kwargs):
-        self.request.status = "C"
-        self.request.save()
-
-        super().save(*args, **kwargs)

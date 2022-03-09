@@ -1,11 +1,9 @@
-import logging
-
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
-from revm_site.settings.base import ITEM_STATUS_COMPLETE
+from revm_site.settings.base import ITEM_STATUS_COMPLETE, ITEM_STATUS_VERIFIED
 from revm_site.utils.models import (
     CommonCategoryModel,
     CommonMultipleCountyModel,
@@ -134,7 +132,6 @@ class ResourceRequest(models.Model):
         verbose_name_plural = _("Offer - Request")
 
     def save(self, *args, **kwargs):
-        logger = logging.getLogger("django")
         previous = None
         try:
             previous = ResourceRequest.objects.get(pk=self.pk)
@@ -168,11 +165,6 @@ class ResourceRequest(models.Model):
 
         resource.stock -= requested_amount
         request.stock -= requested_amount
-        logger.info(
-            "Requested {0} Offer Stock remaining:{1} Request stock remaining:{2}".format(
-                requested_amount, resource.stock, request.stock
-            )
-        )
 
         if request.stock == 0:
             request.status = ITEM_STATUS_COMPLETE
@@ -186,6 +178,9 @@ class ResourceRequest(models.Model):
         self.resource.stock += self.total_units
         self.request.stock += self.total_units
 
+        self.resource.status = ITEM_STATUS_VERIFIED
+        self.request.status = ITEM_STATUS_VERIFIED
+
         self.resource.save()
         self.request.save()
 
@@ -194,15 +189,15 @@ class ResourceRequest(models.Model):
     def _restore_amounts_if_connections_changed(self, previous):
         if previous.resource.id != self.resource.id:
             previous.resource.stock += previous.total_units
+            previous.resource.status = ITEM_STATUS_VERIFIED
             previous.resource.save()
         elif previous.request.id != self.request.id:
             previous.request.stock += previous.total_units
+            previous.request.status = ITEM_STATUS_VERIFIED
             previous.request.save()
 
 
 def get_stock_value(previous, current):
-    logger = logging.getLogger("django")
-
     no_previous_record_or_stock = previous is None or current.stock is None or previous.stock is None
     if no_previous_record_or_stock:
         return current.quantity
@@ -210,11 +205,6 @@ def get_stock_value(previous, current):
     delta = current.quantity - previous.quantity
     stock = current.stock + delta
 
-    logger.info(
-        "Stock delta {delta}. New Stock {stock}. New Quantity {qty}".format(
-            delta=delta, stock=stock, qty=current.quantity
-        )
-    )
     if stock < 0:
         stock = 0
 

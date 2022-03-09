@@ -12,7 +12,7 @@ class CommonPaginatedAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 
-class CommonResourceInline(admin.TabularInline):
+class CommonResourceInline(admin.StackedInline):
     extra = 1
     show_change_link = True
     view_on_site = True
@@ -67,6 +67,10 @@ class CommonOfferInline(CommonResourceInline):
         return formset
 
 
+class CommonReadonlyOfferInline(CommonOfferInline):
+    readonly_fields = ("request", "total_units", "description")
+
+
 class CommonRequestInline(CommonResourceInline):
     verbose_name_plural = _("Allocate from the available offers")
 
@@ -79,6 +83,10 @@ class CommonRequestInline(CommonResourceInline):
         self.resource_obj = obj
         formset = super().get_formset(request, obj, **kwargs)
         return formset
+
+
+class CommonReadonlyRequestInline(CommonRequestInline):
+    readonly_fields = ("resource", "total_units", "description")
 
 
 class CommonResourceAdmin(ImportExportModelAdmin):
