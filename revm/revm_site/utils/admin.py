@@ -28,9 +28,40 @@ class CommonResourceInline(admin.TabularInline):
 class CommonOfferInline(CommonResourceInline):
     verbose_name_plural = _("Allocate this resource to a request")
 
+    def get_formset(self, request, obj=None, **kwargs):
+        self.offer_obj = obj
+        formset = super().get_formset(request, obj, **kwargs)
+        return formset
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "request":
+            RequestModel = self.model._meta.get_field('request').related_model
+            if self.offer_obj:
+                kwargs["queryset"] = RequestModel.objects.filter(status='V', category=self.offer_obj.category)
+            else:
+                kwargs["queryset"] = RequestModel.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 class CommonRequestInline(CommonResourceInline):
     verbose_name_plural = _("Allocate from the available offers")
+
+    def get_formset(self, request, obj=None, **kwargs):
+        self.request_obj = obj
+        formset = super().get_formset(request, obj, **kwargs)
+        return formset
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "resource":
+            OfferModel = self.model._meta.get_field('resource').related_model
+            if self.request_obj:
+                try:
+                    kwargs["queryset"] = OfferModel.objects.filter(status='V', category=self.request_obj.category)
+                except:
+                    kwargs["queryset"] = OfferModel.objects.filter(status='V', type=self.request_obj.type)
+            else:
+                kwargs["queryset"] = OfferModel.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class CommonResourceAdmin(ImportExportModelAdmin):
