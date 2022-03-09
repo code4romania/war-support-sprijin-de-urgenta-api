@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
@@ -46,7 +47,7 @@ class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedA
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj:
+        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
             return (VolunteeringOfferInline,)
         return ()
 
@@ -94,7 +95,7 @@ class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin, CommonPaginate
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj:
+        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
             return (VolunteeringRequestInline,)
         return ()
 

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.db.models import TextField
 from django.forms import Textarea
@@ -71,7 +72,7 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj:
+        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
             return (ItemOfferInline,)
         return ()
 
@@ -157,7 +158,7 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin, CommonPaginatedAdmin):
         return self.readonly_fields
 
     def get_inlines(self, request, obj):
-        if obj:
+        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
             return (ItemRequestInline,)
         return ()
 

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
@@ -46,7 +47,10 @@ class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin, CommonPagina
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    inlines = (TransportOfferInline,)
+    def get_inlines(self, request, obj):
+        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
+            return (TransportOfferInline,)
+        return ()
 
     ordering = ("pk",)
 
@@ -144,7 +148,10 @@ class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin, CommonPagina
             return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
         return self.readonly_fields
 
-    inlines = (TransportRequestInline,)
+    def get_inlines(self, request, obj):
+        if obj and obj.status == settings.ITEM_STATUS_VERIFIED:
+            return (TransportRequestInline,)
+        return ()
 
     ordering = ("pk",)
     view_on_site = False
