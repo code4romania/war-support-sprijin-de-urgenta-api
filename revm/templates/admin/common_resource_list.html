@@ -1,0 +1,21 @@
+{% extends "admin/change_list.html" %}
+{% load i18n static admin_list %}
+
+
+{% block content %}
+
+    {% for card in stats_cards %}
+        <div class="col-2">
+            <div class="card card-secondary card-outline">
+                <div class="card-body">
+                    <span class="text-">{{ card.title }}
+                        <span class="badge badge-{{ card.badge }}">{{ card.statistic }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    {{ block.super }}
+{% endblock %}

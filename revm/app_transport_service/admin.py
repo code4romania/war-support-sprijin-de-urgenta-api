@@ -95,6 +95,7 @@ class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin):
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+        self.requests_model = models.TransportServiceRequest
         self.current_admin_inline = TransportOfferInline
 
     def capacitate(self, obj):
@@ -114,10 +115,6 @@ class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin):
     view_on_site = False
 
     change_form_template = "admin/transport_offer_admin.html"
-
-    def __init__(self, model, admin_site):
-        super().__init__(model, admin_site)
-        self.current_admin_inline = TransportRequestInline
 
     fieldsets = (
         (
@@ -173,6 +170,11 @@ class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin):
             },
         ),
     )
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.requests_model = models.TransportServiceRequest
+        self.current_admin_inline = TransportRequestInline
 
     def capacitate(self, obj):
         if obj.available_seats:

@@ -82,10 +82,55 @@ class CommonRequestInline(CommonResourceInline):
 
 class CommonResourceAdmin(ImportExportModelAdmin):
     list_per_page = settings.PAGE_SIZE
+    change_list_template = "admin/common_resource_list.html"
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+        self.requests_model = None
         self.current_admin_inline = None
+
+    def changelist_view(self, request, extra_context=None):
+        model_name = self.model._meta.verbose_name_plural
+
+        verified_resources = self.model.objects.filter(status=settings.ITEM_STATUS_VERIFIED).count()
+        verified_badge = settings.STATUS_COLOR_MAPPING[settings.ITEM_STATUS_VERIFIED]
+
+        unverified_resources = self.model.objects.filter(Q(status=settings.ITEM_STATUS_NOT_VERIFIED)).count()
+        unverified_badge = settings.STATUS_COLOR_MAPPING[settings.ITEM_STATUS_NOT_VERIFIED]
+
+        complete_resources = self.model.objects.filter(status=settings.ITEM_STATUS_COMPLETE).count()
+        verified_complete_resources = verified_resources + complete_resources
+        complete_badge = settings.STATUS_COLOR_MAPPING[settings.ITEM_STATUS_COMPLETE]
+
+        pending_requests = self.requests_model.objects.filter(
+            Q(status=settings.ITEM_STATUS_VERIFIED) | Q(status=settings.ITEM_STATUS_NOT_VERIFIED)
+        ).count()
+
+        context = {
+            "stats_cards": [
+                {
+                    "title": _(f"Completed {model_name}"),
+                    "badge": complete_badge,
+                    "statistic": f"{complete_resources} / {verified_complete_resources}",
+                },
+                {
+                    "title": _(f"Verified {model_name}"),
+                    "badge": verified_badge,
+                    "statistic": f"{verified_resources}",
+                },
+                {
+                    "title": _(f"Unverified {model_name}"),
+                    "badge": unverified_badge,
+                    "statistic": f"{unverified_resources}",
+                },
+                {
+                    "title": _("Unresolved requests"),
+                    "badge": "warning",
+                    "statistic": f"{pending_requests}",
+                },
+            ],
+        }
+        return super().changelist_view(request, extra_context=context)
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         self.inlines = []
