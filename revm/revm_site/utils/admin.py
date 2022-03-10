@@ -2,11 +2,12 @@ from django.conf import settings
 from django.contrib import admin, messages
 from django.db.models import TextField, Q
 from django.forms import Textarea
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
-from revm_site.settings.base import ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE
+from revm_site.settings.base import ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE, STATUS_COLOR_MAPPING
 from revm_site.utils.models import CommonRequestModel, CommonOfferModel
 
 
@@ -96,6 +97,11 @@ class CommonResourceAdmin(ImportExportModelAdmin):
             if obj.status in (ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE):
                 self.inlines = (self.current_admin_inline,)
         return super().change_view(request, object_id, form_url, extra_context)
+
+    @staticmethod
+    def get_status(obj):
+        color = STATUS_COLOR_MAPPING.get(obj.status, "dark")
+        return format_html('<span class="badge badge-pill badge-{}">{}</span>'.format(color, obj.get_status_display()))
 
     def get_filtered_by_county_queryset(self, queryset, county):
         raise NotImplementedError

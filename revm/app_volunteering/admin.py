@@ -32,7 +32,7 @@ class AdminTypeRequest(ImportExportModelAdmin):
 
 @admin.register(models.VolunteeringOffer)
 class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin):
-    list_display = ("donor", "type", "county_coverage", "town", "available_until", "status")
+    list_display = ("donor", "type", "county_coverage", "town", "available_until", "get_status")
     list_display_links = ("donor",)
     list_filter = ("type", CountyFilter, "status")
     search_fields = ("name",)
@@ -68,7 +68,7 @@ class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin):
 
 @admin.register(models.VolunteeringRequest)
 class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin):
-    list_display = ("made_by", "type", "county_coverage", "town", "status")
+    list_display = ("made_by", "type", "county_coverage", "town", "get_status")
     list_display_links = ("made_by",)
     list_filter = ("type", CountyFilter, "status")
     search_fields = ("name",)

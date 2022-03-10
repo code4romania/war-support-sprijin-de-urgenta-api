@@ -270,6 +270,13 @@ REQUEST_STATUS = (
     (ITEM_STATUS_COMPLETE, _("Solved")),
 )
 
+STATUS_COLOR_MAPPING = {
+    ITEM_STATUS_DEACTIVATED: "secondary",
+    ITEM_STATUS_NOT_VERIFIED: "danger",
+    ITEM_STATUS_VERIFIED: "primary",
+    ITEM_STATUS_COMPLETE: "success",
+}
+
 TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
 
 TRANSPORT_AVAILABILTY = (
@@ -345,6 +352,7 @@ JAZZMIN_SETTINGS = {
     "site_header": ADMIN_TITLE,
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     "site_logo": "jazzmin/img/sprijin-de-urgenta.svg",
+    "site_logo_short": "jazzmin/img/sprijin-de-urgenta-logo.svg",
     "site_icon": "jazzmin/img/sprijin-de-urgenta-logo.svg",
     "site_logo_classes": "site-logo",
     # Welcome text on the login screen
