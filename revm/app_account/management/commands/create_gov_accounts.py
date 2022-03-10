@@ -33,8 +33,7 @@ class Command(BaseCommand):
         user.type = CustomUser.TYPES_CHOICES[3][0]
         user.is_active = True
         user.is_superuser = False
-        # user.is_staff = is_cncci
-        user.is_staff = False
+        user.is_staff = is_cncci
         user.is_validated = True
 
         user.set_password(password)
