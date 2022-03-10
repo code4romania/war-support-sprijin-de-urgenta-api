@@ -109,17 +109,17 @@ class CommonResourceAdmin(ImportExportModelAdmin):
         context = {
             "stats_cards": [
                 {
-                    "title": _(f"Completed {model_name}"),
+                    "title": _("Completed"),
                     "badge": complete_badge,
                     "statistic": f"{complete_resources} / {verified_complete_resources}",
                 },
                 {
-                    "title": _(f"Verified {model_name}"),
+                    "title": _("Verified"),
                     "badge": verified_badge,
                     "statistic": f"{verified_resources}",
                 },
                 {
-                    "title": _(f"Unverified {model_name}"),
+                    "title": _("Unverified"),
                     "badge": unverified_badge,
                     "statistic": f"{unverified_resources}",
                 },

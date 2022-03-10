@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-10 22:38+0200\n"
+"POT-Creation-Date: 2022-03-10 22:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -500,6 +500,7 @@ msgid "Not Verified"
 msgstr "Neverificat"
 
 #: revm_site/settings/base.py:261 revm_site/settings/base.py:268
+#: revm_site/utils/admin.py:117
 msgid "Verified"
 msgstr "Verificat"
 
@@ -519,7 +520,7 @@ msgstr "Rezolvat"
 msgid "National"
 msgstr "Național"
 
-#: revm_site/settings/base.py:280 revm_site/utils/admin.py:218
+#: revm_site/settings/base.py:280 revm_site/utils/admin.py:219
 msgid "County"
 msgstr "Județ"
 
@@ -547,26 +548,19 @@ msgstr "Alocă din această resursă către o cerere de ajutor"
 msgid "Allocate from the available offers"
 msgstr "Alocă din resursele disponibile"
 
-#: revm_site/utils/admin.py:111
-#, python-brace-format
-msgid "Verified {model_name}"
-msgstr "{model_name} verificate"
+#: revm_site/utils/admin.py:112
+msgid "Completed"
+msgstr "Utilizat"
 
-#: revm_site/utils/admin.py:116
-#, python-brace-format
-msgid "Unverified {model_name}"
-msgstr "{model_name} neverificate"
+#: revm_site/utils/admin.py:122
+msgid "Unverified"
+msgstr "Neverificate"
 
-#: revm_site/utils/admin.py:121
-#, python-brace-format
-msgid "Completed {model_name}"
-msgstr "{model_name} închise"
-
-#: revm_site/utils/admin.py:126
+#: revm_site/utils/admin.py:127
 msgid "Unresolved requests"
 msgstr "Cereri nerezolvate"
 
-#: revm_site/utils/admin.py:161
+#: revm_site/utils/admin.py:162
 msgid "You are not assigned to any county. Please contact your administrator."
 msgstr "Nu ai alocat niciun județ. Contactează administratorul."
 
@@ -708,8 +702,17 @@ msgstr "Da, sunt sigur"
 msgid "No, take me back"
 msgstr "Nu, du-mă înapoi"
 
-#~ msgid "verified"
-#~ msgstr "verificate"
+#, python-brace-format
+#~ msgid "Verified {model_name}"
+#~ msgstr "{model_name} verificate"
+
+#, python-brace-format
+#~ msgid "Unverified {model_name}"
+#~ msgstr "{model_name} neverificate"
+
+#, python-brace-format
+#~ msgid "Completed {model_name}"
+#~ msgstr "{model_name} închise"
 
 #~ msgid "completed"
 #~ msgstr "rezolvate"

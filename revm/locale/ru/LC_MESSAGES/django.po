@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-10 22:38+0200\n"
+"POT-Creation-Date: 2022-03-10 22:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -500,6 +500,7 @@ msgid "Not Verified"
 msgstr ""
 
 #: revm_site/settings/base.py:261 revm_site/settings/base.py:268
+#: revm_site/utils/admin.py:117
 msgid "Verified"
 msgstr ""
 
@@ -519,7 +520,7 @@ msgstr ""
 msgid "National"
 msgstr ""
 
-#: revm_site/settings/base.py:280 revm_site/utils/admin.py:218
+#: revm_site/settings/base.py:280 revm_site/utils/admin.py:219
 msgid "County"
 msgstr ""
 
@@ -547,26 +548,19 @@ msgstr ""
 msgid "Allocate from the available offers"
 msgstr ""
 
-#: revm_site/utils/admin.py:111
-#, python-brace-format
-msgid "Verified {model_name}"
+#: revm_site/utils/admin.py:112
+msgid "Completed"
 msgstr ""
 
-#: revm_site/utils/admin.py:116
-#, python-brace-format
-msgid "Unverified {model_name}"
+#: revm_site/utils/admin.py:122
+msgid "Unverified"
 msgstr ""
 
-#: revm_site/utils/admin.py:121
-#, python-brace-format
-msgid "Completed {model_name}"
-msgstr ""
-
-#: revm_site/utils/admin.py:126
+#: revm_site/utils/admin.py:127
 msgid "Unresolved requests"
 msgstr ""
 
-#: revm_site/utils/admin.py:161
+#: revm_site/utils/admin.py:162
 msgid "You are not assigned to any county. Please contact your administrator."
 msgstr ""
 
