@@ -5,11 +5,9 @@ from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
+from app_account.models import CustomUser
+from revm_site.settings.base import ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE
 from revm_site.utils.models import CommonRequestModel, CommonOfferModel
-
-
-class CommonPaginatedAdmin(admin.ModelAdmin):
-    list_per_page = 20
 
 
 class CommonResourceInline(admin.StackedInline):
@@ -67,10 +65,6 @@ class CommonOfferInline(CommonResourceInline):
         return formset
 
 
-class CommonReadonlyOfferInline(CommonOfferInline):
-    readonly_fields = ("request", "total_units", "description")
-
-
 class CommonRequestInline(CommonResourceInline):
     verbose_name_plural = _("Allocate from the available offers")
 
@@ -85,11 +79,24 @@ class CommonRequestInline(CommonResourceInline):
         return formset
 
 
-class CommonReadonlyRequestInline(CommonRequestInline):
-    readonly_fields = ("resource", "total_units", "description")
-
-
 class CommonResourceAdmin(ImportExportModelAdmin):
+    list_per_page = settings.PAGE_SIZE
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.current_admin_inline = None
+
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        self.inlines = []
+        try:
+            obj = self.model.objects.get(pk=object_id)
+        except self.model.DoesNotExist:
+            pass
+        else:
+            if obj.status in (ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE):
+                self.inlines = (self.current_admin_inline,)
+        return super().change_view(request, object_id, form_url, extra_context)
+
     def get_filtered_by_county_queryset(self, queryset, county):
         raise NotImplementedError
 
@@ -117,6 +124,17 @@ class CommonResourceAdmin(ImportExportModelAdmin):
                 return queryset.filter(made_by=request.user)
 
         return queryset
+
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_cncci_user() or request.user.is_cjcci_user():
+            return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
+        return self.readonly_fields
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if request.user.is_regular_user():
+            if db_field.name in ("donor", "made_by"):
+                kwargs["queryset"] = CustomUser.objects.filter(pk=request.user.id)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     class Meta:
         abstract = True
