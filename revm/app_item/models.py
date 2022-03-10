@@ -145,8 +145,8 @@ class ResourceRequest(models.Model):
             requested_amount -= previous.total_units
             self._restore_amounts_if_connections_changed(previous)
 
-        resource = self.resource
-        request = self.request
+        resource = ItemOffer.objects.get(pk=self.resource.id)
+        request = ItemRequest.objects.get(pk=self.request.id)
 
         if requested_amount > request.stock:
             raise ValidationError(
@@ -167,6 +167,8 @@ class ResourceRequest(models.Model):
         resource.stock -= requested_amount
         request.stock -= requested_amount
 
+        if resource.stock == 0:
+            resource.status = ITEM_STATUS_COMPLETE
         if request.stock == 0:
             request.status = ITEM_STATUS_COMPLETE
 
