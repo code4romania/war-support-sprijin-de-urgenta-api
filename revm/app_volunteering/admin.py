@@ -63,6 +63,7 @@ class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin):
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+        self.requests_model = models.VolunteeringRequest
         self.current_admin_inline = VolunteeringOfferInline
 
 
@@ -87,4 +88,5 @@ class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin):
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+        self.requests_model = models.VolunteeringRequest
         self.current_admin_inline = VolunteeringRequestInline

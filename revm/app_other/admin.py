@@ -64,6 +64,7 @@ class AdminOtherOffer(CommonResourceMultipleCountyAdmin):
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+        self.requests_model = models.OtherRequest
         self.current_admin_inline = OtherOfferInline
 
 
@@ -99,4 +100,5 @@ class AdminOtherRequest(CommonResourceMultipleCountyAdmin):
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+        self.requests_model = models.OtherRequest
         self.current_admin_inline = OtherRequestInline
