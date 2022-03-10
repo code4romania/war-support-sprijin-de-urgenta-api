@@ -30,6 +30,7 @@ class Command(BaseCommand):
 
         user.first_name = first_name
         user.last_name = last_name
+        user.business_name = "{0} {1}".format(last_name, first_name)
         user.type = CustomUser.TYPES_CHOICES[3][0]
         user.is_active = True
         user.is_superuser = False
@@ -40,7 +41,7 @@ class Command(BaseCommand):
 
         user.save()
 
-        # group roles
+        # add everyone to cncci group
         user.groups.add(Group.objects.get(name=CNCCI_GROUP))
 
     def handle(self, *args, **kwargs):
