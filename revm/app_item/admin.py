@@ -71,7 +71,7 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
     list_display_links = ("category", "name", "status")
     search_fields = ("name",)
-    list_filter = (CountyFilter, "category", "unit_type", "textile_category", "kids_age", "status")
+    list_filter = (CountyFilter, "category", "unit_type", "textile_category", "textile_size", "status")
     readonly_fields = ("added_on", "stock")
 
     def get_readonly_fields(self, request, obj=None):
@@ -110,7 +110,7 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
             {
                 "fields": (
                     "textile_category",
-                    "kids_age",
+                    "textile_size",
                     "other_textiles",
                     "name",
                     "quantity",
@@ -194,7 +194,7 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin, CommonPaginatedAdmin):
             {
                 "fields": (
                     "textile_category",
-                    "kids_age",
+                    "textile_size",
                     "other_textiles",
                     "name",
                     "quantity",

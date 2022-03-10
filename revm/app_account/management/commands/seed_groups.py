@@ -46,9 +46,6 @@ user_permissions = [
 ]
 
 cjcci_permissions = cncci_permissions = [
-    "add_customuser",
-    "change_customuser",
-    "delete_customuser",
     "view_customuser",
     "add_itemoffer",
     "change_itemoffer",

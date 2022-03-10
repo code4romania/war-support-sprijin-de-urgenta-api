@@ -121,7 +121,7 @@ class Command(BaseCommand):
             self._field_name(ItemOffer.expiration_date): "Data de Expirare",
             self._field_name(ItemOffer.stock): "Stoc",
             self._field_property_name(ItemOffer.textile_category, "name"): "Categorie Textile",
-            self._field_name(ItemOffer.kids_age): "Varsta Copii",
+            self._field_name(ItemOffer.textile_size): "Varsta Copii",
             self._field_name(ItemOffer.other_textiles): "Alte Textile",
             self._field_name(ItemOffer.tent_capacity): "Capacitate Cort",
         }
@@ -139,7 +139,7 @@ class Command(BaseCommand):
             self._field_name(ItemRequest.unit_type): "UM",
             self._field_name(ItemRequest.stock): "Stoc",
             self._field_property_name(ItemRequest.textile_category, "name"): "Categorie Textile",
-            self._field_name(ItemRequest.kids_age): "Varsta Copii",
+            self._field_name(ItemRequest.textile_size): "Varsta Copii",
             self._field_name(ItemRequest.other_textiles): "Alte Textile",
             self._field_name(ItemRequest.tent_capacity): "Capacitate Cort",
         }
