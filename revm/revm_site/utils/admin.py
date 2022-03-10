@@ -90,8 +90,6 @@ class CommonResourceAdmin(ImportExportModelAdmin):
         self.current_admin_inline = None
 
     def changelist_view(self, request, extra_context=None):
-        model_name = self.model._meta.verbose_name_plural
-
         verified_resources = self.model.objects.filter(status=settings.ITEM_STATUS_VERIFIED).count()
         verified_badge = settings.STATUS_COLOR_MAPPING[settings.ITEM_STATUS_VERIFIED]
 
@@ -114,7 +112,7 @@ class CommonResourceAdmin(ImportExportModelAdmin):
                     "statistic": f"{complete_resources} / {verified_complete_resources}",
                 },
                 {
-                    "title": _("Verified"),
+                    "title": _("Verifieds"),
                     "badge": verified_badge,
                     "statistic": f"{verified_resources}",
                 },

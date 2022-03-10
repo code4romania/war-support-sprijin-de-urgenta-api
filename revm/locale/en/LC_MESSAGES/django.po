@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-10 22:52+0200\n"
+"POT-Creation-Date: 2022-03-10 22:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -497,7 +497,6 @@ msgid "Not Verified"
 msgstr ""
 
 #: revm_site/settings/base.py:261 revm_site/settings/base.py:268
-#: revm_site/utils/admin.py:117
 msgid "Verified"
 msgstr ""
 
@@ -548,6 +547,10 @@ msgstr ""
 #: revm_site/utils/admin.py:112
 msgid "Completed"
 msgstr ""
+
+#: revm_site/utils/admin.py:117
+msgid "Verifieds"
+msgstr "Verified"
 
 #: revm_site/utils/admin.py:122
 msgid "Unverified"
