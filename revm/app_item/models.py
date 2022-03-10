@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app_account.models import CustomUser
@@ -125,7 +126,7 @@ class ResourceRequest(models.Model):
     total_units = models.PositiveSmallIntegerField(_("total units"), default=0, blank=False)
     description = models.TextField(_("description"), default="", blank=True, null=False, max_length=500)
 
-    added_on = models.DateTimeField(_("added on"), auto_now_add=True)
+    added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now)
 
     class Meta:
         verbose_name = _("Offer - Request")

@@ -5,7 +5,6 @@ from django.contrib.sites.models import Site
 from django.utils.translation import gettext_lazy as _
 
 from app_account import models
-from revm_site.utils.admin import CommonPaginatedAdmin
 
 DjangoUserAdmin.add_fieldsets = (
     (
@@ -28,16 +27,17 @@ DjangoUserAdmin.add_fieldsets = (
 
 
 @admin.register(models.CustomUser)
-class AdminCustomUser(DjangoUserAdmin, CommonPaginatedAdmin):
+class AdminCustomUser(DjangoUserAdmin):
     list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type", "county")
     list_display_links = ("id", "first_name", "last_name", "email")
     search_fields = ("email", "first_name", "last_name")
     list_filter = ("is_validated", "type")
     ordering = ("first_name",)
     change_form_template = "admin/user_admin.html"
+    list_per_page = settings.PAGE_SIZE
 
     def get_readonly_fields(self, request, obj=None):
-        if request.user.is_cncci_user():
+        if request.user.is_cncci_user() or request.user.is_cjcci_user():
             return ["is_superuser", "user_permissions", "groups"]
         return self.readonly_fields
 
@@ -46,12 +46,7 @@ class AdminCustomUser(DjangoUserAdmin, CommonPaginatedAdmin):
             return (
                 (
                     None,
-                    {
-                        "fields": (
-                            "username",
-                            "email",
-                        )
-                    },
+                    {"fields": ("username", "email")},
                 ),
                 (
                     _("Personal info"),
@@ -91,7 +86,7 @@ class AdminCustomUser(DjangoUserAdmin, CommonPaginatedAdmin):
             )
 
     def has_delete_permission(self, request, obj=None):
-        if not (request.user.is_superuser or request.user.is_cncci_user()):
+        if not (request.user.is_superuser):
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
@@ -99,7 +94,7 @@ class AdminCustomUser(DjangoUserAdmin, CommonPaginatedAdmin):
         return True
 
     def has_change_permission(self, request, obj=None):
-        if not (request.user.is_superuser or request.user.is_cncci_user()):
+        if not (request.user.is_superuser):
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
@@ -108,7 +103,7 @@ class AdminCustomUser(DjangoUserAdmin, CommonPaginatedAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser or request.user.is_cncci_user():
+        if request.user.is_superuser or request.user.is_cncci_user() or request.user.is_cjcci_user():
             return qs
         return qs.filter(pk=request.user.id)
 

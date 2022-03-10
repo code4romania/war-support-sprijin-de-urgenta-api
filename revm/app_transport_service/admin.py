@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
-from app_account.models import CustomUser
 from app_transport_service import models
 from revm_site.utils.admin import (
     CommonRequestInline,
@@ -10,9 +9,6 @@ from revm_site.utils.admin import (
     CommonResourceMultipleCountyAdmin,
     CountyFilter,
     CommonResourceToFromCountyAdmin,
-    CommonPaginatedAdmin,
-    CommonReadonlyRequestInline,
-    CommonReadonlyOfferInline,
 )
 
 
@@ -20,15 +16,7 @@ class TransportOfferInline(CommonOfferInline):
     model = models.ResourceRequest
 
 
-class TransportReadonlyOfferInline(CommonReadonlyOfferInline):
-    model = models.ResourceRequest
-
-
 class TransportRequestInline(CommonRequestInline):
-    model = models.ResourceRequest
-
-
-class TransportReadonlyRequestInline(CommonReadonlyRequestInline):
     model = models.ResourceRequest
 
 
@@ -36,7 +24,7 @@ class TransportReadonlyRequestInline(CommonReadonlyRequestInline):
 class AdminCategoryRequest(ImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
-    search_fields = ["name"]
+    search_fields = ("name",)
 
     ordering = ("pk",)
 
@@ -44,30 +32,17 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.TransportServiceOffer)
-class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
+class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin):
     list_display = ("category", "capacitate", "type", "availability", "county_coverage", "status")
     list_display_links = ("category",)
     list_filter = ("category", "status", "availability", CountyFilter)
-    search_fields = []
+    search_fields = ()
     readonly_fields = ("added_on",)
-
-    def get_readonly_fields(self, request, obj=None):
-        if request.user.is_cjcci_user():
-            return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
-        return self.readonly_fields
-
-    def get_inlines(self, request, obj):
-        return (TransportOfferInline,)
 
     ordering = ("pk",)
 
     view_on_site = False
     change_form_template = "admin/transport_offer_admin.html"
-
-    def capacitate(self, obj):
-        if obj.available_seats:
-            return f"{obj.available_seats} locuri"
-        return f"{obj.weight_capacity} {obj.weight_unit}"
 
     fieldsets = (
         (
@@ -83,22 +58,14 @@ class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin, CommonPagina
         (
             _("Transport details"),
             {
-                "fields": (
-                    "weight_capacity",
-                    "weight_unit",
-                    "has_refrigeration",
-                ),
+                "fields": ("weight_capacity", "weight_unit", "has_refrigeration"),
                 "classes": ("transport-marfa",),
             },
         ),
         (
             _("Transport details"),
             {
-                "fields": (
-                    "available_seats",
-                    "has_disabled_access",
-                    "pets_allowed",
-                ),
+                "fields": ("available_seats", "has_disabled_access", "pets_allowed"),
                 "classes": ("transport-persoane",),
             },
         ),
@@ -116,63 +83,41 @@ class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin, CommonPagina
         ),
         (
             _("Driver details"),
-            {
-                "fields": (
-                    "driver_name",
-                    "driver_contact",
-                    "driver_id",
-                    "car_registration_number",
-                )
-            },
+            {"fields": ("driver_name", "driver_contact", "driver_id", "car_registration_number")},
         ),
         (
             _("Offer status"),
             {
-                "fields": (
-                    "status",
-                    "added_on",
-                ),
+                "fields": ("status", "added_on"),
             },
         ),
     )
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if request.user.is_regular_user():
-            if db_field.name == "donor":
-                kwargs["queryset"] = CustomUser.objects.filter(pk=request.user.id)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
-
-@admin.register(models.TransportServiceRequest)
-class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin, CommonPaginatedAdmin):
-    list_display = ("category", "capacitate", "de_la", "la", "status")
-    list_display_links = ("category",)
-    search_fields = []
-    readonly_fields = ["added_on"]
-
-    def get_readonly_fields(self, request, obj=None):
-        if request.user.is_cjcci_user():
-            return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
-        return self.readonly_fields
-
-    def get_inlines(self, request, obj):
-        return (TransportRequestInline,)
-
-    ordering = ("pk",)
-    view_on_site = False
-
-    change_form_template = "admin/transport_offer_admin.html"
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.current_admin_inline = TransportOfferInline
 
     def capacitate(self, obj):
         if obj.available_seats:
             return f"{obj.available_seats} locuri"
         return f"{obj.weight_capacity} {obj.weight_unit}"
 
-    def de_la(self, obj):
-        return f"{obj.from_city} ({obj.from_county})"
 
-    def la(self, obj):
-        return f"{obj.to_city} ({obj.to_county})"
+@admin.register(models.TransportServiceRequest)
+class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin):
+    list_display = ("category", "capacitate", "de_la", "la", "status")
+    list_display_links = ("category",)
+    search_fields = ()
+    readonly_fields = ("added_on",)
+
+    ordering = ("pk",)
+    view_on_site = False
+
+    change_form_template = "admin/transport_offer_admin.html"
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.current_admin_inline = TransportRequestInline
 
     fieldsets = (
         (
@@ -229,8 +174,13 @@ class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin, CommonPagina
         ),
     )
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if request.user.is_regular_user():
-            if db_field.name == "made_by":
-                kwargs["queryset"] = CustomUser.objects.filter(pk=request.user.id)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    def capacitate(self, obj):
+        if obj.available_seats:
+            return f"{obj.available_seats} locuri"
+        return f"{obj.weight_capacity} {obj.weight_unit}"
+
+    def de_la(self, obj):
+        return f"{obj.from_city} ({obj.from_county})"
+
+    def la(self, obj):
+        return f"{obj.to_city} ({obj.to_county})"
