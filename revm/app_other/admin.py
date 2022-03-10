@@ -32,7 +32,7 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 @admin.register(models.OtherOffer)
 class AdminOtherOffer(CommonResourceMultipleCountyAdmin):
-    list_display = ("category", "name", "available_until", "county_coverage", "town", "status")
+    list_display = ("category", "name", "available_until", "county_coverage", "town", "get_status")
     list_display_links = ("name",)
     search_fields = ("name",)
     readonly_fields = ("added_on",)
@@ -69,7 +69,7 @@ class AdminOtherOffer(CommonResourceMultipleCountyAdmin):
 
 @admin.register(models.OtherRequest)
 class AdminOtherRequest(CommonResourceMultipleCountyAdmin):
-    list_display = ("category", "name", "county_coverage", "town", "status")
+    list_display = ("category", "name", "county_coverage", "town", "get_status")
     list_display_links = ("name",)
     search_fields = ("name",)
     readonly_fields = ("added_on",)

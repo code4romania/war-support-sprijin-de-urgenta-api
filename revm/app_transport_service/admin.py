@@ -33,7 +33,7 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 @admin.register(models.TransportServiceOffer)
 class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin):
-    list_display = ("category", "capacitate", "type", "availability", "county_coverage", "status")
+    list_display = ("category", "capacitate", "type", "availability", "county_coverage", "get_status")
     list_display_links = ("category",)
     list_filter = ("category", "status", "availability", CountyFilter)
     search_fields = ()
@@ -105,7 +105,7 @@ class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin):
 
 @admin.register(models.TransportServiceRequest)
 class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin):
-    list_display = ("category", "capacitate", "de_la", "la", "status")
+    list_display = ("category", "capacitate", "de_la", "la", "get_status")
     list_display_links = ("category",)
     search_fields = ()
     readonly_fields = ("added_on",)

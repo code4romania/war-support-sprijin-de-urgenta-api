@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.db.models import TextField
-from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
@@ -56,8 +54,8 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 @admin.register(models.ItemOffer)
 class AdminItemOffer(CommonResourceMultipleCountyAdmin):
-    list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
-    list_display_links = ("category", "name", "status")
+    list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "get_status")
+    list_display_links = ("category", "name")
     search_fields = ("name",)
     list_filter = (CountyFilter, "category", "unit_type", "textile_category", "textile_size", "status")
     readonly_fields = ("added_on", "stock")
@@ -67,10 +65,6 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin):
     ordering = ("pk",)
 
     view_on_site = False
-
-    formfield_overrides = {
-        TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 63})},
-    }
 
     change_form_template = "admin/item_offer_admin.html"
 
@@ -131,8 +125,8 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin):
 
 @admin.register(models.ItemRequest)
 class AdminItemRequest(CommonResourceSingleCountyAdmin):
-    list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "status")
-    list_display_links = ("category", "name", "status")
+    list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "get_status")
+    list_display_links = ("category", "name")
     search_fields = ("name",)
     readonly_fields = ("added_on", "stock")
 
@@ -141,10 +135,6 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin):
     ordering = ("pk",)
 
     view_on_site = False
-
-    formfield_overrides = {
-        TextField: {"widget": Textarea(attrs={"rows": 3, "cols": 63})},
-    }
 
     change_form_template = "admin/item_offer_admin.html"
 
