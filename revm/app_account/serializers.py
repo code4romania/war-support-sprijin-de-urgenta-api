@@ -68,6 +68,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.type = self.cleaned_data["type"]
         user.business_name = self.cleaned_data["business_name"]
         user.identification_no = self.cleaned_data["identification_no"]
+        user.phone_number = self.cleaned_data["phone_number"]
         user.save()
         # self.custom_signup(request, user)
         setup_user_email(request, user, [])
