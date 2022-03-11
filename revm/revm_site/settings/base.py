@@ -494,7 +494,7 @@ JAZZMIN_SETTINGS = {
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
     "custom_css": "jazzmin/css/admin.css",
-    "custom_js": "jazzmin/js/admin.js",
+    "custom_js": "",
     # Whether to show the UI customizer on the sidebar
     "show_ui_builder": bool(ENVIRONMENT != "production"),
     ###############
