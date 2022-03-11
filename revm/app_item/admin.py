@@ -58,7 +58,7 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin):
     list_display_links = ("category", "name")
     search_fields = ("name",)
     list_filter = (CountyFilter, "category", "unit_type", "textile_category", "textile_size", "status")
-    readonly_fields = ("added_on", "stock")
+    readonly_fields = ("added_on", "stock", "person_phone_number")
 
     actions = (deactivate_offers,)
 
@@ -74,6 +74,7 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin):
             {
                 "fields": (
                     "donor",
+                    "person_phone_number",
                     "category",
                     "description",
                 )
@@ -129,7 +130,7 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "get_status")
     list_display_links = ("category", "name")
     search_fields = ("name",)
-    readonly_fields = ("added_on", "stock")
+    readonly_fields = ("added_on", "stock", "person_phone_number")
 
     list_filter = (CountyFilter, "category", "status")
 
@@ -145,6 +146,7 @@ class AdminItemRequest(CommonResourceSingleCountyAdmin):
             {
                 "fields": (
                     "made_by",
+                    "person_phone_number",
                     "category",
                     "description",
                 )

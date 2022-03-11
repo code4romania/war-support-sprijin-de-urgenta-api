@@ -36,7 +36,7 @@ class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin):
     list_display_links = ("donor",)
     list_filter = ("type", CountyFilter, "status")
     search_fields = ("name",)
-    readonly_fields = ("added_on",)
+    readonly_fields = ("added_on", "person_phone_number")
 
     ordering = ("pk",)
 
@@ -48,6 +48,7 @@ class AdminVolunteeringOffer(CommonResourceMultipleCountyAdmin):
             {
                 "fields": (
                     "donor",
+                    "person_phone_number",
                     "type",
                     "name",
                     "available_until",
@@ -73,7 +74,7 @@ class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin):
     list_display_links = ("made_by",)
     list_filter = ("type", CountyFilter, "status")
     search_fields = ("name",)
-    readonly_fields = ("added_on",)
+    readonly_fields = ("added_on", "person_phone_number")
 
     ordering = ("pk",)
 
@@ -82,7 +83,7 @@ class AdminVolunteeringRequest(CommonResourceMultipleCountyAdmin):
     fieldsets = (
         (
             _("Request details"),
-            {"fields": ("made_by", "type", "county_coverage", "town", "added_on", "status")},
+            {"fields": ("made_by", "person_phone_number", "type", "county_coverage", "town", "added_on", "status")},
         ),
     )
 
