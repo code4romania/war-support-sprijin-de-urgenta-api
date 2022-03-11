@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-10 22:57+0200\n"
+"POT-Creation-Date: 2022-03-11 13:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,8 +33,8 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: app_account/admin.py:23 app_account/admin.py:68 app_item/admin.py:110
-#: app_transport_service/admin.py:153
+#: app_account/admin.py:23 app_account/admin.py:68 app_item/admin.py:111
+#: app_transport_service/admin.py:155
 msgid "Location details"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "type"
 msgstr ""
 
-#: app_account/models.py:27
+#: app_account/models.py:27 revm_site/utils/models.py:70
 msgid "phone number"
 msgstr ""
 
@@ -141,19 +141,19 @@ msgstr ""
 msgid "Deactivate selected offers"
 msgstr ""
 
-#: app_item/admin.py:83 app_item/admin.py:154
+#: app_item/admin.py:84 app_item/admin.py:156
 msgid "Product details"
 msgstr ""
 
-#: app_item/admin.py:101 app_transport_service/admin.py:89
+#: app_item/admin.py:102 app_transport_service/admin.py:90
 msgid "Offer status"
 msgstr ""
 
-#: app_item/admin.py:171 app_transport_service/admin.py:164
+#: app_item/admin.py:173 app_transport_service/admin.py:166
 msgid "Request status"
 msgstr ""
 
-#: app_item/admin.py:180
+#: app_item/admin.py:182
 msgid "Where it is needed"
 msgstr ""
 
@@ -287,8 +287,8 @@ msgstr ""
 msgid "Offer details"
 msgstr ""
 
-#: app_other/admin.py:86 app_transport_service/admin.py:121
-#: app_volunteering/admin.py:84
+#: app_other/admin.py:87 app_transport_service/admin.py:122
+#: app_volunteering/admin.py:85
 msgid "Request details"
 msgstr ""
 
@@ -321,16 +321,16 @@ msgstr ""
 msgid "other request"
 msgstr ""
 
-#: app_transport_service/admin.py:59 app_transport_service/admin.py:66
-#: app_transport_service/admin.py:131 app_transport_service/admin.py:142
+#: app_transport_service/admin.py:60 app_transport_service/admin.py:67
+#: app_transport_service/admin.py:133 app_transport_service/admin.py:144
 msgid "Transport details"
 msgstr ""
 
-#: app_transport_service/admin.py:73
+#: app_transport_service/admin.py:74
 msgid "Availability"
 msgstr ""
 
-#: app_transport_service/admin.py:85
+#: app_transport_service/admin.py:86
 msgid "Driver details"
 msgstr ""
 
@@ -520,7 +520,7 @@ msgstr ""
 msgid "National"
 msgstr ""
 
-#: revm_site/settings/base.py:280 revm_site/utils/admin.py:219
+#: revm_site/settings/base.py:280 revm_site/utils/admin.py:217
 msgid "County"
 msgstr ""
 
@@ -548,23 +548,23 @@ msgstr ""
 msgid "Allocate from the available offers"
 msgstr ""
 
-#: revm_site/utils/admin.py:112
+#: revm_site/utils/admin.py:110
 msgid "Completed"
 msgstr ""
 
-#: revm_site/utils/admin.py:117
+#: revm_site/utils/admin.py:115
 msgid "Verifieds"
 msgstr "Verified"
 
-#: revm_site/utils/admin.py:122
+#: revm_site/utils/admin.py:120
 msgid "Unverified"
 msgstr ""
 
-#: revm_site/utils/admin.py:127
+#: revm_site/utils/admin.py:125
 msgid "Unresolved requests"
 msgstr ""
 
-#: revm_site/utils/admin.py:162
+#: revm_site/utils/admin.py:160
 msgid "You are not assigned to any county. Please contact your administrator."
 msgstr ""
 
@@ -588,23 +588,23 @@ msgstr ""
 msgid "town"
 msgstr ""
 
-#: revm_site/utils/models.py:71
+#: revm_site/utils/models.py:77
 msgid "donor"
 msgstr ""
 
-#: revm_site/utils/models.py:73 revm_site/utils/models.py:85
+#: revm_site/utils/models.py:79 revm_site/utils/models.py:93
 msgid "status"
 msgstr ""
 
-#: revm_site/utils/models.py:82
+#: revm_site/utils/models.py:91
 msgid "requested by"
 msgstr ""
 
-#: revm_site/utils/models.py:122
+#: revm_site/utils/models.py:134
 msgid "no county"
 msgstr ""
 
-#: revm_site/utils/models.py:123
+#: revm_site/utils/models.py:135
 msgid "all counties"
 msgstr ""
 

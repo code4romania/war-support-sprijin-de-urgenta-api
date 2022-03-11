@@ -35,7 +35,7 @@ class AdminOtherOffer(CommonResourceMultipleCountyAdmin):
     list_display = ("category", "name", "available_until", "county_coverage", "town", "get_status")
     list_display_links = ("name",)
     search_fields = ("name",)
-    readonly_fields = ("added_on",)
+    readonly_fields = ("added_on", "person_phone_number")
 
     list_filter = ("category", "status", CountyFilter)
 
@@ -49,6 +49,7 @@ class AdminOtherOffer(CommonResourceMultipleCountyAdmin):
             {
                 "fields": (
                     "donor",
+                    "person_phone_number",
                     "category",
                     "name",
                     "available_until",
@@ -73,7 +74,7 @@ class AdminOtherRequest(CommonResourceMultipleCountyAdmin):
     list_display = ("category", "name", "county_coverage", "town", "get_status")
     list_display_links = ("name",)
     search_fields = ("name",)
-    readonly_fields = ("added_on",)
+    readonly_fields = ("added_on", "person_phone_number")
 
     list_filter = ("category", "status", CountyFilter)
 
@@ -87,6 +88,7 @@ class AdminOtherRequest(CommonResourceMultipleCountyAdmin):
             {
                 "fields": (
                     "made_by",
+                    "person_phone_number",
                     "category",
                     "name",
                     "county_coverage",

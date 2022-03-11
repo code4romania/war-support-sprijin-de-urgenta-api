@@ -37,7 +37,7 @@ class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin):
     list_display_links = ("category",)
     list_filter = ("category", "status", "availability", CountyFilter)
     search_fields = ()
-    readonly_fields = ("added_on",)
+    readonly_fields = ("added_on", "person_phone_number")
 
     ordering = ("pk",)
 
@@ -50,6 +50,7 @@ class AdminTransportServiceOffer(CommonResourceMultipleCountyAdmin):
             {
                 "fields": (
                     "donor",
+                    "person_phone_number",
                     "category",
                     "description",
                 )
@@ -109,7 +110,7 @@ class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin):
     list_display = ("category", "capacitate", "de_la", "la", "get_status")
     list_display_links = ("category",)
     search_fields = ()
-    readonly_fields = ("added_on",)
+    readonly_fields = ("added_on", "person_phone_number")
 
     ordering = ("pk",)
     view_on_site = False
@@ -122,6 +123,7 @@ class AdminTransportServiceRequest(CommonResourceToFromCountyAdmin):
             {
                 "fields": (
                     "made_by",
+                    "person_phone_number",
                     "category",
                     "description",
                 )

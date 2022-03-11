@@ -63,6 +63,12 @@ class CommonResourceModel(models.Model):
 
     added_on = models.DateTimeField(_("added on"), auto_now_add=timezone.now, editable=False)
 
+    @property
+    def person_phone_number(self):
+        raise NotImplementedError
+
+    person_phone_number.fget.short_description = _("phone number")
+
     class Meta:
         abstract = True
 
@@ -72,6 +78,10 @@ class CommonOfferModel(CommonResourceModel):
     status = models.CharField(
         _("status"), max_length=5, choices=settings.OFFER_STATUS, default=settings.OFFER_STATUS[0][0]
     )
+
+    @property
+    def person_phone_number(self):
+        return self.donor.phone_number if self.donor and self.donor.phone_number else "-"
 
     class Meta:
         abstract = True
@@ -84,6 +94,10 @@ class CommonRequestModel(CommonResourceModel):
     status = models.CharField(
         _("status"), max_length=5, choices=settings.REQUEST_STATUS, default=settings.REQUEST_STATUS[0][0]
     )
+
+    @property
+    def person_phone_number(self):
+        return self.made_by.phone_number if self.made_by and self.made_by.phone_number else "-"
 
     class Meta:
         abstract = True
