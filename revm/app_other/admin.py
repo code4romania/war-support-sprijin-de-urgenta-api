@@ -2,16 +2,12 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
-from app_account.models import CustomUser
 from app_other import models
 from revm_site.utils.admin import (
     CommonRequestInline,
     CommonOfferInline,
     CommonResourceMultipleCountyAdmin,
     CountyFilter,
-    CommonPaginatedAdmin,
-    CommonReadonlyOfferInline,
-    CommonReadonlyRequestInline,
 )
 
 
@@ -19,15 +15,7 @@ class OtherOfferInline(CommonOfferInline):
     model = models.ResourceRequest
 
 
-class OtherReadonlyOfferInline(CommonReadonlyOfferInline):
-    model = models.ResourceRequest
-
-
 class OtherRequestInline(CommonRequestInline):
-    model = models.ResourceRequest
-
-
-class OtherReadonlyRequestInline(CommonReadonlyRequestInline):
     model = models.ResourceRequest
 
 
@@ -35,7 +23,7 @@ class OtherReadonlyRequestInline(CommonReadonlyRequestInline):
 class AdminCategoryRequest(ImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
-    search_fields = ["name"]
+    search_fields = ("name",)
 
     ordering = ("pk",)
 
@@ -43,26 +31,11 @@ class AdminCategoryRequest(ImportExportModelAdmin):
 
 
 @admin.register(models.OtherOffer)
-class AdminOtherOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
-    list_display = (
-        "category",
-        "name",
-        "available_until",
-        "county_coverage",
-        "town",
-        "status",
-    )
+class AdminOtherOffer(CommonResourceMultipleCountyAdmin):
+    list_display = ("category", "name", "available_until", "county_coverage", "town", "get_status")
     list_display_links = ("name",)
-    search_fields = ["name"]
-    readonly_fields = ["added_on"]
-
-    def get_readonly_fields(self, request, obj=None):
-        if request.user.is_cjcci_user():
-            return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
-        return self.readonly_fields
-
-    def get_inlines(self, request, obj):
-        return (OtherOfferInline,)
+    search_fields = ("name",)
+    readonly_fields = ("added_on",)
 
     list_filter = ("category", "status", CountyFilter)
 
@@ -89,27 +62,18 @@ class AdminOtherOffer(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
         ),
     )
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if request.user.is_regular_user():
-            if db_field.name == "donor":
-                kwargs["queryset"] = CustomUser.objects.filter(pk=request.user.id)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.requests_model = models.OtherRequest
+        self.current_admin_inline = OtherOfferInline
 
 
 @admin.register(models.OtherRequest)
-class AdminOtherRequest(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin):
-    list_display = ("category", "name", "county_coverage", "town", "status")
+class AdminOtherRequest(CommonResourceMultipleCountyAdmin):
+    list_display = ("category", "name", "county_coverage", "town", "get_status")
     list_display_links = ("name",)
-    search_fields = ["name"]
-    readonly_fields = ["added_on"]
-
-    def get_readonly_fields(self, request, obj=None):
-        if request.user.is_cjcci_user():
-            return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
-        return self.readonly_fields
-
-    def get_inlines(self, request, obj):
-        return (OtherRequestInline,)
+    search_fields = ("name",)
+    readonly_fields = ("added_on",)
 
     list_filter = ("category", "status", CountyFilter)
 
@@ -134,8 +98,7 @@ class AdminOtherRequest(CommonResourceMultipleCountyAdmin, CommonPaginatedAdmin)
         ),
     )
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if request.user.is_regular_user():
-            if db_field.name == "made_by":
-                kwargs["queryset"] = CustomUser.objects.filter(pk=request.user.id)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.requests_model = models.OtherRequest
+        self.current_admin_inline = OtherRequestInline

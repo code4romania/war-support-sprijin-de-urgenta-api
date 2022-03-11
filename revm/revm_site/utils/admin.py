@@ -2,14 +2,13 @@ from django.conf import settings
 from django.contrib import admin, messages
 from django.db.models import TextField, Q
 from django.forms import Textarea
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 
+from app_account.models import CustomUser
+from revm_site.settings.base import ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE, STATUS_COLOR_MAPPING
 from revm_site.utils.models import CommonRequestModel, CommonOfferModel
-
-
-class CommonPaginatedAdmin(admin.ModelAdmin):
-    list_per_page = 20
 
 
 class CommonResourceInline(admin.StackedInline):
@@ -67,10 +66,6 @@ class CommonOfferInline(CommonResourceInline):
         return formset
 
 
-class CommonReadonlyOfferInline(CommonOfferInline):
-    readonly_fields = ("request", "total_units", "description")
-
-
 class CommonRequestInline(CommonResourceInline):
     verbose_name_plural = _("Allocate from the available offers")
 
@@ -85,11 +80,72 @@ class CommonRequestInline(CommonResourceInline):
         return formset
 
 
-class CommonReadonlyRequestInline(CommonRequestInline):
-    readonly_fields = ("resource", "total_units", "description")
-
-
 class CommonResourceAdmin(ImportExportModelAdmin):
+    list_per_page = settings.PAGE_SIZE
+    change_list_template = "admin/common_resource_list.html"
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.requests_model = None
+        self.current_admin_inline = None
+
+    def changelist_view(self, request, extra_context=None):
+        verified_resources = self.model.objects.filter(status=settings.ITEM_STATUS_VERIFIED).count()
+        verified_badge = settings.STATUS_COLOR_MAPPING[settings.ITEM_STATUS_VERIFIED]
+
+        unverified_resources = self.model.objects.filter(Q(status=settings.ITEM_STATUS_NOT_VERIFIED)).count()
+        unverified_badge = settings.STATUS_COLOR_MAPPING[settings.ITEM_STATUS_NOT_VERIFIED]
+
+        complete_resources = self.model.objects.filter(status=settings.ITEM_STATUS_COMPLETE).count()
+        verified_complete_resources = verified_resources + complete_resources
+        complete_badge = settings.STATUS_COLOR_MAPPING[settings.ITEM_STATUS_COMPLETE]
+
+        pending_requests = self.requests_model.objects.filter(
+            Q(status=settings.ITEM_STATUS_VERIFIED) | Q(status=settings.ITEM_STATUS_NOT_VERIFIED)
+        ).count()
+
+        context = {
+            "stats_cards": [
+                {
+                    "title": _("Completed"),
+                    "badge": complete_badge,
+                    "statistic": f"{complete_resources} / {verified_complete_resources}",
+                },
+                {
+                    "title": _("Verifieds"),
+                    "badge": verified_badge,
+                    "statistic": f"{verified_resources}",
+                },
+                {
+                    "title": _("Unverified"),
+                    "badge": unverified_badge,
+                    "statistic": f"{unverified_resources}",
+                },
+                {
+                    "title": _("Unresolved requests"),
+                    "badge": "warning",
+                    "statistic": f"{pending_requests}",
+                },
+            ],
+        }
+        return super().changelist_view(request, extra_context=context)
+
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        self.inlines = []
+        try:
+            obj = self.model.objects.get(pk=object_id)
+        except self.model.DoesNotExist:
+            pass
+        else:
+            if obj.status in (ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE):
+                self.inlines = (self.current_admin_inline,)
+        return super().change_view(request, object_id, form_url, extra_context)
+
+    @staticmethod
+    def get_status(obj):
+        color = STATUS_COLOR_MAPPING.get(obj.status, "dark")
+        return format_html('<span class="badge badge-pill badge-{}">{}</span>'.format(color, obj.get_status_display()))
+
     def get_filtered_by_county_queryset(self, queryset, county):
         raise NotImplementedError
 
@@ -117,6 +173,17 @@ class CommonResourceAdmin(ImportExportModelAdmin):
                 return queryset.filter(made_by=request.user)
 
         return queryset
+
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_cncci_user() or request.user.is_cjcci_user():
+            return [f.name for f in self.model._meta.get_fields() if f.name != "status"]
+        return self.readonly_fields
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if request.user.is_regular_user():
+            if db_field.name in ("donor", "made_by"):
+                kwargs["queryset"] = CustomUser.objects.filter(pk=request.user.id)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     class Meta:
         abstract = True

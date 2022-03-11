@@ -1,12 +1,27 @@
 .site-logo {
     box-shadow: none!important;
-    height: 37px!important;
 }
 
-#jazzy-logo {
+#jazzy-logo-dsu, #jazzy-logo-dsu-short {
     background-color: #fff;
 }
 
-#jazzy-logo img {
+#jazzy-logo-dsu img, #jazzy-logo-dsu-short img {
     margin-left: .75rem;
+}
+
+#jazzy-logo-dsu {
+    display: block;
+}
+
+#jazzy-logo-dsu-short {
+    display: none;
+}
+
+.sidebar-collapse #jazzy-logo-dsu {
+    display: none;
+}
+
+.sidebar-collapse #jazzy-logo-dsu-short {
+    display: block;
 }
