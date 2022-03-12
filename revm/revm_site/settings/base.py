@@ -91,8 +91,10 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "django.contrib.postgres",
     # third-party apps
+    "impersonate",
     "rest_framework",
     "rest_framework.authtoken",
+    "drf_spectacular",
     "storages",
     "corsheaders",
     "dj_rest_auth",
@@ -102,6 +104,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "dj_rest_auth.registration",
     "django_q",
+    "multiselectfield",
     # project apps
     "static_custom",
     "app_account",
@@ -109,9 +112,6 @@ INSTALLED_APPS = [
     "app_transport_service",
     "app_volunteering",
     "app_other",
-    # api documentation
-    "drf_spectacular",
-    "multiselectfield",
 ]
 
 MIDDLEWARE = [
@@ -124,6 +124,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "impersonate.middleware.ImpersonateMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "revm_site.middlewares.AdminErrorMiddleware.AdminErrorMiddleware",
 ]
@@ -149,6 +150,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "revm_site.wsgi.application"
+
+# Impersonation settings
+# https://pypi.org/project/django-impersonate/
+
+IMPERSONATE = {
+    "REDIRECT_URL": "/admin/",
+    "REQUIRE_SUPERUSER": True,
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

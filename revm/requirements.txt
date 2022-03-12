@@ -51,6 +51,8 @@ django-cors-headers==3.11.0
     # via -r requirements.in
 django-environ==0.8.1
     # via -r requirements.in
+django-impersonate==1.8.2
+    # via -r requirements.in
 django-import-export==2.7.1
     # via -r requirements.in
 django-jazzmin==2.4.9
