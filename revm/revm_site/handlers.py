@@ -25,7 +25,7 @@ class SlackHandler(AdminEmailHandler):
                     "short": True,
                 },
                 {
-                    "title": "TIME OCCURED",
+                    "title": "TIME OCCURRED",
                     "value": f"{timezone.now().strftime('%Y-%m-%d %H:%M:%S')}",
                     "short": True,
                 },
