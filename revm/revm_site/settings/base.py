@@ -19,6 +19,9 @@ env = environ.Env(
     ENVIRONMENT=(str, "production"),
     DEBUG=(str, "no"),
     ENABLE_DEBUG_TOOLBAR=(str, "no"),
+    SLACK_WEBHOOK_URL=(str, ""),
+    SLACK_LOGGING_COLOR=(str, ""),
+    ENABLE_SLACK_LOGGING=(str, "no"),
     DEV_ENABLE_EMAIL_SMTP=(str, "no"),
     ENABLE_DUMP_LOCAL_SAVE=(str, "no"),
     LANGUAGE_CODE=(str, "en"),
@@ -39,14 +42,23 @@ BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
 
 DEBUG = env("DEBUG") == "yes"
 ENVIRONMENT = env("ENVIRONMENT")
-ENABLE_DEBUG_TOOLBAR = bool(DEBUG and (env("ENABLE_DEBUG_TOOLBAR")) == "yes")
+ENABLE_DEBUG_TOOLBAR = DEBUG and (env("ENABLE_DEBUG_TOOLBAR")) == "yes"
+
+SLACK_WEBHOOK_URL = env("SLACK_WEBHOOK_URL")
+SLACK_LOGGING_COLOR = env("SLACK_LOGGING_COLOR")
+ENABLE_SLACK_LOGGING = env("ENABLE_SLACK_LOGGING") == "yes"
 
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
         "console": {
+            "level": "INFO",
             "class": "logging.StreamHandler",
+        },
+        "slack": {
+            "level": "ERROR",
+            "class": "revm_site.handlers.SlackHandler",
         },
     },
     "root": {
@@ -55,7 +67,7 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["console"],
+            "handlers": ["slack", "console"],
             "level": "INFO",
             "propagate": False,
         },
