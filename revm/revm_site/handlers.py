@@ -29,7 +29,7 @@ class SlackHandler(AdminEmailHandler):
                     "value": f"{timezone.now().strftime('%Y-%m-%d %H:%M:%S')}",
                     "short": True,
                 },
-            ]
+            ],
         }
 
         requests.post(settings.SLACK_WEBHOOK_URL, json=slack_payload)

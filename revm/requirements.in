@@ -4,6 +4,7 @@ django-environ
 djangorestframework
 django-cors-headers
 django-storages
+django-impersonate
 
 # scheduler
 django-q

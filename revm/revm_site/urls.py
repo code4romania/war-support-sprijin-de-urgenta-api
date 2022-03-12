@@ -84,6 +84,7 @@ urlpatterns = i18n_patterns(
         SpectacularSwaggerView.as_view(url_name="swagger-ui"),
         name="swagger-ui",
     ),
+    path("impersonate/", include("impersonate.urls"), name="impersonate"),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -3,8 +3,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.sites.models import Site
 from django.utils.translation import gettext_lazy as _
+from impersonate.admin import UserAdminImpersonateMixin
 
-from app_account import models
+from app_account.models import CustomUser
 
 DjangoUserAdmin.add_fieldsets = (
     (
@@ -26,8 +27,8 @@ DjangoUserAdmin.add_fieldsets = (
 )
 
 
-@admin.register(models.CustomUser)
-class AdminCustomUser(DjangoUserAdmin):
+@admin.register(CustomUser)
+class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
     list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type", "county")
     list_display_links = ("id", "first_name", "last_name", "email")
     search_fields = ("email", "first_name", "last_name")
@@ -35,6 +36,8 @@ class AdminCustomUser(DjangoUserAdmin):
     ordering = ("first_name",)
     change_form_template = "admin/user_admin.html"
     list_per_page = settings.PAGE_SIZE
+
+    open_new_window = True
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_cncci_user() or request.user.is_cjcci_user():
