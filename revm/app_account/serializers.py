@@ -59,17 +59,19 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
         user = adapter.save_user(request, user, self, commit=False)
+
         if "password" in self.cleaned_data:
             try:
                 adapter.clean_password(self.cleaned_data["password"], user=user)
             except DjangoValidationError as exc:
                 raise serializers.ValidationError(detail=serializers.as_serializer_error(exc))
+
         user.set_password(self.cleaned_data["password"])
         user.type = self.cleaned_data["type"]
         user.business_name = self.cleaned_data["business_name"]
         user.identification_no = self.cleaned_data["identification_no"]
         user.phone_number = self.cleaned_data["phone_number"]
         user.save()
-        # self.custom_signup(request, user)
+
         setup_user_email(request, user, [])
         return user

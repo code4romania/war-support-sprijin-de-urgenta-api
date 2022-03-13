@@ -11,11 +11,16 @@ CNCCI_GROUP = "CNCCI"
 class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
     USERNAME_FIELD = "email"
+
+    INDIVIDUAL = 1
+    CORPORATE = 2
+    NON_PROFIT = 3
+    GOVERNMENT = 4
     TYPES_CHOICES = (
-        (1, _("Individual")),
-        (2, _("Corporate")),
-        (3, _("Non-Profit")),
-        (4, _("Government")),
+        (INDIVIDUAL, _("Individual")),
+        (CORPORATE, _("Corporate")),
+        (NON_PROFIT, _("Non-Profit")),
+        (GOVERNMENT, _("Government")),
     )
 
     business_name = models.CharField(_("bussiness name"), max_length=255, null=True, blank=True)
@@ -23,7 +28,7 @@ class CustomUser(AbstractUser):
 
     email = models.EmailField(_("email address"), unique=True)
 
-    type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=1)
+    type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, default=INDIVIDUAL)
     phone_number = models.CharField(_("phone number"), max_length=13, null=True, blank=True)
     address = models.CharField(_("address"), max_length=255, blank=True, null=True)
     details = models.JSONField(_("details"), null=True, blank=True)
@@ -46,16 +51,20 @@ class CustomUser(AbstractUser):
         verbose_name_plural = _("users")
 
     def __str__(self):
-        name = ""
-        if self.type == 1:
+        if self.type == self.INDIVIDUAL:
             name = self.get_full_name()
         else:
             name = self.business_name
         return name if name else "-"
 
     def save(self, *args, **kwargs):
+        self.is_staff = True  # needed to be able to log in to admin
         self.username = self.email
-        self.is_staff = True  # needed to be able to login to admin
+
+        if not self.first_name and not self.last_name:
+            self.first_name = self.business_name
+            self.last_name = self.TYPES_CHOICES[self.type][1]
+
         super(CustomUser, self).save(*args, **kwargs)
         # all new users are added by default in the users group
         self.groups.add(Group.objects.get(name=USERS_GROUP))
