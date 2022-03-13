@@ -18,6 +18,7 @@ class Command(BaseCommand):
             superuser.first_name = settings.SUPER_ADMIN_FIRST_NAME
             superuser.last_name = settings.SUPER_ADMIN_LAST_NAME
             superuser.set_password(settings.SUPER_ADMIN_PASS)
+            superuser.type = CustomUser.NON_PROFIT
             superuser.save()
         else:
             print("Super admin user already exists")
