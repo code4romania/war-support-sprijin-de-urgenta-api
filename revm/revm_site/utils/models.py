@@ -88,9 +88,7 @@ class CommonOfferModel(CommonResourceModel):
 
 
 class CommonRequestModel(CommonResourceModel):
-    made_by = models.ForeignKey(
-        CustomUser, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("requested by")
-    )
+    made_by = models.ForeignKey(CustomUser, on_delete=models.PROTECT, verbose_name=_("requested by"))
     status = models.CharField(
         _("status"), max_length=5, choices=settings.REQUEST_STATUS, default=settings.REQUEST_STATUS[0][0]
     )
