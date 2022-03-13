@@ -63,7 +63,7 @@ class CustomUser(AbstractUser):
 
         if not self.first_name and not self.last_name:
             self.first_name = self.business_name
-            self.last_name = self.TYPES_CHOICES[self.type][1]
+            self.last_name = self.TYPES_CHOICES[self.type - 1][1]
 
         super(CustomUser, self).save(*args, **kwargs)
         # all new users are added by default in the users group
