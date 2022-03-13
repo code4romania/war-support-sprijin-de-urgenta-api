@@ -30,7 +30,7 @@ class Type(models.Model):
 class VolunteeringOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransportableModel):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name=_("type"))
 
-    name = models.CharField(_("name"), max_length=50, null=False, blank=False)
+    name = models.CharField(_("name"), max_length=100, null=False, blank=False)
     available_until = models.DateField(
         _("volunteer available until"), validators=[validate_date_disallow_past], null=True
     )
