@@ -1,15 +1,20 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from import_export.admin import ImportExportModelAdmin
 
 from app_transport_service import models
-from revm_site.utils.admin import (
+from revm_site.utils.admin.admin_resource import (
     CommonRequestInline,
     CommonOfferInline,
     CommonResourceMultipleCountyAdmin,
     CountyFilter,
     CommonResourceToFromCountyAdmin,
 )
+from revm_site.utils.admin.admin_category import CommonCategoryAdmin
+
+
+@admin.register(models.Category)
+class AdminCategory(CommonCategoryAdmin):
+    ...
 
 
 class TransportOfferInline(CommonOfferInline):
@@ -18,17 +23,6 @@ class TransportOfferInline(CommonOfferInline):
 
 class TransportRequestInline(CommonRequestInline):
     model = models.ResourceRequest
-
-
-@admin.register(models.Category)
-class AdminCategoryRequest(ImportExportModelAdmin):
-    list_display = ("name", "description")
-    list_display_links = ("name",)
-    search_fields = ("name",)
-
-    ordering = ("pk",)
-
-    view_on_site = False
 
 
 @admin.register(models.TransportServiceOffer)

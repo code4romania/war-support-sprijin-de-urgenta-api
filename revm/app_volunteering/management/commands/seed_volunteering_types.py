@@ -1,9 +1,9 @@
-import os
 import json
+import os
 
 from django.core.management.base import BaseCommand
 
-from app_volunteering.models import Type
+from app_volunteering.models import Category
 
 
 class Command(BaseCommand):
@@ -15,7 +15,13 @@ class Command(BaseCommand):
             categories = json.load(f)
 
             for category in categories:
-                Type.objects.get_or_create(name=category["name"])
+                Category.objects.get_or_create(
+                    name=category["name"],
+                    name_ro=category["name_ro"],
+                    name_en=category["name_en"],
+                    name_ru=category["name_ru"],
+                    name_uk=category["name_uk"],
+                )
 
     def handle(self, *args, **kwargs):
         self.populate_volunteering_types()

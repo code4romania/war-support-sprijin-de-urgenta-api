@@ -1,14 +1,30 @@
 [
     {
-        "name": "Marfă"
+        "name": "Marfă",
+        "name_ro": "Marfă",
+        "name_en": "Freight transportation",
+        "name_ru": "Грузовой транспорт",
+        "name_uk": "Вантажний транспорт"
     },
     {
-        "name": "Persoane"
+        "name": "Persoane",
+        "name_ro": "Persoane",
+        "name_en": "Passenger transportation",
+        "name_ru": "Пассажирские перевозки",
+        "name_uk": "Пасажирські перевезення"
     },
     {
-        "name": "Produse Medicale"
+        "name": "Produse Medicale",
+        "name_ro": "Produse Medicale",
+        "name_en": "Medical supplies",
+        "name_ru": "Produse Medicale",
+        "name_uk": "Produse Medicale"
     },
     {
-        "name": "Altele"
+        "name": "Altele",
+        "name_ro": "Altele",
+        "name_en": "Other",
+        "name_ru": "Другое",
+        "name_uk": "Інші"
     }
 ]

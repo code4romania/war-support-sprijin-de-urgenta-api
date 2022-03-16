@@ -1,29 +1,65 @@
 [
     {
-        "name": "Psiholog"
+        "name": "Psiholog",
+        "name_ro": "Psiholog",
+        "name_en": "Psiholog",
+        "name_ru": "Psiholog",
+        "name_uk": "Psiholog"
     },
     {
-        "name": "Medic"
+        "name": "Medic",
+        "name_ro": "Medic",
+        "name_en": "Medic",
+        "name_ru": "Medic",
+        "name_uk": "Medic"
     },
     {
-        "name": "Asistent medical"
+        "name": "Asistent medical",
+        "name_ro": "Asistent medical",
+        "name_en": "Asistent medical",
+        "name_ru": "Asistent medical",
+        "name_uk": "Asistent medical"
     },
     {
-        "name": "Avocat"
+        "name": "Avocat",
+        "name_ro": "Avocat",
+        "name_en": "Avocat",
+        "name_ru": "Avocat",
+        "name_uk": "Avocat"
     },
     {
-        "name": "Bucătar"
+        "name": "Bucătar",
+        "name_ro": "Bucătar",
+        "name_en": "Bucătar",
+        "name_ru": "Bucătar",
+        "name_uk": "Bucătar"
     },
     {
-        "name": "Organizare"
+        "name": "Organizare",
+        "name_ro": "Organizare",
+        "name_en": "Organizare",
+        "name_ru": "Organizare",
+        "name_uk": "Organizare"
     },
     {
-        "name": "Altele"
+        "name": "Altele",
+        "name_ro": "Altele",
+        "name_en": "Altele",
+        "name_ru": "Altele",
+        "name_uk": "Altele"
     },
     {
-        "name": "Veterinar"
+        "name": "Veterinar",
+        "name_ro": "Veterinar",
+        "name_en": "Veterinar",
+        "name_ru": "Veterinar",
+        "name_uk": "Veterinar"
     },
     {
-        "name": "Translator/Traducător"
+        "name": "Translator/Traducător",
+        "name_ro": "Translator/Traducător",
+        "name_en": "Translator/Traducător",
+        "name_ru": "Translator/Traducător",
+        "name_uk": "Translator/Traducător"
     }
 ]
