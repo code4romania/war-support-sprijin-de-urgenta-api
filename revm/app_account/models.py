@@ -29,7 +29,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
 
     type = models.SmallIntegerField(_("type"), choices=TYPES_CHOICES, blank=False, null=False)
-    phone_number = models.CharField(_("phone number"), max_length=13, null=True, blank=True)
+    phone_number = models.CharField(_("phone number"), max_length=32, null=True, blank=True)
     address = models.CharField(_("address"), max_length=255, blank=True, null=True)
     details = models.JSONField(_("details"), null=True, blank=True)
     description = models.CharField(
