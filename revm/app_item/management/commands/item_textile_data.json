@@ -1,23 +1,51 @@
 [
     {
-        "name": "Haine / Femei"
+        "name": "Haine / Femei",
+        "name_ro": "Haine / Femei",
+        "name_en": "Clothes / Women",
+        "name_ru": "Одяг / Женщины",
+        "name_uk": "Одежда / Женщины"
     },
     {
-        "name": "Haine / Bărbați"
+        "name": "Haine / Bărbați",
+        "name_ro": "Haine / Bărbați",
+        "name_en": "Clothes / Men",
+        "name_ru": "Одяг / Мужчины",
+        "name_uk": "Одежда / Мужчины"
     },
     {
-        "name": "Haine / Copii"
+        "name": "Haine / Copii",
+        "name_ro": "Haine / Copii",
+        "name_en": "Clothes / Children",
+        "name_ru": "Одяг / Дети",
+        "name_uk": "Одежда / Дети"
     },
     {
-        "name": "Pături"
+        "name": "Pături",
+        "name_ro": "Pături",
+        "name_en": "Blankets",
+        "name_ru": "Кровати",
+        "name_uk": "Ліжка"
     },
     {
-        "name": "Cuverturi"
+        "name": "Cuverturi",
+        "name_ro": "Cuverturi",
+        "name_en": "Sheets",
+        "name_ru": "Одеяла",
+        "name_uk": "Ковдри"
     },
     {
-        "name": "Saci de dormit"
+        "name": "Saci de dormit",
+        "name_ro": "Saci de dormit",
+        "name_en": "Sleeping bags",
+        "name_ru": "Спальные мешки",
+        "name_uk": "Спальні мішки"
     },
     {
-        "name": "Altele"
+        "name": "Altele",
+        "name_ro": "Altele",
+        "name_en": "Others",
+        "name_ru": "Другое",
+        "name_uk": "Інші"
     }
 ]

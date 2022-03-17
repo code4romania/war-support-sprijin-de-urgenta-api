@@ -9,8 +9,13 @@ from revm_site.settings.base import ITEM_STATUS_COMPLETE, ITEM_STATUS_VERIFIED
 
 
 class CommonCategoryModel(models.Model):
-    name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
     description = models.CharField(_("category description"), default="", blank=True, null=False, max_length=500)
+    name = models.CharField(_("category name"), max_length=50, null=False, blank=False, db_index=True)
+
+    name_ro = models.CharField(_("category name (Romanian)"), max_length=50, default=name)
+    name_en = models.CharField(_("category name (English)"), max_length=50, default=name)
+    name_ru = models.CharField(_("category name (Russian)"), max_length=50, default=name)
+    name_uk = models.CharField(_("category name (Ukrainian)"), max_length=50, default=name)
 
     def __str__(self):
         return self.name

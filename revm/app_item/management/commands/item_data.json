@@ -1,23 +1,65 @@
 [
     {
-        "name": "Alimente"
+        "name": "Alimente",
+        "name_ro": "Alimente",
+        "name_en": "Food",
+        "name_ru": "Еда",
+        "name_uk": "Харчування"
     },
     {
-        "name": "Produse de igienă generală"
+        "name": "Produse de igienă generală",
+        "name_ro": "Produse de igienă generală",
+        "name_en": "General hygiene products",
+        "name_ru": "Средства общей гигиены",
+        "name_uk": "Засоби загальної гігієни"
     },
     {
-        "name": "Produse de igienă feminină"
+        "name": "Produse de igienă feminină",
+        "name_ro": "Produse de igienă feminină",
+        "name_en": "Women's hygiene products",
+        "name_ru": "Средства женской гигиены",
+        "name_uk": "Засоби жіночої гігієни"
     },
     {
-        "name": "Îmbrăcăminte și alte textile"
+        "name": "Îmbrăcăminte și alte textile",
+        "name_ro": "Îmbrăcăminte și alte textile",
+        "name_en": "Clothing and other textiles",
+        "name_ru": "Одежда и другие текстильные изделия",
+        "name_uk": "Одяг та інші текстильні вироби"
     },
     {
-        "name": "Materiale de construcții"
+        "name": "Materiale de construcții",
+        "name_ro": "Materiale de construcții",
+        "name_en": "Building materials",
+        "name_ru": "Строительные материалы",
+        "name_uk": "Будівельні матеріали"
     },
     {
-        "name": "Corturi"
+        "name": "Corturi",
+        "name_ro": "Corturi",
+        "name_en": "Tents",
+        "name_ru": "Палатки",
+        "name_uk": "Намети"
     },
     {
-        "name": "Altele"
+        "name": "Altele",
+        "name_ro": "Altele",
+        "name_en": "Other",
+        "name_ru": "Другое",
+        "name_uk": "Інші"
+    },
+    {
+        "name": "Materiale sanitare",
+        "name_ro": "Materiale sanitare",
+        "name_en": "Medical supplies",
+        "name_ru": "Материалы первой помощи",
+        "name_uk": "Матеріали першої допомоги"
+    },
+    {
+        "name": "Medicamente",
+        "name_ro": "Medicamente",
+        "name_en": "Medicine",
+        "name_ru": "Медикаменты",
+        "name_uk": "Ліки"
     }
 ]

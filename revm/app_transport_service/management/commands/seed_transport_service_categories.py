@@ -15,7 +15,13 @@ class Command(BaseCommand):
             categories = json.load(f)
 
             for category in categories:
-                Category.objects.get_or_create(name=category["name"])
+                Category.objects.get_or_create(
+                    name=category["name"],
+                    name_ro=category["name_ro"],
+                    name_en=category["name_en"],
+                    name_ru=category["name_ru"],
+                    name_uk=category["name_uk"],
+                )
 
     def handle(self, *args, **kwargs):
         self.populate_transport_service_categories()
