@@ -68,6 +68,10 @@ The `.env` files contain variables required to start the services and initialize
 - `DATABASE_URL` - the URL Django will use to connect to the database (should be changed if you're not running through Docker)
 - `SECRET_KEY` - the secret key Django will use to encrypt data (should be changed if you're not running through Docker)
 
+## Staging environment setup
+
+When deploying onto a machine, there is no need to clone the whole project. You only need a `.env` and the `docker-compose.staging.yaml` file. This uses a [watchtower](https://github.com/containrrr/watchtower) contianer to watch for a new version of the `staging` tag of the `code4romania/sprijin-de-urgenta-api` docker image and update the containers as necessary. 
+
 ## Feedback
 
 * Request a new feature on GitHub.
