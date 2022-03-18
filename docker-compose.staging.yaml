@@ -3,10 +3,8 @@ version: "3.8"
 services:
   db:
     container_name: revm-db
-    build:
-      context: ./db
-    env_file:
-      - .env
+    image: postgres:14
+    env_file: .env
     ports:
       - "5454:5432"
     networks:
@@ -30,15 +28,13 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - com.centurylinklabs.watchtower.scope=sprijin
-    command: dockerize -wait tcp://db:5432 -timeout 90s
-    env_file:
-      - .env
+    env_file: .env
     networks:
       - internal
-    volumes:
-      - ./revm:/code
     ports:
       - "8070:8070"
+    links:
+      - "db:db"
     depends_on:
       - db
 
@@ -46,7 +42,7 @@ services:
     image: containrrr/watchtower:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30 --include-restarting --label-enable --scope sprijin --cleanup 
+    command: --interval 30 --include-restarting --label-enable --scope sprijin --cleanup
 
 networks:
   internal:
