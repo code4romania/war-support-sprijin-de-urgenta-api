@@ -10,7 +10,7 @@ Insert bullets description of the project if available.
 
 Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.
 
-[Contributing](#contributing) | [Built with](#built-with) | [Repos and projects](#repos-and-projects) | [Deployment](#deployment) | [Feedback](#feedback) | [License](#license) | [About Code for Romania](#about-code-for-romania)
+[Contributing](#contributing) | [Built with](#built-with) | [Related repositories](#related-repositories) | [Deployment](#deployment) | [Feedback](#feedback) | [License](#license) | [About Code for Romania](#about-code-for-romania)
 
 ## Contributing
 
@@ -26,8 +26,6 @@ If you would like to suggest new functionality, open an Issue and mark it as a _
 
 Python 3.9
 
-### Platforms
-
 ### Backend framework
 
 Django 3.2
@@ -39,6 +37,13 @@ pip
 ### Database technology & provider
 
 PostgreSQL
+
+## Related repositories
+
+- **the client side of the app:**
+  https://github.com/code4romania/war-support-sprijin-de-urgenta-client
+- **the map of the resource collection centers:**
+  https://github.com/code4romania/war-harta-sprijin-de-urgenta
 
 ## Deployment
 
@@ -99,8 +104,8 @@ Last, but not least, we rely on donations to ensure the infrastructure, logistic
 [link-license]: https://opensource.org/licenses/MPL-2.0
 [link-contributing]: https://github.com/code4romania/.github/blob/main/CONTRIBUTING.md
 
-[link-production]: insert_link_here
-[link-staging]: insert_link_here
+[link-production]: https://api.sprijindeurgenta.ro
+[link-staging]: https://sprijin-de-urgenta-api.heroesof.tech/
 
 [link-code4]: https://www.code4.ro/en/
 [link-donate]: https://code4.ro/en/donate/
