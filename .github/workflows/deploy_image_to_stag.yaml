@@ -3,7 +3,7 @@ on:
     branches:
       - develop
 
-name: Deploy
+name: Build staging image
 
 env:
   DOCKER_IMAGE_BASE: code4romania/sprijin-de-urgenta-api
@@ -21,10 +21,6 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-staging
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
-
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
