@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: revm-db
+    build:
+      context: ./db
+    env_file:
+      - .env
+    ports:
+      - "5454:5432"
+    networks:
+      - internal
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    networks:
+      - internal
+
+  revm:
+    container_name: revm-admin
+    image: code4romania/sprijin-de-urgenta-api:staging
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - com.centurylinklabs.watchtower.scope=sprijin
+    command: dockerize -wait tcp://db:5432 -timeout 90s
+    env_file:
+      - .env
+    networks:
+      - internal
+    volumes:
+      - ./revm:/code
+    ports:
+      - "8070:8070"
+    depends_on:
+      - db
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30 --include-restarting --label-enable --scope sprijin --cleanup 
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  pgdata:
+    name: revm-pgdata
