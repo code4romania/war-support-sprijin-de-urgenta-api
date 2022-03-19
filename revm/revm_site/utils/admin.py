@@ -176,8 +176,7 @@ class CommonResourceAdmin(ImportExportModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_cncci_user() or request.user.is_cjcci_user():
-            user_readonly_fields = [f.name for f in self.model._meta.get_fields() if f.name != "status"]
-            user_readonly_fields.append("person_phone_number")
+            user_readonly_fields = ["person_phone_number", "added_on"]
             return user_readonly_fields
         return self.readonly_fields
 
