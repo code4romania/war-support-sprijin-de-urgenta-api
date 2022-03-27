@@ -18,7 +18,7 @@ class AdminErrorMiddleware:
     def process_exception(self, request, exception):
         self.logger.error(exception)
 
-        if settings.ENVIRONMENT == "development":
+        if settings.ENVIRONMENT != "production":
             return
 
         if isinstance(exception, IntegrityError):

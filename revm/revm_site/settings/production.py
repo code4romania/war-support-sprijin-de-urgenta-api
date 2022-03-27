@@ -1,9 +1,9 @@
 from revm_site.settings.base import *
 
-DEBUG = False
+DEBUG: bool = False
 
-SECRET_KEY = env.str("SECRET_KEY")
+SECRET_KEY: str = env.str("SECRET_KEY")
 
-EMAIL_BACKEND = "django_q_email.backends.DjangoQBackend"
+EMAIL_BACKEND: str = "django_q_email.backends.DjangoQBackend"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS: List[str] = ALLOWED_HOSTS or ["*"]

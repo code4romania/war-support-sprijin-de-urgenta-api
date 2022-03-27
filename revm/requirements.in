@@ -5,6 +5,7 @@ djangorestframework
 django-cors-headers
 django-storages
 django-impersonate
+django-multiselectfield>=0.1.12,<1.0.0
 
 # scheduler
 django-q
@@ -13,12 +14,12 @@ supervisor
 
 # authentication
 dj-rest-auth==2.2.3
-dj-rest-auth[with_social]
-djangorestframework-simplejwt==5.0.0
+dj-rest-auth[with_social]==2.2.3
+djangorestframework-simplejwt==5.1.0
 
 # django dashboard
 django-import-export==2.7.1
-django-jazzmin==2.4.9
+django-jazzmin==2.5.0
 
 # database
 psycopg2<2.10
@@ -36,8 +37,4 @@ gunicorn
 gevent
 
 # doc-generation
-drf-spectacular
-
-# admin
-django-jazzmin
-django-multiselectfield>=0.1.12,<1.0.0
+drf-spectacular==0.22.0

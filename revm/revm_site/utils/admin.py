@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib import admin, messages
+from django.contrib import admin
 from django.db.models import TextField, Q
 from django.forms import Textarea
 from django.utils.html import format_html
@@ -47,7 +47,7 @@ class CommonResourceInline(admin.StackedInline):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def has_delete_permission(self, request, obj=None):
-        if request.user.is_cjcci_user() or request.user.is_cncci_user():
+        if request.user.is_cjcci_user or request.user.is_cncci_user:
             return False
         return super().has_delete_permission(request, obj)
 
@@ -155,18 +155,13 @@ class CommonResourceAdmin(ImportExportModelAdmin):
         if not self.has_view_or_change_permission(request):
             queryset = queryset.none()
 
-        if request.user.is_cjcci_user():
-            if request.user.county is None:
-                message_str = _("You are not assigned to any county. Please contact your administrator.")
-                self.message_user(request, message_str, messages.ERROR)
-                return queryset.none()
-
+        if request.user.is_cjcci_user and request.user.county:
             return self.get_filtered_by_county_queryset(queryset, request.user.county)
 
-        if request.user.is_superuser or request.user.is_cncci_user():
+        if request.user.is_superuser or request.user.is_cncci_user or request.user.is_cjcci_user:
             return queryset
 
-        if request.user.is_regular_user():
+        if request.user.is_regular_user:
             if isinstance(self.model, CommonOfferModel):
                 return queryset.filter(donor=request.user)
             if isinstance(self.model, CommonRequestModel):
@@ -175,13 +170,13 @@ class CommonResourceAdmin(ImportExportModelAdmin):
         return queryset
 
     def get_readonly_fields(self, request, obj=None):
-        if request.user.is_cncci_user() or request.user.is_cjcci_user():
+        if request.user.is_cncci_user or request.user.is_cjcci_user:
             user_readonly_fields = ["person_phone_number", "added_on"]
             return user_readonly_fields
         return self.readonly_fields
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if request.user.is_regular_user():
+        if request.user.is_regular_user:
             if db_field.name in ("donor", "made_by"):
                 kwargs["queryset"] = CustomUser.objects.filter(pk=request.user.id)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
