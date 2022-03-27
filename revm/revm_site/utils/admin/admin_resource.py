@@ -8,6 +8,7 @@ from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 from revm_site.settings.base import ITEM_STATUS_VERIFIED, ITEM_STATUS_COMPLETE, STATUS_COLOR_MAPPING
+from revm_site.utils.admin.admin_action import set_resources_status_deactivated, set_resources_status_completed
 from revm_site.utils.models import CommonRequestModel, CommonOfferModel
 
 
@@ -83,6 +84,8 @@ class CommonRequestInline(CommonResourceInline):
 class CommonResourceAdmin(ImportExportModelAdmin):
     list_per_page = settings.PAGE_SIZE
     change_list_template = "admin/common_resource_list.html"
+
+    actions = (set_resources_status_completed, set_resources_status_deactivated)
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
