@@ -4,6 +4,7 @@ from django import http
 from django.conf import settings
 from django.contrib import messages
 from django.db import IntegrityError
+from django.utils.translation import gettext_lazy as _
 
 
 class AdminErrorMiddleware:
