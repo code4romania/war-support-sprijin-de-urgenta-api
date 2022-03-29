@@ -81,7 +81,7 @@ class ItemRequest(CommonRequestModel, CommonLocationModel):
     # Descriere produs
     name = models.CharField(_("Product"), max_length=100, db_index=True)
 
-    quantity = models.PositiveSmallIntegerField(_("total units"), default=0, blank=True, null=True)
+    quantity = models.PositiveSmallIntegerField(_("total units"), default=0)
 
     packaging_type = models.CharField(_("packaging"), max_length=100, blank=True, null=True)
     unit_type = models.CharField(_("unit type"), max_length=10, blank=False, null=False)
