@@ -40,9 +40,9 @@ class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
     open_new_window = True
 
     def get_readonly_fields(self, request, obj=None):
-        if request.user.is_cncci_user() or request.user.is_cjcci_user():
-            return ["is_superuser", "user_permissions", "groups"]
-        return self.readonly_fields
+        if request.user.is_superuser or not obj:
+            return self.readonly_fields
+        return self.readonly_fields + ("is_active", "is_staff", "is_superuser", "user_permissions", "groups")
 
     def get_fieldsets(self, request, obj=None):
         if obj:
@@ -80,7 +80,7 @@ class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
                 ),
                 (
                     _("Profile data"),
-                    {"classes": ("wide",), "fields": ("phone_number", "address")},
+                    {"classes": ("wide",), "fields": ("first_name", "last_name", "phone_number", "address")},
                 ),
                 (
                     _("Profile details"),
@@ -89,24 +89,18 @@ class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
             )
 
     def has_delete_permission(self, request, obj=None):
-        if not (request.user.is_superuser):
+        if not request.user.is_superuser:
             return False
-        if obj and hasattr(obj, "email"):
-            if obj.email == settings.SUPER_ADMIN_EMAIL:
-                return False
         return True
 
     def has_change_permission(self, request, obj=None):
-        if not (request.user.is_superuser):
+        if not request.user.is_superuser and not request.user.is_cncci_user and not (obj and obj.id != request.user.id):
             return False
-        if obj and hasattr(obj, "email"):
-            if obj.email == settings.SUPER_ADMIN_EMAIL:
-                return False
         return True
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser or request.user.is_cncci_user() or request.user.is_cjcci_user():
+        if request.user.is_superuser or request.user.is_cncci_user or request.user.is_cjcci_user:
             return qs
         return qs.filter(pk=request.user.id)
 

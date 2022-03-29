@@ -12,8 +12,8 @@ from revm_site.utils.admin import (
 )
 
 
-def deactivate_offers(modeladmin, request, queryset):
-    if request.user.is_superuser or request.user.is_cjcci_user():
+def deactivate_offers(_, request, queryset):
+    if request.user.is_superuser or request.user.is_cjcci_user:
         queryset.update(status="D")
 
     queryset.filter(donor=request.user).update(status="D")

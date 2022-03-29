@@ -18,7 +18,7 @@ cffi==1.15.0
     # via cryptography
 charset-normalizer==2.0.12
     # via requests
-cryptography==36.0.1
+cryptography==36.0.2
     # via pyjwt
 defusedxml==0.7.1
     # via
@@ -55,7 +55,7 @@ django-impersonate==1.8.2
     # via -r requirements.in
 django-import-export==2.7.1
     # via -r requirements.in
-django-jazzmin==2.4.9
+django-jazzmin==2.5.0
     # via -r requirements.in
 django-multiselectfield==0.1.12
     # via -r requirements.in
@@ -75,9 +75,9 @@ djangorestframework==3.13.1
     #   dj-rest-auth
     #   djangorestframework-simplejwt
     #   drf-spectacular
-djangorestframework-simplejwt==5.0.0
+djangorestframework-simplejwt==5.1.0
     # via -r requirements.in
-drf-spectacular==0.21.2
+drf-spectacular==0.22.0
     # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
@@ -95,7 +95,7 @@ jsonschema==4.4.0
     # via drf-spectacular
 markuppy==1.14
     # via tablib
-numpy==1.22.2
+numpy==1.22.3
     # via pandas
 oauthlib==3.2.0
     # via requests-oauthlib
@@ -121,7 +121,7 @@ python-dateutil==2.8.2
     #   pandas
 python3-openid==3.2.0
     # via django-allauth
-pytz==2021.3
+pytz==2022.1
     # via
     #   django
     #   djangorestframework
@@ -150,7 +150,7 @@ tablib[html,ods,xls,xlsx,yaml]==3.2.0
     # via django-import-export
 uritemplate==4.1.1
     # via drf-spectacular
-urllib3==1.26.8
+urllib3==1.26.9
     # via requests
 wcwidth==0.2.5
     # via blessed

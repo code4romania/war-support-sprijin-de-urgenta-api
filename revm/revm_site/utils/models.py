@@ -31,6 +31,13 @@ class CommonTransportableModel(models.Model):
 class CommonMultipleCountyModel(models.Model):
     county_coverage = MultiSelectField(_("county coverage"), choices=settings.COUNTY_CHOICES, blank=True, null=True)
 
+    def county_coverage_str(self):
+        if not self.county_coverage or len(self.county_coverage) == 0:
+            return _("no county")
+        elif len(self.county_coverage) == len(settings.COUNTY_CHOICES):
+            return _("all counties")
+        return ",".join(self.county_coverage)
+
     class Meta:
         abstract = True
 
@@ -125,11 +132,3 @@ class CommonResourceRequestModel(models.Model):
 
     class Meta:
         abstract = True
-
-
-def get_county_coverage_str(county_coverage):
-    if len(county_coverage) < len(settings.COUNTY_CHOICES):
-        return ",".join(county_coverage)
-    elif len(county_coverage) == 0:
-        return _("no county")
-    return _("all counties")

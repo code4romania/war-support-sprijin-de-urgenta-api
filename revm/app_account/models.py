@@ -72,28 +72,32 @@ class CustomUser(AbstractUser):
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
 
+    @property
     def is_regular_user(self):
-        return self.groups.filter(name=USERS_GROUP).exists() and not (
-            self.is_cjcci_user() or self.is_cncci_user() or self.is_superuser
-        )
+        has_higher_permissions = self.is_cjcci_user or self.is_cncci_user or self.is_superuser
+        return self.groups.filter(name=USERS_GROUP).exists() and not has_higher_permissions
 
+    @property
     def is_cjcci_user(self):
-        return self.groups.filter(name=CJCCI_GROUP).exists() and not (self.is_cncci_user() or self.is_superuser)
+        has_higher_permissions = self.is_cncci_user or self.is_superuser
+        return self.groups.filter(name=CJCCI_GROUP).exists() and not has_higher_permissions
 
+    @property
     def is_cncci_user(self):
-        return self.groups.filter(name=CNCCI_GROUP).exists() and not self.is_superuser
+        has_higher_permissions = self.is_superuser
+        return self.groups.filter(name=CNCCI_GROUP).exists() and not has_higher_permissions
 
     def user_type(self):
         if self.is_superuser:
             return _("Admin")
 
-        if self.is_cncci_user():
+        if self.is_cncci_user:
             return _(CNCCI_GROUP)
 
-        if self.is_cjcci_user():
+        if self.is_cjcci_user:
             return _(CJCCI_GROUP)
 
-        if self.is_regular_user():
+        if self.is_regular_user:
             return _(USERS_GROUP)
 
         return _("NO GROUP ASSIGNED")

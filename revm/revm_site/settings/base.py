@@ -9,10 +9,15 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+from collections import OrderedDict
 from datetime import timedelta
+from typing import Any, Dict, List, Tuple
 
 import environ
 from django.utils.translation import gettext_lazy as _
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR: str = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
 
 env = environ.Env(
     # set casting, default value
@@ -32,23 +37,20 @@ env = environ.Env(
     FROM_EMAIL=(str, "noreply@code4.ro"),
 )
 
-ENABLE_DUMP_LOCAL_SAVE = env("ENABLE_DUMP_LOCAL_SAVE") == "yes"
+ENABLE_DUMP_LOCAL_SAVE: bool = env("ENABLE_DUMP_LOCAL_SAVE") == "yes"
 
 ADMIN_TITLE = _("Sprijin de Urgență")
 ADMIN_TITLE_SHORT = _("RVM")
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
+DEBUG: bool = env("DEBUG") == "yes"
+ENVIRONMENT: str = env("ENVIRONMENT")
+ENABLE_DEBUG_TOOLBAR: bool = DEBUG and (env("ENABLE_DEBUG_TOOLBAR")) == "yes"
 
-DEBUG = env("DEBUG") == "yes"
-ENVIRONMENT = env("ENVIRONMENT")
-ENABLE_DEBUG_TOOLBAR = DEBUG and (env("ENABLE_DEBUG_TOOLBAR")) == "yes"
+SLACK_WEBHOOK_URL: str = env("SLACK_WEBHOOK_URL")
+SLACK_LOGGING_COLOR: str = env("SLACK_LOGGING_COLOR")
+ENABLE_SLACK_LOGGING: bool = env("ENABLE_SLACK_LOGGING") == "yes"
 
-SLACK_WEBHOOK_URL = env("SLACK_WEBHOOK_URL")
-SLACK_LOGGING_COLOR = env("SLACK_LOGGING_COLOR")
-ENABLE_SLACK_LOGGING = env("ENABLE_SLACK_LOGGING") == "yes"
-
-LOGGING = {
+LOGGING: Dict[str, Any] = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
@@ -74,10 +76,10 @@ LOGGING = {
     },
 }
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
-CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS: List[str] = env.list("ALLOWED_HOSTS")
+CORS_ALLOW_ALL_ORIGINS: bool = True
 
-INSTALLED_APPS = [
+INSTALLED_APPS: List[str] = [
     "jazzmin",
     # django apps
     "django.contrib.admin",
@@ -114,7 +116,7 @@ INSTALLED_APPS = [
     "app_other",
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE: List[str] = [
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -129,11 +131,11 @@ MIDDLEWARE = [
     "revm_site.middlewares.AdminErrorMiddleware.AdminErrorMiddleware",
 ]
 
-SITE_ID = 1
+SITE_ID: int = 1
 
-ROOT_URLCONF = "revm_site.urls"
+ROOT_URLCONF: str = "revm_site.urls"
 
-TEMPLATES = [
+TEMPLATES: List[Dict] = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "APP_DIRS": True,
@@ -149,12 +151,12 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "revm_site.wsgi.application"
+WSGI_APPLICATION: str = "revm_site.wsgi.application"
 
 # Impersonation settings
 # https://pypi.org/project/django-impersonate/
 
-IMPERSONATE = {
+IMPERSONATE: Dict[str, Any] = {
     "REDIRECT_URL": "/admin/",
     "REQUIRE_SUPERUSER": True,
 }
@@ -162,7 +164,7 @@ IMPERSONATE = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
+DATABASES: Dict[str, Dict] = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": env("DATABASE_NAME"),
@@ -173,12 +175,12 @@ DATABASES = {
     }
 }
 
-DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+DEFAULT_AUTO_FIELD: str = "django.db.models.AutoField"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
+AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
@@ -188,13 +190,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = env("LANGUAGE_CODE")
-TIME_ZONE = "Europe/Bucharest"
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
+LANGUAGE_CODE: str = env("LANGUAGE_CODE")
+TIME_ZONE: str = "Europe/Bucharest"
+USE_I18N: bool = True
+USE_L10N: bool = True
+USE_TZ: bool = True
 
-LANGUAGES = [
+LANGUAGES: List[Tuple[str, str]] = [
     ("ro", _("Romanian")),
     ("en", _("English")),
     ("uk", _("Ukrainian")),
@@ -204,17 +206,17 @@ LANGUAGES = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-PRIVATE_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "./public/media")
+PRIVATE_FILE_STORAGE: str = "django.core.files.storage.FileSystemStorage"
+MEDIA_URL: str = "/media/"
+MEDIA_ROOT: str = os.path.join(BASE_DIR, "./public/media")
 
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_URL: str = "/static/"
+STATIC_ROOT: str = os.path.join(BASE_DIR, "static")
+STATICFILES_STORAGE: str = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+LOCALE_PATHS: Tuple[str] = (os.path.join(BASE_DIR, "locale"),)
 
-REST_FRAMEWORK = {
+REST_FRAMEWORK: Dict[str, str] = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
@@ -222,131 +224,132 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-SPECTACULAR_SETTINGS = {
+SPECTACULAR_SETTINGS: Dict[str, str] = {
     "VERSION": "1.0.0",
     "SWAGGER_UI_SETTINGS": {"url": "/api/v1/schema"},
 }
 
-COUNTIES_SHORTNAME = {
-    "AB": "Alba",
-    "AR": "Arad",
-    "AG": "Argeș",
-    "BC": "Bacău",
-    "BH": "Bihor",
-    "BN": "Bistrița-Năsăud",
-    "BT": "Botoșani",
-    "BV": "Brașov",
-    "BR": "Brăila",
-    "B": "București",
-    "BZ": "Buzău",
-    "CL": "Călărași",
-    "CS": "Caraș-Severin",
-    "CJ": "Cluj",
-    "CT": "Constanța",
-    "CV": "Covasna",
-    "DB": "Dâmbovița",
-    "DJ": "Dolj",
-    "GL": "Galați",
-    "GR": "Giurgiu",
-    "GJ": "Gorj",
-    "HR": "Harghita",
-    "HD": "Hunedoara",
-    "IL": "Ialomița",
-    "IS": "Iași",
-    "IF": "Ilfov",
-    "MM": "Maramureș",
-    "MH": "Mehedinți",
-    "MS": "Mureș",
-    "NT": "Neamț",
-    "OT": "Olt",
-    "PH": "Prahova",
-    "SM": "Satu Mare",
-    "SJ": "Sălaj",
-    "SB": "Sibiu",
-    "SV": "Suceava",
-    "TR": "Teleorman",
-    "TM": "Timiș",
-    "TL": "Tulcea",
-    "VS": "Vaslui",
-    "VL": "Vâlcea",
-    "VN": "Vrancea",
-}
 
-ITEM_STATUS_NOT_VERIFIED = "NV"
-ITEM_STATUS_VERIFIED = "V"
-ITEM_STATUS_DEACTIVATED = "D"
-ITEM_STATUS_COMPLETE = "C"
+COUNTIES_SHORTNAME: Dict[str, str] = OrderedDict(
+    AB="Alba",
+    AG="Argeș",
+    AR="Arad",
+    B="București",
+    BC="Bacău",
+    BH="Bihor",
+    BN="Bistrița-Năsăud",
+    BR="Brăila",
+    BT="Botoșani",
+    BV="Brașov",
+    BZ="Buzău",
+    CJ="Cluj",
+    CL="Călărași",
+    CS="Caraș-Severin",
+    CT="Constanța",
+    CV="Covasna",
+    DB="Dâmbovița",
+    DJ="Dolj",
+    GJ="Gorj",
+    GL="Galați",
+    GR="Giurgiu",
+    HD="Hunedoara",
+    HR="Harghita",
+    IF="Ilfov",
+    IL="Ialomița",
+    IS="Iași",
+    MH="Mehedinți",
+    MM="Maramureș",
+    MS="Mureș",
+    NT="Neamț",
+    OT="Olt",
+    PH="Prahova",
+    SB="Sibiu",
+    SJ="Sălaj",
+    SM="Satu Mare",
+    SV="Suceava",
+    TL="Tulcea",
+    TM="Timiș",
+    TR="Teleorman",
+    VL="Vâlcea",
+    VN="Vrancea",
+    VS="Vaslui",
+)
 
-OFFER_STATUS = (
+COUNTY_CHOICES: List[Tuple[str, str]] = [(k, v) for k, v in COUNTIES_SHORTNAME.items()]
+
+ITEM_STATUS_NOT_VERIFIED: str = "NV"
+ITEM_STATUS_VERIFIED: str = "V"
+ITEM_STATUS_DEACTIVATED: str = "D"
+ITEM_STATUS_COMPLETE: str = "C"
+
+OFFER_STATUS: Tuple = (
     (ITEM_STATUS_NOT_VERIFIED, _("Not Verified")),
     (ITEM_STATUS_VERIFIED, _("Verified")),
     (ITEM_STATUS_DEACTIVATED, _("Deactivated")),
     (ITEM_STATUS_COMPLETE, _("Complete")),
 )
 
-REQUEST_STATUS = (
+REQUEST_STATUS: Tuple = (
     (ITEM_STATUS_NOT_VERIFIED, _("Not Verified")),
     (ITEM_STATUS_VERIFIED, _("Verified")),
     (ITEM_STATUS_DEACTIVATED, _("Deactivated")),
     (ITEM_STATUS_COMPLETE, _("Solved")),
 )
 
-STATUS_COLOR_MAPPING = {
+STATUS_COLOR_MAPPING: Dict[str, str] = {
     ITEM_STATUS_DEACTIVATED: "secondary",
     ITEM_STATUS_NOT_VERIFIED: "danger",
     ITEM_STATUS_VERIFIED: "primary",
     ITEM_STATUS_COMPLETE: "success",
 }
 
-TRANSPORT_TYPES_CHOICES = ((1, _("National")), (2, _("County")))
+TRANSPORT_TYPES_CHOICES: Tuple = ((1, _("National")), (2, _("County")))
 
-TRANSPORT_AVAILABILTY = (
+TRANSPORT_AVAILABILTY: Tuple = (
     ("WK", _("Disponibil in weekend")),
     ("WD", _("Disponibil in timpul saptamanii")),
     ("A", _("Disponibil oricand")),
     ("FI", _("Intervale fixe")),
 )
 
-COUNTY_CHOICES = list(COUNTIES_SHORTNAME.items())
+PAGE_SIZE: int = 20
 
-PAGE_SIZE = 20
-
-AUTH_USER_MODEL = "app_account.CustomUser"
+AUTH_USER_MODEL: str = "app_account.CustomUser"
 # LOGIN_REDIRECT_URL = "admin"
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE: bool = True
 
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = "revm-auth-cookie"
-JWT_AUTH_REFRESH_COOKIE = "revm-refresh-token"
+REST_USE_JWT: bool = True
+JWT_AUTH_COOKIE: str = "revm-auth-cookie"
+JWT_AUTH_REFRESH_COOKIE: str = "revm-refresh-token"
 
 # DRF-simplejwt https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
-SIMPLE_JWT = {
+SIMPLE_JWT: Dict[str, timedelta] = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=3),
 }
 
-IMPORT_EXPORT_USE_TRANSACTIONS = True
+IMPORT_EXPORT_USE_TRANSACTIONS: bool = True
 
-FROM_EMAIL = env("FROM_EMAIL")
+FROM_EMAIL: str = env("FROM_EMAIL")
 
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_PORT = env("EMAIL_PORT")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = env("EMAIL_USE_TLS") == "yes"
-EMAIL_USE_SSL = env("EMAIL_USE_SSL") == "yes"
+EMAIL_HOST: str = env("EMAIL_HOST")
+EMAIL_PORT: str = env("EMAIL_PORT")
+EMAIL_HOST_USER: str = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD: str = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS: bool = env("EMAIL_USE_TLS") == "yes"
+EMAIL_USE_SSL: bool = env("EMAIL_USE_SSL") == "yes"
 
-SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
-SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
-SUPER_ADMIN_FIRST_NAME = env("SUPER_ADMIN_FIRST_NAME")
-SUPER_ADMIN_LAST_NAME = env("SUPER_ADMIN_LAST_NAME")
+SUPER_ADMIN_PASS: str = env("SUPER_ADMIN_PASS")
+SUPER_ADMIN_EMAIL: str = env("SUPER_ADMIN_EMAIL")
+SUPER_ADMIN_FIRST_NAME: str = env("SUPER_ADMIN_FIRST_NAME")
+SUPER_ADMIN_LAST_NAME: str = env("SUPER_ADMIN_LAST_NAME")
 
-REST_AUTH_REGISTER_SERIALIZERS = {"REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"}
+REST_AUTH_REGISTER_SERIALIZERS: Dict = {"REGISTER_SERIALIZER": "app_account.serializers.RegisterSerializer"}
 
 
 # django-q https://django-q.readthedocs.io/en/latest/configure.html
 
-Q_CLUSTER = {
+Q_CLUSTER: Dict[str, Any] = {
     "name": "SdU",
     "recycle": 500,
     "timeout": 60,
@@ -366,7 +369,7 @@ Q_CLUSTER = {
 # -------------------------------------------------------------------------------
 # django-jazzmin - https://django-jazzmin.readthedocs.io/configuration/
 
-JAZZMIN_SETTINGS = {
+JAZZMIN_SETTINGS: Dict[str, Any] = {
     # title of the window
     "site_title": ADMIN_TITLE,
     # Title on the brand, and the login screen (19 chars max)
@@ -405,11 +408,6 @@ JAZZMIN_SETTINGS = {
     #############
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
-        # {
-        #     "name": "Support",
-        #     "url": "https://github.com/farridav/django-jazzmin/issues",
-        #     "new_window": True,
-        # },
         {"model": "auth.user", "new_window": False},
     ],
     #############
@@ -537,17 +535,26 @@ JAZZMIN_SETTINGS = {
     "language_chooser": True,
 }
 
-if ENVIRONMENT == "development":
-    JAZZMIN_SETTINGS["usermenu_links"].append(
-        {
-            "name": "Support",
-            "url": "https://django-jazzmin.readthedocs.io/configuration/",
-            "new_window": True,
-            "icon": "fas fa-book",
-        }
+if ENVIRONMENT != "production":
+    JAZZMIN_SETTINGS["usermenu_links"].extend(
+        [
+            {"model": "auth.user", "new_window": False},
+            {
+                "name": "Configuration",
+                "url": "https://django-jazzmin.readthedocs.io/configuration/",
+                "new_window": True,
+                "icon": "fas fa-book",
+            },
+            {
+                "name": "Support",
+                "url": "https://github.com/farridav/django-jazzmin/issues",
+                "new_window": True,
+                "icon": "fas fa-question",
+            },
+        ]
     )
 
-JAZZMIN_UI_TWEAKS = {
+JAZZMIN_UI_TWEAKS: Dict[str, Any] = {
     "navbar_small_text": False,
     "footer_small_text": False,
     "body_small_text": True,

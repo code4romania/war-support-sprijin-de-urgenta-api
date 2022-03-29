@@ -10,7 +10,6 @@ from revm_site.utils.models import (
     CommonMultipleLocationModel,
     CommonTransportableModel,
     CommonLocationModel,
-    get_county_coverage_str,
     CommonResourceRequestModel,
 )
 from revm_site.utils.validators import validate_date_disallow_past
@@ -29,7 +28,7 @@ class OtherOffer(CommonOfferModel, CommonMultipleLocationModel, CommonTransporta
     )
 
     def __str__(self):
-        counties_str = get_county_coverage_str(self.county_coverage)
+        counties_str = self.county_coverage_str()
         return f"#{self.pk} {self.name} {self.category} {self.town}({counties_str})"
 
     class Meta:
@@ -42,8 +41,7 @@ class OtherRequest(CommonRequestModel, CommonLocationModel):
     name = models.CharField(_("name"), max_length=100, db_index=True)
 
     def __str__(self):
-        counties_str = get_county_coverage_str(self.county_coverage)
-        return f"#{self.pk} {self.name} {self.category} {self.town}({counties_str})"
+        return f"#{self.pk} {self.name} {self.category} {self.town}({self.county_coverage})"
 
     class Meta:
         verbose_name = _("other request")
