@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
 USERS_GROUP = "Users"
 CJCCI_GROUP = "CJCCI"
 CNCCI_GROUP = "CNCCI"
@@ -61,9 +62,12 @@ class CustomUser(AbstractUser):
         self.is_staff = True  # needed to be able to log in to admin
         self.username = self.email
 
-        if not self.first_name and not self.last_name:
+        if not self.first_name and not self.last_name and self.business_name:
             self.first_name = self.business_name
             self.last_name = self.TYPES_CHOICES[self.type - 1][1]
+        elif not self.business_name:
+            self.first_name = self.email.split("@")[0]
+            self.last_name = ""
 
         super(CustomUser, self).save(*args, **kwargs)
         # all new users are added by default in the users group

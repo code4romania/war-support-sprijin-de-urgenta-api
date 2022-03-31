@@ -76,7 +76,7 @@ class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
             return (
                 (
                     None,
-                    {"classes": ("wide",), "fields": ("email", "password1", "password2")},
+                    {"classes": ("wide",), "fields": ("first_name", "last_name", "email", "password1", "password2")},
                 ),
                 (
                     _("Profile data"),
@@ -89,7 +89,7 @@ class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
             )
 
     def has_delete_permission(self, request, obj=None):
-        if not (request.user.is_superuser):
+        if not request.user.is_superuser:
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
@@ -97,7 +97,7 @@ class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
         return True
 
     def has_change_permission(self, request, obj=None):
-        if not (request.user.is_superuser):
+        if not request.user.is_superuser:
             return False
         if obj and hasattr(obj, "email"):
             if obj.email == settings.SUPER_ADMIN_EMAIL:
