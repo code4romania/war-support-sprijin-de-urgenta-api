@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
 from revm_site.utils.serializers import CountyCoverageSerializer
-from .models import VolunteeringRequest, VolunteeringOffer, Type
+from .models import VolunteeringRequest, VolunteeringOffer, Category
 
 
 class VolunteeringCategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Type
+        model = Category
         fields = "__all__"
 
 

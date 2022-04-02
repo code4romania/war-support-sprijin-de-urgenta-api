@@ -24,8 +24,6 @@ class Category(CommonCategoryModel):
 
 
 class TextileCategory(CommonCategoryModel):
-    ...
-
     class Meta:
         verbose_name = _("Textile Category")
         verbose_name_plural = _("Textile Categories")
