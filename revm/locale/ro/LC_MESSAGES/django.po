@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-28 17:29+0300\n"
+"POT-Creation-Date: 2022-08-29 13:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,6 +143,14 @@ msgstr "Solicitare mâncare ONG"
 msgid "NGO food requests"
 msgstr "Solicitări mâncare ONG"
 
+#: app_food_request/forms.py:20
+msgid ""
+"<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/en/"
+"terms-and-conditions/\">Terms and Conditions</a></div>"
+msgstr ""
+"<div class=\"toc\">Am citit și sunt de acord cu <a class=\"toc\" href=\"/ro/"
+"terms-and-conditions/\">Termenii și condițiile</a></div>"
+
 #: app_food_request/models.py:9
 msgid "bulk packaging"
 msgstr "ambalare vrac"
@@ -240,6 +248,21 @@ msgstr "status"
 #: app_food_request/models.py:96
 msgid "created on"
 msgstr "data creării"
+
+#: app_food_request/templates/food_request_form.html:15
+msgid "Send request"
+msgstr "Trimite cerere"
+
+#: app_food_request/views.py:18
+msgid "Your request has been registered."
+msgstr "Cererea dumneavoastră a fost înregistrată"
+
+#: app_food_request/views.py:20
+msgid ""
+"There was an error submitting your request. Please try again or contact the "
+"site administrator."
+msgstr " A avut loc o eroare la trimiterea cererii. Încercați din nou sau "
+"contactați administratorul."
 
 #: app_item/admin.py:22
 msgid "Deactivate selected offers"
@@ -645,6 +668,10 @@ msgstr "Disponibil oricând"
 #: revm_site/settings/base.py:308
 msgid "Intervale fixe"
 msgstr "Intervale fixe"
+
+#: revm_site/urls.py:63
+msgid "food-requests/"
+msgstr "solicitari-mancare/"
 
 #: revm_site/utils/admin.py:56
 msgid "Allocate this resource to a request"

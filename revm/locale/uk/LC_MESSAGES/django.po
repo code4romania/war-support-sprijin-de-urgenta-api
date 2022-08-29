@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-28 17:29+0300\n"
+"POT-Creation-Date: 2022-08-29 13:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,6 +146,12 @@ msgstr ""
 msgid "NGO food requests"
 msgstr ""
 
+#: app_food_request/forms.py:20
+msgid ""
+"<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/en/"
+"terms-and-conditions/\">Terms and Conditions</a></div>"
+msgstr ""
+
 #: app_food_request/models.py:9
 msgid "bulk packaging"
 msgstr ""
@@ -242,6 +248,20 @@ msgstr ""
 
 #: app_food_request/models.py:96
 msgid "created on"
+msgstr ""
+
+#: app_food_request/templates/food_request_form.html:15
+msgid "Send request"
+msgstr ""
+
+#: app_food_request/views.py:18
+msgid "Your request has been registered."
+msgstr ""
+
+#: app_food_request/views.py:20
+msgid ""
+"There was an error submitting your request. Please try again or contact the "
+"site administrator."
 msgstr ""
 
 #: app_item/admin.py:22
@@ -645,6 +665,10 @@ msgstr ""
 
 #: revm_site/settings/base.py:308
 msgid "Intervale fixe"
+msgstr ""
+
+#: revm_site/urls.py:63
+msgid "food-requests/"
 msgstr ""
 
 #: revm_site/utils/admin.py:56
