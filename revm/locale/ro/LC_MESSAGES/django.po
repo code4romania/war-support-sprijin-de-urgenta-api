@@ -151,9 +151,6 @@ msgstr ""
 "<div class=\"toc\">Am citit și sunt de acord cu <a class=\"toc\" href=\"/ro/"
 "terms-and-conditions/\">Termenii și condițiile</a></div>"
 
-#: app_food_request/forms.py:58
-#, fuzzy
-#| msgid "details"
 msgid "NGO Details"
 msgstr "Detalii ONG/Autoritate publică"
 
@@ -171,9 +168,6 @@ msgstr "Carne"
 msgid "Dietary restrictions"
 msgstr "Restricții alimentare"
 
-#: app_food_request/forms.py:80
-#, fuzzy
-#| msgid "Driver details"
 msgid "Delivery details"
 msgstr "Detalii livrare"
 
