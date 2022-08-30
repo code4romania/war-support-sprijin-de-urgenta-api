@@ -1,7 +1,6 @@
 # from captcha.fields import ReCaptchaField
-# from crispy_forms.bootstrap import FormActions
-# from crispy_forms.helper import FormHelper
-# from crispy_forms.layout import HTML, Div, Fieldset, Layout, Submit
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import HTML, Div, Fieldset, Layout, Submit
 from django import forms
 from django.conf import settings
 from django.utils import timezone
@@ -14,15 +13,6 @@ class FoodRequestForm(forms.ModelForm):
     # captcha = ReCaptchaField(
     #     label="",
     # )
-
-    terms_and_conditions = forms.BooleanField(
-        label=_(
-            '<div class="toc">I have read and agree to the '
-            '<a class="toc" href="/en/terms-and-conditions/">Terms and Conditions</a>'
-            "</div>"
-        ),
-        required=True,
-    )
 
     class Meta:
         model = FoodRequest
@@ -47,12 +37,14 @@ class FoodRequestForm(forms.ModelForm):
             "delivery_daily_frequency",
             "preferred_packaging",
             "notes",
-            
-            "terms_and_conditions",
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', _('Send request'), css_class='btn-blue'))
+        self.helper.form_tag = False
 
         # # TODO: Add captcha support
         # if not settings.RECAPTCHA_PUBLIC_KEY:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-30 11:26+0300\n"
+"POT-Creation-Date: 2022-08-30 17:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,13 +143,9 @@ msgstr "Solicitare mâncare ONG"
 msgid "NGO food requests"
 msgstr "Solicitări mâncare ONG"
 
-#: app_food_request/forms.py:20
-msgid ""
-"<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/en/"
-"terms-and-conditions/\">Terms and Conditions</a></div>"
-msgstr ""
-"<div class=\"toc\">Am citit și sunt de acord cu <a class=\"toc\" href=\"/ro/"
-"terms-and-conditions/\">Termenii și condițiile</a></div>"
+#: app_food_request/forms.py:46
+msgid "Send request"
+msgstr "Trimite cerere"
 
 #: app_food_request/models.py:9
 msgid "bulk packaging"
@@ -179,6 +175,10 @@ msgstr "respinsă"
 msgid "NGO name"
 msgstr "nume ONG"
 
+#: app_food_request/models.py:22
+msgid "NGO name or local authority name"
+msgstr "Nume ONG sau autoritate locală"
+
 #: app_food_request/models.py:25
 msgid "county"
 msgstr "județ"
@@ -200,29 +200,57 @@ msgstr "număr telefon de rezervă"
 msgid "adult vegetarian portions"
 msgstr "porții vegetariene adult"
 
+#: app_food_request/models.py:38
+msgid "Lunch and dinner cumulated number of vegetarian portions for adults"
+msgstr "Număr cumulat de porții vegetariene, prânz și cină, pentru adulți"
+
 #: app_food_request/models.py:41
 msgid "child vegetarian portions"
 msgstr "porții vegetariene copil"
+
+#: app_food_request/models.py:44
+msgid "Lunch and dinner cumulated number of vegetarian portions for children"
+msgstr "Număr cumulat de porții vegetariene, prânz și cină, pentru copii"
 
 #: app_food_request/models.py:47
 msgid "adult meat portions"
 msgstr "porții carne adult"
 
+#: app_food_request/models.py:50
+msgid "Lunch and dinner cumulated number of meat portions for adults"
+msgstr "Număr cumulat de porții cu carne, prânz și cină, pentru adulți"
+
 #: app_food_request/models.py:53
 msgid "child meat portions"
 msgstr "porții carne copil"
+
+#: app_food_request/models.py:56
+msgid "Lunch and dinner cumulated number of meat portions for children"
+msgstr "Număr cumulat de porții cu carne, prânz și cină, pentru copii"
 
 #: app_food_request/models.py:59
 msgid "adult restricted portions"
 msgstr "porții restricții adult"
 
+#: app_food_request/models.py:62
+msgid "Lunch and dinner cumulated number of restriction portions for adults"
+msgstr "Număr cumulat de porții cu restricții, prânz și cină, pentru adulți"
+
 #: app_food_request/models.py:65
 msgid "adult restriction notes"
 msgstr "restricții"
 
+#: app_food_request/models.py:70 app_food_request/models.py:84
+msgid "Gluten, lactose, salt... restrictions"
+msgstr "Restricții gluten, lactoză, sare..."
+
 #: app_food_request/models.py:73
 msgid "child restricted portions"
 msgstr "porții restricții copil"
+
+#: app_food_request/models.py:76
+msgid "Lunch and dinner cumulated number of restriction portions for children"
+msgstr "Număr cumulat de porții cu restricții, prânz și cină, pentru copii"
 
 #: app_food_request/models.py:79
 msgid "child restriction notes"
@@ -253,9 +281,10 @@ msgstr "status"
 msgid "created on"
 msgstr "data creării"
 
-#: app_food_request/templates/food_request_form.html:15
-msgid "Send request"
-msgstr "Trimite cerere"
+#: app_food_request/templates/food_request_form.html:20
+#: app_food_request/templates/food_request_form.html:27
+msgid "Errors"
+msgstr ""
 
 #: app_food_request/views.py:18
 msgid "Your request has been registered."
@@ -614,63 +643,63 @@ msgstr "Sprijin de Urgență"
 msgid "RVM"
 msgstr "SdU"
 
-#: revm_site/settings/base.py:199
+#: revm_site/settings/base.py:201
 msgid "Romanian"
 msgstr "Română"
 
-#: revm_site/settings/base.py:200
+#: revm_site/settings/base.py:202
 msgid "English"
 msgstr "Engleză"
 
-#: revm_site/settings/base.py:201
+#: revm_site/settings/base.py:203
 msgid "Ukrainian"
 msgstr "Ucraineană"
 
-#: revm_site/settings/base.py:202
+#: revm_site/settings/base.py:204
 msgid "Russian"
 msgstr "Rusă"
 
-#: revm_site/settings/base.py:282 revm_site/settings/base.py:289
+#: revm_site/settings/base.py:284 revm_site/settings/base.py:291
 msgid "Not Verified"
 msgstr "Neverificat"
 
-#: revm_site/settings/base.py:283 revm_site/settings/base.py:290
+#: revm_site/settings/base.py:285 revm_site/settings/base.py:292
 msgid "Verified"
 msgstr "Verificat"
 
-#: revm_site/settings/base.py:284 revm_site/settings/base.py:291
+#: revm_site/settings/base.py:286 revm_site/settings/base.py:293
 msgid "Deactivated"
 msgstr "Dezactivat"
 
-#: revm_site/settings/base.py:285
+#: revm_site/settings/base.py:287
 msgid "Complete"
 msgstr "Utilizat"
 
-#: revm_site/settings/base.py:292
+#: revm_site/settings/base.py:294
 msgid "Solved"
 msgstr "Rezolvat"
 
-#: revm_site/settings/base.py:302
+#: revm_site/settings/base.py:304
 msgid "National"
 msgstr "Național"
 
-#: revm_site/settings/base.py:302 revm_site/utils/admin.py:218
+#: revm_site/settings/base.py:304 revm_site/utils/admin.py:218
 msgid "County"
 msgstr "Județ"
 
-#: revm_site/settings/base.py:305
+#: revm_site/settings/base.py:307
 msgid "Disponibil in weekend"
 msgstr "Disponibil în weekend"
 
-#: revm_site/settings/base.py:306
+#: revm_site/settings/base.py:308
 msgid "Disponibil in timpul saptamanii"
 msgstr "Disponibil în timpul săptămânii"
 
-#: revm_site/settings/base.py:307
+#: revm_site/settings/base.py:309
 msgid "Disponibil oricand"
 msgstr "Disponibil oricând"
 
-#: revm_site/settings/base.py:308
+#: revm_site/settings/base.py:310
 msgid "Intervale fixe"
 msgstr "Intervale fixe"
 
@@ -835,6 +864,13 @@ msgstr "Da, sunt sigur"
 #: templates/app_account/user_offers.html:59
 msgid "No, take me back"
 msgstr "Nu, du-mă înapoi"
+
+#~ msgid ""
+#~ "<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/"
+#~ "en/terms-and-conditions/\">Terms and Conditions</a></div>"
+#~ msgstr ""
+#~ "<div class=\"toc\">Am citit și sunt de acord cu <a class=\"toc\" href=\"/"
+#~ "ro/terms-and-conditions/\">Termenii și condițiile</a></div>"
 
 #, python-brace-format
 #~ msgid "Verified {model_name}"

@@ -5,6 +5,9 @@ djangorestframework
 django-cors-headers
 django-storages
 django-impersonate
+django-crispy-forms
+crispy-tailwind
+django-recaptcha
 
 # scheduler
 django-q

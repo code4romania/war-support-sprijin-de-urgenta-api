@@ -105,6 +105,8 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "django_q",
     "multiselectfield",
+    "crispy_forms",
+    "crispy_tailwind",
     # project apps
     "static_custom",
     "app_account",
@@ -362,6 +364,14 @@ Q_CLUSTER = {
         "db": 0,
     },
 }
+
+
+# django-cripsy-forms
+# -------------------------------------------------------------------------------
+# django-cripsy-forms - https://django-crispy-forms.readthedocs.io/en/latest/
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
 
 # django-jazzmin
 # -------------------------------------------------------------------------------

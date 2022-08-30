@@ -19,7 +19,7 @@ class FoodRequest(models.Model):
 
     ngo_name = models.CharField(
         _("NGO name"), max_length=255, blank=False, null=False, db_index=True,
-        help_text="NGO name or local authority name"
+        help_text=_("NGO name or local authority name")
     )
     county_coverage = models.CharField(
         _("county"), choices=settings.COUNTY_CHOICES, max_length=3, blank=False, null=False
@@ -35,31 +35,31 @@ class FoodRequest(models.Model):
         _("adult vegetarian portions"),
         default=0,
         null=False,
-        help_text="Lunch and dinner cumulated number of vegetarian portions for adults",
+        help_text=_("Lunch and dinner cumulated number of vegetarian portions for adults"),
     )
     child_vegetarian_portions = models.PositiveSmallIntegerField(
         _("child vegetarian portions"),
         default=0,
         null=False,
-        help_text="Lunch and dinner cumulated number of vegetarian portions for children",
+        help_text=_("Lunch and dinner cumulated number of vegetarian portions for children"),
     )
     adult_meat_portions = models.PositiveSmallIntegerField(
         _("adult meat portions"),
         default=0,
         null=False,
-        help_text="Lunch and dinner cumulated number of meat portions for adults",
+        help_text=_("Lunch and dinner cumulated number of meat portions for adults"),
     )
     child_meat_portions = models.PositiveSmallIntegerField(
         _("child meat portions"),
         default=0,
         null=False,
-        help_text="Lunch and dinner cumulated number of meat portions for children",
+        help_text=_("Lunch and dinner cumulated number of meat portions for children"),
     )
     adult_restricted_portions = models.PositiveSmallIntegerField(
         _("adult restricted portions"),
         default=0,
         null=False,
-        help_text="Lunch and dinner cumulated number of restriction portions for adults",
+        help_text=_("Lunch and dinner cumulated number of restriction portions for adults"),
     )
     adult_restriction_notes = models.CharField(
         _("adult restriction notes"),
@@ -67,13 +67,13 @@ class FoodRequest(models.Model):
         default="",
         blank=True,
         null=False,
-        help_text="Gluten, lactose, salt... restrictions",
+        help_text=_("Gluten, lactose, salt... restrictions"),
     )
     child_restricted_portions = models.PositiveSmallIntegerField(
         _("child restricted portions"),
         default=0,
         null=False,
-        help_text="Lunch and dinner cumulated number of restriction portions for children",
+        help_text=_("Lunch and dinner cumulated number of restriction portions for children"),
     )
     child_restriction_notes = models.CharField(
         _("child restriction notes"),
@@ -81,7 +81,7 @@ class FoodRequest(models.Model):
         default="",
         blank=True,
         null=False,
-        help_text="Gluten, lactose, salt... restrictions",
+        help_text=_("Gluten, lactose, salt... restrictions"),
     )
 
     delivery_hours = models.CharField(_("delivery hours"), max_length=255, blank=False, null=False)

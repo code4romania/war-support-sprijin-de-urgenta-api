@@ -1,18 +1,41 @@
-{% load i18n %}
+{% extends "base_public_form.html" %}
+{% load i18n crispy_forms_tags tailwind_filters %}
 
-<html>
+{% block main_content %}
 {% if messages %}
 {% for message in messages %}
-<div class="alert alert-success" role="alert">
+<div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
     {{ message }}
 </div>
 {% endfor %}
 {% endif %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="{% trans 'Send request' %}">
-</form>
+<div class="w-full max-w-xs">
+    <form action="" method="post">
 
-</html>
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {{ form.non_field_errors }}
+        </div>
+
+        {% for hidden_field in form.hidden_fields %}
+        {% if hidden_field.errors %}
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {% trans "Errors" %} "{{ hidden_field.label }}":
+            {{ hidden_field.errors }}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for field in form %}
+        {% if field.errors %}
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {% trans "Errors" %} "{{ field.label }}":
+            {{ field.errors }}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% crispy form %}
+    </form>
+</div>
+{% endblock %}
