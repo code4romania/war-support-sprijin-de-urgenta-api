@@ -1,0 +1,43 @@
+{% extends "base_public_form.html" %}
+{% load i18n crispy_forms_tags tailwind_filters %}
+
+{% block title %}{% trans "Emergency Support" %}{% endblock %}
+
+{% block main_content %}
+{% if messages %}
+{% for message in messages %}
+<div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="w-full max-w-xs">
+    <form action="" method="post">
+
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {{ form.non_field_errors }}
+        </div>
+
+        {% for hidden_field in form.hidden_fields %}
+        {% if hidden_field.errors %}
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {% trans "Errors" %} "{{ hidden_field.label }}":
+            {{ hidden_field.errors }}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for field in form %}
+        {% if field.errors %}
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {% trans "Errors" %} "{{ field.label }}":
+            {{ field.errors }}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% crispy form %}
+    </form>
+</div>
+{% endblock %}

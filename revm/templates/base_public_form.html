@@ -1,0 +1,165 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charSet="utf-8" />
+    <title>{% block html_title %}{% endblock %}</title>
+    <meta name="next-head-count" content="3" />
+    <link rel="preload" href="//sprijindeurgenta.ro/fonts/titillium-web-v14-latin-ext_latin-regular.woff2" as="font"
+        type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="//sprijindeurgenta.ro/fonts/titillium-web-v14-latin-ext_latin-regular.woff" as="font"
+        type="font/woff" crossorigin="anonymous" />
+    <link rel="preload" href="//sprijindeurgenta.ro/fonts/titillium-web-v14-latin-ext_latin-600.woff2" as="font"
+        type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="//sprijindeurgenta.ro/fonts/titillium-web-v14-latin-ext_latin-600.woff" as="font"
+        type="font/woff" crossorigin="anonymous" />
+    <link rel="preload" href="//sprijindeurgenta.ro/fonts/titillium-web-v14-latin-ext_latin-700.woff2" as="font"
+        type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="//sprijindeurgenta.ro/fonts/titillium-web-v14-latin-ext_latin-700.woff" as="font"
+        type="font/woff" crossorigin="anonymous" />
+    <meta name="description" content="Sprijin de urgență." />
+    <link rel="apple-touch-icon" sizes="180x180" href="//sprijindeurgenta.ro/favicon/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="//sprijindeurgenta.ro/favicon/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="//sprijindeurgenta.ro/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="//sprijindeurgenta.ro/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="//sprijindeurgenta.ro/manifest.json" />
+    <link rel="shortcut icon" href="//sprijindeurgenta.ro/favicon/favicon.ico" />
+    <link rel="icon" href="//sprijindeurgenta.ro/favicon/favicon.ico" />
+    <meta property="og:image" content="https://sprijindeurgenta.ro/sprijindeurgenta_banner.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sprijindeurgenta.ro" />
+    <meta property="og:site_name" content="Sprijin de Urgență" />
+    <meta property="og:title" content="Sprijin de Urgență" />
+    <meta property="og:description" content="Platformă națională de management de resurse." />
+    <link rel="preload" href="//sprijindeurgenta.ro/_next/static/css/431a9e36bc4016b2.css" as="style" />
+    <link rel="stylesheet" href="//sprijindeurgenta.ro/_next/static/css/431a9e36bc4016b2.css" data-n-g="" /><noscript
+        data-n-css=""></noscript>
+    <link rel="stylesheet" href="{% static "site/css/main.css" %}">
+
+    <!-- <script defer="" nomodule="" src="//sprijindeurgenta.ro/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script> -->
+    <!-- <script src="//sprijindeurgenta.ro/_next/static/chunks/webpack-24780b5468e42e63.js" defer=""></script>
+    <script src="//sprijindeurgenta.ro/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script>
+    <script src="//sprijindeurgenta.ro/_next/static/chunks/main-0305726714e0ef36.js" defer=""></script>
+    <script src="//sprijindeurgenta.ro/_next/static/chunks/pages/_app-998ccb07cbd9817e.js" defer=""></script>
+    <script src="//sprijindeurgenta.ro/_next/static/chunks/pages/_error-2280fa386d040b66.js" defer=""></script>
+    <script src="//sprijindeurgenta.ro/_next/static/P5SgTDfQ7f5t9VtFgzI1P/_buildManifest.js" defer=""></script>
+    <script src="//sprijindeurgenta.ro/_next/static/P5SgTDfQ7f5t9VtFgzI1P/_ssgManifest.js" defer=""></script>
+    <script src="//sprijindeurgenta.ro/_next/static/P5SgTDfQ7f5t9VtFgzI1P/_middlewareManifest.js" defer=""></script> -->
+</head>
+
+<body>
+    <div id="__next" data-reactroot="">
+        <div class="flex flex-col min-h-full">
+            <div class="w-full mx-auto">
+                <div class="bg-gray-50">
+                    <div class="flex items-center
+          py-3 px-2 container mx-auto">
+                        <div class="max-w-[90px]">
+                            <div class="leading-none"><img class="object-contain w-full h-full"
+                                    src="//sprijindeurgenta.ro/code_logo.svg" alt="Code 4 Romania logo" height="100%"
+                                    width="100%" /></div>
+                        </div>
+                        <div class="flex flex-col ml-6 text-sm font-medium text-gray-700 md:flex-row md:gap-1"><span>O
+                                soluție Code for Romania. </span><a href="https://www.code4.ro/" target="_blank"
+                                rel="noopener noreferrer" class="text-blue-900 hover:underline whitespace-nowrap">Află
+                                mai multe</a></div>
+                    </div>
+                </div>
+                <div class="border-b-2 border-gray-50">
+                    <div class="container px-2 mx-auto ">
+                        <div class="flex items-center justify-between py-4">
+                            <div class="flex items-center"><a href="//sprijindeurgenta.ro/">
+                                    <div class="leading-none h-[42px]"><img class="object-contain w-full h-full"
+                                            src="//sprijindeurgenta.ro/logo.svg" alt="Sprijin de urgență" height="100%"
+                                            width="100%" /></div>
+                                </a></div>
+                            <div class="flex items-center gap-2">
+                                <div class="">
+                                    <div class="relative flex"><select name="locale"
+                                            class="block w-full h-10 mt-1 border border-gray-200 rounded-md px-2 py-1.5"
+                                            id="locale">
+                                            <option hidden="" disabled=""></option>
+                                            <option selected="" value="ro">RO</option>
+                                            <option value="en">EN</option>
+                                            <option value="uk">UK</option>
+                                            <option value="ru">RU</option>
+                                        </select></div>
+                                    <p class="text-sm pl-1 pr-1 text-red-50"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center w-full max-w-[1350px] mx-auto justify-end py-3 pr-4"><span
+                        class="text-sm font-bold text-gray-500  mx-4">Un proiect in parteneriat cu</span>
+                    <div class="flex items-center gap-2"><a href="https://gov.ro/" rel="noreferrer" target="_blank">
+                            <div class="leading-none hidden md:block h-[38px]"><img class="object-contain w-full h-full"
+                                    src="//sprijindeurgenta.ro/gov_ro.png" alt="Romanian GOV Logo" height="100%"
+                                    width="100%" /></div>
+                        </a><a href="https://gov.ro/" rel="noreferrer" target="_blank">
+                            <div class="leading-none md:hidden h-[38px]"><img class="object-contain w-full h-full"
+                                    src="//sprijindeurgenta.ro/gov_ro_mobile.svg" alt="Romanian GOV Logo" height="100%"
+                                    width="100%" /></div>
+                        </a><a href="http://www.dsu.mai.gov.ro/" rel="noreferrer" target="_blank">
+                            <div class="leading-none h-[38px]"><img class="object-contain w-full h-full"
+                                    src="//sprijindeurgenta.ro/dsu_logo.svg" alt="DSU Logo" height="100%"
+                                    width="100%" /></div>
+                        </a></div><span class="text-sm font-bold text-gray-500  mx-4 lowercase">Realizat de</span><a
+                        href="https://www.code4.ro/" rel="noreferrer" target="_blank">
+                        <div class="leading-none h-[34px]"><img class="object-contain w-full h-full"
+                                src="//sprijindeurgenta.ro/code4romania.svg" alt="Code 4 Romania logo" height="100%"
+                                width="100%" /></div>
+                    </a>
+                </div>
+            </div>
+
+            <main class="h-full layout">
+                {% block main_content %}{% endblock %}
+            </main>
+
+            <footer class="w-full mt-auto text-white bg-blue-950">
+                <div class="mt-auto bg-gray-50">
+                    <div class="flex items-center justify-end py-3 layout"><span class="mx-4 text-gray-700">proiect
+                            dezvoltat în programul</span><a href="https://code4.ro/ro/code-for-romania-war-task-force">
+                            <div class="leading-none h-[42px]"><img class="object-contain w-full h-full"
+                                    src="//sprijindeurgenta.ro/code_logo_colored.svg" alt="Code 4 Romania logo"
+                                    height="100%" width="100%" />
+                            </div>
+                        </a></div>
+                </div>
+                <div class="grid py-12 layout gap-y-10 gap-x-6 lg:py-24 lg:grid-cols-2">
+                    <div class="flex flex-wrap">
+                        <ul class="w-full space-y-1 md:w-1/2 md:px-3 md:py-0">
+                            <li class="mb-4 font-bold tracking-wide">Linkuri utile</li>
+                            <li><a href="//sprijindeurgenta.ro/about-project/">Despre proiect</a></li>
+                            <li><a rel="noreferrer" target="_blank" href="https://dopomoha.ro/">Dopomoha.ro</a></li>
+                            <li><a rel="noreferrer" target="_blank"
+                                    href="https://github.com/code4romania/war-support-sprijin-de-urgenta-client">Codul
+                                    sursă</a></li>
+                        </ul>
+                        <ul class="w-full py-5 md:w-1/2 md:px-3 md:py-0">
+                            <li class="mb-4 font-bold tracking-wide">Informații legale</li>
+                            <li><a href="//sprijindeurgenta.ro/confidentiality-policy/">Politică de
+                                    confidențialitate</a></li>
+                            <li><a href="//sprijindeurgenta.ro/terms-and-conditions/">Termeni și condiții</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-4 tracking-wide lg:text-right">
+                        <p>©
+                            <!-- -->2022
+                            <!-- --> Code for Romania.
+                        </p>
+                        <p class="max-w-[45ch] lg:ml-auto md">Organizație neguvernamentală independentă neafiliată
+                            politic și apolitică</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>
