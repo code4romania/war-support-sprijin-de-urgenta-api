@@ -155,17 +155,27 @@ msgstr ""
 #, fuzzy
 #| msgid "details"
 msgid "NGO Details"
-msgstr "detalii"
+msgstr "Detalii ONG/Autoritate publică"
 
 #: app_food_request/forms.py:69
 msgid "Food quantity"
 msgstr ""
 
+msgid "Food details"
+msgstr "Detalii mâncare"
+
+msgid "Meat"
+msgstr "Carne"
+
+
+msgid "Dietary restrictions"
+msgstr "Restricții alimentare"
+
 #: app_food_request/forms.py:80
 #, fuzzy
 #| msgid "Driver details"
 msgid "Delivery details"
-msgstr "Detalii șofer"
+msgstr "Detalii livrare"
 
 #: app_food_request/models.py:9
 msgid "bulk packaging"
@@ -891,8 +901,8 @@ msgstr "Da, sunt sigur"
 msgid "No, take me back"
 msgstr "Nu, du-mă înapoi"
 
-#~ msgid "Send request"
-#~ msgstr "Trimite cerere"
+msgid "Send request"
+msgstr "Trimite cerere"
 
 #, python-brace-format
 #~ msgid "Verified {model_name}"
