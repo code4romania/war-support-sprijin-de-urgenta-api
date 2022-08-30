@@ -5,8 +5,14 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 from django.urls import include, path
+from django.utils.translation import gettext_lazy as _
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
+
+from app_food_request.views import (
+    FoodRequestCreateView,
+    FoodRequestViewSet,
+)
 
 from app_item.views import (
     CreateItemRequestViewSet,
@@ -35,6 +41,7 @@ admin.site.index_title = settings.ADMIN_TITLE_SHORT
 
 
 router = routers.DefaultRouter()
+router.register(r"food/request", FoodRequestViewSet, basename="food_requests")
 router.register(r"categories/item", GetItemCategoryViewSet, basename="item_categories")
 router.register(r"categories/other", GetOtherCategoryViewSet, basename="other_categories")
 router.register(r"categories/transport_service", GetTransportServiceCategoryViewSet, basename="transport_categories")
@@ -52,6 +59,11 @@ router.register(r"donate/volunteering", CreateVolunteeringOfferViewSet, basename
 
 urlpatterns = i18n_patterns(
     # URL patterns which accept a language prefix
+    path(
+        _("food-requests/"),
+        FoodRequestCreateView.as_view(),
+        name="food_request_form",
+    ),
     path(
         "admin/password_reset/",
         auth_views.PasswordResetView.as_view(),

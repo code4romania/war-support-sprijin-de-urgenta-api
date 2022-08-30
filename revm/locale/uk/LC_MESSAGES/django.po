@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-11 13:02+0200\n"
+"POT-Creation-Date: 2022-08-30 17:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,32 +21,32 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: app_account/admin.py:11 app_account/admin.py:52
+#: app_account/admin.py:12 app_account/admin.py:55
 msgid "Personal info"
 msgstr ""
 
-#: app_account/admin.py:15
+#: app_account/admin.py:16
 msgid "Password"
 msgstr ""
 
-#: app_account/admin.py:19 app_account/admin.py:60
+#: app_account/admin.py:20 app_account/admin.py:63
 msgid "Permissions"
 msgstr ""
 
-#: app_account/admin.py:23 app_account/admin.py:68 app_item/admin.py:111
+#: app_account/admin.py:24 app_account/admin.py:71 app_item/admin.py:111
 #: app_transport_service/admin.py:155
 msgid "Location details"
 msgstr ""
 
-#: app_account/admin.py:56 app_account/admin.py:79
+#: app_account/admin.py:59 app_account/admin.py:82
 msgid "Profile data"
 msgstr ""
 
-#: app_account/admin.py:64
+#: app_account/admin.py:67
 msgid "RVM User"
 msgstr ""
 
-#: app_account/admin.py:83
+#: app_account/admin.py:86
 msgid "Profile details"
 msgstr ""
 
@@ -54,78 +54,79 @@ msgstr ""
 msgid "Accounts"
 msgstr ""
 
-#: app_account/models.py:15
+#: app_account/models.py:21
 msgid "Individual"
 msgstr ""
 
-#: app_account/models.py:16
+#: app_account/models.py:22
 msgid "Corporate"
 msgstr ""
 
-#: app_account/models.py:17
+#: app_account/models.py:23
 msgid "Non-Profit"
 msgstr ""
 
-#: app_account/models.py:18
+#: app_account/models.py:24
 msgid "Government"
 msgstr ""
 
-#: app_account/models.py:21
+#: app_account/models.py:27
 msgid "bussiness name"
 msgstr ""
 
-#: app_account/models.py:22
+#: app_account/models.py:28
 msgid "identification number"
 msgstr ""
 
-#: app_account/models.py:24
+#: app_account/models.py:30 app_food_request/models.py:31
 msgid "email address"
 msgstr ""
 
-#: app_account/models.py:26 app_transport_service/models.py:30
+#: app_account/models.py:32 app_transport_service/models.py:30
 #: app_volunteering/models.py:31 app_volunteering/models.py:48
 #: app_volunteering/models.py:61
 msgid "type"
 msgstr ""
 
-#: app_account/models.py:27 revm_site/utils/models.py:70
+#: app_account/models.py:33 app_food_request/models.py:30
+#: revm_site/utils/models.py:70
 msgid "phone number"
 msgstr ""
 
-#: app_account/models.py:28
+#: app_account/models.py:34 app_food_request/models.py:28
 msgid "address"
 msgstr ""
 
-#: app_account/models.py:29
+#: app_account/models.py:35
 msgid "details"
 msgstr ""
 
-#: app_account/models.py:31
+#: app_account/models.py:37
 msgid "general user description"
 msgstr ""
 
-#: app_account/models.py:41 revm_site/utils/models.py:32
+#: app_account/models.py:47 revm_site/utils/models.py:32
 #: revm_site/utils/models.py:47
 msgid "county coverage"
 msgstr ""
 
-#: app_account/models.py:45
+#: app_account/models.py:51
 msgid "user"
 msgstr ""
 
-#: app_account/models.py:46
+#: app_account/models.py:52
 msgid "users"
 msgstr ""
 
-#: app_account/models.py:79
+#: app_account/models.py:93
 msgid "Admin"
 msgstr ""
 
-#: app_account/models.py:90
+#: app_account/models.py:104
 msgid "NO GROUP ASSIGNED"
 msgstr ""
 
-#: app_account/models.py:92
+#: app_account/models.py:106
 msgid "User Type"
 msgstr ""
 
@@ -135,6 +136,167 @@ msgstr ""
 
 #: app_account/serializers.py:42
 msgid "The two password fields didn't match."
+msgstr ""
+
+#: app_food_request/apps.py:8 app_food_request/models.py:102
+msgid "NGO food request"
+msgstr ""
+
+#: app_food_request/apps.py:9 app_food_request/models.py:103
+msgid "NGO food requests"
+msgstr ""
+
+#: app_food_request/forms.py:46
+msgid "Send request"
+msgstr ""
+
+#: app_food_request/models.py:9
+msgid "bulk packaging"
+msgstr ""
+
+#: app_food_request/models.py:10
+msgid "retail packaging"
+msgstr ""
+
+#: app_food_request/models.py:14
+msgid "new"
+msgstr ""
+
+#: app_food_request/models.py:15
+msgid "in progress"
+msgstr ""
+
+#: app_food_request/models.py:16
+msgid "solved"
+msgstr ""
+
+#: app_food_request/models.py:17
+msgid "rejected"
+msgstr ""
+
+#: app_food_request/models.py:21
+msgid "NGO name"
+msgstr ""
+
+#: app_food_request/models.py:22
+msgid "NGO name or local authority name"
+msgstr ""
+
+#: app_food_request/models.py:25
+msgid "county"
+msgstr ""
+
+#: app_food_request/models.py:27 revm_site/utils/models.py:39
+#: revm_site/utils/models.py:55
+msgid "town"
+msgstr ""
+
+#: app_food_request/models.py:29
+msgid "contact person"
+msgstr ""
+
+#: app_food_request/models.py:32
+msgid "backup phone number"
+msgstr ""
+
+#: app_food_request/models.py:35
+msgid "adult vegetarian portions"
+msgstr ""
+
+#: app_food_request/models.py:38
+msgid "Lunch and dinner cumulated number of vegetarian portions for adults"
+msgstr ""
+
+#: app_food_request/models.py:41
+msgid "child vegetarian portions"
+msgstr ""
+
+#: app_food_request/models.py:44
+msgid "Lunch and dinner cumulated number of vegetarian portions for children"
+msgstr ""
+
+#: app_food_request/models.py:47
+msgid "adult meat portions"
+msgstr ""
+
+#: app_food_request/models.py:50
+msgid "Lunch and dinner cumulated number of meat portions for adults"
+msgstr ""
+
+#: app_food_request/models.py:53
+msgid "child meat portions"
+msgstr ""
+
+#: app_food_request/models.py:56
+msgid "Lunch and dinner cumulated number of meat portions for children"
+msgstr ""
+
+#: app_food_request/models.py:59
+msgid "adult restricted portions"
+msgstr ""
+
+#: app_food_request/models.py:62
+msgid "Lunch and dinner cumulated number of restriction portions for adults"
+msgstr ""
+
+#: app_food_request/models.py:65
+msgid "adult restriction notes"
+msgstr ""
+
+#: app_food_request/models.py:70 app_food_request/models.py:84
+msgid "Gluten, lactose, salt... restrictions"
+msgstr ""
+
+#: app_food_request/models.py:73
+msgid "child restricted portions"
+msgstr ""
+
+#: app_food_request/models.py:76
+msgid "Lunch and dinner cumulated number of restriction portions for children"
+msgstr ""
+
+#: app_food_request/models.py:79
+msgid "child restriction notes"
+msgstr ""
+
+#: app_food_request/models.py:87
+msgid "delivery hours"
+msgstr ""
+
+#: app_food_request/models.py:88
+msgid "delivery daily frequency"
+msgstr ""
+
+#: app_food_request/models.py:91
+msgid "preferred packaging"
+msgstr ""
+
+#: app_food_request/models.py:93
+msgid "notes"
+msgstr ""
+
+#: app_food_request/models.py:95 revm_site/utils/models.py:79
+#: revm_site/utils/models.py:93
+msgid "status"
+msgstr ""
+
+#: app_food_request/models.py:96
+msgid "created on"
+msgstr ""
+
+#: app_food_request/templates/food_request_form.html:20
+#: app_food_request/templates/food_request_form.html:27
+msgid "Errors"
+msgstr ""
+
+#: app_food_request/views.py:18
+msgid "Your request has been registered."
+msgstr ""
+
+#: app_food_request/views.py:20
+msgid ""
+"There was an error submitting your request. Please try again or contact the "
+"site administrator."
 msgstr ""
 
 #: app_item/admin.py:22
@@ -462,82 +624,86 @@ msgstr ""
 msgid "made_by"
 msgstr ""
 
-#: revm_site/middlewares/AdminErrorMiddleware.py:28
+#: revm_site/middlewares/AdminErrorMiddleware.py:29
 msgid ""
 "Delete operation not permitted. Please check that the object is not "
 "referenced by other objects."
 msgstr ""
 
-#: revm_site/middlewares/AdminErrorMiddleware.py:30
+#: revm_site/middlewares/AdminErrorMiddleware.py:31
 msgid "Integrity error: Delete operation not permitted"
 msgstr ""
 
-#: revm_site/settings/base.py:34
+#: revm_site/settings/base.py:37
 msgid "Sprijin de Urgență"
 msgstr ""
 
-#: revm_site/settings/base.py:35
+#: revm_site/settings/base.py:38
 msgid "RVM"
 msgstr ""
 
-#: revm_site/settings/base.py:177
+#: revm_site/settings/base.py:201
 msgid "Romanian"
 msgstr ""
 
-#: revm_site/settings/base.py:178
+#: revm_site/settings/base.py:202
 msgid "English"
 msgstr ""
 
-#: revm_site/settings/base.py:179
+#: revm_site/settings/base.py:203
 msgid "Ukrainian"
 msgstr ""
 
-#: revm_site/settings/base.py:180
+#: revm_site/settings/base.py:204
 msgid "Russian"
 msgstr ""
 
-#: revm_site/settings/base.py:260 revm_site/settings/base.py:267
+#: revm_site/settings/base.py:284 revm_site/settings/base.py:291
 msgid "Not Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:261 revm_site/settings/base.py:268
+#: revm_site/settings/base.py:285 revm_site/settings/base.py:292
 msgid "Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:262 revm_site/settings/base.py:269
+#: revm_site/settings/base.py:286 revm_site/settings/base.py:293
 msgid "Deactivated"
 msgstr ""
 
-#: revm_site/settings/base.py:263
+#: revm_site/settings/base.py:287
 msgid "Complete"
 msgstr ""
 
-#: revm_site/settings/base.py:270
+#: revm_site/settings/base.py:294
 msgid "Solved"
 msgstr ""
 
-#: revm_site/settings/base.py:280
+#: revm_site/settings/base.py:304
 msgid "National"
 msgstr ""
 
-#: revm_site/settings/base.py:280 revm_site/utils/admin.py:217
+#: revm_site/settings/base.py:304 revm_site/utils/admin.py:218
 msgid "County"
 msgstr ""
 
-#: revm_site/settings/base.py:283
+#: revm_site/settings/base.py:307
 msgid "Disponibil in weekend"
 msgstr ""
 
-#: revm_site/settings/base.py:284
+#: revm_site/settings/base.py:308
 msgid "Disponibil in timpul saptamanii"
 msgstr ""
 
-#: revm_site/settings/base.py:285
+#: revm_site/settings/base.py:309
 msgid "Disponibil oricand"
 msgstr ""
 
-#: revm_site/settings/base.py:286
+#: revm_site/settings/base.py:310
 msgid "Intervale fixe"
+msgstr ""
+
+#: revm_site/urls.py:63
+msgid "food-requests/"
 msgstr ""
 
 #: revm_site/utils/admin.py:56
@@ -584,16 +750,8 @@ msgstr ""
 msgid "has transportation"
 msgstr ""
 
-#: revm_site/utils/models.py:39 revm_site/utils/models.py:55
-msgid "town"
-msgstr ""
-
 #: revm_site/utils/models.py:77
 msgid "donor"
-msgstr ""
-
-#: revm_site/utils/models.py:79 revm_site/utils/models.py:93
-msgid "status"
 msgstr ""
 
 #: revm_site/utils/models.py:91
@@ -616,47 +774,47 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: templates/admin/base.html:158
+#: templates/admin/base.html:166
 msgid "Account"
 msgstr ""
 
-#: templates/admin/base.html:161
+#: templates/admin/base.html:169
 msgid "Change password"
 msgstr ""
 
-#: templates/admin/base.html:165
+#: templates/admin/base.html:173
 msgid "Log out"
 msgstr ""
 
-#: templates/admin/base.html:176
+#: templates/admin/base.html:184
 msgid "See Profile"
 msgstr ""
 
-#: templates/admin/base.html:218
+#: templates/admin/base.html:226
 msgid "Dashboard"
 msgstr ""
 
-#: templates/admin/base.html:331
+#: templates/admin/base.html:339
 msgid "Jazzmin version"
 msgstr ""
 
-#: templates/admin/base.html:334
+#: templates/admin/base.html:342
 msgid "Copyright"
 msgstr ""
 
-#: templates/admin/base.html:334
+#: templates/admin/base.html:342
 msgid "All rights reserved."
 msgstr ""
 
-#: templates/admin/base.html:350
+#: templates/admin/base.html:358
 msgid "UI Configuration"
 msgstr ""
 
-#: templates/admin/base.html:354
+#: templates/admin/base.html:362
 msgid "Copy this info your settings file to persist these UI changes"
 msgstr ""
 
-#: templates/admin/base.html:358
+#: templates/admin/base.html:366
 msgid "Close"
 msgstr ""
 

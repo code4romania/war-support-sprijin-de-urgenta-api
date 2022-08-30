@@ -105,6 +105,8 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "django_q",
     "multiselectfield",
+    "crispy_forms",
+    "crispy_tailwind",
     # project apps
     "static_custom",
     "app_account",
@@ -112,6 +114,7 @@ INSTALLED_APPS = [
     "app_transport_service",
     "app_volunteering",
     "app_other",
+    "app_food_request",
 ]
 
 MIDDLEWARE = [
@@ -362,6 +365,14 @@ Q_CLUSTER = {
     },
 }
 
+
+# django-cripsy-forms
+# -------------------------------------------------------------------------------
+# django-cripsy-forms - https://django-crispy-forms.readthedocs.io/en/latest/
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
+
 # django-jazzmin
 # -------------------------------------------------------------------------------
 # django-jazzmin - https://django-jazzmin.readthedocs.io/configuration/
@@ -425,6 +436,7 @@ JAZZMIN_SETTINGS = {
     "hide_models": [],
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     "order_with_respect_to": [
+        "app_food_request",
         "app_item",
         "app_item.itemoffer",
         "app_item.itemrequest",
@@ -487,6 +499,7 @@ JAZZMIN_SETTINGS = {
         "socialaccount.socialtoken": "fas fa-user-lock",
         "authtoken": "fas fa-lock",
         "authtoken.tokenproxy": "fas fa-user-lock",
+        "app_food_request.FoodRequest": "far fa-arrow-alt-circle-left",
         "app_item.Category": "fas fa-cube",
         "app_item.TextileCategory": "fas fa-cubes",
         "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
