@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-30 17:35+0300\n"
+"POT-Creation-Date: 2022-08-30 22:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,8 +142,22 @@ msgstr ""
 msgid "NGO food requests"
 msgstr ""
 
-#: app_food_request/forms.py:46
-msgid "Send request"
+#: app_food_request/forms.py:17
+msgid ""
+"<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/en/"
+"terms-and-conditions/\">Terms and Conditions</a></div>"
+msgstr ""
+
+#: app_food_request/forms.py:58
+msgid "NGO Details"
+msgstr ""
+
+#: app_food_request/forms.py:69
+msgid "Food quantity"
+msgstr ""
+
+#: app_food_request/forms.py:80
+msgid "Delivery details"
 msgstr ""
 
 #: app_food_request/models.py:9
@@ -172,7 +186,7 @@ msgstr ""
 
 #: app_food_request/models.py:21
 msgid "NGO name"
-msgstr ""
+msgstr "NGO/local authority name"
 
 #: app_food_request/models.py:22
 msgid "NGO name or local authority name"
@@ -280,8 +294,12 @@ msgstr ""
 msgid "created on"
 msgstr ""
 
-#: app_food_request/templates/food_request_form.html:20
-#: app_food_request/templates/food_request_form.html:27
+#: app_food_request/templates/food_request_form.html:4
+msgid "Emergency Support"
+msgstr ""
+
+#: app_food_request/templates/food_request_form.html:25
+#: app_food_request/templates/food_request_form.html:34
 msgid "Errors"
 msgstr ""
 

@@ -1,6 +1,8 @@
 {% extends "base_public_form.html" %}
 {% load i18n crispy_forms_tags tailwind_filters %}
 
+{% block title %}{% trans "Emergency Support" %}{% endblock %}
+
 {% block main_content %}
 {% if messages %}
 {% for message in messages %}
