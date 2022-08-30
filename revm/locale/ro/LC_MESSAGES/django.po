@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-29 13:05+0300\n"
+"POT-Creation-Date: 2022-08-30 11:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,12 +216,16 @@ msgstr "porții carne copil"
 msgid "adult restricted portions"
 msgstr "porții restricții adult"
 
-#: app_food_request/models.py:65 app_food_request/models.py:79
+#: app_food_request/models.py:65
 msgid "adult restriction notes"
 msgstr "restricții"
 
 #: app_food_request/models.py:73
 msgid "child restricted portions"
+msgstr "porții restricții copil"
+
+#: app_food_request/models.py:79
+msgid "child restriction notes"
 msgstr "restricții"
 
 #: app_food_request/models.py:87
@@ -261,8 +265,9 @@ msgstr "Cererea dumneavoastră a fost înregistrată"
 msgid ""
 "There was an error submitting your request. Please try again or contact the "
 "site administrator."
-msgstr " A avut loc o eroare la trimiterea cererii. Încercați din nou sau "
-"contactați administratorul."
+msgstr ""
+" A avut loc o eroare la trimiterea cererii. Încercați din nou sau contactați "
+"administratorul."
 
 #: app_item/admin.py:22
 msgid "Deactivate selected offers"

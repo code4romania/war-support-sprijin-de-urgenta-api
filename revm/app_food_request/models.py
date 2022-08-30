@@ -76,7 +76,7 @@ class FoodRequest(models.Model):
         help_text="Lunch and dinner cumulated number of restriction portions for children",
     )
     child_restriction_notes = models.CharField(
-        _("adult restriction notes"),
+        _("child restriction notes"),
         max_length=255,
         default="",
         blank=True,
