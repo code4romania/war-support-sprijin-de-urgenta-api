@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ro">
 
@@ -35,6 +37,8 @@
     <link rel="preload" href="//sprijindeurgenta.ro/_next/static/css/431a9e36bc4016b2.css" as="style" />
     <link rel="stylesheet" href="//sprijindeurgenta.ro/_next/static/css/431a9e36bc4016b2.css" data-n-g="" /><noscript
         data-n-css=""></noscript>
+    <link rel="stylesheet" href="{% static "site/css/main.css" %}">
+
     <!-- <script defer="" nomodule="" src="//sprijindeurgenta.ro/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script> -->
     <!-- <script src="//sprijindeurgenta.ro/_next/static/chunks/webpack-24780b5468e42e63.js" defer=""></script>
     <script src="//sprijindeurgenta.ro/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script>
@@ -51,7 +55,7 @@
         <div class="flex flex-col min-h-full">
             <div class="w-full mx-auto">
                 <div class="bg-gray-50">
-                    <div class="flex items-center 
+                    <div class="flex items-center
           py-3 px-2 container mx-auto">
                         <div class="max-w-[90px]">
                             <div class="leading-none"><img class="object-contain w-full h-full"

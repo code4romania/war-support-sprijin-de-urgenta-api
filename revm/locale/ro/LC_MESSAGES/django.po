@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-30 17:35+0300\n"
+"POT-Creation-Date: 2022-08-30 22:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,9 +143,29 @@ msgstr "Solicitare mâncare ONG"
 msgid "NGO food requests"
 msgstr "Solicitări mâncare ONG"
 
-#: app_food_request/forms.py:46
-msgid "Send request"
-msgstr "Trimite cerere"
+#: app_food_request/forms.py:17
+msgid ""
+"<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/en/"
+"terms-and-conditions/\">Terms and Conditions</a></div>"
+msgstr ""
+"<div class=\"toc\">Am citit și sunt de acord cu <a class=\"toc\" href=\"/ro/"
+"terms-and-conditions/\">Termenii și condițiile</a></div>"
+
+#: app_food_request/forms.py:58
+#, fuzzy
+#| msgid "details"
+msgid "NGO Details"
+msgstr "detalii"
+
+#: app_food_request/forms.py:69
+msgid "Food quantity"
+msgstr ""
+
+#: app_food_request/forms.py:80
+#, fuzzy
+#| msgid "Driver details"
+msgid "Delivery details"
+msgstr "Detalii șofer"
 
 #: app_food_request/models.py:9
 msgid "bulk packaging"
@@ -173,7 +193,7 @@ msgstr "respinsă"
 
 #: app_food_request/models.py:21
 msgid "NGO name"
-msgstr "nume ONG"
+msgstr "Nume ONG sau autoritate locală"
 
 #: app_food_request/models.py:22
 msgid "NGO name or local authority name"
@@ -214,7 +234,7 @@ msgstr "Număr cumulat de porții vegetariene, prânz și cină, pentru copii"
 
 #: app_food_request/models.py:47
 msgid "adult meat portions"
-msgstr "porții carne adult"
+msgstr "porții carne pentru adulți"
 
 #: app_food_request/models.py:50
 msgid "Lunch and dinner cumulated number of meat portions for adults"
@@ -222,7 +242,7 @@ msgstr "Număr cumulat de porții cu carne, prânz și cină, pentru adulți"
 
 #: app_food_request/models.py:53
 msgid "child meat portions"
-msgstr "porții carne copil"
+msgstr "porții carne pentru copii"
 
 #: app_food_request/models.py:56
 msgid "Lunch and dinner cumulated number of meat portions for children"
@@ -230,7 +250,7 @@ msgstr "Număr cumulat de porții cu carne, prânz și cină, pentru copii"
 
 #: app_food_request/models.py:59
 msgid "adult restricted portions"
-msgstr "porții restricții adult"
+msgstr "porții cu restricții pentru adulți"
 
 #: app_food_request/models.py:62
 msgid "Lunch and dinner cumulated number of restriction portions for adults"
@@ -238,7 +258,7 @@ msgstr "Număr cumulat de porții cu restricții, prânz și cină, pentru adul�
 
 #: app_food_request/models.py:65
 msgid "adult restriction notes"
-msgstr "restricții"
+msgstr "restricții pentru adulți"
 
 #: app_food_request/models.py:70 app_food_request/models.py:84
 msgid "Gluten, lactose, salt... restrictions"
@@ -246,7 +266,7 @@ msgstr "Restricții gluten, lactoză, sare..."
 
 #: app_food_request/models.py:73
 msgid "child restricted portions"
-msgstr "porții restricții copil"
+msgstr "porții cu restricții pentru copii"
 
 #: app_food_request/models.py:76
 msgid "Lunch and dinner cumulated number of restriction portions for children"
@@ -254,7 +274,7 @@ msgstr "Număr cumulat de porții cu restricții, prânz și cină, pentru copii
 
 #: app_food_request/models.py:79
 msgid "child restriction notes"
-msgstr "restricții"
+msgstr "restricții pentru copii"
 
 #: app_food_request/models.py:87
 msgid "delivery hours"
@@ -281,8 +301,14 @@ msgstr "status"
 msgid "created on"
 msgstr "data creării"
 
-#: app_food_request/templates/food_request_form.html:20
-#: app_food_request/templates/food_request_form.html:27
+#: app_food_request/templates/food_request_form.html:4
+#, fuzzy
+#| msgid "Emergency Support Admin"
+msgid "Emergency Support"
+msgstr "Suport de Urgență Admin"
+
+#: app_food_request/templates/food_request_form.html:25
+#: app_food_request/templates/food_request_form.html:34
 msgid "Errors"
 msgstr ""
 
@@ -865,12 +891,8 @@ msgstr "Da, sunt sigur"
 msgid "No, take me back"
 msgstr "Nu, du-mă înapoi"
 
-#~ msgid ""
-#~ "<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/"
-#~ "en/terms-and-conditions/\">Terms and Conditions</a></div>"
-#~ msgstr ""
-#~ "<div class=\"toc\">Am citit și sunt de acord cu <a class=\"toc\" href=\"/"
-#~ "ro/terms-and-conditions/\">Termenii și condițiile</a></div>"
+#~ msgid "Send request"
+#~ msgstr "Trimite cerere"
 
 #, python-brace-format
 #~ msgid "Verified {model_name}"
@@ -994,9 +1016,6 @@ msgstr "Nu, du-mă înapoi"
 
 #~ msgid "volume unit"
 #~ msgstr "unitatea de volum"
-
-#~ msgid "Emergency Support Admin"
-#~ msgstr "Suport de Urgență Admin"
 
 #, python-format
 #~ msgid "Models in the %(name)s application"

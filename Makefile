@@ -50,6 +50,8 @@ makemessages:                     ## generate the strings marked for translation
 compilemessages:                  ## compile the translations
 	docker-compose exec revm ./manage.py compilemessages
 
+messages: makemessages compilemessages
+
 collectstatic:
 	docker-compose exec revm ./manage.py collectstatic --no-input
 
@@ -58,3 +60,9 @@ format:
 
 format-check:
 	black --line-length=120 --target-version=py39 --check --diff  --exclude migrations ./revm
+
+css-live:                                      ## compile the css files continuously
+	npx tailwindcss -i ./revm/static_custom/src/main.css -o ./revm/static_custom/static/site/css/main.css --watch
+
+css:                                           ## compile the css files
+	npx tailwindcss -i ./revm/static_custom/src/main.css -o ./revm/static_custom/static/site/css/main.css -m
