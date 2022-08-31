@@ -32,6 +32,8 @@ class FoodRequestForm(forms.ModelForm):
             "phone_number",
             "email",
             "backup_phone_number",
+            "offered_services",
+            "other_offered_services",
             "adult_vegetarian_portions",
             "child_vegetarian_portions",
             "adult_meat_portions",
@@ -44,9 +46,8 @@ class FoodRequestForm(forms.ModelForm):
             "delivery_daily_frequency",
             "preferred_packaging",
             "notes",
-            "terms_and_conditions"
+            "terms_and_conditions",
         ]
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,6 +65,8 @@ class FoodRequestForm(forms.ModelForm):
                 "phone_number",
                 "email",
                 "backup_phone_number",
+                "offered_services",
+                "other_offered_services",
                 css_class="fieldset",
             ),
             Fieldset(
@@ -100,14 +103,11 @@ class FoodRequestForm(forms.ModelForm):
             ),
             HTML('<hr class="pre-toc">'),
             Div(
-                Div(
-                    "terms_and_conditions",
-                    css_class="toc-input"
-                ),
+                Div("terms_and_conditions", css_class="toc-input"),
                 FormActions(
                     Submit("submit", f"{_('Send request')} &vrtri;", css_class="btn btn-primary btn-lg float-right "),
                 ),
-                css_class="final-input"
+                css_class="final-input",
             ),
         )
 

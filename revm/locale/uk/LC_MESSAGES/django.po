@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-30 22:35+0300\n"
+"POT-Creation-Date: 2022-08-31 16:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,7 +78,7 @@ msgstr ""
 msgid "identification number"
 msgstr ""
 
-#: app_account/models.py:30 app_food_request/models.py:31
+#: app_account/models.py:30 app_food_request/models.py:43
 msgid "email address"
 msgstr ""
 
@@ -88,12 +88,12 @@ msgstr ""
 msgid "type"
 msgstr ""
 
-#: app_account/models.py:33 app_food_request/models.py:30
+#: app_account/models.py:33 app_food_request/models.py:42
 #: revm_site/utils/models.py:70
 msgid "phone number"
 msgstr ""
 
-#: app_account/models.py:34 app_food_request/models.py:28
+#: app_account/models.py:34 app_food_request/models.py:40
 msgid "address"
 msgstr ""
 
@@ -138,11 +138,11 @@ msgstr ""
 msgid "The two password fields didn't match."
 msgstr ""
 
-#: app_food_request/apps.py:8 app_food_request/models.py:102
+#: app_food_request/apps.py:8 app_food_request/models.py:119
 msgid "NGO food request"
 msgstr ""
 
-#: app_food_request/apps.py:9 app_food_request/models.py:103
+#: app_food_request/apps.py:9 app_food_request/models.py:120
 msgid "NGO food requests"
 msgstr ""
 
@@ -152,149 +152,181 @@ msgid ""
 "terms-and-conditions/\">Terms and Conditions</a></div>"
 msgstr ""
 
-#: app_food_request/forms.py:58
+#: app_food_request/forms.py:59
 msgid "NGO Details"
 msgstr ""
 
-#: app_food_request/forms.py:69
-msgid "Food quantity"
+#: app_food_request/forms.py:72
+msgid "Food details"
+msgstr ""
+
+#: app_food_request/forms.py:74
+msgid "Vegetarian"
 msgstr ""
 
 #: app_food_request/forms.py:80
+msgid "Meat"
+msgstr ""
+
+#: app_food_request/forms.py:86
+msgid "Dietary restrictions"
+msgstr ""
+
+#: app_food_request/forms.py:96
 msgid "Delivery details"
 msgstr ""
 
-#: app_food_request/models.py:9
+#: app_food_request/models.py:10
 msgid "bulk packaging"
 msgstr ""
 
-#: app_food_request/models.py:10
+#: app_food_request/models.py:11
 msgid "retail packaging"
 msgstr ""
 
-#: app_food_request/models.py:14
+#: app_food_request/models.py:15
 msgid "new"
 msgstr ""
 
-#: app_food_request/models.py:15
+#: app_food_request/models.py:16
 msgid "in progress"
 msgstr ""
 
-#: app_food_request/models.py:16
+#: app_food_request/models.py:17
 msgid "solved"
 msgstr ""
 
-#: app_food_request/models.py:17
+#: app_food_request/models.py:18
 msgid "rejected"
 msgstr ""
 
-#: app_food_request/models.py:21
-msgid "NGO name"
+#: app_food_request/models.py:22
+msgid "hosting"
 msgstr ""
 
-#: app_food_request/models.py:22
-msgid "NGO name or local authority name"
+#: app_food_request/models.py:23
+msgid "food"
+msgstr ""
+
+#: app_food_request/models.py:24
+msgid "educational services"
 msgstr ""
 
 #: app_food_request/models.py:25
+msgid "other services"
+msgstr ""
+
+#: app_food_request/models.py:29
+msgid "NGO name"
+msgstr ""
+
+#: app_food_request/models.py:34
+msgid "NGO name or local authority name"
+msgstr ""
+
+#: app_food_request/models.py:37
 msgid "county"
 msgstr ""
 
-#: app_food_request/models.py:27 revm_site/utils/models.py:39
+#: app_food_request/models.py:39 revm_site/utils/models.py:39
 #: revm_site/utils/models.py:55
 msgid "town"
 msgstr ""
 
-#: app_food_request/models.py:29
+#: app_food_request/models.py:41
 msgid "contact person"
 msgstr ""
 
-#: app_food_request/models.py:32
+#: app_food_request/models.py:44
 msgid "backup phone number"
 msgstr ""
 
-#: app_food_request/models.py:35
+#: app_food_request/models.py:45
+msgid "offered services"
+msgstr ""
+
+#: app_food_request/models.py:48
 msgid "adult vegetarian portions"
 msgstr ""
 
-#: app_food_request/models.py:38
+#: app_food_request/models.py:51
 msgid "Lunch and dinner cumulated number of vegetarian portions for adults"
 msgstr ""
 
-#: app_food_request/models.py:41
+#: app_food_request/models.py:54
 msgid "child vegetarian portions"
 msgstr ""
 
-#: app_food_request/models.py:44
+#: app_food_request/models.py:57
 msgid "Lunch and dinner cumulated number of vegetarian portions for children"
 msgstr ""
 
-#: app_food_request/models.py:47
+#: app_food_request/models.py:60
 msgid "adult meat portions"
 msgstr ""
 
-#: app_food_request/models.py:50
+#: app_food_request/models.py:63
 msgid "Lunch and dinner cumulated number of meat portions for adults"
 msgstr ""
 
-#: app_food_request/models.py:53
+#: app_food_request/models.py:66
 msgid "child meat portions"
 msgstr ""
 
-#: app_food_request/models.py:56
+#: app_food_request/models.py:69
 msgid "Lunch and dinner cumulated number of meat portions for children"
 msgstr ""
 
-#: app_food_request/models.py:59
+#: app_food_request/models.py:72
 msgid "adult restricted portions"
 msgstr ""
 
-#: app_food_request/models.py:62
+#: app_food_request/models.py:75
 msgid "Lunch and dinner cumulated number of restriction portions for adults"
 msgstr ""
 
-#: app_food_request/models.py:65
+#: app_food_request/models.py:78
 msgid "adult restriction notes"
 msgstr ""
 
-#: app_food_request/models.py:70 app_food_request/models.py:84
+#: app_food_request/models.py:83 app_food_request/models.py:97
 msgid "Gluten, lactose, salt... restrictions"
 msgstr ""
 
-#: app_food_request/models.py:73
+#: app_food_request/models.py:86
 msgid "child restricted portions"
 msgstr ""
 
-#: app_food_request/models.py:76
+#: app_food_request/models.py:89
 msgid "Lunch and dinner cumulated number of restriction portions for children"
 msgstr ""
 
-#: app_food_request/models.py:79
+#: app_food_request/models.py:92
 msgid "child restriction notes"
 msgstr ""
 
-#: app_food_request/models.py:87
+#: app_food_request/models.py:100
 msgid "delivery hours"
 msgstr ""
 
-#: app_food_request/models.py:88
+#: app_food_request/models.py:101
 msgid "delivery daily frequency"
 msgstr ""
 
-#: app_food_request/models.py:91
+#: app_food_request/models.py:104
 msgid "preferred packaging"
 msgstr ""
 
-#: app_food_request/models.py:93
+#: app_food_request/models.py:106
 msgid "notes"
 msgstr ""
 
-#: app_food_request/models.py:95 revm_site/utils/models.py:79
+#: app_food_request/models.py:109 revm_site/utils/models.py:79
 #: revm_site/utils/models.py:93
 msgid "status"
 msgstr ""
 
-#: app_food_request/models.py:96
+#: app_food_request/models.py:112
 msgid "created on"
 msgstr ""
 

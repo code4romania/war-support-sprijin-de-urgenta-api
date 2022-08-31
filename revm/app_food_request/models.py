@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 
 
 class FoodRequest(models.Model):
@@ -17,9 +18,20 @@ class FoodRequest(models.Model):
         (3, _("rejected")),
     )
 
+    SERVICES_CHOICES = (
+        ("HOST", _("hosting")),
+        ("FOOD", _("food")),
+        ("EDU", _("educational services")),
+        ("MISC", _("other services")),
+    )
+
     ngo_name = models.CharField(
-        _("NGO name"), max_length=255, blank=False, null=False, db_index=True,
-        help_text=_("NGO name or local authority name")
+        _("NGO name"),
+        max_length=255,
+        blank=False,
+        null=False,
+        db_index=True,
+        help_text=_("NGO name or local authority name"),
     )
     county_coverage = models.CharField(
         _("county"), choices=settings.COUNTY_CHOICES, max_length=3, blank=False, null=False
@@ -30,6 +42,8 @@ class FoodRequest(models.Model):
     phone_number = models.CharField(_("phone number"), max_length=32, null=False, blank=False)
     email = models.EmailField(_("email address"), blank=False, null=False)
     backup_phone_number = models.CharField(_("backup phone number"), max_length=32, default="", null=False, blank=True)
+    offered_services = MultiSelectField(_("offered services"), choices=SERVICES_CHOICES, blank=True, null=True)
+    other_offered_services = models.CharField(_("other offered services"), max_length=512, blank=True, null=True)
 
     adult_vegetarian_portions = models.PositiveSmallIntegerField(
         _("adult vegetarian portions"),
@@ -92,8 +106,12 @@ class FoodRequest(models.Model):
     )
     notes = models.TextField(_("notes"), default="", blank=True, null=False)
 
-    status = models.PositiveSmallIntegerField(_("status"), default=0, choices=STATUS_CHOICES, blank=False, null=False, db_index=True)
-    created_on = models.DateTimeField(_("created on"), blank=True, null=False, editable=False, auto_now_add=timezone.now)
+    status = models.PositiveSmallIntegerField(
+        _("status"), default=0, choices=STATUS_CHOICES, blank=False, null=False, db_index=True
+    )
+    created_on = models.DateTimeField(
+        _("created on"), blank=True, null=False, editable=False, auto_now_add=timezone.now
+    )
 
     def __str__(self):
         return f"#{self.id} {self.ngo_name}"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-30 22:35+0300\n"
+"POT-Creation-Date: 2022-08-31 16:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgstr "numele afacerii"
 msgid "identification number"
 msgstr "CUI"
 
-#: app_account/models.py:30 app_food_request/models.py:31
+#: app_account/models.py:30 app_food_request/models.py:43
 msgid "email address"
 msgstr "adresa e-mail"
 
@@ -85,12 +85,12 @@ msgstr "adresa e-mail"
 msgid "type"
 msgstr "tip"
 
-#: app_account/models.py:33 app_food_request/models.py:30
+#: app_account/models.py:33 app_food_request/models.py:42
 #: revm_site/utils/models.py:70
 msgid "phone number"
 msgstr "număr telefon"
 
-#: app_account/models.py:34 app_food_request/models.py:28
+#: app_account/models.py:34 app_food_request/models.py:40
 msgid "address"
 msgstr "adresă"
 
@@ -135,11 +135,11 @@ msgstr "Un utilizator cu această adresă de e-mail este deja înregistrat."
 msgid "The two password fields didn't match."
 msgstr "Cele două câmpuri de parolă nu corespund."
 
-#: app_food_request/apps.py:8 app_food_request/models.py:102
+#: app_food_request/apps.py:8 app_food_request/models.py:119
 msgid "NGO food request"
 msgstr "Solicitare mâncare ONG"
 
-#: app_food_request/apps.py:9 app_food_request/models.py:103
+#: app_food_request/apps.py:9 app_food_request/models.py:120
 msgid "NGO food requests"
 msgstr "Solicitări mâncare ONG"
 
@@ -151,170 +151,192 @@ msgstr ""
 "<div class=\"toc\">Am citit și sunt de acord cu <a class=\"toc\" href=\"/ro/"
 "terms-and-conditions/\">Termenii și condițiile</a></div>"
 
+#: app_food_request/forms.py:59
 msgid "NGO Details"
 msgstr "Detalii ONG/Autoritate publică"
 
-#: app_food_request/forms.py:69
-msgid "Food quantity"
-msgstr ""
-
+#: app_food_request/forms.py:72
 msgid "Food details"
 msgstr "Detalii mâncare"
 
+#: app_food_request/forms.py:74
+msgid "Vegetarian"
+msgstr "Vegetarian"
+
+#: app_food_request/forms.py:80
 msgid "Meat"
 msgstr "Carne"
 
-
+#: app_food_request/forms.py:86
 msgid "Dietary restrictions"
 msgstr "Restricții alimentare"
 
+#: app_food_request/forms.py:96
 msgid "Delivery details"
 msgstr "Detalii livrare"
 
-#: app_food_request/models.py:9
+#: app_food_request/models.py:10
 msgid "bulk packaging"
 msgstr "ambalare vrac"
 
-#: app_food_request/models.py:10
+#: app_food_request/models.py:11
 msgid "retail packaging"
 msgstr "ambalare individuală"
 
-#: app_food_request/models.py:14
+#: app_food_request/models.py:15
 msgid "new"
 msgstr "nouă"
 
-#: app_food_request/models.py:15
+#: app_food_request/models.py:16
 msgid "in progress"
 msgstr "în desfășurare"
 
-#: app_food_request/models.py:16
+#: app_food_request/models.py:17
 msgid "solved"
 msgstr "rezolvată"
 
-#: app_food_request/models.py:17
+#: app_food_request/models.py:18
 msgid "rejected"
 msgstr "respinsă"
 
-#: app_food_request/models.py:21
+#: app_food_request/models.py:22
+msgid "hosting"
+msgstr "cazare"
+
+#: app_food_request/models.py:23
+msgid "food"
+msgstr "mâncare"
+
+#: app_food_request/models.py:24
+msgid "educational services"
+msgstr "servicii educaționale"
+
+#: app_food_request/models.py:25
+msgid "other services"
+msgstr "alte servicii"
+
+#: app_food_request/models.py:29
 msgid "NGO name"
 msgstr "Nume ONG sau autoritate locală"
 
-#: app_food_request/models.py:22
+#: app_food_request/models.py:34
 msgid "NGO name or local authority name"
 msgstr "Nume ONG sau autoritate locală"
 
-#: app_food_request/models.py:25
+#: app_food_request/models.py:37
 msgid "county"
 msgstr "județ"
 
-#: app_food_request/models.py:27 revm_site/utils/models.py:39
+#: app_food_request/models.py:39 revm_site/utils/models.py:39
 #: revm_site/utils/models.py:55
 msgid "town"
-msgstr "oraș"
+msgstr "localitate"
 
-#: app_food_request/models.py:29
+#: app_food_request/models.py:41
 msgid "contact person"
 msgstr "persoană de contact"
 
-#: app_food_request/models.py:32
+#: app_food_request/models.py:44
 msgid "backup phone number"
 msgstr "număr telefon de rezervă"
 
-#: app_food_request/models.py:35
+#: app_food_request/models.py:45
+msgid "offered services"
+msgstr "servicii oferite"
+
+#: app_food_request/models.py:48
 msgid "adult vegetarian portions"
 msgstr "porții vegetariene adult"
 
-#: app_food_request/models.py:38
+#: app_food_request/models.py:51
 msgid "Lunch and dinner cumulated number of vegetarian portions for adults"
 msgstr "Număr cumulat de porții vegetariene, prânz și cină, pentru adulți"
 
-#: app_food_request/models.py:41
+#: app_food_request/models.py:54
 msgid "child vegetarian portions"
 msgstr "porții vegetariene copil"
 
-#: app_food_request/models.py:44
+#: app_food_request/models.py:57
 msgid "Lunch and dinner cumulated number of vegetarian portions for children"
 msgstr "Număr cumulat de porții vegetariene, prânz și cină, pentru copii"
 
-#: app_food_request/models.py:47
+#: app_food_request/models.py:60
 msgid "adult meat portions"
 msgstr "porții carne pentru adulți"
 
-#: app_food_request/models.py:50
+#: app_food_request/models.py:63
 msgid "Lunch and dinner cumulated number of meat portions for adults"
 msgstr "Număr cumulat de porții cu carne, prânz și cină, pentru adulți"
 
-#: app_food_request/models.py:53
+#: app_food_request/models.py:66
 msgid "child meat portions"
 msgstr "porții carne pentru copii"
 
-#: app_food_request/models.py:56
+#: app_food_request/models.py:69
 msgid "Lunch and dinner cumulated number of meat portions for children"
 msgstr "Număr cumulat de porții cu carne, prânz și cină, pentru copii"
 
-#: app_food_request/models.py:59
+#: app_food_request/models.py:72
 msgid "adult restricted portions"
 msgstr "porții cu restricții pentru adulți"
 
-#: app_food_request/models.py:62
+#: app_food_request/models.py:75
 msgid "Lunch and dinner cumulated number of restriction portions for adults"
 msgstr "Număr cumulat de porții cu restricții, prânz și cină, pentru adulți"
 
-#: app_food_request/models.py:65
+#: app_food_request/models.py:78
 msgid "adult restriction notes"
 msgstr "restricții pentru adulți"
 
-#: app_food_request/models.py:70 app_food_request/models.py:84
+#: app_food_request/models.py:83 app_food_request/models.py:97
 msgid "Gluten, lactose, salt... restrictions"
 msgstr "Restricții gluten, lactoză, sare..."
 
-#: app_food_request/models.py:73
+#: app_food_request/models.py:86
 msgid "child restricted portions"
 msgstr "porții cu restricții pentru copii"
 
-#: app_food_request/models.py:76
+#: app_food_request/models.py:89
 msgid "Lunch and dinner cumulated number of restriction portions for children"
 msgstr "Număr cumulat de porții cu restricții, prânz și cină, pentru copii"
 
-#: app_food_request/models.py:79
+#: app_food_request/models.py:92
 msgid "child restriction notes"
 msgstr "restricții pentru copii"
 
-#: app_food_request/models.py:87
+#: app_food_request/models.py:100
 msgid "delivery hours"
 msgstr "interval orar de livrare"
 
-#: app_food_request/models.py:88
+#: app_food_request/models.py:101
 msgid "delivery daily frequency"
 msgstr "frecvență zilnică"
 
-#: app_food_request/models.py:91
+#: app_food_request/models.py:104
 msgid "preferred packaging"
 msgstr "mod preferat de ambalare"
 
-#: app_food_request/models.py:93
+#: app_food_request/models.py:106
 msgid "notes"
 msgstr "observații"
 
-#: app_food_request/models.py:95 revm_site/utils/models.py:79
+#: app_food_request/models.py:109 revm_site/utils/models.py:79
 #: revm_site/utils/models.py:93
 msgid "status"
 msgstr "status"
 
-#: app_food_request/models.py:96
+#: app_food_request/models.py:112
 msgid "created on"
 msgstr "data creării"
 
 #: app_food_request/templates/food_request_form.html:4
-#, fuzzy
-#| msgid "Emergency Support Admin"
 msgid "Emergency Support"
-msgstr "Suport de Urgență Admin"
+msgstr "Suport de Urgență"
 
 #: app_food_request/templates/food_request_form.html:25
 #: app_food_request/templates/food_request_form.html:34
 msgid "Errors"
-msgstr ""
+msgstr "Erori"
 
 #: app_food_request/views.py:18
 msgid "Your request has been registered."
@@ -844,6 +866,8 @@ msgstr "Configurare UI"
 #: templates/admin/base.html:362
 msgid "Copy this info your settings file to persist these UI changes"
 msgstr ""
+"Copiază aceste informații în fișierul de setări pentru a salva aceste "
+"modificări de interfață"
 
 #: templates/admin/base.html:366
 msgid "Close"
@@ -895,8 +919,8 @@ msgstr "Da, sunt sigur"
 msgid "No, take me back"
 msgstr "Nu, du-mă înapoi"
 
-msgid "Send request"
-msgstr "Trimite cerere"
+#~ msgid "Send request"
+#~ msgstr "Trimite cerere"
 
 #, python-brace-format
 #~ msgid "Verified {model_name}"
