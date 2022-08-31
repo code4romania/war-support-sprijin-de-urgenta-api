@@ -1,5 +1,5 @@
 {% extends "base_public_form.html" %}
-{% load i18n crispy_forms_tags tailwind_filters %}
+{% load i18n static crispy_forms_tags tailwind_filters %}
 
 {% block title %}{% trans "Emergency Support" %}{% endblock %}
 
@@ -40,4 +40,23 @@
         {% crispy form %}
     </form>
 </div>
+
+<!-- jQuery -->
+<script src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#div_id_other_offered_services").hide();
+
+        $("#id_offered_services_4").change(function () {
+            if ($(this).prop('checked')) {
+                $("#div_id_other_offered_services").show();
+            } else {
+                $("#div_id_other_offered_services").hide();
+                $("#id_other_offered_services").val("")
+            }
+        });
+    });
+</script>
+
 {% endblock %}

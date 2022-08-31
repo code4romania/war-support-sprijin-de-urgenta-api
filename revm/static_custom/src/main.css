@@ -25,6 +25,10 @@ fieldset>div.mb-3 {
     padding-left: 2%;
 }
 
+.mr-3 {
+    padding-left: 2%;
+}
+
 legend.block {
     font-style: normal;
     line-height: 48px;
@@ -40,6 +44,8 @@ legend.block {
 .btn-primary {
     background-color: #004AA9;
     color: #FFFFFF;
+
+    border-radius: 8px;
 }
 
 .btn-lg {
