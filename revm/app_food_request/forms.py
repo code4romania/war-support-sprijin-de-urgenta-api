@@ -49,6 +49,12 @@ class FoodRequestForm(forms.ModelForm):
             "terms_and_conditions",
         ]
 
+        labels = {
+            "adult_restriction_notes": _("Adult restriction notes (please fill in)"),
+            "child_restriction_notes": _("Child restriction notes (please fill in)"),
+            "notes": _("Notes (please fill in)"),
+        }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
