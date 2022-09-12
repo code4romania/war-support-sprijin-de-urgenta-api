@@ -21,6 +21,8 @@ services:
   redis:
     container_name: redis
     image: redis:alpine
+    ports:
+      - "6769:6379"
     networks:
       - internal
 

@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.sites.models import Site
 from django.utils.translation import gettext_lazy as _
 from impersonate.admin import UserAdminImpersonateMixin
+from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
 
@@ -28,8 +29,18 @@ DjangoUserAdmin.add_fieldsets = (
 
 
 @admin.register(CustomUser)
-class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin):
-    list_display = ("id", "first_name", "last_name", "email", "phone_number", "type", "user_type", "county")
+class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin, ImportExportModelAdmin):
+    list_display = (
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "phone_number",
+        "type",
+        "user_type",
+        "county",
+        "last_login",
+    )
     list_display_links = ("id", "first_name", "last_name", "email")
     search_fields = ("email", "first_name", "last_name")
     list_filter = ("is_validated", "type")
