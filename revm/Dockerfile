@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.10.7-slim
 
 ARG ENVIRONMENT
 
@@ -19,7 +19,7 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERS
     tar -C /usr/local/bin -xzvf dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz && \
     rm dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz && \
     chown root:root /usr/local/bin/dockerize && \
-    pip install "pip<22"
+    pip install --upgrade pip
 
 # install and cache app dependencies
 WORKDIR /opt/
