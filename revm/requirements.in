@@ -1,5 +1,5 @@
 # django and related apps
-django>=3.2,<3.3
+django==3.2.15
 django-environ
 djangorestframework
 django-cors-headers
@@ -42,5 +42,4 @@ gevent
 drf-spectacular
 
 # admin
-django-jazzmin
 django-multiselectfield>=0.1.12,<1.0.0
