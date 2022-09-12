@@ -118,7 +118,7 @@ psycopg2==2.9.3
     # via -r requirements.in
 pycparser==2.21
     # via cffi
-pyjwt[crypto]==2.3.0
+pyjwt[crypto]==2.4.0
     # via
     #   django-allauth
     #   djangorestframework-simplejwt

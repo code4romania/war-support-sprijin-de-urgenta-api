@@ -223,7 +223,7 @@ pygments==2.11.2
     # via
     #   ipython
     #   pdbpp
-pyjwt[crypto]==2.3.0
+pyjwt[crypto]==2.4.0
     # via
     #   -r requirements.txt
     #   django-allauth
