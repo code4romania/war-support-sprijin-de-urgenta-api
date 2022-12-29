@@ -18,14 +18,6 @@ services:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_DB=${DATABASE_NAME}
 
-  redis:
-    container_name: redis
-    image: redis:alpine
-    ports:
-      - "6769:6379"
-    networks:
-      - internal
-
   revm:
     container_name: revm-admin
     build:

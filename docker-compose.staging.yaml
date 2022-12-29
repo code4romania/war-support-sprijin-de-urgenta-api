@@ -16,12 +16,6 @@ services:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_DB=${DATABASE_NAME}
 
-  redis:
-    container_name: redis
-    image: redis:alpine
-    networks:
-      - internal
-
   revm:
     container_name: revm-admin
     image: code4romania/sprijin-de-urgenta-api:staging
