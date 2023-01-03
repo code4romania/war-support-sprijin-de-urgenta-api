@@ -27,8 +27,6 @@ env = environ.Env(
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
-    REDIS_HOST=(str, "redis"),
-    REDIS_PORT=(int, 6379),
     FROM_EMAIL=(str, "noreply@code4.ro"),
 )
 
@@ -358,11 +356,7 @@ Q_CLUSTER = {
     "queue_limit": 500,
     "cpu_affinity": 1,
     "label": "Django Q",
-    "redis": {
-        "host": env("REDIS_HOST"),
-        "port": env("REDIS_PORT"),
-        "db": 0,
-    },
+    "orm": "default",
 }
 
 
