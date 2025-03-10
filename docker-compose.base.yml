@@ -1,0 +1,39 @@
+services:
+  sdu_dev_base:
+    extends:
+      file: docker-compose.base.yml
+      service: dev_base
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/Dockerfile.dev
+    volumes:
+      - ./backend:/var/www/sdu/backend
+    networks:
+      - internal
+    env_file:
+      - .env
+    ports:
+      - "${WEBAPP_PORT:-8080}:8000"
+
+  dev_base:
+    container_name: sdu_dev
+    env_file:
+      - "${ENV_FILE:-.env}"
+    environment:
+      - "PYTHONUNBUFFERED=1"
+    restart: on-failure
+
+  db_base:
+    image: postgres:16.4
+    volumes:
+      - sdu_psql:/var/lib/postgresql/data
+    networks:
+      - internal
+    env_file:
+      - "${ENV_FILE:-.env}"
+    environment:
+      POSTGRES_DB: "${DATABASE_NAME}"
+      POSTGRES_USER: "${DATABASE_USER}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+    ports:
+      - "${DATABASE_PORT:-5432}:5432"

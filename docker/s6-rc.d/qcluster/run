@@ -1,0 +1,23 @@
+#!/command/with-contenv sh
+
+set -e
+
+cd /var/www/sdu/backend
+
+if [ "${ENVIRONMENT}" = "debug" ]; then
+  echo "*********************************************"
+  echo "***  Starting the qcluster in DEBUG mode  ***"
+  echo "*********************************************"
+  python3 -Xfrozen_modules=off -m debugpy --listen 0.0.0.0:5677 manage.py qcluster
+elif [ "${ENVIRONMENT}" = "debugwait" ]; then
+  echo "*********************************************"
+  echo "***  Starting the qcluster in DEBUG mode  ***"
+  echo "***   Waiting for debugger connection...  ***"
+  echo "*********************************************"
+  python3 -Xfrozen_modules=off -m debugpy --wait-for-client --listen 0.0.0.0:5677 manage.py qcluster
+else
+  echo "Starting the qcluster in production mode"
+
+  python3 manage.py qcluster
+fi
+

@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./revm/**/*.{html,js}"],
+  content: ["./backend/**/*.{html,js}"],
   theme: {
     extend: {},
   },
