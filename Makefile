@@ -33,10 +33,10 @@ drop-db:                          ## drops the database
 
 ## [UTILS]
 requirements-build:               ## run pip compile and add requirements from the *.in files
-	docker compose run --rm --no-deps --entrypoint "bash -c" sdu "cd /code && pip-compile -o requirements.txt requirements.in && pip-compile -o requirements-dev.txt requirements-dev.in"
+	docker compose run --rm --no-deps --entrypoint "bash -c" sdu "cd ./backend && pip-compile -o requirements.txt requirements.in && pip-compile -o requirements-dev.txt requirements-dev.in"
 
 requirements-update:              ## run pip compile and rebuild the requirements files
-	docker compose run --rm --no-deps --entrypoint "bash -c" sdu "cd /code && pip-compile -r -U -o requirements.txt requirements.in && pip-compile -r -U -o requirements-dev.txt requirements-dev.in && chmod a+r requirements.txt && chmod a+r requirements-dev.txt"
+	docker compose run --rm --no-deps --entrypoint "bash -c" sdu "cd ./backend && pip-compile -r -U -o requirements.txt requirements.in && pip-compile -r -U -o requirements-dev.txt requirements-dev.in && chmod a+r requirements.txt && chmod a+r requirements-dev.txt"
 
 migrations:                       ## generate migrations in a clean container
 	docker compose exec sdu ./manage.py makemigrations
