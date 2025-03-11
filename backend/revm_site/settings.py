@@ -504,9 +504,9 @@ SIMPLE_JWT = {
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # Email settings
-if env.bool("DEV_ENABLE_EMAIL_SMTP") or ENVIRONMENT != "development":
+if env.bool("DEV_ENABLE_EMAIL_SMTP") or ENVIRONMENT not in ("development", "test"):
     # XXX: change this
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_BACKEND = "django_ses.SESBackend"
 elif ENVIRONMENT == "test":
     EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
 else:
@@ -519,7 +519,8 @@ EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
-EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
+if not EMAIL_USE_TLS:
+    EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 
 SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
 SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
