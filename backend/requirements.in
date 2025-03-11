@@ -1,0 +1,45 @@
+# django and related apps
+django~=4.2
+django-environ
+djangorestframework
+django-cors-headers
+django-storages
+django-impersonate
+django-crispy-forms
+crispy-tailwind
+django-recaptcha
+
+# scheduler
+django-q2~=1.7.4
+blessed~=1.20.0  # optional requirement for django-q2
+supervisor
+
+# authentication
+dj-rest-auth
+dj-rest-auth[with_social]
+djangorestframework-simplejwt
+
+# django dashboard
+django-import-export
+django-jazzmin
+
+# database
+psycopg2<2.10
+dj-database-url
+
+# data analysis
+pandas
+xlsxwriter
+
+# file handling
+whitenoise
+
+# wsgi server
+gunicorn
+gevent
+
+# doc-generation
+drf-spectacular
+
+# admin
+django-multiselectfield

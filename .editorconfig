@@ -3,16 +3,21 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-insert_final_newline = true
-indent_style = space
-indent_size = 4
-trim_trailing_whitespace = true
-
-[*.md]
-trim_trailing_whitespace = false
-
-[*.{yml,yaml,js}]
+tab_width = 2
 indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+[*.html]
+max_line_length = 240
+
+[*.py]
+indent_size = 4
+tab_width = 4
 
 [Makefile]
+tab_width = 4
 indent_style = tab
+max_line_length = 240
