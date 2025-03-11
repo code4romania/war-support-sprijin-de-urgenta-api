@@ -13,29 +13,34 @@ from copy import deepcopy
 from datetime import timedelta
 
 import environ
+import sentry_sdk
 from django.utils.translation import gettext_lazy as _
 
 env = environ.Env(
     # set casting, default value
     ENVIRONMENT=(str, "production"),
-    DEBUG=(str, "no"),
-    ENABLE_DEBUG_TOOLBAR=(str, "no"),
-    SLACK_WEBHOOK_URL=(str, ""),
-    SLACK_LOGGING_COLOR=(str, ""),
-    ENABLE_SLACK_LOGGING=(str, "no"),
-    DEV_ENABLE_EMAIL_SMTP=(str, "no"),
-    ENABLE_DUMP_LOCAL_SAVE=(str, "no"),
+    DEBUG=(bool, False),
+    ENABLE_DEBUG_TOOLBAR=(bool, False),
+    DEV_ENABLE_EMAIL_SMTP=(bool, False),
+    ENABLE_DUMP_LOCAL_SAVE=(bool, False),
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
+    # Error logging
+    ## Through Slack
+    ENABLE_SLACK_LOGGING=(bool, True),
+    SLACK_WEBHOOK_URL=(str, ""),
+    SLACK_LOGGING_COLOR=(str, ""),
+    ## Through Sentry
+    SENTRY_DSN=(str, ""),
     # Email settings
     FROM_EMAIL=(str, "noreply@code4.ro"),
     EMAIL_HOST=(str, ""),
     EMAIL_PORT=(str, ""),
     EMAIL_HOST_USER=(str, ""),
     EMAIL_HOST_PASSWORD=(str, ""),
-    EMAIL_USE_TLS=(str, ""),
-    EMAIL_USE_SSL=(str, ""),
+    EMAIL_USE_TLS=(bool, True),
+    EMAIL_USE_SSL=(bool, False),
     # S3
     USE_S3=(bool, False),
     AWS_S3_REGION_NAME=(str, ""),
@@ -61,7 +66,7 @@ env = environ.Env(
     AWS_SES_REGION_ENDPOINT=(str, ""),
 )
 
-ENABLE_DUMP_LOCAL_SAVE = env("ENABLE_DUMP_LOCAL_SAVE") == "yes"
+ENABLE_DUMP_LOCAL_SAVE = env.bool("ENABLE_DUMP_LOCAL_SAVE")
 
 ADMIN_TITLE = _("Sprijin de Urgență")
 ADMIN_TITLE_SHORT = _("SDU")
@@ -72,12 +77,51 @@ BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
 SECRET_KEY = env.str("SECRET_KEY")
 
 ENVIRONMENT = env("ENVIRONMENT")
-DEBUG = bool(ENVIRONMENT != "production") and env("DEBUG") == "yes"
-ENABLE_DEBUG_TOOLBAR = DEBUG and (env("ENABLE_DEBUG_TOOLBAR")) == "yes"
+DEBUG = bool(ENVIRONMENT == "development") and env.bool("DEBUG")
+ENABLE_DEBUG_TOOLBAR = DEBUG and env.bool("ENABLE_DEBUG_TOOLBAR")
 
-SLACK_WEBHOOK_URL = env("SLACK_WEBHOOK_URL")
-SLACK_LOGGING_COLOR = env("SLACK_LOGGING_COLOR")
-ENABLE_SLACK_LOGGING = env("ENABLE_SLACK_LOGGING") == "yes"
+# Application definition
+APPEND_SLASH = True
+
+# some settings will be different if it's not running in a container (e.g., locally, on a Mac)
+IS_CONTAINERIZED = env.bool("IS_CONTAINERIZED")
+
+DEFAULT_REVISION_STRING = "dev"
+
+VERSION = env.str("VERSION", "edge")
+REVISION = env.str("REVISION", DEFAULT_REVISION_STRING)
+REVISION = REVISION[:7]
+
+if IS_CONTAINERIZED and VERSION == "edge" and REVISION == DEFAULT_REVISION_STRING:
+    version_file = "/var/www/redirect/.version"
+    if os.path.exists(version_file):
+        with open(version_file) as f:
+            VERSION, REVISION = f.read().strip().split("+")
+
+VERSION_SUFFIX = f"{VERSION}+{REVISION}"
+VERSION_LABEL = f"redirect@{VERSION_SUFFIX}"
+
+# Error Logging
+ENABLE_SLACK_LOGGING = env.bool("ENABLE_SLACK_LOGGING")
+if ENABLE_SLACK_LOGGING:
+    SLACK_WEBHOOK_URL = env("SLACK_WEBHOOK_URL")
+    SLACK_LOGGING_COLOR = env("SLACK_LOGGING_COLOR")
+
+# Sentry
+ENABLE_SENTRY = True if env.str("SENTRY_DSN") else False
+if ENABLE_SENTRY:
+    sentry_sdk.init(
+        dsn=env.str("SENTRY_DSN"),
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE"),
+        # Set profiles_sample_rate to 1.0 to profile 100%
+        # of sampled transactions.
+        # We recommend adjusting this value in production.
+        profiles_sample_rate=env.float("SENTRY_PROFILES_SAMPLE_RATE"),
+        environment=ENVIRONMENT,
+        release=VERSION_LABEL,
+    )
 
 LOGGING = {
     "version": 1,
@@ -460,9 +504,9 @@ SIMPLE_JWT = {
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # Email settings
-if env("DEV_ENABLE_EMAIL_SMTP") == "yes" or ENVIRONMENT == "production":
+if env.bool("DEV_ENABLE_EMAIL_SMTP") or ENVIRONMENT not in ("development", "test"):
     # XXX: change this
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_BACKEND = "django_ses.SESBackend"
 elif ENVIRONMENT == "test":
     EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
 else:
@@ -474,8 +518,9 @@ EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = env("EMAIL_USE_TLS") == "yes"
-EMAIL_USE_SSL = env("EMAIL_USE_SSL") == "yes"
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
+if not EMAIL_USE_TLS:
+    EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 
 SUPER_ADMIN_PASS = env("SUPER_ADMIN_PASS")
 SUPER_ADMIN_EMAIL = env("SUPER_ADMIN_EMAIL")
@@ -664,7 +709,7 @@ JAZZMIN_SETTINGS = {
     "custom_css": "jazzmin/css/admin.css",
     "custom_js": "",
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": bool(ENVIRONMENT != "production"),
+    "show_ui_builder": bool(ENVIRONMENT == "development"),
     ###############
     # Change view #
     ###############

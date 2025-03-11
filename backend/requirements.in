@@ -24,7 +24,7 @@ django-import-export
 django-jazzmin
 
 # database
-psycopg2<2.10
+psycopg2-binary<2.10
 dj-database-url
 
 # data analysis
@@ -43,3 +43,6 @@ drf-spectacular
 
 # admin
 django-multiselectfield
+
+# error logging
+sentry-sdk[django]

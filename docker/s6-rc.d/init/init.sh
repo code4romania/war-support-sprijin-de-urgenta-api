@@ -1,4 +1,5 @@
 #!/command/with-contenv sh
+# shellcheck shell=bash
 
 # Convert one parameter to uppercase
 to_uppercase() {
@@ -10,7 +11,7 @@ is_enabled() {
     _UPPER_VALUE=$(to_uppercase "${1}")
     if [ "${_UPPER_VALUE}" = "TRUE" ]; then
         return 0
-    fi
+  fi
 
     return 1
 }
@@ -43,32 +44,21 @@ if is_enabled "${RUN_COLLECT_STATIC}"; then
     python3 manage.py collectstatic --noinput
 fi
 
-## Create the Django user groups
-#if is_enabled "${RUN_SEED_GROUPS:-False}"; then
-#    echo "Running the test user seed script"
-#
-#    python3 manage.py seed_groups
-#fi
-#
-## Create the Django Admin superuser
-#if is_enabled "${RUN_CREATE_SUPER_USER:-False}"; then
-#    echo "Running the superuser seed script"
-#
-#    python3 manage.py seed_superuser \
-#        --first_name "${DJANGO_ADMIN_FIRST_NAME}" \
-#        --last_name "${DJANGO_ADMIN_LAST_NAME}"
-#fi
+if is_enabled "${RUN_SEED_GROUPS}"; then
+  ./manage.py seed_groups
+fi
 
-## Start the task queue heartbeat scheduler
-#echo "Starting the task queue heartbeat scheduler"
-#python3 manage.py schedule_qheartbeat
-#
-#echo "######    Cron job to check if the task queue is stuck"
-#(
-#    crontab -l
-#    echo "*/30 * * * * /opt/venv/bin/python3 /var/www/sdu/backend/manage.py qheartbeat --check-minutes 25"
-#) | crontab -
-#
-## Start the session clean-up schedule
-#echo "Starting the session clean-up schedule that runs once a day"
-#python3 manage.py schedule_session_cleanup
+if is_enabled "${RUN_CREATE_SUPER_USER}"; then
+  ./manage.py seed_superuser
+fi
+
+if is_enabled "${RUN_SEED_SCHEDULE}"; then
+  ./manage.py seed_schedule
+fi
+
+if is_enabled "${RUN_SEED_DATA}"; then
+  echo "Load seed data in the database"
+  ./manage.py seed_item_data
+  ./manage.py seed_transport_service_categories
+  ./manage.py seed_volunteering_types
+fi

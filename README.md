@@ -65,17 +65,16 @@ Guide users through getting your code up and running on their own system. In thi
 The `.env` files contain variables required to start the services and initialize them.
 
 - `ENVIRONMENT` - [`test`|`development`|`production`] sets the type of deployment (default `production`)
-- `RUN_MIGRATION` - [`yes`|`no`] run django migrations when you start the app (default `yes`)
-- `RUN_COMPILEMESSAGES` - [`yes`|`no`] compile i18n messages when you first start the app (default `yes`)
-- `RUN_SEED_DATA` - [`yes`|`no`] load the data from the `fixtures/` folders (default `no`)
-- `RUN_COLLECT_STATIC` - [`yes`|`no`] collects static data like images/fonts (default `yes` - has no effect if `ENVIRONMENT != production`)
-- `RUN_DEV_SERVER` - [`yes`|`no`] starts the app in development mode with a more comprehensive debugging toolbox (default `no`)
-- `DATABASE_URL` - the URL Django will use to connect to the database (should be changed if you're not running through Docker)
+- `RUN_MIGRATION` - [`True`|`False`] run django migrations when you start the app (default `True`)
+- `RUN_COMPILEMESSAGES` - [`True`|`False`] compile i18n messages when you first start the app (default `True`)
+- `RUN_SEED_DATA` - [`True`|`False`] load the data from the `fixtures/` folders (default `False`)
+- `RUN_COLLECT_STATIC` - [`True`|`False`] collects static data like images/fonts (default `True` - has no effect if `ENVIRONMENT != production`)
+- `RUN_DEV_SERVER` - [`True`|`False`] starts the app in development mode with a more comprehensive debugging toolbox (default `False`)
 - `SECRET_KEY` - the secret key Django will use to encrypt data (should be changed if you're not running through Docker)
 
 ## Staging environment setup
 
-When deploying onto a machine, there is no need to clone the whole project. You only need a `.env` and the `docker-compose.staging.yaml` file. This uses a [watchtower](https://github.com/containrrr/watchtower) contianer to watch for a new version of the `staging` tag of the `code4romania/sprijin-de-urgenta-api` docker image and update the containers as necessary. 
+When deploying onto a machine, there is no need to clone the whole project. You only need a `.env` and the `docker-compose.staging.yaml` file. This uses a [watchtower](https://github.com/containrrr/watchtower) contianer to watch for a new version of the `staging` tag of the `code4romania/sprijin-de-urgenta-api` docker image and update the containers as necessary.
 
 ## Feedback
 
