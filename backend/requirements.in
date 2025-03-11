@@ -43,3 +43,6 @@ drf-spectacular
 
 # admin
 django-multiselectfield
+
+# error logging
+sentry-sdk[django]

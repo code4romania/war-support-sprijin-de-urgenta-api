@@ -16,7 +16,9 @@ attrs==25.1.0
 blessed==1.20.0
     # via -r requirements.in
 certifi==2025.1.31
-    # via requests
+    # via
+    #   requests
+    #   sentry-sdk
 cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.1
@@ -50,6 +52,7 @@ django==4.2.20
     #   djangorestframework
     #   djangorestframework-simplejwt
     #   drf-spectacular
+    #   sentry-sdk
 django-allauth==65.4.1
     # via dj-rest-auth
 django-cors-headers==4.7.0
@@ -136,6 +139,8 @@ rpds-py==0.23.1
     # via
     #   jsonschema
     #   referencing
+sentry-sdk==2.22.0
+    # via -r requirements.in
 six==1.17.0
     # via
     #   blessed
@@ -155,7 +160,9 @@ tzdata==2025.1
 uritemplate==4.1.1
     # via drf-spectacular
 urllib3==2.3.0
-    # via requests
+    # via
+    #   requests
+    #   sentry-sdk
 wcwidth==0.2.13
     # via blessed
 whitenoise==6.9.0
