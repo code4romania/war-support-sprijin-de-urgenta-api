@@ -111,7 +111,7 @@ packaging==24.2
     # via gunicorn
 pandas==2.2.3
     # via -r requirements.in
-psycopg2==2.9.10
+psycopg2-binary==2.9.10
     # via -r requirements.in
 pycparser==2.22
     # via cffi
