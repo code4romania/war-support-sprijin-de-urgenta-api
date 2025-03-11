@@ -19,7 +19,7 @@ msgstr ""
 
 #: app_account/admin.py:13 app_account/admin.py:66
 msgid "Personal info"
-msgstr ""
+msgstr "Información personal"
 
 #: app_account/admin.py:17
 msgid "Password"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: app_account/admin.py:78
 msgid "RVM User"
-msgstr "Emergency Support User"
+msgstr ""
 
 #: app_account/admin.py:97
 msgid "Profile details"
@@ -68,7 +68,7 @@ msgstr ""
 
 #: app_account/models.py:27
 msgid "bussiness name"
-msgstr "business name"
+msgstr ""
 
 #: app_account/models.py:28
 msgid "identification number"
@@ -230,7 +230,7 @@ msgstr ""
 
 #: app_food_request/models.py:29
 msgid "NGO name"
-msgstr "NGO/local authority name"
+msgstr ""
 
 #: app_food_request/models.py:34
 msgid "NGO name or local authority name"
@@ -503,7 +503,7 @@ msgstr ""
 #: app_transport_service/models.py:100 app_volunteering/models.py:64
 #: app_volunteering/models.py:65
 msgid "Offer - Request"
-msgstr "Allocate available resources"
+msgstr ""
 
 #: app_other/admin.py:48 app_transport_service/admin.py:49
 #: app_volunteering/admin.py:47
@@ -567,7 +567,7 @@ msgstr ""
 
 #: app_transport_service/models.py:24 app_transport_service/models.py:65
 msgid "Capacity"
-msgstr "Weight capacity"
+msgstr ""
 
 #: app_transport_service/models.py:25 app_transport_service/models.py:66
 msgid "weight unit"
@@ -697,7 +697,7 @@ msgstr ""
 
 #: revm_site/settings.py:71
 msgid "Sprijin de Urgență"
-msgstr "Sprijin de Urgență"
+msgstr ""
 
 #: revm_site/settings.py:72
 msgid "SDU"
@@ -785,7 +785,7 @@ msgstr ""
 
 #: revm_site/utils/admin.py:114
 msgid "Verifieds"
-msgstr "Verified"
+msgstr ""
 
 #: revm_site/utils/admin.py:119
 msgid "Unverified"
@@ -921,11 +921,3 @@ msgstr ""
 #: templates/app_account/user_offers.html:59
 msgid "No, take me back"
 msgstr ""
-
-#~ msgid "RVM"
-#~ msgstr "SdU"
-
-#, fuzzy
-#~| msgid "RVM User"
-#~ msgid "Users"
-#~ msgstr "Emergency Support User"

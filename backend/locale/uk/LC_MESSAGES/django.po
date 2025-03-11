@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 16:32+0300\n"
+"POT-Creation-Date: 2025-03-11 18:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,32 +21,32 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: app_account/admin.py:12 app_account/admin.py:55
+#: app_account/admin.py:13 app_account/admin.py:66
 msgid "Personal info"
 msgstr ""
 
-#: app_account/admin.py:16
+#: app_account/admin.py:17
 msgid "Password"
 msgstr ""
 
-#: app_account/admin.py:20 app_account/admin.py:63
+#: app_account/admin.py:21 app_account/admin.py:74
 msgid "Permissions"
 msgstr ""
 
-#: app_account/admin.py:24 app_account/admin.py:71 app_item/admin.py:111
+#: app_account/admin.py:25 app_account/admin.py:82 app_item/admin.py:111
 #: app_transport_service/admin.py:155
 msgid "Location details"
 msgstr ""
 
-#: app_account/admin.py:59 app_account/admin.py:82
+#: app_account/admin.py:70 app_account/admin.py:93
 msgid "Profile data"
 msgstr ""
 
-#: app_account/admin.py:67
+#: app_account/admin.py:78
 msgid "RVM User"
 msgstr ""
 
-#: app_account/admin.py:86
+#: app_account/admin.py:97
 msgid "Profile details"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgid "type"
 msgstr ""
 
 #: app_account/models.py:33 app_food_request/models.py:42
-#: revm_site/utils/models.py:70
+#: revm_site/utils/models.py:69
 msgid "phone number"
 msgstr ""
 
@@ -105,8 +105,8 @@ msgstr ""
 msgid "general user description"
 msgstr ""
 
-#: app_account/models.py:47 revm_site/utils/models.py:32
-#: revm_site/utils/models.py:47
+#: app_account/models.py:47 revm_site/utils/models.py:31
+#: revm_site/utils/models.py:46
 msgid "county coverage"
 msgstr ""
 
@@ -188,6 +188,10 @@ msgstr ""
 msgid "Delivery details"
 msgstr ""
 
+#: app_food_request/forms.py:114
+msgid "Send request"
+msgstr ""
+
 #: app_food_request/models.py:10
 msgid "bulk packaging"
 msgstr ""
@@ -240,8 +244,8 @@ msgstr ""
 msgid "county"
 msgstr ""
 
-#: app_food_request/models.py:39 revm_site/utils/models.py:39
-#: revm_site/utils/models.py:55
+#: app_food_request/models.py:39 revm_site/utils/models.py:38
+#: revm_site/utils/models.py:54
 msgid "town"
 msgstr ""
 
@@ -337,8 +341,8 @@ msgstr ""
 msgid "notes"
 msgstr ""
 
-#: app_food_request/models.py:110 revm_site/utils/models.py:79
-#: revm_site/utils/models.py:93
+#: app_food_request/models.py:110 revm_site/utils/models.py:78
+#: revm_site/utils/models.py:92
 msgid "status"
 msgstr ""
 
@@ -393,121 +397,116 @@ msgstr ""
 msgid "Items"
 msgstr ""
 
-#: app_item/models.py:30
+#: app_item/models.py:25
 msgid "Textile Category"
 msgstr ""
 
-#: app_item/models.py:31
+#: app_item/models.py:26
 msgid "Textile Categories"
 msgstr ""
 
-#: app_item/models.py:35 app_item/models.py:79 app_other/models.py:24
+#: app_item/models.py:30 app_item/models.py:74 app_other/models.py:24
 #: app_other/models.py:41 app_transport_service/models.py:21
-#: app_transport_service/models.py:62 revm_site/utils/models.py:20
+#: app_transport_service/models.py:62 revm_site/utils/models.py:19
 msgid "category"
 msgstr ""
 
-#: app_item/models.py:38 app_item/models.py:82
+#: app_item/models.py:33 app_item/models.py:77
 msgid "Product"
 msgstr ""
 
-#: app_item/models.py:39 app_item/models.py:84 app_item/models.py:126
+#: app_item/models.py:34 app_item/models.py:79 app_item/models.py:121
 msgid "total units"
 msgstr ""
 
-#: app_item/models.py:40 app_item/models.py:86
+#: app_item/models.py:35 app_item/models.py:81
 msgid "packaging"
 msgstr ""
 
-#: app_item/models.py:41 app_item/models.py:87
+#: app_item/models.py:36 app_item/models.py:82
 msgid "unit type"
 msgstr ""
 
-#: app_item/models.py:43
+#: app_item/models.py:38
 msgid "expiration date"
 msgstr ""
 
-#: app_item/models.py:46
+#: app_item/models.py:41
 msgid "Stock"
 msgstr ""
 
-#: app_item/models.py:46
+#: app_item/models.py:41
 msgid "How many units of this type are left"
 msgstr ""
 
-#: app_item/models.py:51 app_item/models.py:95
+#: app_item/models.py:46 app_item/models.py:90
 msgid "textile category"
 msgstr ""
 
-#: app_item/models.py:53 app_item/models.py:97
+#: app_item/models.py:48 app_item/models.py:92
 msgid "textile size"
 msgstr ""
 
-#: app_item/models.py:54 app_item/models.py:98
+#: app_item/models.py:49 app_item/models.py:93
 msgid "other"
 msgstr ""
 
-#: app_item/models.py:57 app_item/models.py:101
+#: app_item/models.py:52 app_item/models.py:96
 msgid "capacity"
 msgstr ""
 
-#: app_item/models.py:64
+#: app_item/models.py:59
 msgid "item offer"
 msgstr ""
 
-#: app_item/models.py:65
+#: app_item/models.py:60
 msgid "item offers"
 msgstr ""
 
-#: app_item/models.py:90
+#: app_item/models.py:85
 msgid "Necessary"
 msgstr ""
 
-#: app_item/models.py:90
+#: app_item/models.py:85
 msgid "How many units are still needed"
 msgstr ""
 
-#: app_item/models.py:104
+#: app_item/models.py:99
 msgid "Requested"
 msgstr ""
 
-#: app_item/models.py:108
+#: app_item/models.py:103
 msgid "item request"
 msgstr ""
 
-#: app_item/models.py:109
+#: app_item/models.py:104
 msgid "item requests"
 msgstr ""
 
-#: app_item/models.py:123 app_other/models.py:54
+#: app_item/models.py:118 app_other/models.py:54
 #: app_transport_service/models.py:90
 msgid "donation"
 msgstr ""
 
-#: app_item/models.py:124 app_other/models.py:55
+#: app_item/models.py:119 app_other/models.py:55
 #: app_transport_service/models.py:93
 msgid "request"
 msgstr ""
 
-#: app_item/models.py:127 app_transport_service/models.py:96
-#: revm_site/utils/models.py:62
+#: app_item/models.py:122 app_transport_service/models.py:96
+#: revm_site/utils/models.py:61
 msgid "description"
 msgstr ""
 
-#: app_item/models.py:129 revm_site/utils/models.py:64
+#: app_item/models.py:124 revm_site/utils/models.py:63
 msgid "added on"
 msgstr ""
 
-#: app_item/models.py:132 app_item/models.py:133 app_other/models.py:58
+#: app_item/models.py:127 app_item/models.py:128 app_other/models.py:58
 #: app_other/models.py:59 app_transport_service/models.py:99
 #: app_transport_service/models.py:100 app_volunteering/models.py:64
 #: app_volunteering/models.py:65
 msgid "Offer - Request"
-msgstr ""
-
-#: app_item/models.py:154 app_item/models.py:162
-#, python-brace-format
-msgid "The amount you're trying to transfer {requested_amount} "
 msgstr ""
 
 #: app_other/admin.py:48 app_transport_service/admin.py:49
@@ -700,135 +699,139 @@ msgstr ""
 msgid "Integrity error: Delete operation not permitted"
 msgstr ""
 
-#: revm_site/settings/base.py:37
+#: revm_site/settings.py:71
 msgid "Sprijin de Urgență"
 msgstr ""
 
-#: revm_site/settings/base.py:38
-msgid "RVM"
+#: revm_site/settings.py:72
+msgid "SDU"
 msgstr ""
 
-#: revm_site/settings/base.py:201
+#: revm_site/settings.py:292
 msgid "Romanian"
 msgstr ""
 
-#: revm_site/settings/base.py:202
+#: revm_site/settings.py:293
 msgid "English"
 msgstr ""
 
-#: revm_site/settings/base.py:203
+#: revm_site/settings.py:294
+msgid "Spanish"
+msgstr ""
+
+#: revm_site/settings.py:295
 msgid "Ukrainian"
 msgstr ""
 
-#: revm_site/settings/base.py:204
+#: revm_site/settings.py:296
 msgid "Russian"
 msgstr ""
 
-#: revm_site/settings/base.py:284 revm_site/settings/base.py:291
+#: revm_site/settings.py:458 revm_site/settings.py:465
 msgid "Not Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:285 revm_site/settings/base.py:292
+#: revm_site/settings.py:459 revm_site/settings.py:466
 msgid "Verified"
 msgstr ""
 
-#: revm_site/settings/base.py:286 revm_site/settings/base.py:293
+#: revm_site/settings.py:460 revm_site/settings.py:467
 msgid "Deactivated"
 msgstr ""
 
-#: revm_site/settings/base.py:287
+#: revm_site/settings.py:461
 msgid "Complete"
 msgstr ""
 
-#: revm_site/settings/base.py:294
+#: revm_site/settings.py:468
 msgid "Solved"
 msgstr ""
 
-#: revm_site/settings/base.py:304
+#: revm_site/settings.py:478
 msgid "National"
 msgstr ""
 
-#: revm_site/settings/base.py:304 revm_site/utils/admin.py:218
+#: revm_site/settings.py:478 revm_site/utils/admin.py:217
 msgid "County"
 msgstr ""
 
-#: revm_site/settings/base.py:307
+#: revm_site/settings.py:481
 msgid "Disponibil in weekend"
 msgstr ""
 
-#: revm_site/settings/base.py:308
+#: revm_site/settings.py:482
 msgid "Disponibil in timpul saptamanii"
 msgstr ""
 
-#: revm_site/settings/base.py:309
+#: revm_site/settings.py:483
 msgid "Disponibil oricand"
 msgstr ""
 
-#: revm_site/settings/base.py:310
+#: revm_site/settings.py:484
 msgid "Intervale fixe"
 msgstr ""
 
-#: revm_site/urls.py:63
+#: revm_site/urls.py:62
 msgid "food-requests/"
 msgstr ""
 
-#: revm_site/utils/admin.py:56
+#: revm_site/utils/admin.py:55
 msgid "Allocate this resource to a request"
 msgstr ""
 
-#: revm_site/utils/admin.py:70
+#: revm_site/utils/admin.py:69
 msgid "Allocate from the available offers"
 msgstr ""
 
-#: revm_site/utils/admin.py:110
+#: revm_site/utils/admin.py:109
 msgid "Completed"
 msgstr ""
 
-#: revm_site/utils/admin.py:115
+#: revm_site/utils/admin.py:114
 msgid "Verifieds"
 msgstr "Verified"
 
-#: revm_site/utils/admin.py:120
+#: revm_site/utils/admin.py:119
 msgid "Unverified"
 msgstr ""
 
-#: revm_site/utils/admin.py:125
+#: revm_site/utils/admin.py:124
 msgid "Unresolved requests"
 msgstr ""
 
-#: revm_site/utils/admin.py:160
+#: revm_site/utils/admin.py:159
 msgid "You are not assigned to any county. Please contact your administrator."
 msgstr ""
 
-#: revm_site/utils/models.py:12
+#: revm_site/utils/models.py:11
 msgid "category name"
 msgstr ""
 
-#: revm_site/utils/models.py:13
+#: revm_site/utils/models.py:12
 msgid "category description"
 msgstr ""
 
-#: revm_site/utils/models.py:21
+#: revm_site/utils/models.py:20
 msgid "categories"
 msgstr ""
 
-#: revm_site/utils/models.py:25
+#: revm_site/utils/models.py:24
 msgid "has transportation"
 msgstr ""
 
-#: revm_site/utils/models.py:77
+#: revm_site/utils/models.py:76
 msgid "donor"
 msgstr ""
 
-#: revm_site/utils/models.py:91
+#: revm_site/utils/models.py:90
 msgid "requested by"
 msgstr ""
 
-#: revm_site/utils/models.py:134
+#: revm_site/utils/models.py:133
 msgid "no county"
 msgstr ""
 
-#: revm_site/utils/models.py:135
+#: revm_site/utils/models.py:134
 msgid "all counties"
 msgstr ""
 
