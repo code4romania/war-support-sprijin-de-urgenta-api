@@ -12,7 +12,6 @@ django-recaptcha
 # scheduler
 django-q2~=1.7.4
 blessed~=1.20.0  # optional requirement for django-q2
-supervisor
 
 # authentication
 dj-rest-auth

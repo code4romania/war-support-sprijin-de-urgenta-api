@@ -147,8 +147,6 @@ six==1.17.0
     #   python-dateutil
 sqlparse==0.5.3
     # via django
-supervisor==4.2.5
-    # via -r requirements.in
 tablib==3.8.0
     # via django-import-export
 typing-extensions==4.12.2
