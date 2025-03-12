@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from import_export.admin import ImportExportModelAdmin
+
+from unfold.admin import ModelAdmin
 
 from app_item import models
 from revm_site.utils.admin import (
+    CommonImportExportModelAdmin,
     CommonRequestInline,
     CommonOfferInline,
     CommonResourceMultipleCountyAdmin,
@@ -31,7 +33,7 @@ class ItemRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategory(ImportExportModelAdmin):
+class AdminCategory(CommonImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
     search_fields = ("name",)
@@ -42,7 +44,7 @@ class AdminCategory(ImportExportModelAdmin):
 
 
 @admin.register(models.TextileCategory)
-class AdminTextileCategory(ImportExportModelAdmin):
+class AdminTextileCategory(CommonImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
     search_fields = ("name",)
@@ -53,7 +55,7 @@ class AdminTextileCategory(ImportExportModelAdmin):
 
 
 @admin.register(models.ItemOffer)
-class AdminItemOffer(CommonResourceMultipleCountyAdmin):
+class AdminItemOffer(CommonResourceMultipleCountyAdmin, ModelAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "get_status")
     list_display_links = ("category", "name")
     search_fields = ("name",)
@@ -126,7 +128,7 @@ class AdminItemOffer(CommonResourceMultipleCountyAdmin):
 
 
 @admin.register(models.ItemRequest)
-class AdminItemRequest(CommonResourceSingleCountyAdmin):
+class AdminItemRequest(CommonResourceSingleCountyAdmin, ModelAdmin):
     list_display = ("category", "name", "quantity", "stock", "unit_type", "county_coverage", "town", "get_status")
     list_display_links = ("category", "name")
     search_fields = ("name",)

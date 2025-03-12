@@ -1,0 +1,25 @@
+{% extends 'unfold/layouts/base_simple.html' %}
+
+{% load i18n %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+  {% if subtitle %}
+    {{ subtitle }} |
+  {% endif %}
+
+  {{ title }} | {{ site_title|default:_('Django site admin') }}
+{% endblock %}
+
+{% block branding %}
+  {% include "unfold/helpers/site_branding.html" %}
+{% endblock %}
+
+{% block content %}
+  <h1>
+    {% blocktrans trimmed %}
+      This is where we can create a dashboard for the site admin.
+    {% endblocktrans %}
+  </h1>
+{% endblock %}
