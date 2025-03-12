@@ -26,6 +26,7 @@ env = environ.Env(
     LANGUAGE_CODE=(str, "en"),
     HOME_SITE_URL=(str, ""),
     ALLOWED_HOSTS=(list, ["*"]),
+    IS_CONTAINERIZED=(bool, False),
     # Error logging
     ## Through Slack
     ENABLE_SLACK_LOGGING=(bool, True),
@@ -72,7 +73,7 @@ ADMIN_TITLE = _("Sprijin de Urgență")
 ADMIN_TITLE_SHORT = _("SDU")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
+BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir)
 
 SECRET_KEY = env.str("SECRET_KEY")
 
