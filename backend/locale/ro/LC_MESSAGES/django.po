@@ -791,7 +791,7 @@ msgid "Completed"
 msgstr "Utilizate"
 
 #: revm_site/utils/admin.py:114
-msgid "Verifieds"
+msgid "Verified"
 msgstr "Verificate"
 
 #: revm_site/utils/admin.py:119

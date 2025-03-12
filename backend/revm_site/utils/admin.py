@@ -111,7 +111,7 @@ class CommonResourceAdmin(ImportExportModelAdmin):
                     "statistic": f"{complete_resources} / {verified_complete_resources}",
                 },
                 {
-                    "title": _("Verifieds"),
+                    "title": _("Verified"),
                     "badge": verified_badge,
                     "statistic": f"{verified_resources}",
                 },
