@@ -29,15 +29,12 @@ cryptography==44.0.2
     # via pyjwt
 diff-match-patch==20241021
     # via django-import-export
-dj-database-url==2.3.0
-    # via -r requirements.in
 dj-rest-auth==7.0.1
     # via -r requirements.in
 django==4.2.20
     # via
     #   -r requirements.in
     #   crispy-tailwind
-    #   dj-database-url
     #   dj-rest-auth
     #   django-allauth
     #   django-cors-headers
@@ -151,8 +148,6 @@ sqlparse==0.5.3
     # via django
 tablib==3.8.0
     # via django-import-export
-typing-extensions==4.12.2
-    # via dj-database-url
 tzdata==2025.1
     # via pandas
 uritemplate==4.1.1
