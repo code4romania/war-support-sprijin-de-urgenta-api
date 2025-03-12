@@ -14,6 +14,8 @@ from datetime import timedelta
 
 import environ
 import sentry_sdk
+from django.templatetags.static import static
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 env = environ.Env(
@@ -154,7 +156,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 CORS_ALLOW_ALL_ORIGINS = True
 
 INSTALLED_APPS = [
-    "jazzmin",
+    "unfold",
     # django apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -554,213 +556,260 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 
-# django-jazzmin
+# Unfold Admin settings
 # -------------------------------------------------------------------------------
-# django-jazzmin - https://django-jazzmin.readthedocs.io/configuration/
+# django-unfold - https://unfoldadmin.com/docs/configuration/settings/
+# Supported icon set: https://fonts.google.com/icons
 
-JAZZMIN_SETTINGS = {
-    # title of the window
-    "site_title": ADMIN_TITLE,
-    # Title on the brand, and the login screen (19 chars max)
-    "site_header": ADMIN_TITLE,
-    # square logo to use for your site, must be present in static files, used for favicon and brand on top left
-    "site_logo": "jazzmin/img/sprijin-de-urgenta.svg",
-    "site_logo_short": "jazzmin/img/sprijin-de-urgenta-logo.svg",
-    "site_icon": "jazzmin/img/sprijin-de-urgenta-logo.svg",
-    "site_logo_classes": "site-logo",
-    # Welcome text on the login screen
-    "welcome_sign": "",
-    # Copyright on the footer
-    "copyright": "Code4Romania - War Task Force",
-    # The model admin to search from the search bar, search bar omitted if excluded
-    # "search_model": "donors.Donor",
-    # The field name on user model that contains avatar image
-    "user_avatar": None,
-    ############
-    # Top Menu #
-    ############
-    # Links to put along the top menu
-    "topmenu_links": [
-        # Url that gets reversed (Permissions can be added)
-        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
-        # external url that opens in a new window (Permissions can be added)
-        # {
-        #     "name": "View website",
-        #     "url": "https://github.com/farridav/django-jazzmin/issues",
-        #     "new_window": True,
-        # },
-        # model admin to link to (Permissions checked against model)
-        # {"model": "auth.User"},
-    ],
-    #############
-    # User Menu #
-    #############
-    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
-    "usermenu_links": [
-        # {
-        #     "name": "Support",
-        #     "url": "https://github.com/farridav/django-jazzmin/issues",
-        #     "new_window": True,
-        # },
-        {"model": "auth.user", "new_window": False},
-    ],
-    #############
-    # Side Menu #
-    #############
-    # Whether to display the side menu
-    "show_sidebar": True,
-    # Whether to auto expand the menu
-    "navigation_expanded": True,
-    # Hide these apps when generating side menu e.g (auth)
-    "hide_apps": [],
-    # Hide these models when generating side menu (e.g auth.user)
-    "hide_models": [],
-    # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": [
-        "app_food_request",
-        "app_item",
-        "app_item.itemoffer",
-        "app_item.itemrequest",
-        "app_item.category",
-        "app_item.textilecategory",
-        "app_transport_service",
-        "app_transport_service.transportserviceoffer",
-        "app_transport_service.transportservicerequest",
-        "app_transport_service.category",
-        "app_volunteering",
-        "app_volunteering.volunteeringoffer",
-        "app_volunteering.volunteeringrequest",
-        "app_volunteering.category",
-        "app_other",
-        "app_other.otheroffer",
-        "app_other.otherrequest",
-        "app_other.category",
-        "auth",
-        "app_account",
-        "django_q",
-        "django_q.schedule",
-        "django_q.success",
-        "django_q.failed",
-        "account",
-        "socialaccount",
-        "socialaccount.socialaccount",
-        "socialaccount.socialapp",
-        "socialaccount.socialtoken",
-        "authtoken",
-        "authtoken.tokenproxy",
-    ],
-    # Custom links to append to app groups, keyed on app name
-    "custom_links": {
-        "books": [
+SIDEBAR_NAVIGATION = [
+    {
+        "title": _("Dashboard"),
+        "items": [
             {
-                "name": "Make Messages",
-                "url": "make_messages",
-                "icon": "fas fa-comments",
-                "permissions": ["books.view_book"],
+                "title": _("Dashboard"),
+                "icon": "dashboard",
+                "link": reverse_lazy("admin:index"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+        ],
+    },
+    {
+        "title": _("NGO Food Requests"),
+        "items": [
+            {
+                "title": _("NGO Food Requests"),
+                "icon": "arrow_circle_right",
+                "link": reverse_lazy("admin:app_food_request_foodrequest_changelist"),
+                "permission": lambda request: request.user.is_staff,
             }
-        ]
+        ],
     },
-    # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free
-    # for a list of icon classes
-    "icons": {
-        "auth": "fas fa-users-cog",
-        "auth.user": "fas fa-user",
-        "auth.Group": "fas fa-users",
-        "account": "fas fa-envelope",
-        "account.EmailAddress": "fas fa-at",
-        "app_account": "fas fa-users",
-        "app_account.CustomUser": "fas fa-user",
-        "django_q": "fas fa-layer-group",
-        "django_q.schedule": "fas fa-layer-group",
-        "django_q.success": "fas fa-check",
-        "django_q.failure": "fas fa-exclamation",
-        "socialaccount": "fas fa-share-nodes",
-        "socialaccount.socialaccount": "fas fa-hashtag",
-        "socialaccount.socialapp": "fas fa-user-cog",
-        "socialaccount.socialtoken": "fas fa-user-lock",
-        "authtoken": "fas fa-lock",
-        "authtoken.tokenproxy": "fas fa-user-lock",
-        "app_food_request.FoodRequest": "far fa-arrow-alt-circle-left",
-        "app_item.Category": "fas fa-cube",
-        "app_item.TextileCategory": "fas fa-cubes",
-        "app_item.ItemOffer": "fas fa-arrow-alt-circle-right",
-        "app_item.ItemRequest": "far fa-arrow-alt-circle-left",
-        "app_other.Category": "fas fa-cube",
-        "app_other.Subcategory": "fas fa-cubes",
-        "app_other.OtherOffer": "fas fa-arrow-alt-circle-right",
-        "app_other.OtherRequest": "far fa-arrow-alt-circle-left",
-        "app_volunteering.Type": "fas fa-cube",
-        "app_volunteering.VolunteeringOffer": "fas fa-arrow-alt-circle-right",
-        "app_volunteering.VolunteeringRequest": "far fa-arrow-alt-circle-left",
-        "app_transport_service.Category": "fas fa-cube",
-        "app_transport_service.TransportServiceOffer": "fas fa-arrow-alt-circle-right",
-        "app_transport_service.TransportServiceRequest": "far fa-arrow-alt-circle-left",
+    {
+        "title": _("Items"),
+        "items": [
+            {
+                "title": _("Item Offer"),
+                "icon": "arrow_circle_right",
+                "link": reverse_lazy("admin:app_item_itemoffer_changelist"),
+            },
+            {
+                "title": _("Item Request"),
+                "icon": "arrow_circle_left",
+                "link": reverse_lazy("admin:app_item_itemrequest_changelist"),
+            },
+            {
+                "title": _("Categories"),
+                "icon": "inventory_2",
+                "link": reverse_lazy("admin:app_item_category_changelist"),
+            },
+            {
+                "title": _("Textile Category"),
+                "icon": "package_2",
+                "link": reverse_lazy("admin:app_item_textilecategory_changelist"),
+            },
+        ],
     },
-    # Icons that are used when one is not manually specified
-    "default_icon_parents": "fas fa-chevron-circle-right",
-    "default_icon_children": "fas fa-circle",
-    #################
-    # Related Modal #
-    #################
-    # Use modals instead of popups
-    "related_modal_active": False,
-    #############
-    # UI Tweaks #
-    #############
-    # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": "jazzmin/css/admin.css",
-    "custom_js": "",
-    # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": bool(ENVIRONMENT == "development"),
-    ###############
-    # Change view #
-    ###############
-    # Render out the change view as a single form, or in tabs, current options are
-    # - single
-    # - horizontal_tabs (default)
-    # - vertical_tabs
-    # - collapsible
-    # - carousel
-    "changeform_format": "single",
-    # override change forms on a per modeladmin basis
-    "changeform_format_overrides": {
-        "auth.user": "collapsible",
-        "auth.group": "vertical_tabs",
+    {
+        "title": _("Transport Services"),
+        "items": [
+            {
+                "title": _("Transport Service Offer"),
+                "icon": "arrow_circle_right",
+                "link": reverse_lazy("admin:app_transport_service_transportserviceoffer_changelist"),
+            },
+            {
+                "title": _("Transport Service Request"),
+                "icon": "arrow_circle_left",
+                "link": reverse_lazy("admin:app_transport_service_transportservicerequest_changelist"),
+            },
+            {
+                "title": _("Categories"),
+                "icon": "inventory_2",
+                "link": reverse_lazy("admin:app_transport_service_category_changelist"),
+            },
+        ],
     },
-    # Add a language dropdown into the admin
-    "language_chooser": True,
-}
+    {
+        "title": _("Volunteering"),
+        "items": [
+            {
+                "title": _("Volunteering Offer"),
+                "icon": "arrow_circle_right",
+                "link": reverse_lazy("admin:app_volunteering_volunteeringoffer_changelist"),
+            },
+            {
+                "title": _("Volunteering Request"),
+                "icon": "arrow_circle_left",
+                "link": reverse_lazy("admin:app_volunteering_volunteeringrequest_changelist"),
+            },
+            {
+                "title": _("Categories"),
+                "icon": "inventory_2",
+                "link": reverse_lazy("admin:app_volunteering_type_changelist"),
+            },
+        ],
+    },
+    {
+        "title": _("Other"),
+        "items": [
+            {
+                "title": _("Other Offer"),
+                "icon": "arrow_circle_right",
+                "link": reverse_lazy("admin:app_other_otheroffer_changelist"),
+            },
+            {
+                "title": _("Other Request"),
+                "icon": "arrow_circle_left",
+                "link": reverse_lazy("admin:app_other_otherrequest_changelist"),
+            },
+            {
+                "title": _("Categories"),
+                "icon": "inventory_2",
+                "link": reverse_lazy("admin:app_other_category_changelist"),
+            },
+        ],
+    },
+    {
+        "title": _("Users"),
+        "items": [
+            {
+                "title": _("Users"),
+                "icon": "person",
+                "link": reverse_lazy("admin:app_account_customuser_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Groups"),
+                "icon": "group",
+                "link": reverse_lazy("admin:auth_group_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Email Addresses"),
+                "icon": "email",
+                "link": reverse_lazy("admin:account_emailaddress_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Auth Tokens"),
+                "icon": "vpn_key",
+                "link": reverse_lazy("admin:authtoken_tokenproxy_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Impersonation Logs"),
+                "icon": "supervised_user_circle",
+                "link": reverse_lazy("impersonate-list"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+        ],
+    },
+    {
+        "title": _("Background Tasks"),
+        "items": [
+            {
+                "title": _("Failed tasks"),
+                "icon": "assignment_late",
+                "link": reverse_lazy("admin:django_q_failure_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Queued tasks"),
+                "icon": "assignment_add",
+                "link": reverse_lazy("admin:django_q_ormq_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Scheduled tasks"),
+                "icon": "assignment",
+                "link": reverse_lazy("admin:django_q_schedule_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Success tasks"),
+                "icon": "assignment_turned_in",
+                "link": reverse_lazy("admin:django_q_success_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+        ],
+    },
+    {
+        "title": _("Social Accounts"),
+        "items": [
+            {
+                "title": _("Social Accounts"),
+                "icon": "group",
+                "link": reverse_lazy("admin:socialaccount_socialaccount_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Social Apps"),
+                "icon": "apps",
+                "link": reverse_lazy("admin:socialaccount_socialapp_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+            {
+                "title": _("Social Tokens"),
+                "icon": "vpn_key",
+                "link": reverse_lazy("admin:socialaccount_socialtoken_changelist"),
+                "permission": lambda request: request.user.is_superuser,
+            },
+        ],
+    },
+]
 
-if ENVIRONMENT == "development":
-    JAZZMIN_SETTINGS["usermenu_links"].append(
+UNFOLD = {
+    "SITE_HEADER": ADMIN_TITLE,
+    "SITE_TITLE": ADMIN_TITLE,
+    "SITE_SYMBOL": "support",
+    # https://unfoldadmin.com/docs/configuration/settings/
+    # Site configuration
+    # "ENVIRONMENT": "redirectioneaza.callbacks.environment_callback",
+    "DASHBOARD_CALLBACK": "revm_site.callbacks.dashboard",
+    # Site customization
+    "SITE_ICON": lambda request: static("jazzmin/img/sprijin-de-urgenta-logo.svg"),
+    "SITE_LOGO": lambda request: static("jazzmin/img/sprijin-de-urgenta-logo.svg"),
+    "SITE_FAVICONS": [
         {
-            "name": "Support",
-            "url": "https://django-jazzmin.readthedocs.io/configuration/",
-            "new_window": True,
-            "icon": "fas fa-book",
-        }
-    )
-
-JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": False,
-    "footer_small_text": False,
-    "body_small_text": True,
-    "brand_small_text": False,
-    "brand_colour": False,
-    "accent": "accent-primary",
-    "navbar": "navbar-dark",
-    "no_navbar_border": False,
-    "navbar_fixed": True,
-    "layout_boxed": False,
-    "footer_fixed": False,
-    "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-primary",
-    "sidebar_nav_small_text": False,
-    "sidebar_disable_expand": False,
-    "sidebar_nav_child_indent": True,
-    "sidebar_nav_compact_style": True,
-    "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": True,
-    "theme": "default",
-    "dark_mode_theme": "darkly",
+            "rel": "icon",
+            "sizes": "16x16",
+            "type": "image/png",
+            "href": lambda request: static("images/favicon/favicon-16x16.png"),
+        },
+        {
+            "rel": "icon",
+            "sizes": "32x32",
+            "type": "image/png",
+            "href": lambda request: static("images/favicon/favicon-32x32.png"),
+        },
+    ],
+    "COLORS": {
+        "font": {
+            "subtle-light": "107 114 128",
+            "subtle-dark": "156 163 175",
+            "default-light": "75 85 99",
+            "default-dark": "209 213 219",
+            "important-light": "17 24 39",
+            "important-dark": "243 244 246",
+        },
+        "primary": {
+            50: "#eff7ff",
+            100: "#dbedfe",
+            200: "#bfe0fe",
+            300: "#93cefd",
+            400: "#60b2fa",
+            500: "#3b92f6",
+            600: "#2574eb",
+            700: "#1d5ed8",
+            800: "#1d49a7",
+            900: "#1e438a",
+            950: "#172a54",
+        },
+    },
+    # Sidebar settings
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": SIDEBAR_NAVIGATION,
+    },
 }

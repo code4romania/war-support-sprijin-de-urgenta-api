@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from import_export.admin import ImportExportModelAdmin
 
 from app_transport_service import models
 from revm_site.utils.admin import (
+    CommonImportExportModelAdmin,
     CommonRequestInline,
     CommonOfferInline,
     CommonResourceMultipleCountyAdmin,
@@ -21,7 +21,7 @@ class TransportRequestInline(CommonRequestInline):
 
 
 @admin.register(models.Category)
-class AdminCategoryRequest(ImportExportModelAdmin):
+class AdminCategoryRequest(CommonImportExportModelAdmin):
     list_display = ("name", "description")
     list_display_links = ("name",)
     search_fields = ("name",)

@@ -5,9 +5,13 @@ from django.forms import Textarea
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
+from unfold.admin import ModelAdmin
 
 from app_account.models import CustomUser
 from revm_site.utils.models import CommonRequestModel, CommonOfferModel
+
+
+class CommonImportExportModelAdmin(ImportExportModelAdmin, ModelAdmin): ...
 
 
 class CommonResourceInline(admin.StackedInline):
@@ -79,9 +83,9 @@ class CommonRequestInline(CommonResourceInline):
         return formset
 
 
-class CommonResourceAdmin(ImportExportModelAdmin):
+class CommonResourceAdmin(CommonImportExportModelAdmin):
     list_per_page = settings.PAGE_SIZE
-    change_list_template = "admin/common_resource_list.html"
+    # change_list_template = "admin/common_resource_list.html"
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)

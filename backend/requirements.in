@@ -21,7 +21,7 @@ djangorestframework-simplejwt
 
 # django dashboard
 django-import-export
-django-jazzmin
+django-unfold
 
 # database
 psycopg2-binary~=2.9.10

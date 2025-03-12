@@ -4,9 +4,9 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.sites.models import Site
 from django.utils.translation import gettext_lazy as _
 from impersonate.admin import UserAdminImpersonateMixin
-from import_export.admin import ImportExportModelAdmin
 
 from app_account.models import CustomUser
+from revm_site.utils.admin import CommonImportExportModelAdmin
 
 DjangoUserAdmin.add_fieldsets = (
     (
@@ -29,7 +29,7 @@ DjangoUserAdmin.add_fieldsets = (
 
 
 @admin.register(CustomUser)
-class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin, ImportExportModelAdmin):
+class AdminCustomUser(UserAdminImpersonateMixin, DjangoUserAdmin, CommonImportExportModelAdmin):
     list_display = (
         "id",
         "first_name",
