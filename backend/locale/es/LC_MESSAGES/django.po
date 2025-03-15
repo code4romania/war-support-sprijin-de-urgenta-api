@@ -8,205 +8,254 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-11 18:05+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2025-03-15 10:05+0000\n"
+"Last-Translator: Olivia Vereha <olivia.vereha@commitglobal.org>\n"
+"Language-Team: Spanish <https://translate.commitglobal.org/projects/"
+"emergency-support/backend/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: app_account/admin.py:13 app_account/admin.py:66
 msgid "Personal info"
 msgstr "Información personal"
 
 #: app_account/admin.py:17
+#, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: app_account/admin.py:21 app_account/admin.py:74
+#, fuzzy
 msgid "Permissions"
-msgstr ""
+msgstr "Permisos"
 
 #: app_account/admin.py:25 app_account/admin.py:82 app_item/admin.py:111
 #: app_transport_service/admin.py:155
+#, fuzzy
 msgid "Location details"
-msgstr ""
+msgstr "Detalles de ubicación"
 
 #: app_account/admin.py:70 app_account/admin.py:93
+#, fuzzy
 msgid "Profile data"
-msgstr ""
+msgstr "Datos de perfil"
 
 #: app_account/admin.py:78
+#, fuzzy
 msgid "RVM User"
-msgstr ""
+msgstr "Usuario de RVM"
 
 #: app_account/admin.py:97
+#, fuzzy
 msgid "Profile details"
-msgstr ""
+msgstr "Detalles del perfil"
 
 #: app_account/apps.py:8
+#, fuzzy
 msgid "Accounts"
-msgstr ""
+msgstr "Cuentas"
 
 #: app_account/models.py:21
+#, fuzzy
 msgid "Individual"
-msgstr ""
+msgstr "Individual"
 
 #: app_account/models.py:22
+#, fuzzy
 msgid "Corporate"
-msgstr ""
+msgstr "Corporativo"
 
 #: app_account/models.py:23
+#, fuzzy
 msgid "Non-Profit"
-msgstr ""
+msgstr "No lucrativo"
 
 #: app_account/models.py:24
+#, fuzzy
 msgid "Government"
-msgstr ""
+msgstr "Gobierno"
 
 #: app_account/models.py:27
+#, fuzzy
 msgid "bussiness name"
-msgstr ""
+msgstr "nombre de la empresa"
 
 #: app_account/models.py:28
+#, fuzzy
 msgid "identification number"
-msgstr ""
+msgstr "número de identificación"
 
 #: app_account/models.py:30 app_food_request/models.py:43
+#, fuzzy
 msgid "email address"
-msgstr ""
+msgstr "dirección de correo electrónico"
 
 #: app_account/models.py:32 app_transport_service/models.py:30
 #: app_volunteering/models.py:31 app_volunteering/models.py:48
 #: app_volunteering/models.py:61
+#, fuzzy
 msgid "type"
-msgstr ""
+msgstr "tipo"
 
 #: app_account/models.py:33 app_food_request/models.py:42
 #: revm_site/utils/models.py:69
+#, fuzzy
 msgid "phone number"
-msgstr ""
+msgstr "número de teléfono"
 
 #: app_account/models.py:34 app_food_request/models.py:40
+#, fuzzy
 msgid "address"
-msgstr ""
+msgstr "dirección"
 
 #: app_account/models.py:35
+#, fuzzy
 msgid "details"
-msgstr ""
+msgstr "detalles"
 
 #: app_account/models.py:37
+#, fuzzy
 msgid "general user description"
-msgstr ""
+msgstr "descripción general del usuario"
 
 #: app_account/models.py:47 revm_site/utils/models.py:31
 #: revm_site/utils/models.py:46
+#, fuzzy
 msgid "county coverage"
-msgstr ""
+msgstr "cobertura del condado"
 
 #: app_account/models.py:51
+#, fuzzy
 msgid "user"
-msgstr ""
+msgstr "usuario"
 
 #: app_account/models.py:52
+#, fuzzy
 msgid "users"
-msgstr ""
+msgstr "usuarios"
 
 #: app_account/models.py:93
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Administrador"
 
 #: app_account/models.py:104
+#, fuzzy
 msgid "NO GROUP ASSIGNED"
-msgstr ""
+msgstr "NO HAY NINGÚN GRUPO ASIGNADO"
 
 #: app_account/models.py:106
+#, fuzzy
 msgid "User Type"
-msgstr ""
+msgstr "Tipo de usuario"
 
 #: app_account/serializers.py:33
+#, fuzzy
 msgid "A user is already registered with this e-mail address."
-msgstr ""
+msgstr "Ya hay un usuario registrado con esta dirección de correo electrónico."
 
 #: app_account/serializers.py:42
+#, fuzzy
 msgid "The two password fields didn't match."
-msgstr ""
+msgstr "Los dos campos de contraseña no coincidían."
 
 #: app_food_request/apps.py:8 app_food_request/models.py:120
+#, fuzzy
 msgid "NGO food request"
-msgstr ""
+msgstr "Solicitud de comida de una ONG"
 
 #: app_food_request/apps.py:9 app_food_request/models.py:121
+#, fuzzy
 msgid "NGO food requests"
-msgstr ""
+msgstr "Solicitudes de alimentos de ONG"
 
 #: app_food_request/forms.py:17
+#, fuzzy
 msgid ""
 "<div class=\"toc\">I have read and agree to the <a class=\"toc\" href=\"/en/"
 "terms-and-conditions/\">Terms and Conditions</a></div>"
 msgstr ""
+"<div class=\"toc\"> He leído y acepto los términos y condiciones de <a class="
+"\"toc\" href=\"/en/terms-and-conditions/\"> </a> </div>"
 
 #: app_food_request/forms.py:53
+#, fuzzy
 msgid "Adult restriction notes (please fill in)"
-msgstr ""
+msgstr "Notas de restricción para adultos (rellénelas)"
 
 #: app_food_request/forms.py:54
+#, fuzzy
 msgid "Child restriction notes (please fill in)"
-msgstr ""
+msgstr "Notas sobre restricciones para niños (rellénelas)"
 
 #: app_food_request/forms.py:55
+#, fuzzy
 msgid "Notes (please fill in)"
-msgstr ""
+msgstr "Notas (por favor rellénelas)"
 
 #: app_food_request/forms.py:65
+#, fuzzy
 msgid "NGO Details"
-msgstr ""
+msgstr "Detalles de la ONG"
 
 #: app_food_request/forms.py:79
+#, fuzzy
 msgid "Food details"
-msgstr ""
+msgstr "Detalles de la comida"
 
 #: app_food_request/forms.py:81
+#, fuzzy
 msgid "Vegetarian"
-msgstr ""
+msgstr "vegetariano"
 
 #: app_food_request/forms.py:87
+#, fuzzy
 msgid "Meat"
-msgstr ""
+msgstr "Carne"
 
 #: app_food_request/forms.py:93
+#, fuzzy
 msgid "Dietary restrictions"
-msgstr ""
+msgstr "Restricciones dietéticas"
 
 #: app_food_request/forms.py:103
+#, fuzzy
 msgid "Delivery details"
-msgstr ""
+msgstr "Detalles de entrega"
 
 #: app_food_request/forms.py:114
+#, fuzzy
 msgid "Send request"
-msgstr ""
+msgstr "Enviar solicitud"
 
 #: app_food_request/models.py:10
+#, fuzzy
 msgid "bulk packaging"
-msgstr ""
+msgstr "envasado a granel"
 
 #: app_food_request/models.py:11
+#, fuzzy
 msgid "retail packaging"
-msgstr ""
+msgstr "embalaje minorista"
 
 #: app_food_request/models.py:15
+#, fuzzy
 msgid "new"
-msgstr ""
+msgstr "nuevo"
 
 #: app_food_request/models.py:16
+#, fuzzy
 msgid "in progress"
-msgstr ""
+msgstr "en progreso"
 
 #: app_food_request/models.py:17
+#, fuzzy
 msgid "solved"
-msgstr ""
+msgstr "resuelto"
 
 #: app_food_request/models.py:18
 msgid "rejected"
